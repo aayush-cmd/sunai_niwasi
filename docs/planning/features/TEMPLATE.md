@@ -47,6 +47,7 @@ Issues surfaced after going live + their diagnosis + the fix. Multiple dated ent
 
 - SRS row: `docs/requirement/SRS.md` §_
 - TEST_CASES: TC-XX-NN..NN (promoted from §3 on ship)
+- Page maps / API docs updated: `docs/frontend/<portal>.md`, `docs/api/api-structure.md` _(list which, or "none — no page/endpoint change")_
 - Prototype todo row #: _(if applicable — no prototype-changes tracker exists in this repo yet)_
 - CHANGELOG bullet: _(no CHANGELOG exists in this repo yet)_
 - Production deploy notes (if any non-standard steps needed)

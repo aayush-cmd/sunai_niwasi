@@ -59,3 +59,13 @@ git push
   (sync discipline, DB conventions, feature planning file convention).
 - `docs/planning/features/` — one dated planning file per feature/significant change, started
   from `TEMPLATE.md` before any code is written.
+
+### Page maps and API guide
+
+| Doc | What's in it |
+|---|---|
+| [`docs/frontend/niwasi-portal.md`](docs/frontend/niwasi-portal.md) | Every page on `niwasi.in`: public pages, joining, the community area, public help, system admin |
+| [`docs/frontend/partner-portal.md`](docs/frontend/partner-portal.md) | Every page on `partner.niwasi.in`: login flow, org admin, staff portal, surveys, orders, reports |
+| [`docs/frontend/event-portal.md`](docs/frontend/event-portal.md) | Every page on `event.niwasi.in`: public events, registration, attendance |
+| [`docs/api/api-structure.md`](docs/api/api-structure.md) | How the API is organised: folders, request flow, modules and URLs, auth, responses, database, tests, adding an endpoint |
+| [`docs/api/endpoints.md`](docs/api/endpoints.md) | Every API endpoint: method, full URL, auth/permission guards, source file and line |

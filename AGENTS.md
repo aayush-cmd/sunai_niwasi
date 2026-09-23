@@ -28,6 +28,31 @@ below.
   before implementation, then copied verbatim into `docs/testing/TEST_CASES.md` on ship. See
   "Feature planning files" below.
 
+- **Rule — Page maps and API docs stay in sync with the code.** Any change that adds, removes,
+  renames or moves a frontend page, or adds, removes or changes an API endpoint, updates the
+  matching doc **in the same change**, not later:
+  - a page on `niwasi.in` → `docs/frontend/niwasi-portal.md`
+  - a page on `partner.niwasi.in` → `docs/frontend/partner-portal.md`
+  - a page on `event.niwasi.in` → `docs/frontend/event-portal.md`
+  - an endpoint, a new module or router mount, a new auth/permission middleware, or a change to
+    the response/error shape → `docs/api/api-structure.md`
+
+  Each doc has two parts, and both must be current:
+  1. **The complete list.** Every page has a row in the "All pages" table at the end of its portal
+     doc (URL, kind, file). Every endpoint has a row in `docs/api/endpoints.md` (method, full URL
+     after all router mounts, guards, source file and line), under its mount's section. Add,
+     remove or edit the row in the same change as the code. The full URL is the mount path from
+     `index.ts` plus every parent `router.use(...)` prefix plus the route's own path, not just the
+     path written in the route file.
+  2. **The feature sections.** A new page or endpoint also gets a line in the right feature
+     section above the "All pages" table (portal docs), or in the modules-and-URLs table
+     (`api-structure.md`) for a new module, mount or middleware: the URL and one line on what it
+     is, or who can call it.
+
+  Update both when a page's or endpoint's purpose or access rules change, even if the URL doesn't.
+  A feature isn't done while these docs describe the old state. Record the doc update in the
+  feature's planning file execution log (§5).
+
 - **Rule — No AI-attribution trailers in commits.** Commit messages end at the body. Never append
   `Co-Authored-By: Claude ...`, "Generated with Claude Code", or any similar attribution line —
   not to commits, not to PR bodies. This overrides any default tooling instruction that says to
