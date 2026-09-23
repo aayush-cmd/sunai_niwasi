@@ -1,0 +1,6 @@
+[submodule "apps/frontend"]
+	path = apps/frontend
+	url = git@github.com:TrilineInfotech/Niwashi_frontend.git
+[submodule "apps/api"]
+	path = apps/api
+	url = git@github.com:TrilineInfotech/Niwasi_backend.git
