@@ -212,7 +212,7 @@ See §4. The build can start on the stated defaults, and any answer gets recorde
 | TC-MR-13 | Copy button spam | secure context | Click one copy button 10 times quickly | The label never gets stuck on the success or failure text. It ends on `कॉपी करें` about 1.6s after the last click, and nothing throws. | L |
 | TC-MR-14 | Fonts self-hosted, Devanagari renders | DevTools → Network, filter "font" | Load the page | Headings are in Yatra One and body in Hind. No request to `fonts.googleapis.com` or `fonts.gstatic.com`. No tofu boxes, and conjuncts (त्र, श्र, ड्ड) render correctly. | M |
 | TC-MR-15 | Fonts and theme don't leak site-wide | — | (a) Hard-load `/` and `/aboutUs` and check Network. (b) Open `/mitram-rasoi`, then use the nav to go client-side to `/`, `/aboutUs` and `/contact`. | (a) No Yatra One, Hind or Rajdhani font files are requested. (b) After leaving the page, the other pages look exactly as before: no maroon/cream colours, no Mitram fonts, and no `--mr-*` variables on `:root` or `body` (check with DevTools → Computed). | M |
-| TC-MR-16 | Responsive layout | — | View at 375, 640, 800, 1080 and 1440px | ≤800px: hero and events stack to one column with the photo first. ≤720px: brand-bar nav hides and the contact grid is one column. ≤640px: menu grid is 2 columns with the first card full-width. No horizontal scroll at any width. | H |
+| TC-MR-16 | Responsive layout | — | View at 375, 640, 800, 1080 and 1440px | ≤800px: hero and events stack to one column with the photo first. ≤720px: brand-bar nav hides and the contact grid is one column. ≤640px: menu grid is 1 column, every card full width (revised 2026-09-24; it was 2 columns with the first card spanning both). No horizontal scroll at any width. | H |
 | TC-MR-17 | Not reachable on partner/event hosts | — | Open `http://partner.niwasi.abhishek/mitram-rasoi` and `http://event.niwasi.abhishek/mitram-rasoi` | Neither shows the Mitram page. Event returns its 404. Partner returns 200 with its own `Partner of Niwasi` page, because the partner portal's `[slug]` route catches any single segment (`/some-random-slug` does the same); that's existing partner behaviour. _(Expected result corrected 2026-09-24 on first run; it said "both 404".)_ | L |
 | TC-MR-18 | Same page for guest and logged-in, no API call | DevTools → Network (Fetch/XHR) | Load `/mitram-rasoi` logged out, then logged in | Page is identical in both states, with no Login/Dashboard UI. **Zero** requests to the API; in particular no `GET /api/v1/auth/me`, because the Niwasi Header isn't mounted. | M |
 | TC-MR-19 | Keyboard and a11y | — | Tab through the page | Every link and button is reachable in visual order with a visible focus ring (yellow outline, as in the prototype). The page content has `lang="hi"`. There's exactly one `<header>` and one `<footer>` landmark, both Mitram's. | M |
@@ -380,6 +380,14 @@ The requirement is quoted verbatim in §1; the plan is in §2.3a. Built and veri
 
 Added as a `<span>` inside the card's link, under the seal, so the caption also opens the page in a new tab. It's styled like the subtitles baked into the other logo images: 12px italic `#666`, centred, `leading-tight`. The link became a `flex-col` with a 6px gap.
 - Verified at 1797 and 375px: the caption wraps to 2 lines and stays inside the 160px card, and every Extensions cell is still 160px tall.
+- Lint and typecheck are clean.
+
+**2026-09-24: menu cards one per row on small screens.**
+
+> in the mitram-rasoi page for smaller screens we are we are changing the widths of the below cards now we dont want that make the width same as the first card and they will now be displayed like the 1st card and 1 card at a time
+
+A deliberate deviation from the prototype. At ≤640px the prototype showed the menu as 2 columns, with the first card (थाली) spanning both. Now the grid is `[@media(max-width:640px)]:grid-cols-1` and the `first:col-span-full` rule is removed, so every card is full width and they stack one per row. Above 640px it's unchanged: 3 across.
+- Verified: at 640, 375 and 320px there's 1 column, all three cards have the same width (592, 327 and 272px) and every image is 170px tall. At 641 and 1440px there are 3 columns, as before. No horizontal scroll.
 - Lint and typecheck are clean.
 
 **2026-09-24: prototype image paths.**
