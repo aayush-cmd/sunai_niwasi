@@ -1,0 +1,592 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Mitram Rasoi</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Hind:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap">
+<style>
+  :root{
+    color-scheme: light;
+
+    /* brand tokens — from the Mitram Rasoi design system */
+    --maroon-900:#5e1018;
+    --maroon-950:#670017;
+    --mauve-400:#a94e62;
+    --cream-100:#f6e1bf;
+    --cream-50:#fffce9;
+    --blush-100:#fde4e4;
+    --green-600:#63bf61;
+    --green-400:#ade78a;
+    --green-900:#125c12;
+    --yellow-400:#ffed00;
+    --red-600:#c00000;
+    --ink:#000000;
+    --white:#ffffff;
+
+    --radius-pill:999px;
+    --radius-md:16px;
+    --radius-lg:26px;
+
+    --space-1:8px;
+    --space-2:16px;
+    --space-3:24px;
+    --space-4:40px;
+    --space-5:64px;
+
+    --font-display:"Yatra One", "Noto Sans Devanagari", system-ui, sans-serif;
+    --font-body:"Hind", "Noto Sans Devanagari", system-ui, sans-serif;
+    --font-utility:"Rajdhani", "Hind", system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream-100);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  h1,h2,h3{font-family:var(--font-display);font-weight:400;margin:0;text-wrap:balance;}
+  p{margin:0;}
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding-inline:var(--space-3);
+  }
+  .eyebrow{
+    font-family:var(--font-utility);
+    font-weight:600;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:13px;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;
+    top:env(safe-area-inset-top, 0px);
+    z-index:20;
+    background:var(--maroon-900);
+    border-bottom:3px solid var(--maroon-950);
+  }
+  .header-row{
+    display:flex;
+    align-items:center;
+    gap:var(--space-2);
+    padding-block:10px;
+  }
+  .brand-mark{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    flex:0 0 auto;
+  }
+  .brand-mark img{
+    width:40px;height:40px;border-radius:50%;
+    box-shadow:0 0 0 2px var(--cream-50);
+  }
+  .brand-mark span{
+    font-family:var(--font-display);
+    font-size:21px;
+    color:var(--cream-50);
+    line-height:1;
+  }
+  nav.site-nav{
+    display:flex;
+    gap:var(--space-3);
+    margin-left:var(--space-2);
+    flex:1 1 auto;
+  }
+  nav.site-nav a{
+    color:var(--green-400);
+    text-decoration:none;
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:15px;
+  }
+  nav.site-nav a:hover{color:var(--cream-50);}
+  .call-pill{
+    margin-left:auto;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--green-600);
+    color:var(--ink);
+    border-radius:var(--radius-pill);
+    padding:9px 18px 9px 14px;
+    text-decoration:none;
+    font-family:var(--font-utility);
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:.02em;
+    white-space:nowrap;
+  }
+  .call-pill svg{width:18px;height:18px;flex:0 0 auto;}
+
+  @media (max-width:720px){
+    nav.site-nav{display:none;}
+    .call-pill span.long{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:
+      radial-gradient(circle at 6px 6px, var(--mauve-400) 1.6px, transparent 1.6px) 0 0/34px 34px,
+      var(--maroon-900);
+    background-blend-mode:normal;
+    position:relative;
+  }
+  .hero .wrap{
+    padding-block:var(--space-5) var(--space-4);
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:var(--space-4);
+    align-items:center;
+  }
+  .hero-copy .eyebrow{color:var(--green-400);}
+  .hero-copy h1{
+    color:var(--cream-50);
+    font-size:clamp(44px,7vw,76px);
+    line-height:.98;
+    margin-top:8px;
+  }
+  .hero-copy .tagline{
+    color:var(--cream-100);
+    font-size:17px;
+    margin-top:var(--space-2);
+    max-width:46ch;
+  }
+  .hero-copy .address{
+    color:var(--green-400);
+    font-family:var(--font-utility);
+    font-weight:600;
+    font-size:14.5px;
+    margin-top:6px;
+  }
+  .badge-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px;
+    margin-top:var(--space-3);
+  }
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:var(--cream-50);
+    color:var(--maroon-900);
+    border-radius:var(--radius-pill);
+    padding:6px 13px;
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:13.5px;
+  }
+  .chip img{width:16px;height:16px;}
+  .cta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:var(--space-3);
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    border-radius:var(--radius-pill);
+    padding:13px 24px;
+    font-family:var(--font-utility);
+    font-weight:700;
+    font-size:17px;
+    text-decoration:none;
+    border:2px solid transparent;
+  }
+  .btn-primary{background:var(--green-600);color:var(--ink);}
+  .btn-secondary{background:transparent;color:var(--cream-50);border-color:var(--cream-50);}
+  .btn:focus-visible{outline:3px solid var(--yellow-400);outline-offset:2px;}
+
+  .hero-photo{position:relative;}
+  .hero-photo .frame{
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    border:4px solid var(--cream-50);
+  }
+  .hero-photo img{width:100%;height:280px;object-fit:cover;}
+  .hall-chip{
+    position:absolute;
+    right:14px;
+    bottom:-16px;
+    background:var(--yellow-400);
+    color:var(--ink);
+    border-radius:var(--radius-md);
+    padding:10px 16px;
+    font-family:var(--font-utility);
+    font-weight:700;
+    font-size:15px;
+    box-shadow:0 6px 0 rgba(0,0,0,.15);
+    max-width:190px;
+    line-height:1.25;
+  }
+
+  @media (max-width:800px){
+    .hero .wrap{grid-template-columns:1fr;padding-block:var(--space-4) var(--space-5);}
+    .hero-photo{order:-1;}
+    .hall-chip{position:static;margin-top:14px;display:inline-block;}
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding-block:var(--space-5);}
+  .section-head{max-width:60ch;margin-bottom:var(--space-4);}
+  .section-head .eyebrow{color:var(--maroon-900);opacity:.7;}
+  .section-head h2{font-size:clamp(30px,4.4vw,42px);color:var(--maroon-900);margin-top:6px;}
+  .section-head p{margin-top:10px;font-size:16px;color:var(--maroon-950);opacity:.85;max-width:54ch;}
+
+  /* ---------- services ---------- */
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:var(--space-3);
+  }
+  .service-card{
+    background:var(--cream-50);
+    border-radius:var(--radius-md);
+    padding:var(--space-3);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .service-icon{
+    width:48px;height:48px;
+    border-radius:var(--radius-pill);
+    background:var(--maroon-900);
+    display:flex;align-items:center;justify-content:center;
+    flex:0 0 auto;
+  }
+  .service-icon svg{width:24px;height:24px;}
+  .service-card h3{font-family:var(--font-body);font-weight:700;font-size:18px;color:var(--maroon-900);}
+  .service-card p{font-size:14.5px;color:var(--maroon-950);opacity:.85;}
+
+  .trust-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:var(--space-2) var(--space-3);
+    margin-top:var(--space-4);
+    padding-top:var(--space-3);
+    border-top:1px solid var(--mauve-400);
+  }
+  .trust-item{display:flex;align-items:center;gap:8px;font-family:var(--font-utility);font-weight:600;color:var(--maroon-900);font-size:14.5px;}
+  .trust-item img{width:22px;height:22px;}
+
+  /* ---------- menu photos ---------- */
+  .menu-section{background:var(--blush-100);}
+  .menu-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:var(--space-3);
+  }
+  .menu-card{
+    background:var(--cream-50);
+    border-radius:var(--radius-md);
+    overflow:hidden;
+  }
+  .menu-card img{width:100%;height:170px;object-fit:cover;}
+  .menu-card .cap{padding:12px 14px;}
+  .menu-card .cap b{font-family:var(--font-body);font-size:15.5px;color:var(--maroon-900);}
+  .menu-card .cap span{display:block;font-size:13px;color:var(--maroon-950);opacity:.8;margin-top:2px;}
+  .menu-note{margin-top:var(--space-3);font-size:14.5px;color:var(--maroon-950);opacity:.85;}
+
+  @media (max-width:640px){
+    .menu-grid{grid-template-columns:1fr 1fr;}
+    .menu-grid .menu-card:first-child{grid-column:1 / -1;}
+  }
+
+  /* ---------- events ---------- */
+  .events{
+    background:var(--maroon-900);
+    color:var(--cream-100);
+  }
+  .events-inner{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:var(--space-4);
+    align-items:center;
+  }
+  .events .eyebrow{color:var(--green-400);}
+  .events h2{color:var(--cream-50);font-size:clamp(30px,4.4vw,42px);margin-top:6px;}
+  .hall-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--yellow-400);
+    color:var(--ink);
+    border-radius:var(--radius-pill);
+    padding:8px 16px;
+    font-family:var(--font-utility);
+    font-weight:700;
+    font-size:14.5px;
+    margin-top:var(--space-2);
+  }
+  .events p.body-copy{margin-top:var(--space-3);font-size:16px;max-width:48ch;}
+  .events-list{
+    list-style:none;
+    padding:0;margin:var(--space-3) 0 0;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .events-list li{
+    display:flex;gap:10px;align-items:flex-start;
+    font-size:15px;color:var(--cream-100);
+  }
+  .events-list li svg{flex:0 0 auto;width:18px;height:18px;margin-top:3px;color:var(--green-400);}
+  .events .cta-row{margin-top:var(--space-4);}
+  .events-photo img{
+    width:100%;height:320px;object-fit:cover;
+    border-radius:var(--radius-lg);
+    border:4px solid var(--maroon-950);
+  }
+
+  @media (max-width:800px){
+    .events-inner{grid-template-columns:1fr;}
+    .events-photo{order:-1;}
+    .events-photo img{height:220px;}
+  }
+
+  /* ---------- contact / footer ---------- */
+  footer{
+    background:var(--maroon-950);
+    color:var(--cream-100);
+    padding-block:var(--space-4);
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:var(--space-4);
+  }
+  footer h2{color:var(--cream-50);font-size:28px;}
+  footer .eyebrow{color:var(--green-400);}
+  .addr-line{margin-top:var(--space-2);font-size:15.5px;line-height:1.7;}
+  .addr-line b{color:var(--cream-50);}
+  .phone-list{margin-top:var(--space-3);display:flex;flex-direction:column;gap:10px;}
+  .phone-row{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    background:rgba(255,252,233,.06);
+    border:1px solid rgba(255,252,233,.18);
+    border-radius:var(--radius-md);
+    padding:10px 14px;
+  }
+  .phone-row .num{
+    font-family:var(--font-utility);
+    font-variant-numeric:tabular-nums;
+    font-size:20px;font-weight:700;
+    color:var(--cream-50);
+    letter-spacing:.02em;
+  }
+  .phone-row .label{display:block;font-size:12px;color:var(--green-400);font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+  .copy-btn{
+    background:var(--green-600);color:var(--ink);
+    border:none;border-radius:var(--radius-pill);
+    padding:8px 14px;font-family:var(--font-body);font-weight:700;font-size:13.5px;
+    cursor:pointer;
+    flex:0 0 auto;
+  }
+  .copy-btn:focus-visible{outline:3px solid var(--yellow-400);outline-offset:2px;}
+  .hours{margin-top:var(--space-3);font-size:14.5px;color:var(--green-400);font-weight:600;}
+  .foot-tag{margin-top:var(--space-4);font-size:13px;opacity:.65;border-top:1px solid rgba(255,252,233,.15);padding-top:var(--space-2);}
+
+  @media (max-width:720px){
+    .contact-grid{grid-template-columns:1fr;}
+  }
+
+  @media (prefers-reduced-motion:no-preference){
+    .btn, .call-pill, .copy-btn{transition:transform .12s ease;}
+    .btn:hover, .call-pill:hover{transform:translateY(-1px);}
+  }
+</style>
+
+<header>
+  <div class="wrap header-row">
+    <a class="brand-mark" href="#top">
+      <img src="../../../apps/frontend/app/(niwasi)/(public)/mitram-rasoi/_assets/logo-seal.png" alt="मित्रम रसोई — seal logo">
+      <span>मित्रम रसोई</span>
+    </a>
+    <nav class="site-nav" aria-label="मुख्य मेन्यू">
+      <a href="#menu">मेन्यू</a>
+      <a href="#events">उत्सव व बैठक</a>
+      <a href="#contact">संपर्क</a>
+    </nav>
+    <a class="call-pill" href="tel:+917061653559">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 3a2 2 0 0 1-.5 2.1L8 10.1a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c1 .4 2 .6 3 .7a2 2 0 0 1 1.7 2z"/></svg>
+      <span class="long">70616&nbsp;53559</span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">बलिया, NH 31 पर</p>
+        <h1>मित्रम<br>रसोई</h1>
+        <p class="tagline">पारिवारिक शुद्ध शाकाहारी रसोई — डाइन-इन, टेक-अवे, होम-डिलीवरी और 80–100 मेहमानों तक के उत्सव व बैठक के लिए हॉल।</p>
+        <p class="address">सरयाँ, उजियार घाट, NH 31, बलिया — मंगला भवानी मंदिर के पास, गाजीपुर रोड</p>
+        <div class="badge-row">
+          <span class="chip"><img src="../../../apps/frontend/app/(niwasi)/(public)/mitram-rasoi/_assets/badge-veg.png" alt="">शुद्ध शाकाहारी</span>
+          <span class="chip">24×7 खुला</span>
+          <span class="chip">24 घंटे बिजली</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="tel:+917061653559">अभी कॉल करें · 70616 53559</a>
+          <a class="btn btn-secondary" href="#events">हॉल बुक करें</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="frame">
+          <img src="../../../apps/frontend/app/(niwasi)/(public)/mitram-rasoi/_assets/dining-hall.jpg" alt="मित्रम रसोई के डाइनिंग हॉल में भोजन करते परिवार">
+        </div>
+        <div class="hall-chip">80–100 लोगों के लिए हॉल उपलब्ध</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">सेवाएं</p>
+        <h2>हर मौके के लिए तैयार</h2>
+        <p>रोज़ के खाने से लेकर घर पर शादी-मुंडन की रसोई तक — जो चाहिए, वो मिलेगा।</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fffce9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v7a2 2 0 0 0 4 0V2M8 9v13M18 2c-1.7 0-3 2-3 5s1.3 5 3 5v8"/></svg>
+          </div>
+          <h3>डाइन-इन · टेक-अवे · डिलीवरी</h3>
+          <p>बैठकर खाइए, पैक कराइए या घर मंगवाइए — जैसा सुविधाजनक हो।</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fffce9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l9-6 9 6v11M8 21v-7h8v7"/></svg>
+          </div>
+          <h3>उत्सव और बैठक</h3>
+          <p>80–100 लोगों तक के लिए हॉल — पारिवारिक आयोजन और बैठकें।</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fffce9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4c0 1.5-.8 2.3-1.5 3-.5.5-.5 1-.5 2h-4c0-1 0-1.5-.5-2-.7-.7-1.5-1.5-1.5-3a4 4 0 0 1 4-4ZM8 20h8M9 17h6"/></svg>
+          </div>
+          <h3>शादी-विवाह व मुंडन केटरिंग</h3>
+          <p>हलवाई घर आकर खाना बनाकर देता है — आपके ही आँगन में।</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fffce9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M6 7h12M6 7a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2M18 7a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2"/></svg>
+          </div>
+          <h3>अतिथियों के लिए शौचालय</h3>
+          <p>हॉल में आने वाले मेहमानों के लिए शौचालय की सुविधा उपलब्ध है।</p>
+        </div>
+      </div>
+
+      <div class="trust-row">
+        <span class="trust-item"><img src="../../../apps/frontend/app/(niwasi)/(public)/mitram-rasoi/_assets/badge-veg.png" alt="">100% शुद्ध शाकाहारी</span>
+        <span class="trust-item">24×7 रेस्टोरेंट</span>
+        <span class="trust-item">24 घंटे बिजली आपूर्ति</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu" class="menu-section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">मेन्यू की झलक</p>
+        <h2>भोजन, मिठाई, नमकीन</h2>
+        <p>रोज़ की थाली से लेकर बड़े ऑर्डर तक — पूरा मेन्यू जानने के लिए एक कॉल करें।</p>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <img src="../../../apps/frontend/app/(niwasi)/(public)/mitram-rasoi/_assets/photo-thali.jpg" alt="दाल, सब्ज़ी, रोटी और चावल की थाली">
+          <div class="cap"><b>थाली</b><span>दाल · सब्ज़ी · रोटी · चावल</span></div>
+        </div>
+        <div class="menu-card">
+          <img src="../../../apps/frontend/app/(niwasi)/(public)/mitram-rasoi/_assets/photo-laddu.jpg" alt="ताज़े बेसन के लड्डू">
+          <div class="cap"><b>मिठाई</b><span>घर जैसे ताज़े लड्डू</span></div>
+        </div>
+        <div class="menu-card">
+          <img src="../../../apps/frontend/app/(niwasi)/(public)/mitram-rasoi/_assets/photo-namkeen.jpg" alt="कुरकुरी मिक्स नमकीन">
+          <div class="cap"><b>नमकीन</b><span>कुरकुरी मिक्स नमकीन</span></div>
+        </div>
+      </div>
+      <p class="menu-note">शादी-मुंडन के ऑर्डर के लिए मिठाई और नमकीन थोक में भी बनते हैं।</p>
+    </div>
+  </section>
+
+  <section id="events" class="events">
+    <div class="wrap events-inner">
+      <div>
+        <p class="eyebrow">बुकिंग</p>
+        <h2>उत्सव और बैठक</h2>
+        <span class="hall-pill">हॉल उपलब्ध है</span>
+        <p class="body-copy">80 से 100 लोगों तक के लिए हॉल — पारिवारिक आयोजन, सामाजिक बैठकें और छोटे समारोहों के लिए।</p>
+        <ul class="events-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>शादी-विवाह एवं मुंडन में घर पर जाकर खाना बनाने के लिए हलवाई की सुविधा</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>बैठकर भोजन, टेक-अवे और होम-डिलीवरी तीनों उपलब्ध</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>अतिथियों के लिए शौचालय की सुविधा</li>
+        </ul>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="tel:+917061653559">हॉल व केटरिंग के लिए कॉल करें</a>
+        </div>
+      </div>
+      <div class="events-photo">
+        <img src="../../../apps/frontend/app/(niwasi)/(public)/mitram-rasoi/_assets/logo-seal.png" alt="मित्रम रसोई सील लोगो" style="object-fit:contain;background:var(--cream-50);">
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="eyebrow">पता</p>
+      <h2>हमें यहाँ खोजिए</h2>
+      <p class="addr-line"><b>सरयाँ, उजियार घाट, NH 31, बलिया</b><br>मंगला भवानी मंदिर के पास, गाजीपुर रोड — हाईवे साइड</p>
+      <p class="hours">24×7 खुला · 24 घंटे बिजली आपूर्ति</p>
+    </div>
+    <div>
+      <p class="eyebrow">कॉल करें</p>
+      <div class="phone-list">
+        <div class="phone-row">
+          <span><span class="label">रेस्टोरेंट</span><span class="num">70616 53559</span></span>
+          <button class="copy-btn" data-num="70616 53559" onclick="copyNum(this)">कॉपी करें</button>
+        </div>
+        <div class="phone-row">
+          <span><span class="label">बुकिंग व ऑर्डर</span><span class="num">7070 819 777</span></span>
+          <button class="copy-btn" data-num="7070 819 777" onclick="copyNum(this)">कॉपी करें</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="foot-tag">मित्रम रसोई — शुद्ध शाकाहारी रसोई, NH 31, बलिया। रंग व चिह्न मित्रम रसोई के डिज़ाइन सिस्टम से।</p>
+  </div>
+</footer>
+
+<script>
+  function copyNum(btn){
+    var num = btn.getAttribute('data-num');
+    var original = btn.textContent;
+    function done(ok){
+      btn.textContent = ok ? 'कॉपी हो गया' : 'नंबर चुनें';
+      setTimeout(function(){ btn.textContent = original; }, 1600);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(num).then(function(){ done(true); }, function(){ done(false); });
+    } else {
+      done(false);
+    }
+  }
+</script>
+
+</body></html>

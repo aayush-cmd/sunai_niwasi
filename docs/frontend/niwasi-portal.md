@@ -29,6 +29,7 @@ No login needed.
 | `/uses` | "Uses & Users": who Niwasi is for |
 | `/sabha` | Explains how a Niwasi Sabha (community meeting) works |
 | `/niwasi-video` | Intro video |
+| `/mitram-rasoi` | Mitram Rasoi: a standalone, static Hindi page for the restaurant. It has no Niwasi header or footer (`PublicChrome` skips them on this path). It's reached from the Mitram Rasoi card in the home page's **Extensions** section, which opens it in a new tab. It isn't in the main nav. |
 | `/login` | Resident login |
 | `/forgot-password`, `/reset-password` | Password recovery |
 
@@ -174,7 +175,7 @@ Platform-wide administration. Only the System Admin can open it.
 
 The complete list: one row per `page.tsx` in `apps/frontend/app/`. The sections above explain what each feature is; this table makes sure every page is listed. Keep it in sync by hand (see the docs rule in `AGENTS.md`).
 
-211 pages. **URL** is what the user sees. **Kind** comes from the URL: Create = `new`/`create`/`add`, Edit = `edit`, Detail = ends in a `[param]`.
+212 pages. **URL** is what the user sees. **Kind** comes from the URL: Create = `new`/`create`/`add`, Edit = `edit`, Detail = ends in a `[param]`.
 
 | URL | Kind | File |
 |---|---|---|
@@ -345,6 +346,7 @@ The complete list: one row per `page.tsx` in `apps/frontend/app/`. The sections 
 | `/join/global` | Page | `app/(niwasi)/(public)/join/global/page.tsx` |
 | `/join/select` | Page | `app/(niwasi)/(public)/join/select/page.tsx` |
 | `/login` | Page | `app/(niwasi)/(public)/login/page.tsx` |
+| `/mitram-rasoi` | Page | `app/(niwasi)/(public)/mitram-rasoi/page.tsx` |
 | `/modules` | Page | `app/(niwasi)/(public)/modules/page.tsx` |
 | `/niwasi-video` | Page | `app/(niwasi)/(public)/niwasi-video/page.tsx` |
 | `/reset-password` | Page | `app/(niwasi)/(public)/reset-password/page.tsx` |
