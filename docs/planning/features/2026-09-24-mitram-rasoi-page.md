@@ -2,11 +2,11 @@
 
 | Field | Value |
 |---|---|
-| Status | in-progress |
+| Status | shipped |
 | Started | 2026-09-24 |
-| Shipped | |
+| Shipped | 2026-09-24: frontend `0897975` (page + Extensions card) and `29690e5` (one-column menu); parent `d2697bd` and `072913f` (submodule bumps + docs) |
 | SRS row | — (no `docs/requirement/SRS.md` in this repo yet) |
-| Test cases | TC-MR-01..29 (01, 02, 04, 05 superseded) |
+| Test cases | TC-MR-06..29 active; 01, 02, 04 and 05 superseded; 03 dropped. Promoted to `docs/testing/TEST_CASES.md` |
 | Prototype todo | — |
 
 ## 1. Requirement (as given)
@@ -28,7 +28,7 @@
 >
 > _(Screenshot: the home page's EXTENSIONS section, a single row of 6 faded logos: PARTNER, Project for Students, INFO, HELP, CBO, समुदाय वेबसाइट.)_
 
-**Screenshot (main nav, desktop, as of 2026-09-24):**
+**Screenshot (main nav, desktop, 2026-09-24, before this feature):**
 `Home · About Niwasi · Niwasi Resources ▾ · Niwasi Action · Need & Help · Event · Mitram Kitchen · MOOL · Contact`
 (Event, Mitram Kitchen and MOOL are greyed, non-clickable Phase 2 placeholders.)
 
@@ -55,7 +55,8 @@ Brand tokens come from the prototype's `:root` (maroon-900/950, mauve-400, cream
 |---|---|---|
 | Frontend ↔ backend validation mirror | No | No form and no input: the page is static. |
 | DB schema change → dated `.sql` | No | No DB access and no endpoint. The existing `mitram_daily_reports` table and the `is_mitram_daily_report` flag are unrelated and untouched. |
-| New test cases up front | **Yes** | §3 below. `docs/testing/TEST_CASES.md` doesn't exist yet, so it gets created on ship with these rows. |
+| New test cases up front | **Yes** | §3 below. `docs/testing/TEST_CASES.md` didn't exist; it was created on ship (2026-09-24) with the active §3 rows. |
+| Page maps and API docs in sync | **Yes** | New page on `niwasi.in` → `docs/frontend/niwasi-portal.md`: a feature-section row (§1 Public pages) and an All-pages row (count 211 → 212), updated in the same change. No endpoint, so `docs/api/*` is untouched. Recorded in §5. |
 | No AI-attribution trailers | Yes | Applies to the commits for this feature. |
 | Sensitive files never in git | Yes | Only static images and TSX are added. Stage by explicit path. |
 | Reactivation discipline | Done | `docs/planning/features/` holds only `TEMPLATE.md`, so no prior plan touches the nav or Mitram. |
@@ -72,10 +73,10 @@ The frontend's `AGENTS.md` says this is Next.js 16.2 with breaking changes. Befo
   - `(public)/layout.tsx` stays a server component: `<PublicChrome header={<Header />} footer={<Footer />}>{children}</PublicChrome>`. `Footer` is passed as an already-rendered server-component slot, so it stays a server component. `Header` was already client.
   - The path list is a single constant, `STANDALONE_PATHS = ["/mitram-rasoi"]`, in `PublicChrome.tsx`, so another standalone page later means one entry, not a new special case.
   - Side effect: `Header` isn't mounted on the page, so its `GET /api/v1/auth/me` never fires there (TC-MR-18).
-  - Known trade-off, accepted with option 2: this is the one change outside the route folder besides the nav tab. Every other `(public)` page's markup stays byte-identical (TC-MR-24).
+  - Known trade-off, accepted with option 2: this wrapper and the Extensions card in `(public)/page.tsx` (§2.3a) are the only code changes outside the route folder. Every other `(public)` page's markup stays byte-identical (TC-MR-24).
 - **URL:** `/mitram-rasoi` on the main host (`niwasi.abhishek` locally, `niwasi.in` in prod).
-- **No way back to Niwasi on the page** (user's decision). There's no Niwasi logo link and no back button; the browser's back button is the only route back. _(A "Back to Niwasi" button was added and removed again on 2026-09-24, because it isn't in the client requirement (§4). This rule stands.)_
-- `proxy.ts` needs no change. The main host passes through unchanged. On `partner.*` and `event.*` the path is rewritten to `/partner/mitram-rasoi` and `/event-host/mitram-rasoi`, which don't exist and so return 404. That's expected (TC-MR-17).
+- **No way back to Niwasi on the page** (user's decision). There's no Niwasi logo link and no back button; the browser's back button is the only route back. _(A "Back to Niwasi" button was added and removed again on 2026-09-24, because it isn't in the client requirement (§4). This rule stands.)_ Since the entry point became the Extensions card, which opens a **new tab** (§2.3a), that tab has no history, so Back is disabled there. The Niwasi tab stays open behind it (verified on ship, §5).
+- `proxy.ts` needs no change. The main host passes through unchanged. On `partner.*` and `event.*` the path is rewritten to `/partner/mitram-rasoi` and `/event-host/mitram-rasoi`, so the Mitram page is never served there. Event returns 404. Partner returns 200 with its own page, because its `[slug]` route catches any single segment; that's existing partner behaviour (TC-MR-17, corrected on the first run).
 - Make it a **server component**. The only client code is the copy button (§2.5).
 - ~~Add `metadata` with title `"Mitram Rasoi | Niwasi"`.~~ _Superseded on implementation: the title is `"Mitram Rasoi"` (§5)._
 
@@ -106,22 +107,25 @@ Change it so the order becomes:
 
 ### 2.4 Porting the prototype
 
-Keep the prototype's look and content exactly, but in this codebase's style. **Everything the page needs lives inside the route folder `mitram-rasoi/`** (see §2.4a and §4, 2026-09-24 instruction). The only exceptions are the things that can't live there: the nav tab in the shared `Header.tsx`, the `PublicChrome` wrapper used by `(public)/layout.tsx` (§2.2), and the docs.
+Keep the prototype's look and content exactly, but in this codebase's style. **Everything the page needs lives inside the route folder `mitram-rasoi/`** (see §2.4a and §4, 2026-09-24 instruction). The only exceptions are the things that can't live there: the Extensions card in `(public)/page.tsx` (§2.3a; it replaced the ~~nav tab in the shared `Header.tsx`~~), the `PublicChrome` wrapper used by `(public)/layout.tsx` (§2.2), and the docs.
 
 - ~~**Styling in Tailwind v4, not a CSS file.** Port the tokens into `app/globals.css` `@theme` as namespaced `--color-mitram-*` tokens, the same approach used for `--color-admin-*`.~~ _Superseded 2026-09-24 by the colocation instruction: tokens move into the route folder instead._
-- **Styling:** use Tailwind v4 utilities for layout, spacing and type, as in the rest of the codebase. The **brand tokens** (the prototype's `:root` colours, radii and font stacks) go in a colocated CSS module, `mitram-rasoi/mitram-rasoi.module.css`, declared on a single `.theme` class, for example `.theme { --mr-maroon-900: #5e1018; … }`. `layout.tsx` applies that class to the page wrapper. Components use them through Tailwind v4's CSS-variable shorthand: `bg-(--mr-maroon-900)`, `text-(--mr-cream-50)`, `rounded-(--mr-radius-md)`.
+- **Styling:** use Tailwind v4 utilities for layout, spacing and type, as in the rest of the codebase. The **brand tokens** (the prototype's `:root` colours, plus the three font stacks `--mr-display`/`--mr-body`/`--mr-utility`) go in a colocated CSS module, `mitram-rasoi/mitram-rasoi.module.css`, declared on a single `.theme` class, for example `.theme { --mr-maroon-900: #5e1018; … }`. `layout.tsx` applies that class to the page wrapper. Components use them through Tailwind v4's CSS-variable shorthand: `bg-(--mr-maroon-900)`, `text-(--mr-cream-50)`, `font-(family-name:--mr-display)`. _As built:_ the prototype's radius and spacing tokens weren't ported as variables. They map directly onto Tailwind values (`rounded-2xl` = 16px, `rounded-[26px]`, `rounded-full`; spacing 8/16/24/40/64px = `2/4/6/10/16`).
   - Why a module and not a global `.css`: Next 16's CSS guide says a global stylesheet imported from a route **is not removed when navigating to another route**. A `:root { --… }` block imported here would stay loaded on every Niwasi page afterwards. The module's class is hashed and only applies inside this page's wrapper, so nothing leaks (TC-MR-15). This is the first `*.module.css` in the repo. It's used only for token declarations; all styling stays in Tailwind.
   - `app/globals.css` is **not touched**.
-- **Fonts through `next/font/google`, defined in `mitram-rasoi/layout.tsx`.** Load Yatra One (400), Hind (400/500/600/700) and Rajdhani (500/600/700) with `subsets: ["latin", "devanagari"]` and `variable: "--mr-font-display"` / `"--mr-font-body"` / `"--mr-font-utility"`. The layout puts their `.variable` classes on the same wrapper. Nothing goes in the root layout, so the rest of the site never downloads them. This self-hosts the fonts: no runtime request to `fonts.googleapis.com`, unlike the prototype's `<link>`. Keep the prototype's fallback stack, adding `Noto Sans Devanagari`.
+- **Fonts through `next/font/google`, defined in `mitram-rasoi/layout.tsx`.** _As built:_ Yatra One (400), Hind (400/600/700) and Rajdhani (600/700), with `subsets: ["latin", "devanagari"]` and `variable: "--mr-font-yatra"` / `"--mr-font-hind"` / `"--mr-font-rajdhani"`. The module's `--mr-display`/`--mr-body`/`--mr-utility` stacks reference those variables. The weights were trimmed to what the prototype's CSS uses; its `<link>` also asked for Hind 500 and Rajdhani 500, which nothing used (§5). The layout puts the `.variable` classes on the same wrapper. Nothing goes in the root layout, so the rest of the site never downloads them. This self-hosts the fonts: no runtime request to `fonts.googleapis.com`, unlike the prototype's `<link>`. Keep the prototype's fallback stack, adding `Noto Sans Devanagari`.
 - ~~**Images:** copy the 6 files to `apps/frontend/public/images/mitram-rasoi/`.~~ _Superseded 2026-09-24: images move into the route folder._
-- **Images:** copy the 6 files into `mitram-rasoi/_assets/`, keeping their names, and **statically import** them (`import diningHall from "../_assets/dining-hall.jpg"`). `next/image` then fills in width, height and `blurDataURL` automatically, so there's no hand-typed size to drift. The hero dining-hall image gets `priority`. Alt text is copied verbatim from the prototype. At build time Next copies them to `/_next/static/media/…` with a content hash, which gives long-lived caching for free.
+- **Images:** copy the 6 files into `mitram-rasoi/_assets/`, keeping their names, and **statically import** them (`import diningHall from "../_assets/dining-hall.jpg"`). `next/image` fills in width and height automatically, so there's no hand-typed size to drift. _As built:_ every `<Image>` is `unoptimized`, because the optimizer visibly degraded them (the squeezed veg badge smeared; §5, fidelity pass). The header logo and the hero dining-hall image get `priority`. Alt text is copied verbatim from the prototype. At build time Next copies them to `/_next/static/media/…` with a content hash, which gives long-lived caching for free.
 - **Language:** `layout.tsx` wraps the page content in `<div lang="hi">`, on the same wrapper as the theme and font classes. The root `<html lang="en">` stays.
 - ~~**Prototype header → in-page brand bar**, non-sticky, below the sticky Niwasi header.~~ _Superseded 2026-09-24 (Q1: standalone)._
 - **Prototype header stays exactly as built:** a sticky maroon `<header>` with the seal, name, in-page nav and call pill. It's the page's only header.
-- ~~**Anchor offset** for the 90px Niwasi header.~~ _Superseded._ **Anchor offset:** the sticky Mitram header is about 63px tall (a 40px logo, 10px padding each side, a 3px border). Give each anchor target a matching `scroll-mt` so its heading isn't hidden under the header (TC-MR-09).
+- ~~**Anchor offset** for the 90px Niwasi header.~~ _Superseded._ **Anchor offset:** the sticky Mitram header is about 63px tall (a 40px logo, 10px padding each side, a 3px border). Give each anchor target a matching `scroll-mt` so its heading isn't hidden under the header (TC-MR-09). _As built:_ the header measures 65px (63px at ≤720px). Offsets, all tuned on request (§4):
+  - `#menu`: `scroll-mt-[8px]`;
+  - `#events`: `scroll-mt-[18px]`, so the eyebrow of both sections lands about 16px under the header;
+  - `#contact`: the shared `ANCHOR` (`scroll-mt-[68px]`), but it's the page bottom, so the browser clamps it there.
 - ~~**Prototype `<footer id="contact">`** becomes a `<section>`.~~ _Superseded._ **It stays a `<footer id="contact">`**, as in the prototype: it's the page's only footer.
 - **Page background:** the prototype sets `body { background: cream-100 }`. `body` belongs to the root layout, so the page wrapper instead gets `min-h-screen` and the cream background, which covers the viewport the same way.
-- **Keep content exactly:** all Hindi copy, both phone numbers (`tel:+917061653559`; the second number has no `tel:` link in the prototype, so keep it as copy-only), the section order, and the 800px, 720px and 640px responsive breakpoints (map them onto Tailwind `max-[800px]:` etc. or the nearest standard breakpoint).
+- **Keep content exactly:** all Hindi copy, both phone numbers (`tel:+917061653559`; the second number has no `tel:` link in the prototype, so keep it as copy-only), the section order, and the 800px, 720px and 640px responsive breakpoints. _As built:_ `[@media(max-width:800px)]:` (and 720/640), not `max-[800px]:`, which compiles to `width < 800px` and disagreed with the prototype's inclusive `max-width` at exactly 800, 720 and 640px (§5). One deliberate deviation, by request: at ≤640px the menu is 1 column, not the prototype's 2 columns with the first card spanning both (§4).
 - The `prefers-reduced-motion` hover lift maps to `motion-safe:` utilities.
 
 ### 2.4a Route-folder structure (colocation)
@@ -151,9 +155,9 @@ apps/frontend/app/(niwasi)/(public)/mitram-rasoi/
 ```
 
 - **`_` prefix:** Next's "private folders" convention (Next 16 docs, *Project structure → Private folders*). `_components` and `_assets` and everything under them are opted out of routing, so `/mitram-rasoi/_components` is never a URL (TC-MR-21). This also stops a future file named `page.tsx`, `layout.tsx` etc. inside them from turning into a route by accident.
-- **Nested layout:** `mitram-rasoi/layout.tsx` nests **inside** `(public)/layout.tsx`, so the Niwasi `Header` and `Footer` still wrap the page. It only adds the Mitram wrapper (theme, fonts, `lang`) around `{children}`, and has no `<html>`/`<body>`.
+- **Nested layout:** `mitram-rasoi/layout.tsx` nests **inside** `(public)/layout.tsx`. On this path `PublicChrome` renders no Niwasi `Header`/`Footer` (§2.2), so the Mitram wrapper (theme, fonts, `lang`, cream `min-h-screen` background) is the whole visible shell. The layout has no `<html>`/`<body>`.
 - **Server components:** every file except `CopyNumberButton.tsx` is a server component. It's the only `"use client"` file.
-- **Nothing Mitram-specific outside this folder**, except the `Header.tsx` tab and the docs. There's no `components/mitram-rasoi/`, no `public/images/mitram-rasoi/`, and no `globals.css` change. Deleting the folder and the Header entry removes the feature completely.
+- **Nothing Mitram-specific outside this folder**, except the Extensions card in `(public)/page.tsx`, the `PublicChrome` path entry, and the docs. There's no `components/mitram-rasoi/`, no `public/images/mitram-rasoi/`, and no `globals.css` change. To remove the feature: delete the folder, the Extensions card and its seal import in `(public)/page.tsx` (the build would fail on that import otherwise), and the `STANDALONE_PATHS` entry.
 
 ### 2.5 Copy-number button
 
@@ -172,26 +176,27 @@ _Revised 2026-09-24 for colocation. The earlier rows for `components/mitram-raso
 | `apps/frontend/app/(niwasi)/(public)/mitram-rasoi/layout.tsx` | **new**: fonts, theme class, `lang="hi"` wrapper, cream `min-h-screen` background |
 | `apps/frontend/app/(niwasi)/(public)/mitram-rasoi/page.tsx` | **new**: metadata, composes the sections |
 | `apps/frontend/app/(niwasi)/(public)/mitram-rasoi/mitram-rasoi.module.css` | **new**: brand tokens only |
-| `apps/frontend/app/(niwasi)/(public)/mitram-rasoi/_components/*.tsx` | **new**: 6 section components, `CopyNumberButton` (client), `icons` |
+| `apps/frontend/app/(niwasi)/(public)/mitram-rasoi/_components/*` | **new**: 6 section components (`MitramHeader`, `Hero`, `Services`, `MenuPreview`, `Events`, `MitramFooter`), `CopyNumberButton` (client), `icons.tsx`, `ui.ts` |
 | `apps/frontend/app/(niwasi)/(public)/mitram-rasoi/_assets/*` | **new**: the 6 prototype images |
 | ~~`apps/frontend/components/layout/Header.tsx`~~ | ~~live "Mitram Rasoi" tab~~ _Superseded 2026-09-24: restored to `HEAD`, no change (§2.3a)._ |
 | `apps/frontend/app/(niwasi)/(public)/page.tsx` | Extensions: Mitram Rasoi card (new tab), 4-per-row grid, fade moved to the placeholder cells (§2.3a) |
 | `apps/frontend/components/layout/PublicChrome.tsx` | **new**: client wrapper that skips Header/Footer on standalone paths (§2.2, option 2) |
 | `apps/frontend/app/(niwasi)/(public)/layout.tsx` | render through `PublicChrome`, with Header and Footer passed as slots |
 | `docs/frontend/niwasi-portal.md` | add `/mitram-rasoi` to §1 Public pages and to the All-pages table and count |
-| `docs/testing/TEST_CASES.md` | **new on ship**: §3 rows copied verbatim |
+| `docs/prototype/mitram-rasoi/index.html` | prototype kept in the repo; image paths point at `_assets/` (§4) |
+| `docs/testing/TEST_CASES.md` | **new**, created on ship (2026-09-24): active §3 rows copied verbatim |
 
 Nothing changes in `apps/api`: no endpoint, no DB, no env var.
 
 ### 2.7 Security / performance
 
-- Static content, no user input, no API call from the page itself. The `Header` still makes its existing `GET /api/v1/auth/me`.
+- Static content, no user input, and no API call at all on this page. The Niwasi `Header`, whose `GET /api/v1/auth/me` runs on other public pages, isn't mounted here (§2.2, TC-MR-18).
 - No external requests: fonts are self-hosted by `next/font`, and images are local.
-- The images total about 213 KB before `next/image` optimisation. The page should stay light.
+- The images total about 170 KB and are served as-is (`unoptimized`, §2.4). The page stays light.
 
 ### 2.8 Open questions
 
-See §4. The build can start on the stated defaults, and any answer gets recorded there.
+None open. Q1–Q4 were answered (§4). One optional follow-up was offered and not taken up: the Extensions card uses the full-colour seal next to faded text logos, and could use a text-style Mitram Rasoi logo if one is supplied.
 
 ## 3. Test cases (designed up front)
 
@@ -205,27 +210,27 @@ See §4. The build can start on the stated defaults, and any answer gets recorde
 | TC-MR-06 | Direct URL and refresh | — | Open `http://niwasi.abhishek/mitram-rasoi` directly, then refresh | Page renders standalone: the Mitram sticky header at the top, the Mitram footer at the bottom, and no Niwasi header, top bar or footer. HTTP 200, no login prompt. | H |
 | TC-MR-07 | Content parity with prototype | Prototype open side by side | Compare section by section | Same sections in the same order, same Hindi text (character for character), same phone numbers, same chips, same checklist items. No lorem ipsum or English substitutions. | H |
 | TC-MR-08 | All images load | DevTools → Network | Load the page | All 6 images load (no 404) directly from `/_next/static/media/…` (static imports from `_assets/`, served `unoptimized`, see §5). The hero image is not lazy-loaded. Every `<img>` has its prototype alt text. No layout shift as images load, since width and height come from the static import. | H |
-| TC-MR-09 | In-page anchors clear the sticky header | Desktop | Click मेन्यू, उत्सव व बैठक, संपर्क in the Mitram header | Page scrolls to each section and its heading is fully visible below the sticky Mitram header, not hidden under it. The header stays pinned while scrolling. **मेन्यू:** the eyebrow "मेन्यू की झलक" lands about 16px below the header (per the 2026-09-24 request, §4). ~~**उत्सव व बैठक** / **हॉल बुक करें** land at the same spot as **संपर्क**.~~ _Reverted (§4); they use `ANCHOR` again._ **उत्सव व बैठक** / **हॉल बुक करें:** the "बुकिंग" eyebrow lands about 16px below the header, with no light strip between the header and the maroon section (§4). | M |
+| TC-MR-09 | In-page anchors clear the sticky header | Desktop | Click मेन्यू, उत्सव व बैठक, संपर्क in the Mitram header, and हॉल बुक करें in the hero | The header stays pinned while scrolling, and no heading is hidden under it. **मेन्यू:** the eyebrow "मेन्यू की झलक" lands about 16px below the header. **उत्सव व बैठक / हॉल बुक करें:** the eyebrow "बुकिंग" lands about 16px below the header, with no light strip between the header and the maroon section. **संपर्क:** scrolls to the page bottom (it's the last block). _(Offsets revised on request, 2026-09-24; see §4. An interim "events land where संपर्क lands" build was reverted.)_ | M |
 | TC-MR-10 | Call links | Phone, or desktop with a tel: handler | Tap the call pill and both "कॉल करें" buttons | Each opens the dialler with `+91 70616 53559`. | H |
 | TC-MR-11 | Copy button, secure context | Open via `http://localhost:3016/mitram-rasoi` or prod HTTPS | Click "कॉपी करें" on each phone row, then paste | Clipboard holds `70616 53559` and `7070 819 777` respectively. The label shows `कॉपी हो गया` and goes back to `कॉपी करें` after about 1.6s. | M |
 | TC-MR-12 | Copy button, insecure context | Open via `http://niwasi.abhishek/mitram-rasoi` | Click "कॉपी करें" on each phone row, then paste | Clipboard holds the right number (fallback path). The label shows `कॉपी हो गया` and goes back after about 1.6s, with no console error. _(Revised 2026-09-24: it previously expected `नंबर चुनें`.)_ | M |
 | TC-MR-13 | Copy button spam | secure context | Click one copy button 10 times quickly | The label never gets stuck on the success or failure text. It ends on `कॉपी करें` about 1.6s after the last click, and nothing throws. | L |
 | TC-MR-14 | Fonts self-hosted, Devanagari renders | DevTools → Network, filter "font" | Load the page | Headings are in Yatra One and body in Hind. No request to `fonts.googleapis.com` or `fonts.gstatic.com`. No tofu boxes, and conjuncts (त्र, श्र, ड्ड) render correctly. | M |
-| TC-MR-15 | Fonts and theme don't leak site-wide | — | (a) Hard-load `/` and `/aboutUs` and check Network. (b) Open `/mitram-rasoi`, then use the nav to go client-side to `/`, `/aboutUs` and `/contact`. | (a) No Yatra One, Hind or Rajdhani font files are requested. (b) After leaving the page, the other pages look exactly as before: no maroon/cream colours, no Mitram fonts, and no `--mr-*` variables on `:root` or `body` (check with DevTools → Computed). | M |
-| TC-MR-16 | Responsive layout | — | View at 375, 640, 800, 1080 and 1440px | ≤800px: hero and events stack to one column with the photo first. ≤720px: brand-bar nav hides and the contact grid is one column. ≤640px: menu grid is 1 column, every card full width (revised 2026-09-24; it was 2 columns with the first card spanning both). No horizontal scroll at any width. | H |
+| TC-MR-15 | Fonts and theme don't leak site-wide | — | (a) Hard-load `/` and `/aboutUs` and check Network. (b) In one tab, open `/` then `/mitram-rasoi`, press Back, and from `/` use the nav to go client-side to `/aboutUs` and `/contact`. | (a) No Yatra One, Hind or Rajdhani font files are requested. (b) After leaving the page, the other pages look exactly as before: no maroon/cream colours, no Mitram fonts, and no `--mr-*` variables on `:root` or `body` (check with DevTools → Computed). _(Step (b) reworded on ship: the page has no links out, and the Extensions card opens a new tab, so Back in the same tab is the only way to leave it client-side.)_ | M |
+| TC-MR-16 | Responsive layout | — | View at 375, 640, 800, 1080 and 1440px | ≤800px: hero and events stack to one column with the photo first. ≤720px: the header nav hides, the call pill shows only its icon, and the contact grid is one column. ≤640px: menu grid is 1 column, every card full width (revised 2026-09-24; it was 2 columns with the first card spanning both). No horizontal scroll at any width. | H |
 | TC-MR-17 | Not reachable on partner/event hosts | — | Open `http://partner.niwasi.abhishek/mitram-rasoi` and `http://event.niwasi.abhishek/mitram-rasoi` | Neither shows the Mitram page. Event returns its 404. Partner returns 200 with its own `Partner of Niwasi` page, because the partner portal's `[slug]` route catches any single segment (`/some-random-slug` does the same); that's existing partner behaviour. _(Expected result corrected 2026-09-24 on first run; it said "both 404".)_ | L |
 | TC-MR-18 | Same page for guest and logged-in, no API call | DevTools → Network (Fetch/XHR) | Load `/mitram-rasoi` logged out, then logged in | Page is identical in both states, with no Login/Dashboard UI. **Zero** requests to the API; in particular no `GET /api/v1/auth/me`, because the Niwasi Header isn't mounted. | M |
-| TC-MR-19 | Keyboard and a11y | — | Tab through the page | Every link and button is reachable in visual order with a visible focus ring (yellow outline, as in the prototype). The page content has `lang="hi"`. There's exactly one `<header>` and one `<footer>` landmark, both Mitram's. | M |
-| TC-MR-20 | Build, typecheck, lint, console clean | — | `npm run build` and `npm run lint` in `apps/frontend`; load the page with DevTools open | Build and lint pass with no new warnings. The build's route list shows `/mitram-rasoi` as static (○). No console errors or hydration warnings on the page. | H |
+| TC-MR-19 | Keyboard and a11y | — | Tab through the page | Same 10 focus stops as the prototype, in visual order: logo link, the 3 header links, call pill, the 3 CTA buttons, the 2 copy buttons. Focus styles match the prototype: the browser's default ring on the header links and call pill (the prototype has no rule for them), and a 3px solid yellow `#ffed00` ring with a 2px offset on the CTA and copy buttons. The page content has `lang="hi"`. There's exactly one `<header>` and one `<footer>` landmark, both Mitram's. _(Expected result made precise on ship.)_ | M |
+| TC-MR-20 | Build, typecheck, lint, console clean | — | `npm run build`, and `eslint` on the changed files, in `apps/frontend`; load the page with DevTools open | Build passes, and lint reports nothing for this feature's files. A full `npm run lint` fails on 4 existing problems in files this feature doesn't touch. The build's route list shows `/mitram-rasoi` as static (○). No console errors or hydration warnings on the page. | H |
+| TC-MR-21 | Private folders aren't routes | — | Open `/mitram-rasoi/_components`, `/mitram-rasoi/_components/Hero`, `/mitram-rasoi/_assets/logo-seal.png` | All three return the Niwasi 404. None renders a component or serves the raw image file. | M |
+| TC-MR-22 | Feature is self-contained | Implementation done | `git diff --stat 8f7a9d2..HEAD` in `apps/frontend` | The only changed paths outside `app/(niwasi)/(public)/mitram-rasoi/` are `app/(niwasi)/(public)/page.tsx` (Extensions card), `app/(niwasi)/(public)/layout.tsx` and `components/layout/PublicChrome.tsx` (new). `components/layout/Header.tsx`, `globals.css` and `public/` are untouched. _(Revised on ship: the nav tab in `Header.tsx` was replaced by the Extensions card.)_ | L |
+| TC-MR-23 | No route back on the page | On `/mitram-rasoi` | Look for any link to Niwasi. Then (a) open the page from the Extensions card, and (b) open `/` then `/mitram-rasoi` in the same tab and press Back | There's no Niwasi logo, link or back button anywhere on the page (the only links are in-page anchors and `tel:`). (a) The card opens a new tab with no history, so Back is disabled there, and the Niwasi tab is still open behind it. (b) Back returns to `/`. _(Restored 2026-09-24 after the Back to Niwasi button was removed, §4; (a) added on ship because the entry point moved to the new-tab card.)_ | M |
+| TC-MR-24 | Other public pages unaffected | — | Open `/`, `/aboutUs`, `/contact`, `/sabha`, `/login`, `/join`; also go client-side from `/mitram-rasoi` back to `/` with browser Back | Each shows the Niwasi top bar, header and footer exactly as before. After going Back from `/mitram-rasoi`, the header and footer reappear without a refresh, and the header's Login/Dashboard state loads correctly. Paths that only look similar, e.g. `/mitram-rasoi-x`, still get the Niwasi chrome (they 404 inside it). | H |
 | TC-MR-25 | Header has no Mitram Rasoi tab | — | Open `/` at ≥1024px, then open the ☰ menu at <1024px | Nav reads `… Need & Help · Event · Mitram Kitchen · MOOL · Contact` in both, with no Mitram Rasoi. Spacing is the original `px-4`. | H |
 | TC-MR-26 | Extensions shows the Mitram Rasoi card | — | Open `/` and scroll to EXTENSIONS | 7 cards: PARTNER, Project for Students, INFO, HELP, CBO, समुदाय वेबसाइट, Mitram Rasoi (seal logo). The Mitram card shows the caption "Home-cooked meals from local kitchens." under the seal, inside the card. The six placeholders are faded (opacity 0.5) exactly as before; Mitram Rasoi is at full opacity. | H |
 | TC-MR-27 | 4 per row | — | View EXTENSIONS at 1797, 1280, 1024, 768, 767 and 375px | ≥768px: 4 columns, rows 4 + 3. <768px: 2 columns, rows 2 + 2 + 2 + 1. No horizontal scroll. | H |
 | TC-MR-28 | Card opens in a new tab | — | Click the Mitram Rasoi card | A **new tab** opens at `/mitram-rasoi` (standalone page). The original tab stays on `/`. `window.opener` is `null` in the new tab (`rel="noopener noreferrer"`). | H |
 | TC-MR-29 | Placeholders stay non-working | — | Click each of the six faded logos | Nothing happens: no navigation and no pointer cursor, as before. | M |
-| TC-MR-21 | Private folders aren't routes | — | Open `/mitram-rasoi/_components`, `/mitram-rasoi/_components/Hero`, `/mitram-rasoi/_assets/logo-seal.png` | All three return the Niwasi 404. None renders a component or serves the raw image file. | M |
-| TC-MR-22 | Feature is self-contained | Implementation done | `git diff --stat` against the base commit | The only changed paths outside `app/(niwasi)/(public)/mitram-rasoi/` are `components/layout/Header.tsx`, `components/layout/PublicChrome.tsx` (new), `app/(niwasi)/(public)/layout.tsx`, and docs. `globals.css` and `public/` are untouched. | L |
-| TC-MR-23 | No route back on the page | On `/mitram-rasoi` | Look for any link to Niwasi, then press the browser's Back button | There's no Niwasi logo, link or back button anywhere on the page (the only links are in-page anchors and `tel:`). Browser Back returns to the previous page, e.g. `/` after arriving through the tab. _(Restored 2026-09-24 after the Back to Niwasi button was removed, §4.)_ | M |
-| TC-MR-24 | Other public pages unaffected | — | Open `/`, `/aboutUs`, `/contact`, `/sabha`, `/login`, `/join`; also go client-side from `/mitram-rasoi` back to `/` with browser Back | Each shows the Niwasi top bar, header and footer exactly as before. After going Back from `/mitram-rasoi`, the header and footer reappear without a refresh, and the header's Login/Dashboard state loads correctly. Paths that only look similar, e.g. `/mitram-rasoi-x`, still get the Niwasi chrome (they 404 inside it). | H |
 
 ## 4. Sign-off
 
@@ -236,7 +241,7 @@ See §4. The build can start on the stated defaults, and any answer gets recorde
 - **Q3: Events section image.** The prototype shows the logo seal where a hall photo would normally go. Keep it as in the prototype (default), or will a photo of the hall be supplied?
 - **Q4: Mitram Kitchen placeholder.** Should "Mitram Kitchen" stay a greyed Phase 2 placeholder next to the new live "Mitram Rasoi" tab (default: yes, unchanged)?
 
-_Answers:_ (pending)
+_Answers:_ see "answers to Q1–Q4" below.
 
 **2026-09-24: instruction from the user (colocation).**
 
@@ -281,11 +286,38 @@ The recommendation for every question was the default. For Q1, that meant keepin
 - **Q3:** the events image slot keeps the logo seal, exactly like the prototype.
 - **Q4:** Mitram Kitchen stays a greyed Phase 2 placeholder, unchanged.
 
+**2026-09-24: route location for the standalone page.**
+
+The build was paused while §2 was being updated to move the route out of `(public)`. The user asked:
+
+> wait why does it move out of the public if we make a layout file in the mitram -rasoi route we wont need to moove it out keep it there only
+
+The answer given was that Next layouts nest, so a child `mitram-rasoi/layout.tsx` renders inside `(public)/layout.tsx` and can't remove its Header or Footer. Three options were offered:
+- (1) split `(public)` into a `(site)` sub-group holding the Header/Footer layout and move all 11 public pages into it;
+- (2) have `(public)/layout.tsx` skip Header/Footer by pathname;
+- recommended: move `mitram-rasoi/` beside `(public)` under the passthrough `(niwasi)` layout.
+
+> yes 2nd
+
+**Decided: option 2, against the recommendation, built as asked.** The route stays at `app/(niwasi)/(public)/mitram-rasoi/`, and a `PublicChrome` client wrapper in `(public)/layout.tsx` skips the Niwasi Header/Footer on `/mitram-rasoi`. Details are in §2.2, and TC-MR-24 was added.
+
+**2026-09-24: bug report after the first build.**
+
+> copy button is not working
+
+The cause was the plan's own §2.5 choice. The page was opened over `http://niwasi.abhishek`, which isn't a secure context, so there's no Clipboard API and the button always showed `नंबर चुनें`. The prototype behaves the same way. Fixed by adding the `execCommand` fallback (§2.5 superseded), and TC-MR-12 was revised to expect a real copy.
+
 **2026-09-24: fidelity re-check requested.**
 
 > now check the prototype once again it is in docs in the sunai_niwasi and make sure everything properly matches font color images responsiveness everything properly once again
 
 `docs/prototype/mitram-rasoi/index.html` is byte-for-byte identical to the Downloads copy the port was built from, but it has **no `images/` folder** next to it, so opened from `docs/` the prototype's images are broken. The comparison rendered the Downloads copy, which has the images. Findings and fixes are in §5.
+
+**2026-09-24: prototype image paths.**
+
+> can you make the path correction in the prototype images so they load properly
+
+In `docs/prototype/mitram-rasoi/index.html`, all 8 `src="images/…"` now point to `../../../apps/frontend/app/(niwasi)/(public)/mitram-rasoi/_assets/…`. Those are the port's own copies, verified byte-identical to the originals with `cmp`, so there's one set of images and no duplicate in `docs/`. That's the only change to the prototype HTML. Verified: all 8 images load from `docs/` with no failed requests, and the render is pixel-identical to the Downloads copy. This depends on the `apps/frontend` submodule being checked out.
 
 **2026-09-24: menu anchor offset.**
 
@@ -390,41 +422,14 @@ A deliberate deviation from the prototype. At ≤640px the prototype showed the 
 - Verified: at 640, 375 and 320px there's 1 column, all three cards have the same width (592, 327 and 272px) and every image is 170px tall. At 641 and 1440px there are 3 columns, as before. No horizontal scroll.
 - Lint and typecheck are clean.
 
-**2026-09-24: prototype image paths.**
-
-> can you make the path correction in the prototype images so they load properly
-
-In `docs/prototype/mitram-rasoi/index.html`, all 8 `src="images/…"` now point to `../../../apps/frontend/app/(niwasi)/(public)/mitram-rasoi/_assets/…`. Those are the port's own copies, verified byte-identical to the originals with `cmp`, so there's one set of images and no duplicate in `docs/`. That's the only change to the prototype HTML. Verified: all 8 images load from `docs/` with no failed requests, and the render is pixel-identical to the Downloads copy. This depends on the `apps/frontend` submodule being checked out.
-
-**2026-09-24: bug report after the first build.**
-
-> copy button is not working
-
-The cause was the plan's own §2.5 choice. The page was opened over `http://niwasi.abhishek`, which isn't a secure context, so there's no Clipboard API and the button always showed `नंबर चुनें`. The prototype behaves the same way. Fixed by adding the `execCommand` fallback (§2.5 superseded), and TC-MR-12 was revised to expect a real copy.
-
-**2026-09-24: route location for the standalone page.**
-
-The build was paused while §2 was being updated to move the route out of `(public)`. The user asked:
-
-> wait why does it move out of the public if we make a layout file in the mitram -rasoi route we wont need to moove it out keep it there only
-
-The answer given was that Next layouts nest, so a child `mitram-rasoi/layout.tsx` renders inside `(public)/layout.tsx` and can't remove its Header or Footer. Three options were offered:
-- (1) split `(public)` into a `(site)` sub-group holding the Header/Footer layout and move all 11 public pages into it;
-- (2) have `(public)/layout.tsx` skip Header/Footer by pathname;
-- recommended: move `mitram-rasoi/` beside `(public)` under the passthrough `(niwasi)` layout.
-
-> yes 2nd
-
-**Decided: option 2, against the recommendation, built as asked.** The route stays at `app/(niwasi)/(public)/mitram-rasoi/`, and a `PublicChrome` client wrapper in `(public)/layout.tsx` skips the Niwasi Header/Footer on `/mitram-rasoi`. Details are in §2.2, and TC-MR-24 was added.
-
 ## 5. Execution log
 
 **2026-09-24: implementation.**
 
-Files (frontend submodule, not committed):
+Files (frontend submodule; uncommitted at this point, committed on ship, see the last entry):
 - new route folder `app/(niwasi)/(public)/mitram-rasoi/`: `layout.tsx`, `page.tsx`, `mitram-rasoi.module.css`, `_components/` (8 files) and `_assets/` (6 images copied verbatim from the prototype);
 - new `components/layout/PublicChrome.tsx`;
-- edited `app/(niwasi)/(public)/layout.tsx` and `components/layout/Header.tsx`.
+- edited `app/(niwasi)/(public)/layout.tsx` and `components/layout/Header.tsx` (the nav tab; `Header.tsx` was later restored to `HEAD` when the entry point moved to the Extensions card, §2.3a).
 
 Docs: `docs/frontend/niwasi-portal.md` gained the §1 row and the All-pages row, and the count went from 211 to 212.
 
@@ -434,7 +439,7 @@ Decisions and findings during the build:
 - **Anchor offset:** the sticky header measures 65px, not the estimated 63px, because the call pill sets the row height. `#events` landed 1px under it, so the offset went from `scroll-mt-16` to `scroll-mt-[68px]`.
 - **Prototype bug copied as-is:** the veg badge (`badge-veg.png`, 240×58, with the text "शुद्ध शाकाहारी" inside it) is squeezed into 16×16 (hero chip) and 22×22 (trust row) with no `object-fit`, so it renders squashed. Kept exactly as the prototype; flagged to the user.
 - **Button outline:** on the first render "हॉल बुक करें" had no outline, because the shared `border-transparent` beat the secondary button's border colour. `border-transparent` moved to the primary button only.
-- **Nav width (§2.3):** measured by removing the new tab:
+- **Nav width (§2.3):** _(superseded with the nav tab, §2.3a; the `NAV_ITEM_PAD` tweak was removed)_ measured by removing the new tab:
   - 1024px: it **already wrapped to two rows before this change** (needs 929px, has 929px). Still two rows; that's existing behaviour, and the breakpoint wasn't changed.
   - 1180px and 1280px: the new tab made it wrap (needs 1171px at `px-4`).
   - Fix: `NAV_ITEM_PAD = "px-2.5 min-[1300px]:px-4"` on the desktop items. At 1300px and above, spacing is the original `px-4`.
@@ -445,15 +450,15 @@ Verification. Build and route checks: `tsc --noEmit` OK, `eslint` OK, and `npm r
 
 | TC | Result | Notes |
 |---|---|---|
-| TC-MR-01 | PASS | Order: Home · About Niwasi · Niwasi Resources · Niwasi Action · Need & Help · Event · Mitram Kitchen · Mitram Rasoi · MOOL · Contact |
-| TC-MR-02 | PASS | Clicking the tab loads `/mitram-rasoi`. Neighbours are still greyed spans. |
+| TC-MR-01 | PASS (later superseded) | Order: Home · About Niwasi · Niwasi Resources · Niwasi Action · Need & Help · Event · Mitram Kitchen · Mitram Rasoi · MOOL · Contact |
+| TC-MR-02 | PASS (later superseded) | Clicking the tab loads `/mitram-rasoi`. Neighbours are still greyed spans. |
 | TC-MR-03 | n/a | Dropped (standalone page) |
-| TC-MR-04 | PASS* | One row at 1180, 1280, 1366 and 1440px. *1024px wraps to 2 rows, as it did before this change. |
-| TC-MR-05 | PASS | Mobile overlay: … Mitram Kitchen · Mitram Rasoi · MOOL …; tapping it closes the overlay and navigates. |
+| TC-MR-04 | PASS* (later superseded) | One row at 1180, 1280, 1366 and 1440px. *1024px wraps to 2 rows, as it did before this change. |
+| TC-MR-05 | PASS (later superseded) | Mobile overlay: … Mitram Kitchen · Mitram Rasoi · MOOL …; tapping it closes the overlay and navigates. |
 | TC-MR-06 | PASS | 200, one `<header>` and one `<footer>` (Mitram's), no Niwasi top bar or header |
 | TC-MR-07 | PASS | Visual side-by-side at 1440 and 375px against the prototype; text copied verbatim |
 | TC-MR-08 | PASS | 6 files / 8 `<img>` all load from `/_next/static/media`; hero and logo `priority`; alt text verbatim |
-| TC-MR-09 | PASS | After the 68px fix, targets land at 68px under a 65px header |
+| TC-MR-09 | PASS | After the 68px fix, targets land at 68px under a 65px header. _(Offsets later tuned on request; the final results are in the ship entry.)_ |
 | TC-MR-10 | PASS (markup) | All three call links are `tel:+917061653559`. Dialler not exercised. |
 | TC-MR-11 | PASS | On `localhost:3016`: clipboard = `7070 819 777`, label resets. Re-run after the fallback change: both buttons paste the right number. |
 | TC-MR-12 | ~~PASS~~ → re-run PASS | The first run "passed" against the old expectation (`नंबर चुनें`); the user reported that as broken. After the fallback, on `http://niwasi.abhishek` both buttons show `कॉपी हो गया` and paste `70616 53559` / `7070 819 777`; there's no console error, and the label resets. |
@@ -466,11 +471,11 @@ Verification. Build and route checks: `tsc --noEmit` OK, `eslint` OK, and `npm r
 | TC-MR-19 | partial | Landmarks and `lang="hi"` checked. Keyboard tab order not walked. |
 | TC-MR-20 | PASS | tsc, eslint and build clean; 0 console errors on the page |
 | TC-MR-21 | PASS | `/mitram-rasoi/_components`, `/_components/Hero` and `/_assets/logo-seal.png` all return 404 |
-| TC-MR-22 | PASS | Outside the route folder: Header.tsx, PublicChrome.tsx (new), (public)/layout.tsx, docs |
+| TC-MR-22 | PASS | Outside the route folder: Header.tsx, PublicChrome.tsx (new), (public)/layout.tsx, docs. _(At this point; the final result is in the ship entry.)_ |
 | TC-MR-23 | PASS | No non-anchor, non-`tel:` links on the page; browser Back returns to `/` |
 | TC-MR-24 | PASS | `/`, `/aboutUs`, `/contact`, `/sabha`, `/login` and `/join` return 200 with chrome. Back from the page restores header, footer and Login. `/mitram-rasoi-x` gets a 404 inside the Niwasi chrome. |
 
-Still to do before `shipped`: the logged-in run of TC-MR-18, a keyboard walk for TC-MR-19, a real-phone `tel:` tap for TC-MR-10, commits (frontend submodule plus the parent repo's docs and submodule pointer), and promoting §3 into `docs/testing/TEST_CASES.md`.
+Still to do before `shipped`: the logged-in run of TC-MR-18, a keyboard walk for TC-MR-19, a real-phone `tel:` tap for TC-MR-10, commits (frontend submodule plus the parent repo's docs and submodule pointer), and promoting §3 into `docs/testing/TEST_CASES.md`. _(Resolved on ship, see the last entry.)_
 
 **2026-09-24: fidelity pass (second check against the prototype).**
 
@@ -497,16 +502,58 @@ Results after the fixes:
 
 TC-MR-07 (content and visual parity) re-verified: PASS, now pixel-exact. TC-MR-16 (responsive): PASS at all 13 widths, including the exact breakpoints.
 
+**2026-09-24: shipped.**
+
+The user confirmed the feature is implemented. Status → `shipped`.
+
+Commits:
+
+| Repo | Commit | Change |
+|---|---|---|
+| frontend | `0897975` | Add standalone Mitram Rasoi page and link it from the home page Extensions section |
+| frontend | `29690e5` | Stack Mitram Rasoi menu cards one per row on small screens |
+| parent | `d2697bd` | Bump frontend for Mitram Rasoi page; add its plan, prototype and page-map entry |
+| parent | `072913f` | Bump frontend for single-column Mitram Rasoi menu on small screens; update plan |
+
+- **Page-map rule (AGENTS.md):** `docs/frontend/niwasi-portal.md` covers both parts, in the same commit as the page (`d2697bd`):
+  - the feature section: the §1 Public pages row describes `/mitram-rasoi` as standalone and reached from the Extensions card in a new tab, not in the nav;
+  - the All-pages table has its row, and the count is 212.
+  - No endpoint changed, so `docs/api/*` needed nothing.
+- **Test cases promoted:** the active §3 rows (TC-MR-06..29) were copied verbatim into the new `docs/testing/TEST_CASES.md`, under a *Mitram Rasoi* module heading. The superseded or dropped TC-MR-01..05 stay in §3 only, as history.
+
+Final checks run on ship (Playwright, system Chrome, against the committed code):
+- **TC-MR-19: PASS.** A keyboard walk gives the same 10 focus stops as the prototype, in visual order: the logo link, मेन्यू, उत्सव व बैठक, संपर्क, the call pill, the 3 CTAs and the 2 copy buttons. Every stop's focus style matches the prototype's: the browser's default ring on the header links and call pill, and 3px solid `#ffed00` on the CTAs and copy buttons.
+- **TC-MR-23 (a): PASS.** A tab opened from the Extensions card has `history.length === 1`, so Back is disabled, and the Niwasi tab is still on `/`. §2.2 and TC-MR-23 were corrected accordingly.
+- **TC-MR-22: PASS as revised.** Outside the route folder only `(public)/page.tsx`, `(public)/layout.tsx` and `PublicChrome.tsx` changed; `Header.tsx` is byte-identical to its pre-feature commit.
+
+Final status of the active test cases:
+- **PASS:** 06, 07, 08, 09, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28 and 29.
+- **Not fully run:**
+  - **TC-MR-10:** markup verified (all three call links are `tel:+917061653559`); the dialler hasn't been tapped on a real phone.
+  - **TC-MR-18:** logged-out run only (0 API requests). No test account was available for the logged-in run. Low risk: nothing on the page reads auth state, and the Niwasi `Header` isn't mounted on this path.
+
+Plan corrected on ship, so it describes the final code. §2.2, §2.4, §2.4a, §2.6, §2.7 and §2.8 had stale references to:
+- the nav tab as the entry point;
+- the Niwasi Header/Footer wrapping the page;
+- font weights and variable names;
+- image optimisation;
+- anchor offsets and breakpoint syntax;
+- radius tokens;
+- the partner-host 404;
+- Back as the way home.
+
+TC-MR-09, 15, 16, 19, 20, 22 and 23 were reworded to the final behaviour, and the rows were put back in numeric order. §4's entries were put back in chronological order; the prototype-image-path, copy-button and route-location entries had been appended at the end.
+
 ## 6. Post-deploy
 
 _(none yet)_
 
 ## 7. Cross-references
 
-- SRS row: none (`docs/requirement/SRS.md` doesn't exist). The Header's Phase 2 comment cites SRS §4.5.
-- TEST_CASES: TC-MR-01..29 (promoted from §3 on ship; `docs/testing/TEST_CASES.md` gets created then).
-- Page maps / API docs updated: `docs/frontend/niwasi-portal.md` (new public page). API docs: none, since no endpoint changes.
-- Prototype source: `/home/triline27/Downloads/Mitram Rasoi/index.html` and `images/` (outside the repo; the images get copied into `mitram-rasoi/_assets/`).
+- SRS row: none (`docs/requirement/SRS.md` doesn't exist). The Header's Phase 2 comment and the home page's Extensions comment both cite SRS §4.5.
+- TEST_CASES: TC-MR-06..29 in `docs/testing/TEST_CASES.md` → *Mitram Rasoi* (created on ship, 2026-09-24).
+- Page maps / API docs updated: `docs/frontend/niwasi-portal.md` (new public page: feature-section row and All-pages row). API docs: none, since no endpoint changes.
+- Prototype source: `/home/triline27/Downloads/Mitram Rasoi/index.html` and `images/`. The HTML is also in the repo at `docs/prototype/mitram-rasoi/index.html`, with image paths pointing at `mitram-rasoi/_assets/`.
 - Related but out of scope: the `mitram_daily_reports` table, the `is_mitram_daily_report` facility flag, and the partner nav's greyed "Order From Mitram" / "Mitram Daily Reports" items.
 - CHANGELOG bullet: none (no CHANGELOG in this repo).
 - Production deploy notes: none. It's a standard frontend deploy with no env or DB steps.
