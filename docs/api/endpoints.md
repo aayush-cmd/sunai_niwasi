@@ -2,7 +2,7 @@
 
 Every endpoint in `apps/api`, with the full URL it's served at (after all router mounts from `src/index.ts`). Keep it in sync by hand (see the docs rule in `AGENTS.md`). See [api-structure.md](api-structure.md) for how the API is organised and what each module does.
 
-893 endpoints, grouped by mount. **Guards** are the auth/permission middleware on the route, including router-level ones; permission keys are shown in quotes. **Source** is the file and line where the route is declared.
+899 endpoints, grouped by mount. **Guards** are the auth/permission middleware on the route, including router-level ones; permission keys are shown in quotes. **Source** is the file and line where the route is declared.
 
 ### `/api/v1/admin` (110)
 
@@ -553,7 +553,7 @@ Every endpoint in `apps/api`, with the full URL it's served at (after all router
 | POST | `/api/v1/locations/sub-localities` | public | `src/modules/niwasi/location.routes.ts:31` |
 | GET | `/api/v1/locations/wards` | public | `src/modules/niwasi/location.routes.ts:25` |
 
-### `/api/v1/partner` (383)
+### `/api/v1/partner` (389)
 
 | Method | Path | Guards | Source |
 |---|---|---|---|
@@ -581,6 +581,12 @@ Every endpoint in `apps/api`, with the full URL it's served at (after all router
 | GET | `/api/v1/partner/my-orgs` | `requirePartnerAuth` | `src/modules/partner/partner.routes.ts:157` |
 | GET | `/api/v1/partner/nature-types` | `requirePartnerAuth`, `requirePartnerPermission('partner.org.manage')` | `src/modules/partner/partner.routes.ts:699` |
 | GET | `/api/v1/partner/orgs` | public | `src/modules/partner/partner.routes.ts:120` |
+| GET | `/api/v1/partner/orgs/:slug/admin/orders` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/order-placement.admin.routes.ts:29` |
+| GET | `/api/v1/partner/orgs/:slug/admin/orders/:group/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/order-placement.admin.routes.ts:32` |
+| GET | `/api/v1/partner/orgs/:slug/admin/orders/:group/:id/attachments/:filename` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/order-placement.admin.routes.ts:33` |
+| PATCH | `/api/v1/partner/orgs/:slug/admin/orders/:group/:id/status` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/order-placement.admin.routes.ts:34` |
+| GET | `/api/v1/partner/orgs/:slug/admin/orders/export` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/order-placement.admin.routes.ts:31` |
+| GET | `/api/v1/partner/orgs/:slug/admin/orders/staff-options` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/order-placement.admin.routes.ts:30` |
 | POST | `/api/v1/partner/orgs/:slug/affiliator/mark/:uprId` | `requirePartnerAuth`, `requireOrgAccess` | `src/modules/partner/affiliator.routes.ts:41` |
 | GET | `/api/v1/partner/orgs/:slug/affiliator/niwasi` | `requirePartnerAuth`, `requireOrgMember` | `src/modules/partner/affiliator.routes.ts:69` |
 | GET | `/api/v1/partner/orgs/:slug/affiliator/service-requests` | `requirePartnerAuth`, `requireOrgMember` | `src/modules/partner/affiliator.routes.ts:50` |
@@ -681,38 +687,38 @@ Every endpoint in `apps/api`, with the full URL it's served at (after all router
 | PUT | `/api/v1/partner/orgs/:slug/masters/activity-category/:id` | `requirePartnerAuth`, `requireOrgAccess` | `src/modules/partner/partner.routes.ts:578` |
 | PATCH | `/api/v1/partner/orgs/:slug/masters/activity-category/:id/status` | `requirePartnerAuth`, `requireOrgAccess` | `src/modules/partner/partner.routes.ts:594` |
 | GET | `/api/v1/partner/orgs/:slug/masters/activity-category/project-options` | `requirePartnerAuth`, `requireOrgAccess` | `src/modules/partner/partner.routes.ts:563` |
-| POST | `/api/v1/partner/orgs/:slug/order-placement/attachments` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:67` |
-| GET | `/api/v1/partner/orgs/:slug/order-placement/attachments/:filename` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:68` |
-| GET | `/api/v1/partner/orgs/:slug/order-placement/customers` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:71` |
-| POST | `/api/v1/partner/orgs/:slug/order-placement/customers` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:73` |
-| GET | `/api/v1/partner/orgs/:slug/order-placement/customers/:id` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:74` |
-| PUT | `/api/v1/partner/orgs/:slug/order-placement/customers/:id` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:75` |
-| POST | `/api/v1/partner/orgs/:slug/order-placement/customers/:id/members` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:77` |
-| GET | `/api/v1/partner/orgs/:slug/order-placement/customers/:id/orders` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:76` |
-| GET | `/api/v1/partner/orgs/:slug/order-placement/customers/lookup` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:72` |
-| GET | `/api/v1/partner/orgs/:slug/order-placement/dashboard` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:64` |
-| GET | `/api/v1/partner/orgs/:slug/order-placement/masters/categories` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:99` |
-| POST | `/api/v1/partner/orgs/:slug/order-placement/masters/categories` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:100` |
-| PUT | `/api/v1/partner/orgs/:slug/order-placement/masters/categories/:id` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:101` |
-| PATCH | `/api/v1/partner/orgs/:slug/order-placement/masters/categories/:id/status` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:102` |
-| POST | `/api/v1/partner/orgs/:slug/order-placement/masters/categories/ensure` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:89` |
-| GET | `/api/v1/partner/orgs/:slug/order-placement/masters/groups` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:93` |
-| POST | `/api/v1/partner/orgs/:slug/order-placement/masters/groups` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:94` |
-| PUT | `/api/v1/partner/orgs/:slug/order-placement/masters/groups/:id` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:95` |
-| PATCH | `/api/v1/partner/orgs/:slug/order-placement/masters/groups/:id/status` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:96` |
-| GET | `/api/v1/partner/orgs/:slug/order-placement/masters/items` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:105` |
-| POST | `/api/v1/partner/orgs/:slug/order-placement/masters/items` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:106` |
-| PUT | `/api/v1/partner/orgs/:slug/order-placement/masters/items/:id` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:108` |
-| GET | `/api/v1/partner/orgs/:slug/order-placement/masters/items/:id/rate-history` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:107` |
-| PATCH | `/api/v1/partner/orgs/:slug/order-placement/masters/items/:id/status` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:109` |
-| POST | `/api/v1/partner/orgs/:slug/order-placement/masters/items/ensure` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:90` |
-| GET | `/api/v1/partner/orgs/:slug/order-placement/masters/options/categories` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:87` |
-| GET | `/api/v1/partner/orgs/:slug/order-placement/masters/options/items` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:88` |
-| GET | `/api/v1/partner/orgs/:slug/order-placement/orders` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:81` |
-| POST | `/api/v1/partner/orgs/:slug/order-placement/orders` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:80` |
-| GET | `/api/v1/partner/orgs/:slug/order-placement/orders/:group/:id` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:82` |
-| PUT | `/api/v1/partner/orgs/:slug/order-placement/orders/:group/:id` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:83` |
-| PATCH | `/api/v1/partner/orgs/:slug/order-placement/orders/:group/:id/status` | `requirePartnerAuth`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:84` |
+| POST | `/api/v1/partner/orgs/:slug/order-placement/attachments` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:72` |
+| GET | `/api/v1/partner/orgs/:slug/order-placement/attachments/:filename` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:73` |
+| GET | `/api/v1/partner/orgs/:slug/order-placement/customers` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:76` |
+| POST | `/api/v1/partner/orgs/:slug/order-placement/customers` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:78` |
+| GET | `/api/v1/partner/orgs/:slug/order-placement/customers/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:79` |
+| PUT | `/api/v1/partner/orgs/:slug/order-placement/customers/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:80` |
+| POST | `/api/v1/partner/orgs/:slug/order-placement/customers/:id/members` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:82` |
+| GET | `/api/v1/partner/orgs/:slug/order-placement/customers/:id/orders` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:81` |
+| GET | `/api/v1/partner/orgs/:slug/order-placement/customers/lookup` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:77` |
+| GET | `/api/v1/partner/orgs/:slug/order-placement/dashboard` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:69` |
+| GET | `/api/v1/partner/orgs/:slug/order-placement/masters/categories` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:104` |
+| POST | `/api/v1/partner/orgs/:slug/order-placement/masters/categories` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:105` |
+| PUT | `/api/v1/partner/orgs/:slug/order-placement/masters/categories/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:106` |
+| PATCH | `/api/v1/partner/orgs/:slug/order-placement/masters/categories/:id/status` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:107` |
+| POST | `/api/v1/partner/orgs/:slug/order-placement/masters/categories/ensure` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:94` |
+| GET | `/api/v1/partner/orgs/:slug/order-placement/masters/groups` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:98` |
+| POST | `/api/v1/partner/orgs/:slug/order-placement/masters/groups` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:99` |
+| PUT | `/api/v1/partner/orgs/:slug/order-placement/masters/groups/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:100` |
+| PATCH | `/api/v1/partner/orgs/:slug/order-placement/masters/groups/:id/status` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:101` |
+| GET | `/api/v1/partner/orgs/:slug/order-placement/masters/items` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:110` |
+| POST | `/api/v1/partner/orgs/:slug/order-placement/masters/items` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:111` |
+| PUT | `/api/v1/partner/orgs/:slug/order-placement/masters/items/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:113` |
+| GET | `/api/v1/partner/orgs/:slug/order-placement/masters/items/:id/rate-history` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:112` |
+| PATCH | `/api/v1/partner/orgs/:slug/order-placement/masters/items/:id/status` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:114` |
+| POST | `/api/v1/partner/orgs/:slug/order-placement/masters/items/ensure` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:95` |
+| GET | `/api/v1/partner/orgs/:slug/order-placement/masters/options/categories` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:92` |
+| GET | `/api/v1/partner/orgs/:slug/order-placement/masters/options/items` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:93` |
+| GET | `/api/v1/partner/orgs/:slug/order-placement/orders` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:86` |
+| POST | `/api/v1/partner/orgs/:slug/order-placement/orders` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:85` |
+| GET | `/api/v1/partner/orgs/:slug/order-placement/orders/:group/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:87` |
+| PUT | `/api/v1/partner/orgs/:slug/order-placement/orders/:group/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:88` |
+| PATCH | `/api/v1/partner/orgs/:slug/order-placement/orders/:group/:id/status` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:89` |
 | POST | `/api/v1/partner/orgs/:slug/pratham/assign-project` | `requirePartnerAuth`, `requireOrgMember`, `requirePartnerPermission('pratham.access')` | `src/modules/partner/pratham.routes.ts:76` |
 | GET | `/api/v1/partner/orgs/:slug/pratham/assign-role` | `requirePartnerAuth`, `requireOrgMember`, `requirePartnerPermission('pratham.access')` | `src/modules/partner/pratham.routes.ts:155` |
 | POST | `/api/v1/partner/orgs/:slug/pratham/assign-role/:id` | `requirePartnerAuth`, `requireOrgMember`, `requirePartnerPermission('pratham.access')` | `src/modules/partner/pratham.routes.ts:156` |

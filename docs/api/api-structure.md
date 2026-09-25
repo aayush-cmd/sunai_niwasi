@@ -101,7 +101,7 @@ single endpoint.
 | `/profile` | `modules/profile/` | The user's own profile, the same across all communities | Logged in |
 | `/admin/...` | `modules/admin/` | System admin: communities, users, locations, masters, service access, populate, upload/download | System Admin only |
 | `/help/...` | `modules/help/` | Public needy browsing, help actions, and help admin under `/help/admin` | Mixed: public, logged in, admin |
-| `/partner/...` | `modules/partner/` | Partner portal. Org-scoped routes are `/partner/orgs/:slug/...`: surveys, campaigns, contacts, facilities, order placement, reports, Pratham, Samajik Udyami, … | Logged-in partner users, by org and designation |
+| `/partner/...` | `modules/partner/` | Partner portal. Org-scoped routes are `/partner/orgs/:slug/...`: surveys, campaigns, contacts, facilities, order placement (staff-only), the org-admin Orders view (`/partner/orgs/:slug/admin/orders`: every staff member's orders, read-only except status, `requireOrgAccess`), reports, Pratham, Samajik Udyami, … | Logged-in partner users, by org and designation |
 | `/event/:slug/:pctype/...` | `modules/event/` | Managing events: create/edit, assign, media, reports. `pctype`: `1` community, `2` partner, `3` sub-group. | Logged in, by owner's role |
 | `/event-host/...` | `modules/event/` (`event-host.*`) | Public event portal: published event list, event dashboard, registration | Public (login optional) |
 
@@ -138,6 +138,7 @@ Shared helpers used across modules are in `modules/services/` (service-access lo
 | `requireCommunityPermission(key)` | `middleware/rbac.ts` | Must hold a community role allowed for that permission key (see the `PERMISSIONS` map in `rbac.ts`) |
 | `requirePartnerAuth` | `modules/partner/partner.auth.ts` | Partner-portal login check |
 | `requireOrgMember()` / `requireOrgAccess()` / `requirePartnerPermission(key)` | `modules/partner/permissions.ts` | Must belong to the `:slug` partner org, with the right designation |
+| `requireSunaiOrg` | `modules/partner/sunai-org.ts` | Org-lock: the `:slug` must be the Sunai org (matched by slug), otherwise 404 for everyone including System Admin. Mounted router-level on `/orgs/:slug/order-placement` and `/orgs/:slug/admin/orders`. |
 
 Roles are **per community**: someone can be Community Admin in one community and an ordinary
 member in another. Handlers always use the user id from the session (`req.user!.userId`), never

@@ -54,6 +54,8 @@ each feature once. The table at the end lists every page.
 | `/admin/communities`, `/admin/wards` | Communities and wards the organisation works in |
 | `/admin/work-requests` | Work requests sent to the organisation by communities |
 | `/admin/masters/activity-category` | Activity categories |
+| `/admin/orders` | Every staff member's Order Placement orders for the org. Filters (customer/mobile, staff, service group, status, date range), filter-dependent CSV download, a ✏ Edit status dialog (statuses depend on the service group), and 👁 → the Order Details page. **Sunai only:** for Sunai's Partner Admin and the System Admin; staff can't open it, and other partner orgs have no tab (their URLs are not-found). The "Orders" tab after Feedback Form. |
+| `/admin/orders/[group]/[id]` | Order Details: read-only fields for one order, depending on its service group (and medical type), with its attachments. Back and Close return to the list with the same filters. |
 | `/admin/profile` | Organisation profile |
 
 ## 4. Staff portal — `/{slug}/staff/...`
@@ -99,7 +101,7 @@ The day-to-day work area for field staff.
 
 ### Order placement — `/staff/order-placement/...`
 
-Placing and tracking service orders for customers, such as home sample collection.
+Placing and tracking service orders for customers, such as home sample collection. **Sunai only:** the menu item shows only for the Sunai org's staff, and these pages (and their API) are not-found for every other partner.
 
 | URL | Page |
 |---|---|
@@ -161,7 +163,7 @@ The platform System Admin's partner-side tools.
 
 The complete list: one row per `page.tsx` in `apps/frontend/app/`. The sections above explain what each feature is; this table makes sure every page is listed. Keep it in sync by hand (see the docs rule in `AGENTS.md`).
 
-207 pages. **URL** is what the user sees. **Kind** comes from the URL: Create = `new`/`create`/`add`, Edit = `edit`, Detail = ends in a `[param]`.
+209 pages. **URL** is what the user sees. **Kind** comes from the URL: Create = `new`/`create`/`add`, Edit = `edit`, Detail = ends in a `[param]`.
 
 | URL | Kind | File |
 |---|---|---|
@@ -186,6 +188,8 @@ The complete list: one row per `page.tsx` in `apps/frontend/app/`. The sections 
 | `/[slug]/admin/communities` | Page | `app/(partner)/partner/(dash)/[slug]/admin/communities/page.tsx` |
 | `/[slug]/admin/designations` | Page | `app/(partner)/partner/(dash)/[slug]/admin/designations/page.tsx` |
 | `/[slug]/admin/masters/activity-category` | Page | `app/(partner)/partner/(dash)/[slug]/admin/masters/activity-category/page.tsx` |
+| `/[slug]/admin/orders` | Page | `app/(partner)/partner/(dash)/[slug]/admin/orders/page.tsx` |
+| `/[slug]/admin/orders/[group]/[id]` | Detail | `app/(partner)/partner/(dash)/[slug]/admin/orders/[group]/[id]/page.tsx` |
 | `/[slug]/admin/profile` | Page | `app/(partner)/partner/(dash)/[slug]/admin/profile/page.tsx` |
 | `/[slug]/admin/projects` | Page | `app/(partner)/partner/(dash)/[slug]/admin/projects/page.tsx` |
 | `/[slug]/admin/shared-projects` | Page | `app/(partner)/partner/(dash)/[slug]/admin/shared-projects/page.tsx` |
