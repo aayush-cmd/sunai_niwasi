@@ -208,7 +208,7 @@ None open. Q1–Q4 were answered (§4). One optional follow-up was offered and n
 | ~~TC-MR-04~~ | Nav fits at desktop widths | — | Resize to 1024, 1180, 1280 and 1440px on `/` and `/mitram-rasoi` | All 10 items stay on one line inside the header, with no wrapping, clipping, horizontal scroll, or overlap with the logo. | H _Superseded 2026-09-24: there's no nav tab anymore (§2.3a); see TC-MR-25..29._ |
 | ~~TC-MR-05~~ | Mobile overlay | Viewport <1024px | Tap ☰ | "Mitram Rasoi" is listed between "Mitram Kitchen" and "MOOL" as a live white link. Tapping it closes the overlay and opens `/mitram-rasoi`. | H _Superseded 2026-09-24: there's no nav tab anymore (§2.3a); see TC-MR-25..29._ |
 | TC-MR-06 | Direct URL and refresh | — | Open `http://niwasi.abhishek/mitram-rasoi` directly, then refresh | Page renders standalone: the Mitram sticky header at the top, the Mitram footer at the bottom, and no Niwasi header, top bar or footer. HTTP 200, no login prompt. | H |
-| TC-MR-07 | Content parity with prototype | Prototype open side by side | Compare section by section | Same sections in the same order, same Hindi text (character for character), same phone numbers, same chips, same checklist items. No lorem ipsum or English substitutions. | H |
+| TC-MR-07 | Content parity with prototype | Prototype open side by side | Compare section by section | Same sections in the same order, same Hindi text (character for character), same phone numbers, same chips, same checklist items. No lorem ipsum or English substitutions. **One exception:** the prototype's last footer line ("मित्रम रसोई — शुद्ध शाकाहारी रसोई, NH 31, बलिया। रंग व चिह्न मित्रम रसोई के डिज़ाइन सिस्टम से।") and its divider are removed, by request (plan §6, 2026-09-25). | H |
 | TC-MR-08 | All images load | DevTools → Network | Load the page | All 6 images load (no 404) directly from `/_next/static/media/…` (static imports from `_assets/`, served `unoptimized`, see §5). The hero image is not lazy-loaded. Every `<img>` has its prototype alt text. No layout shift as images load, since width and height come from the static import. | H |
 | TC-MR-09 | In-page anchors clear the sticky header | Desktop | Click मेन्यू, उत्सव व बैठक, संपर्क in the Mitram header, and हॉल बुक करें in the hero | The header stays pinned while scrolling, and no heading is hidden under it. **मेन्यू:** the eyebrow "मेन्यू की झलक" lands about 16px below the header. **उत्सव व बैठक / हॉल बुक करें:** the eyebrow "बुकिंग" lands about 16px below the header, with no light strip between the header and the maroon section. **संपर्क:** scrolls to the page bottom (it's the last block). _(Offsets revised on request, 2026-09-24; see §4. An interim "events land where संपर्क lands" build was reverted.)_ | M |
 | TC-MR-10 | Call links | Phone, or desktop with a tel: handler | Tap the call pill and both "कॉल करें" buttons | Each opens the dialler with `+91 70616 53559`. | H |
@@ -546,7 +546,13 @@ TC-MR-09, 15, 16, 19, 20, 22 and 23 were reworded to the final behaviour, and th
 
 ## 6. Post-deploy
 
-_(none yet)_
+**2026-09-25: footer credit line removed (change request after ship).**
+
+> in the mitram rasoi page remove this line "मित्रम रसोई — शुद्ध शाकाहारी रसोई, NH 31, बलिया। रंग व चिह्न मित्रम रसोई के डिज़ाइन सिस्टम से।"
+
+_(The screenshot showed that line at the bottom of the maroon footer.)_ The whole bottom block of `MitramFooter.tsx` is removed: the second `WRAP` div and its `<p>`, which carried the line plus the thin `border-t` divider above it. A divider with nothing under it would have been left dangling. The footer now ends after the address and phone grid. This is a deliberate deviation from the prototype; `docs/prototype/mitram-rasoi/index.html` is left unchanged as the original reference. TC-MR-07 is updated in both §3 and `docs/testing/TEST_CASES.md`.
+- Verified at 1440 and 375px: the line is gone, the footer still has its address block and 2 copy buttons, there's no horizontal scroll, and there are no console errors.
+- Lint and typecheck are clean. No page, URL or endpoint changed, so the page maps need nothing.
 
 ## 7. Cross-references
 
