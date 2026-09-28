@@ -2,11 +2,11 @@
 
 | Field | Value |
 |---|---|
-| Status | in-progress |
+| Status | shipped |
 | Started | 2026-09-25 |
-| Shipped | |
+| Shipped | 2026-09-25: api `5f84b82`, frontend `cdff1b3`, parent `18041b4` |
 | SRS row | — (no `docs/requirement/SRS.md` in this repo yet) |
-| Test cases | TC-PAO-01..38 |
+| Test cases | TC-PAO-01..38 (16 superseded). Active rows promoted to `docs/testing/TEST_CASES.md` |
 | Prototype todo | — |
 
 ## 1. Requirement (as given)
@@ -605,7 +605,32 @@ Verification (kept light at the user's request: typecheck, lint on changed files
 
 TC-PAO-38 (API part): PASS. TC-PAO-36, TC-PAO-37 and the page part of TC-PAO-38 are **not run** (no browser run, to keep load low); the code paths are in place.
 
-Still to do before `shipped`:
+**2026-09-28: shipped.**
+
+The user confirmed the feature has shipped. Status → `shipped`.
+
+Commits (2026-09-25):
+
+| Repo | Commit | Message |
+|---|---|---|
+| api | `5f84b82` | feat(admin-orders): add Sunai-only Partner Admin Orders API with filters, CSV export, details, attachments and status update |
+| frontend | `cdff1b3` | feat(admin-orders): add Sunai Partner Admin Orders tab with Order Details page, status edit and CSV export |
+| parent | `18041b4` | feat(admin-orders): bump api and frontend for Partner Admin Orders; add plan and update docs |
+
+- **Test cases promoted:** the 37 active §3 rows (TC-PAO-01..38 except 16, which was superseded by the Order Details page) were copied verbatim into `docs/testing/TEST_CASES.md` under a new *Partner Admin Orders* module.
+- **Shipped with these not fully verified** (recorded above, left as-is):
+  - TC-PAO-06: no 00:00–05:30 IST order locally;
+  - TC-PAO-19: System Admin checked by API only;
+  - TC-PAO-22: logged-out download not run;
+  - TC-PAO-23: empty org checked by API only;
+  - TC-PAO-24: no soft-deleted orders locally;
+  - TC-PAO-36, TC-PAO-37 and the page part of TC-PAO-38: menus / pages not checked in a browser after the Sunai-only change.
+- **Known limitations carried forward** (§6 or follow-ups):
+  - attachment files missing from the local upload folder return 404; a missing file shows the raw JSON error rather than a friendly message;
+  - the admin nav wraps to two rows at ≤1600px (pre-existing), and in the ~1680px band because of the new tab;
+  - the catch-up migration for `copied_from_customer_id` / `opc_partner_mobile_creator_uq` (§2.7) is still outstanding.
+
+_Superseded by the ship entry above:_ Still to do before `shipped`:
 - the partial / not-run rows above (06, 19 in the UI, 22 logged-out, 23 in the UI, 24);
 - commits in both submodules and the parent (plan + docs + submodule pointers);
 - promoting §3 to `docs/testing/TEST_CASES.md`.
@@ -617,7 +642,7 @@ _(none yet)_
 ## 7. Cross-references
 
 - SRS row: none.
-- TEST_CASES: TC-PAO-01..26, to be promoted to `docs/testing/TEST_CASES.md` on ship.
+- TEST_CASES: TC-PAO-01..38 (except 16) in `docs/testing/TEST_CASES.md` → *Partner Admin Orders* (promoted on ship, 2026-09-28).
 - Page maps / API docs to update: `docs/frontend/partner-portal.md`, `docs/api/endpoints.md`.
 - Related code: `apps/api/src/modules/partner/order-placement.*`, `apps/frontend/app/(partner)/partner/(dash)/[slug]/staff/order-placement/**`, `apps/frontend/lib/partner-order-placement.ts`.
 - Missing design doc cited by the code: `docs/order-placement-rebuild-plan.md` (not in the repo).
