@@ -84,3 +84,47 @@ TC-PAO-16 (the old 👁 modal) was superseded before ship and is only in the pla
 | TC-PAO-36 | Orders tab only on Sunai | Partner Admin of Sunai; Partner Admin of another org (e.g. pratham); System Admin | Open each org's admin area | Sunai PA and SA-on-Sunai see **Orders** after Feedback Form. The other org's PA sees no Orders tab, and SA viewing another org sees no Orders tab. | H |
 | TC-PAO-37 | Order Placement menu only for Sunai staff | Sunai staff; another org's staff | Open each staff dashboard | Sunai staff see Order Placement; the other org's staff don't. The Sunai Partner Admin still doesn't see it (unchanged). | H |
 | TC-PAO-38 | Direct URL / API on another org → not found | Other-org PA / staff; System Admin | Open `/{other}/admin/orders`, `/{other}/admin/orders/waste/1`, `/{other}/staff/order-placement/order`; call `/api/v1/partner/orgs/{other}/admin/orders` and `/orgs/{other}/order-placement/orders` | Pages show not-found. The API returns **404** for everyone including SA. Sunai's pages and API behave exactly as before (TC-PAO-03, TC-PAO-20 still pass). | H |
+
+## Partner Masters (Sunai-only)
+
+Sunai-only partner masters under Master: **Material and Expense Head**, **Center Name** and **Quantity Unit** (list, Add/Edit, Activate/Deactivate, no delete).
+Source: [2026-09-29-partner-sunai-masters.md](../planning/features/2026-09-29-partner-sunai-masters.md) §3, shipped 2026-09-29.
+`<M>` means the case is run for each of the three masters. The 404 cases apply to the page URL
+
+| TC-ID | Title | Pre-condition | Steps | Expected Result | Priority |
+|---|---|---|---|---|---|
+| TC-PSM-01 | Menu shows three new leaves for Sunai | Logged in as Sunai Partner Admin | Open the Master dropdown on `/Sunai/admin` | "Master Activity", then Material and Expense Head, Center Name, Quantity Unit, in that order; each opens its page | H |
+| TC-PSM-02 | Menu hides leaves for other orgs | Partner Admin of a non-Sunai org | Open the Master dropdown | Only "Master Activity"; no new leaves | H |
+| TC-PSM-03 | System Admin can manage on Sunai | Logged in as System Admin (users.id 1) | Open each `<M>` page under `/Sunai/admin/masters/…`, add, edit, toggle | All succeed | H |
+| TC-PSM-04 | Non-Sunai org URL is 404 (page) | Any user, including System Admin | Visit `/<OtherOrg>/admin/masters/center` directly | Next.js 404 page | H |
+| TC-PSM-05 | Non-Sunai org URL is 404 (API) | System Admin token | `GET /api/v1/partner/orgs/<OtherOrg>/masters/center` | 404 `NOT_FOUND` | H |
+| TC-PSM-06 | Sunai staff blocked | Logged in as a Sunai staff member (Vendor Admin / Office Staff / Surveyor) | Visit a `<M>` page URL, and call its GET API | Page shows no access / is not in the menu; API 403 | H |
+| TC-PSM-07 | Logged out blocked | No partner session | Call `GET …/masters/quantity-unit` | 401 | H |
+| TC-PSM-08 | Other org's Partner Admin can't reach Sunai rows | Partner Admin of org X | `GET /api/v1/partner/orgs/Sunai/masters/center` | 403 (not this org's admin) | H |
+| TC-PSM-09 | Empty list | No rows yet | Open a `<M>` page | "No result found."; count 0; Add button visible | M |
+| TC-PSM-10 | Add Material and Expense Head | Sunai admin | Add Head → Name "rice" → Save | Row "Rice", Active; count +1; modal closes | H |
+| TC-PSM-11 | Add Center | Sunai admin | Add Center → "Mitram Rasoi Ballia", code 16 → Save | Row shows name, code 16, Active | H |
+| TC-PSM-12 | Add Quantity Unit keeps short name case | Sunai admin | Add → Unit Name "kilogram", Short Code "kg" → Save | Row "Kilogram" / "kg" (short name not capitalised) | H |
+| TC-PSM-13 | Required fields | Add modal open, per `<M>` | Save with every field blank / only spaces | Inline "required" error under each field; nothing saved; API returns 422 with the same fields if called directly | H |
+| TC-PSM-14 | Max length | Add modal | Name of 256 characters (101 for unit name); unit short name of 21 | Inline max-length error; API 422 | M |
+| TC-PSM-15 | Center code must be a whole number | Add Center | Enter `abc`, `-5`, `1.5`, `1e3`, `0`, `4294967296` | Each rejected inline; API 422 for each | H |
+| TC-PSM-16 | Center code upper bound ok | Add Center | Code `4294967295` | Saved | L |
+| TC-PSM-17 | Center code leading zeros | Add Center | Code `016` | Saved and shown as 16 | L |
+| TC-PSM-18 | Duplicate center code | Center with code 16 exists | Add another center with code 16 | Inline "code already exists" (409 `CODE_TAKEN`); not saved | H |
+| TC-PSM-19 | Duplicate code blocked even when inactive | Center code 16 exists and is deactivated | Add a new center with code 16 | 409 `CODE_TAKEN` | M |
+| TC-PSM-20 | Same code allowed in another org | Another org has a center row with code 16 (inserted directly) | Sunai adds code 16 | Saved (uniqueness is per partner) | M |
+| TC-PSM-21 | Duplicate active name, case-insensitive | Active "Kilogram" exists | Add unit "KILOGRAM" | 409 `NAME_TAKEN`, inline on the name; not saved | H |
+| TC-PSM-22 | Duplicate short name | Active unit with "kg" exists | Add unit "Kilo" / "KG" | 409 `SHORT_NAME_TAKEN`, inline on short code | M |
+| TC-PSM-23 | Inactive name can be reused | Head "Oil" deactivated | Add head "Oil" | Saved as a new active row | M |
+| TC-PSM-24 | Edit | Existing row, per `<M>` | ✏ → change fields → Save | Row updated; `created_at` / `created_by` unchanged, `updated_*` set | H |
+| TC-PSM-25 | Edit to a clashing value | Two active units "Gram"/"g" and "Litre"/"L" | Edit Litre's name to "gram" | 409 inline; original values kept | M |
+| TC-PSM-26 | Edit unchanged saves | Existing row | ✏ → Save without changes | Saved (no self-clash) | M |
+| TC-PSM-27 | Deactivate / Activate | Active row | Toggle to inactive, then back | Status flips; row moves between the Active and Inactive filters | H |
+| TC-PSM-28 | Reactivate blocked by a newer duplicate | "Oil" inactive; a new active "Oil" exists | Activate the old "Oil" | 409 `NAME_TAKEN`; old row stays inactive; message shown | M |
+| TC-PSM-29 | No delete | Any row | Inspect the actions; call `DELETE …/masters/center/:id` | No delete button; API 404 (route doesn't exist) | M |
+| TC-PSM-30 | Search and status filters | Mixed active/inactive rows | Search a partial name (and "kg" / "16" on unit / center); switch chips; Clear | Only matching rows; chips filter by status; Clear resets search and page | M |
+| TC-PSM-31 | Pagination | 25+ rows | Go to page 2 | 20 per page; "Showing 21–25 of 25" | M |
+| TC-PSM-32 | Id from another org or missing | Row id belonging to another partner / nonexistent | `PUT` and `PATCH …/status` with that id on the Sunai slug | 404; nothing changed | H |
+| TC-PSM-33 | Body can't set partner or status | Sunai admin | POST with extra `partner_id: 5, status: 0` | Row saved under Sunai, active (extra keys ignored or rejected) | M |
+| TC-PSM-34 | Translation wrapped | `NEXT_PUBLIC_I18N_ENABLED` on; a Hindi `label_text` row added via the Language admin for "Center Name" | Switch to हिं | That label shows in Hindi; strings without a row stay English; master data values unchanged | L |
+| TC-PSM-35 | Timestamps set on create/edit | Sunai admin | Create a row, then edit it; check the DB | API sets both on create, and only `updated_at` on edit / toggle; the values match the real time (not 5h30m off); the columns have no DB default | L |

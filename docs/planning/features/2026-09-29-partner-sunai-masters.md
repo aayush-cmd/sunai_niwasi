@@ -2,11 +2,11 @@
 
 | Field | Value |
 |---|---|
-| Status | in-progress |
+| Status | shipped |
 | Started | 2026-09-29 |
-| Shipped | |
+| Shipped | 2026-09-29 |
 | SRS row | — (no `docs/requirement/SRS.md` in this repo yet) |
-| Test cases | TC-PSM-01..35 |
+| Test cases | TC-PSM-01..35. Promoted to `docs/testing/TEST_CASES.md` |
 | Prototype todo | — |
 
 ## 1. Requirement (as given)
@@ -490,6 +490,11 @@ and to the API.
   - **Noted, not changed:** the shared `MasterStatusToggle` confirm copy ("Deactivate",
     "Cancel", …) isn't wrapped in `t()`. That's existing component code used by every master.
 
+- 2026-09-29: shipped. Commits: api `4e26226`, frontend `fe7f3cf`, parent `4ec6695`. The 35 §3
+  rows were copied verbatim into `docs/testing/TEST_CASES.md` ("Partner Masters (Sunai-only)",
+  numeric order). Status → shipped. **Before deploying the API to beta/prod, the user runs
+  `apps/api/prisma/sql/2026-09-29-partner-sunai-masters.sql` there.**
+
 ## 6. Post-deploy
 
 _(none yet)_
@@ -497,7 +502,7 @@ _(none yet)_
 ## 7. Cross-references
 
 - SRS row: n/a
-- TEST_CASES: TC-PSM-01..35 (promote on ship)
+- TEST_CASES: TC-PSM-01..35 ✔ promoted on ship (2026-09-29)
 - Page maps / API docs to update: `docs/frontend/partner-portal.md`, `docs/api/endpoints.md`,
   `docs/api/api-structure.md`
 - Migration: `apps/api/prisma/sql/2026-09-29-partner-sunai-masters.sql` (user runs it)
