@@ -2,7 +2,7 @@
 
 Every endpoint in `apps/api`, with the full URL it's served at (after all router mounts from `src/index.ts`). Keep it in sync by hand (see the docs rule in `AGENTS.md`). See [api-structure.md](api-structure.md) for how the API is organised and what each module does.
 
-899 endpoints, grouped by mount. **Guards** are the auth/permission middleware on the route, including router-level ones; permission keys are shown in quotes. **Source** is the file and line where the route is declared.
+911 endpoints, grouped by mount. **Guards** are the auth/permission middleware on the route, including router-level ones; permission keys are shown in quotes. **Source** is the file and line where the route is declared.
 
 ### `/api/v1/admin` (110)
 
@@ -553,7 +553,7 @@ Every endpoint in `apps/api`, with the full URL it's served at (after all router
 | POST | `/api/v1/locations/sub-localities` | public | `src/modules/niwasi/location.routes.ts:31` |
 | GET | `/api/v1/locations/wards` | public | `src/modules/niwasi/location.routes.ts:25` |
 
-### `/api/v1/partner` (389)
+### `/api/v1/partner` (401)
 
 | Method | Path | Guards | Source |
 |---|---|---|---|
@@ -687,6 +687,18 @@ Every endpoint in `apps/api`, with the full URL it's served at (after all router
 | PUT | `/api/v1/partner/orgs/:slug/masters/activity-category/:id` | `requirePartnerAuth`, `requireOrgAccess` | `src/modules/partner/partner.routes.ts:578` |
 | PATCH | `/api/v1/partner/orgs/:slug/masters/activity-category/:id/status` | `requirePartnerAuth`, `requireOrgAccess` | `src/modules/partner/partner.routes.ts:594` |
 | GET | `/api/v1/partner/orgs/:slug/masters/activity-category/project-options` | `requirePartnerAuth`, `requireOrgAccess` | `src/modules/partner/partner.routes.ts:563` |
+| GET | `/api/v1/partner/orgs/:slug/masters/center` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/partner-masters.sunai.routes.ts:45` |
+| POST | `/api/v1/partner/orgs/:slug/masters/center` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/partner-masters.sunai.routes.ts:46` |
+| PUT | `/api/v1/partner/orgs/:slug/masters/center/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/partner-masters.sunai.routes.ts:47` |
+| PATCH | `/api/v1/partner/orgs/:slug/masters/center/:id/status` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/partner-masters.sunai.routes.ts:48` |
+| GET | `/api/v1/partner/orgs/:slug/masters/material-expense-head` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/partner-masters.sunai.routes.ts:45` |
+| POST | `/api/v1/partner/orgs/:slug/masters/material-expense-head` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/partner-masters.sunai.routes.ts:46` |
+| PUT | `/api/v1/partner/orgs/:slug/masters/material-expense-head/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/partner-masters.sunai.routes.ts:47` |
+| PATCH | `/api/v1/partner/orgs/:slug/masters/material-expense-head/:id/status` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/partner-masters.sunai.routes.ts:48` |
+| GET | `/api/v1/partner/orgs/:slug/masters/quantity-unit` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/partner-masters.sunai.routes.ts:45` |
+| POST | `/api/v1/partner/orgs/:slug/masters/quantity-unit` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/partner-masters.sunai.routes.ts:46` |
+| PUT | `/api/v1/partner/orgs/:slug/masters/quantity-unit/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/partner-masters.sunai.routes.ts:47` |
+| PATCH | `/api/v1/partner/orgs/:slug/masters/quantity-unit/:id/status` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/partner-masters.sunai.routes.ts:48` |
 | POST | `/api/v1/partner/orgs/:slug/order-placement/attachments` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:72` |
 | GET | `/api/v1/partner/orgs/:slug/order-placement/attachments/:filename` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:73` |
 | GET | `/api/v1/partner/orgs/:slug/order-placement/customers` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgStaffOnly` | `src/modules/partner/order-placement.routes.ts:76` |

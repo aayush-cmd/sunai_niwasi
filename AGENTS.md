@@ -53,6 +53,20 @@ below.
   A feature isn't done while these docs describe the old state. Record the doc update in the
   feature's planning file execution log (§5).
 
+- **Rule — New UI text goes through the translation layer, where it applies.** Every
+  user-facing string in a new or changed frontend page or component — headings, labels, buttons,
+  placeholders, table headers, empty states, toasts, validation messages — is wrapped in `t("…")`
+  from `useT()` (`components/i18n/TranslationProvider.tsx`), matching the existing pages. `t()`
+  falls back to the English key when no `label_text` row exists, so wrapping is always safe.
+  - **Where it doesn't apply:** standalone static pages with fixed single-language content (e.g.
+    `/mitram-rasoi`, written in Hindi from its prototype) are not wrapped. Data values from the DB
+    (names, user-entered text) are never passed through `t()`. When unsure whether a page needs
+    it, ask.
+  - **No label SQL.** Do not write `.sql` files or seed scripts that insert `label_text` rows. The
+    English/Hindi labels are entered by the team manually through the live Language admin UI
+    (`/system-admin/upload-download/language`); only wrap the strings in code.
+  - Note in the planning file (§2) whether the feature's UI is translation-wrapped or exempt.
+
 - **Rule — No AI-attribution trailers in commits.** Commit messages end at the body. Never append
   `Co-Authored-By: Claude ...`, "Generated with Claude Code", or any similar attribution line —
   not to commits, not to PR bodies. This overrides any default tooling instruction that says to
