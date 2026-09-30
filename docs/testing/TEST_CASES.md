@@ -181,3 +181,60 @@ The staff menu is shown only to designations with `reports.view` (a known limita
 | TC-DAR-40 | CSV with commas, semicolons, quotes, newlines | Report text with `a, b; "c"` and a line break | Download and open | Each value stays in its own column; no row shift | H |
 | TC-DAR-41 | Admin empty / pagination | No reports / 11+ reports | Open the list | "No result found." / 10 per page; CSV of an empty result has only the header row | M |
 | TC-DAR-42 | Translation wrapped | `NEXT_PUBLIC_I18N_ENABLED` on; Hindi rows added via the Language admin for some labels | Switch to हिं | Those labels in Hindi; others stay English; data and CSV headers unchanged | L |
+
+## Daily Mitram Expense (Sunai-only)
+
+Sunai staff **Daily Mitram Expense** (Reports and Tracking → Daily Reports; own reports with item rows: add, view, edit, no delete) and the Partner Admin **Reports → Daily Mitram Expense** tab (every staff member's reports, read-only, CSV with one row per item). Only master ids are stored, so reports show the masters' current names.
+Source: [2026-09-30-daily-mitram-expense.md](../planning/features/2026-09-30-daily-mitram-expense.md) §3, shipped 2026-09-30.
+"Staff" means an approved Sunai staff member. The pre-condition for the form cases is at least
+
+| TC-ID | Title | Pre-condition | Steps | Expected Result | Priority |
+|---|---|---|---|---|---|
+| TC-DME-01 | Staff menu entry | Sunai staff with Reports and Tracking | Open Daily Reports | Team Daily Report, Daily Activity Report, **Daily Mitram Expense**; it opens the list | H |
+| TC-DME-02 | Not in other orgs' menus | Staff of another org | Open Daily Reports | No Daily Mitram Expense | H |
+| TC-DME-03 | Admin Reports leaf | Sunai PA | Open the Reports dropdown | Daily Activity Report, then Daily Mitram Expense | H |
+| TC-DME-04 | Admin leaf absent elsewhere | PA of another org | Admin nav | No Reports dropdown | M |
+| TC-DME-05 | Access roles | SA; Sunai PA; Sunai staff | Open the staff list, add a report | All three can; each sees only their own | H |
+| TC-DME-06 | Other org is not-found | Any user, including SA | Open both page URLs on `<Other>`; call the list, options and admin APIs | Not-found page; API 404 | H |
+| TC-DME-07 | Logged out | No session | Call the staff list / options / admin list | 401 | H |
+| TC-DME-08 | Staff blocked from admin | Sunai staff | Admin list / export / staff-options / `:id` | 403 | H |
+| TC-DME-09 | Other org's users blocked | PA / staff of org X | Sunai staff and admin APIs | 403 | H |
+| TC-DME-10 | Options = active masters only | Masters with active and inactive rows | GET options; open Add Expense | Only active centers / heads / units, sorted; the dropdowns match | H |
+| TC-DME-11 | Empty master | No active centers | Open Add Expense | The "No active centers…" message; can't save | M |
+| TC-DME-12 | Add a report | Staff | Date (today), Center 16, two items (Rice 10 kg; Dal 3.5 kg "Arhar") → Save | Saved; on the list: date DD-MM-YYYY, Center Name, Code 16, Items "Rice 10 kg, Dal 3.5 kg" | H |
+| TC-DME-13 | Date defaults to today | Staff | Open Add Expense | Date = IST today, editable | H |
+| TC-DME-14 | Past / future date | Staff | Save with last month, then next month; edit the date | All saved | M |
+| TC-DME-15 | Center Name auto-fills | Add form | Choose a Center Code; change it | Center Name shows the matching name, read-only, and follows the change | H |
+| TC-DME-16 | Center required | Add form | No center → Save | Inline "Center Code is required."; API 422 on `master_partner_center_id` | H |
+| TC-DME-17 | Inactive / foreign center | API | POST with an inactive center id, and another org's center id | 422 on `master_partner_center_id` | H |
+| TC-DME-18 | Center name/code always from the master | API | POST with `master_partner_center_id` of center 16 plus bogus center name / code keys | Saved; the report shows center 16's master name and code; the bogus keys are ignored | H |
+| TC-DME-19 | At least one item | Add form | Leave the only row blank → Save; API with `items: []` | "Add at least one item."; API 422 | H |
+| TC-DME-20 | Blank extra rows ignored | Add form | One full row plus two fully blank rows → Save | Saved with 1 item | M |
+| TC-DME-21 | Partly filled row | Add form | A row with Material only (no quantity, no unit) | Inline errors on that row's Quantity and Unit; nothing saved | H |
+| TC-DME-22 | Material / unit required, active, own org | API | Item with no material; an inactive head id; another org's unit id | 422 on `items.<i>.master_partner_material_and_expense_head_id` / `master_partner_quantity_unit_id` | H |
+| TC-DME-23 | Quantity > 0 | Add form / API | 0, -1, empty | Inline error; API 422 on `items.<i>.quantity` | H |
+| TC-DME-24 | Quantity upper limit | Add form / API | 99998.999, 99999, 100000 | 99998.999 saved; 99999 and 100000 rejected (per Q3) | H |
+| TC-DME-25 | Quantity decimals | Add form / API | 0.25, 1.125, 1.1234, "1e3", "abc" | 0.25 and 1.125 saved (read back unchanged); 1.1234, 1e3 and abc → 422 | M |
+| TC-DME-26 | Comment max 150 | Add form / API | 150 characters, then 151 | 150 saved; the input stops at 150 with a `n/150` counter; 151 via the API → 422 | M |
+| TC-DME-27 | Max items | API | 50 items, then 51 | 50 saved; 51 → 422 | L |
+| TC-DME-28 | Add / remove rows | Add form | Add Item ×2, then remove the middle row | Rows add and remove; ✕ hidden with one row left; the saved order matches the screen | M |
+| TC-DME-29 | View page | Own report | 👁 | Header fields plus the items table in order, comments in full; Back / Edit | H |
+| TC-DME-30 | Edit report and items | Own report with 2 items | Change the center, edit item 1, remove item 2, add a new item → Save | Header updated; items replaced exactly; header `created_*` unchanged | H |
+| TC-DME-31 | Edit keeps an inactive saved choice | Report whose head was later deactivated | Open Edit → Save unchanged | The head shows "(inactive)"; save succeeds. Choosing a different inactive head is rejected | M |
+| TC-DME-32 | Reports follow master renames | Report saved with head "Oil" and center 16 | Rename the head to "Mustard Oil" and change the center's name / code in Master; reopen the report, the list and the CSV | They show the **current** master values ("Mustard Oil", new center name / code) (user 2026-09-30, Q2) | M |
+| TC-DME-33 | Can't read / edit another's report | Staff A; B's report id | GET / PUT `:id`; open the pages | 404 / not found; B's report unchanged | H |
+| TC-DME-34 | No delete | Any report | Check the actions; DELETE `:id` | No control; 404 | M |
+| TC-DME-35 | Body can't set owner / org | API | POST with `created_by`, `partner_id` | Saved under the caller and Sunai | H |
+| TC-DME-36 | Save is atomic | API | Items where item 2 is invalid | Nothing saved (no header without items); 422 | H |
+| TC-DME-37 | Staff filters | Several reports | Search by center name, item name, comment; Center Code dropdown; date range; Clear | Correct rows; Clear resets | M |
+| TC-DME-38 | Date range order | Staff / admin | From > To | The page's own message; API 422 | M |
+| TC-DME-39 | Staff pagination | 11+ reports | Page 2 | 10 per page | M |
+| TC-DME-40 | Admin list | Reports by 2+ staff | PA opens the admin list | Every report; Staff column; sorted date desc, then staff | H |
+| TC-DME-41 | Admin staff filter | — | Staff dropdown; choose one | Only submitters listed; the filter works; filters in the URL | H |
+| TC-DME-42 | Admin search | — | By staff name, center code, item name | Matching reports | M |
+| TC-DME-43 | Admin view | — | 👁 | "Staff: <name>", header, items; no Edit; Back keeps the filters | H |
+| TC-DME-44 | CSV one row per item | A filtered set with a 2-item and a 1-item report | Download CSV | 3 data rows; both rows of the 2-item report share its S.No; filename `daily-mitram-expense_<today>.csv` | H |
+| TC-DME-45 | CSV headers and format | — | Open the CSV | Exactly `S.No, Staff, Date, Center Code, Center Name, Material, Quantity, Quantity Unit, Comment`; DD-MM-YYYY; BOM; units per Q7 | H |
+| TC-DME-46 | CSV tricky text | A comment with `a, b; "c"` and a newline | Open the CSV | The values stay in their own columns | H |
+| TC-DME-47 | Numbers and dates round-trip | Staff | Quantity 12.5, Date 01-09-2026 | Read back 12.5 and 01-09-2026 exactly | H |
+| TC-DME-48 | Translation wrapped | i18n on; some Hindi labels entered | Switch to हिं | Those labels in Hindi; the data and CSV headers unchanged | L |

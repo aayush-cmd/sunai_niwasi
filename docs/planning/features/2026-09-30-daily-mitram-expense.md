@@ -2,11 +2,11 @@
 
 | Field | Value |
 |---|---|
-| Status | in-progress |
+| Status | shipped |
 | Started | 2026-09-30 |
-| Shipped | |
+| Shipped | 2026-09-30 |
 | SRS row | — (no `docs/requirement/SRS.md` in this repo yet) |
-| Test cases | TC-DME-01..48 |
+| Test cases | TC-DME-01..48. Promoted to `docs/testing/TEST_CASES.md` |
 | Prototype todo | — |
 
 ## 1. Requirement (as given)
@@ -609,6 +609,12 @@ one active center, head and unit. The 404 cases apply to the page (not-found) an
     currently offers no center. It was deactivated by user 1 (SA) at 07:51 UTC, not by the
     tests, which ran as PA 111454.
 
+- 2026-09-30: shipped. Commits: api `5bbe9f5`, frontend `0de22b9`, parent `78c89d5`. The 48 §3
+  rows were copied verbatim into `docs/testing/TEST_CASES.md` ("Daily Mitram Expense
+  (Sunai-only)"). Status → shipped. **Before deploying the API to beta/prod, the user runs
+  `apps/api/prisma/sql/2026-09-30-partner-staff-daily-mitram-expense.sql` there, and the Sunai
+  admin needs at least one active center, material and quantity unit.**
+
 ## 6. Post-deploy
 
 _(none yet)_
@@ -616,7 +622,7 @@ _(none yet)_
 ## 7. Cross-references
 
 - SRS row: n/a
-- TEST_CASES: TC-DME-01..48 (promote on ship)
+- TEST_CASES: TC-DME-01..48 ✔ promoted on ship (2026-09-30)
 - Page maps / API docs to update: `docs/frontend/partner-portal.md`, `docs/api/endpoints.md`,
   `docs/api/api-structure.md`
 - Migration: `apps/api/prisma/sql/2026-09-30-partner-staff-daily-mitram-expense.sql` (user runs
