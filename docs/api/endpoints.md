@@ -2,7 +2,7 @@
 
 Every endpoint in `apps/api`, with the full URL it's served at (after all router mounts from `src/index.ts`). Keep it in sync by hand (see the docs rule in `AGENTS.md`). See [api-structure.md](api-structure.md) for how the API is organised and what each module does.
 
-928 endpoints, grouped by mount. **Guards** are the auth/permission middleware on the route, including router-level ones; permission keys are shown in quotes. **Source** is the file and line where the route is declared.
+936 endpoints, grouped by mount. **Guards** are the auth/permission middleware on the route, including router-level ones; permission keys are shown in quotes. **Source** is the file and line where the route is declared.
 
 ### `/api/v1/admin` (110)
 
@@ -553,7 +553,7 @@ Every endpoint in `apps/api`, with the full URL it's served at (after all router
 | POST | `/api/v1/locations/sub-localities` | public | `src/modules/niwasi/location.routes.ts:31` |
 | GET | `/api/v1/locations/wards` | public | `src/modules/niwasi/location.routes.ts:25` |
 
-### `/api/v1/partner` (418)
+### `/api/v1/partner` (426)
 
 | Method | Path | Guards | Source |
 |---|---|---|---|
@@ -585,6 +585,10 @@ Every endpoint in `apps/api`, with the full URL it's served at (after all router
 | GET | `/api/v1/partner/orgs/:slug/admin/daily-activity-reports/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/daily-activity-report.routes.ts:43` |
 | GET | `/api/v1/partner/orgs/:slug/admin/daily-activity-reports/export` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/daily-activity-report.routes.ts:42` |
 | GET | `/api/v1/partner/orgs/:slug/admin/daily-activity-reports/staff-options` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/daily-activity-report.routes.ts:41` |
+| GET | `/api/v1/partner/orgs/:slug/admin/daily-meal-income-reports` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/daily-meal-income-report.routes.ts:40` |
+| GET | `/api/v1/partner/orgs/:slug/admin/daily-meal-income-reports/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/daily-meal-income-report.routes.ts:43` |
+| GET | `/api/v1/partner/orgs/:slug/admin/daily-meal-income-reports/export` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/daily-meal-income-report.routes.ts:42` |
+| GET | `/api/v1/partner/orgs/:slug/admin/daily-meal-income-reports/staff-options` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/daily-meal-income-report.routes.ts:41` |
 | GET | `/api/v1/partner/orgs/:slug/admin/daily-mitram-expenses` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/daily-mitram-expense.routes.ts:43` |
 | GET | `/api/v1/partner/orgs/:slug/admin/daily-mitram-expenses/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/daily-mitram-expense.routes.ts:46` |
 | GET | `/api/v1/partner/orgs/:slug/admin/daily-mitram-expenses/export` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/daily-mitram-expense.routes.ts:45` |
@@ -667,6 +671,10 @@ Every endpoint in `apps/api`, with the full URL it's served at (after all router
 | POST | `/api/v1/partner/orgs/:slug/daily-activity-reports` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgMember` | `src/modules/partner/daily-activity-report.routes.ts:36` |
 | GET | `/api/v1/partner/orgs/:slug/daily-activity-reports/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgMember` | `src/modules/partner/daily-activity-report.routes.ts:37` |
 | PUT | `/api/v1/partner/orgs/:slug/daily-activity-reports/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgMember` | `src/modules/partner/daily-activity-report.routes.ts:38` |
+| GET | `/api/v1/partner/orgs/:slug/daily-meal-income-reports` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgMember` | `src/modules/partner/daily-meal-income-report.routes.ts:35` |
+| POST | `/api/v1/partner/orgs/:slug/daily-meal-income-reports` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgMember` | `src/modules/partner/daily-meal-income-report.routes.ts:36` |
+| GET | `/api/v1/partner/orgs/:slug/daily-meal-income-reports/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgMember` | `src/modules/partner/daily-meal-income-report.routes.ts:37` |
+| PUT | `/api/v1/partner/orgs/:slug/daily-meal-income-reports/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgMember` | `src/modules/partner/daily-meal-income-report.routes.ts:38` |
 | GET | `/api/v1/partner/orgs/:slug/daily-mitram-expenses` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgMember` | `src/modules/partner/daily-mitram-expense.routes.ts:38` |
 | POST | `/api/v1/partner/orgs/:slug/daily-mitram-expenses` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgMember` | `src/modules/partner/daily-mitram-expense.routes.ts:39` |
 | GET | `/api/v1/partner/orgs/:slug/daily-mitram-expenses/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgMember` | `src/modules/partner/daily-mitram-expense.routes.ts:40` |
