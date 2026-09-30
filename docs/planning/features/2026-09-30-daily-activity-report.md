@@ -320,7 +320,7 @@ the page URL (the not-found page) and the API.
 | TC-DAR-09 | Other org's member blocked | Staff / PA of org X | Call the Sunai staff and admin APIs | 403 | H |
 | TC-DAR-10 | Empty staff list | Staff with no reports | Open the list | "No result found."; count 0; Add Report visible | M |
 | TC-DAR-11 | Add a report | Staff | Add Report → Date today, 08:00–16:30, Work Done "Kitchen setup", Next Plan "Stock audit by 27-09-2026", Items "40 thalis" → Save | Saved; back on the list with the new row first; date shown DD-MM-YYYY, times HH:mm | H |
-| TC-DAR-12 | Only required fields | Staff | Date only (everything else blank) → Save | Saved; empty columns show "—" | H |
+| TC-DAR-12 | Only required fields | Staff | Date only (everything else blank) → Save | Saved; empty columns are blank (was "—", changed 2026-09-30) | H |
 | TC-DAR-13 | Date required | Add form | Clear the Date → Save | Inline "Date is required."; API 422 on `report_date` | H |
 | TC-DAR-14 | Date defaults to today | Staff | Open Add Report | Date is prefilled with today's date (IST); it can be changed | H |
 | TC-DAR-15 | Past and future dates allowed | Add form / edit form | Save with a date last month, then with a date next month; edit a report's date | All saved; the edited date is kept | H |
@@ -329,7 +329,7 @@ the page URL (the not-found page) and the API.
 | TC-DAR-18 | Only one time given | Add form | Start 08:00, End blank | Saved | M |
 | TC-DAR-19 | Invalid time | API | `work_start_time` "24:00" / "8:5" / "08:60" | 422 | M |
 | TC-DAR-20 | Text max length | Add form / API | Work Done / Next Plan / Items Sold with 151 characters (and exactly 150) | 151: inputs stop at 150; API 422 if sent directly. 150: saved | M |
-| TC-DAR-21 | Whitespace handling | Staff | Next Plan "   " → Save; reopen | Stored as empty (NULL); view shows "—" | L |
+| TC-DAR-21 | Whitespace handling | Staff | Next Plan "   " → Save; reopen | Stored as empty (NULL); view shows a blank value (was "—", changed 2026-09-30) | L |
 | TC-DAR-22 | Times read back unchanged | Staff | Save 08:05–23:59; reopen view and edit | Exactly 08:05 and 23:59 (no timezone shift) | H |
 | TC-DAR-23 | Date reads back unchanged | Staff | Save Date 01-09-2026; reopen | 01-09-2026 (no off-by-one day) | H |
 | TC-DAR-24 | Multiple reports same day | Staff | Add two reports with the same date | Both saved and listed | M |
@@ -530,6 +530,25 @@ the page URL (the not-found page) and the API.
   `apps/api/prisma/sql/2026-09-30-partner-staff-daily-activity-report.sql` there.**
 
 ## 6. Post-deploy
+
+- 2026-09-30, user (with a screenshot of the admin Daily Activity Report list): "where there is no
+  data in the cell we will show blank instead of that "—"".
+  - All three Sunai daily reports (Daily Activity Report, Daily Mitram Expense, Daily Meal and
+    Income Report) now show an **empty cell / empty value** instead of "—" wherever there is no
+    data: the staff and admin list tables, the staff and admin view pages, the Items summary of an
+    expense report with no items, and a missing date. A 0 still shows "0".
+  - The CSV already used empty cells, so it's unchanged.
+  - Files:
+    - `lib/partner-daily-activity-report.ts` (`dmy`);
+    - `lib/partner-daily-mitram-expense.ts` (`itemsSummary`);
+    - `lib/partner-daily-meal-income-report.ts` (`show`);
+    - the three `*Details.tsx` view components;
+    - the DAR and DME staff and admin list pages. The DMI lists use `show()`.
+  - Test cases TC-DAR-12, TC-DAR-21, TC-DMI-12 and TC-DMI-21 were reworded here and in
+    `TEST_CASES.md` ("blank", noting the change).
+  - For DMI this supersedes the display part of Q4 ('show "—"'); empty numbers are still stored
+    NULL, not 0.
+  - Frontend `tsc` and eslint are clean.
 
 - 2026-09-30, user (with a screenshot of the staff Reports and Tracking menu): "also move the
   ham niwasi daily report http://partner.niwasi.abhishek/Sunai/staff/ham-niwasi-daily-report

@@ -617,6 +617,25 @@ one active center, head and unit. The 404 cases apply to the page (not-found) an
 
 ## 6. Post-deploy
 
+- 2026-09-30, user (with a screenshot of the admin Daily Activity Report list): "where there is no
+  data in the cell we will show blank instead of that "—"".
+  - All three Sunai daily reports (Daily Activity Report, Daily Mitram Expense, Daily Meal and
+    Income Report) now show an **empty cell / empty value** instead of "—" wherever there is no
+    data: the staff and admin list tables, the staff and admin view pages, the Items summary of an
+    expense report with no items, and a missing date. A 0 still shows "0".
+  - The CSV already used empty cells, so it's unchanged.
+  - Files:
+    - `lib/partner-daily-activity-report.ts` (`dmy`);
+    - `lib/partner-daily-mitram-expense.ts` (`itemsSummary`);
+    - `lib/partner-daily-meal-income-report.ts` (`show`);
+    - the three `*Details.tsx` view components;
+    - the DAR and DME staff and admin list pages. The DMI lists use `show()`.
+  - Test cases TC-DAR-12, TC-DAR-21, TC-DMI-12 and TC-DMI-21 were reworded here and in
+    `TEST_CASES.md` ("blank", noting the change).
+  - For DMI this supersedes the display part of Q4 ('show "—"'); empty numbers are still stored
+    NULL, not 0.
+  - Frontend `tsc` and eslint are clean.
+
 - 2026-09-30, user: add a `status` column for soft delete (-1) to the report tables, and make
   the Daily Mitram Expense item ✕ soft-delete instead of deleting. Planned in
   `2026-09-30-report-status-soft-delete.md`.

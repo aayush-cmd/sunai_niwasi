@@ -150,7 +150,7 @@ The staff menu is shown only to designations with `reports.view` (a known limita
 | TC-DAR-09 | Other org's member blocked | Staff / PA of org X | Call the Sunai staff and admin APIs | 403 | H |
 | TC-DAR-10 | Empty staff list | Staff with no reports | Open the list | "No result found."; count 0; Add Report visible | M |
 | TC-DAR-11 | Add a report | Staff | Add Report → Date today, 08:00–16:30, Work Done "Kitchen setup", Next Plan "Stock audit by 27-09-2026", Items "40 thalis" → Save | Saved; back on the list with the new row first; date shown DD-MM-YYYY, times HH:mm | H |
-| TC-DAR-12 | Only required fields | Staff | Date only (everything else blank) → Save | Saved; empty columns show "—" | H |
+| TC-DAR-12 | Only required fields | Staff | Date only (everything else blank) → Save | Saved; empty columns are blank (was "—", changed 2026-09-30) | H |
 | TC-DAR-13 | Date required | Add form | Clear the Date → Save | Inline "Date is required."; API 422 on `report_date` | H |
 | TC-DAR-14 | Date defaults to today | Staff | Open Add Report | Date is prefilled with today's date (IST); it can be changed | H |
 | TC-DAR-15 | Past and future dates allowed | Add form / edit form | Save with a date last month, then with a date next month; edit a report's date | All saved; the edited date is kept | H |
@@ -159,7 +159,7 @@ The staff menu is shown only to designations with `reports.view` (a known limita
 | TC-DAR-18 | Only one time given | Add form | Start 08:00, End blank | Saved | M |
 | TC-DAR-19 | Invalid time | API | `work_start_time` "24:00" / "8:5" / "08:60" | 422 | M |
 | TC-DAR-20 | Text max length | Add form / API | Work Done / Next Plan / Items Sold with 151 characters (and exactly 150) | 151: inputs stop at 150; API 422 if sent directly. 150: saved | M |
-| TC-DAR-21 | Whitespace handling | Staff | Next Plan "   " → Save; reopen | Stored as empty (NULL); view shows "—" | L |
+| TC-DAR-21 | Whitespace handling | Staff | Next Plan "   " → Save; reopen | Stored as empty (NULL); view shows a blank value (was "—", changed 2026-09-30) | L |
 | TC-DAR-22 | Times read back unchanged | Staff | Save 08:05–23:59; reopen view and edit | Exactly 08:05 and 23:59 (no timezone shift) | H |
 | TC-DAR-23 | Date reads back unchanged | Staff | Save Date 01-09-2026; reopen | 01-09-2026 (no off-by-one day) | H |
 | TC-DAR-24 | Multiple reports same day | Staff | Add two reports with the same date | Both saved and listed | M |
@@ -280,7 +280,7 @@ Source: [2026-09-30-daily-meal-income-report.md](../planning/features/2026-09-30
 | TC-DMI-09 | Other org's users blocked | PA / staff of org X | Sunai staff and admin APIs | 403 | H |
 | TC-DMI-10 | Form sections | Staff | Open Add Report | Six titled sections (Date, Tiffin, Mess, Expense and Money, Stock Remaining, Remarks), fields in table order | H |
 | TC-DMI-11 | Add a full report | Staff | Fill every field (e.g. 18 / 14 / 1200 / 850.50 / 22 / 20 / 1500 / 1100 / 2300 / 2000 / Ramesh / 5 Kg / 1 Kg / 2 Kg / — / remark) → Save | Saved; the list row shows Date DD-MM-YYYY, 18, 14, 22, 20, 2300, 2000 | H |
-| TC-DMI-12 | Date only | Staff | Only the Date → Save | Saved; empty columns show "—" | H |
+| TC-DMI-12 | Date only | Staff | Only the Date → Save | Saved; empty columns are blank (was "—", changed 2026-09-30) | H |
 | TC-DMI-13 | Date defaults to today | Staff | Open Add Report | Date = IST today, editable | H |
 | TC-DMI-14 | Date required / invalid | Form / API | Clear the date; API `2026-02-30`, `30-09-2026` | Inline "Date is required."; API 422 | H |
 | TC-DMI-15 | Past / future dates | Staff | Save last month and next month; edit the date | All saved | M |
@@ -289,7 +289,7 @@ Source: [2026-09-30-daily-meal-income-report.md](../planning/features/2026-09-30
 | TC-DMI-18 | Money range and decimals | Form / API | Cash Payment = 0, 99999, 99999.99, 100000, 12.5, 12.345, 1e3, abc | 0, 99999 and 12.5 saved; 99999.99 → rejected (above 99999); 100000, 12.345 (3 decimals), 1e3 and abc → rejected | H |
 | TC-DMI-19 | Decimal round-trip | Staff | Online Payment 850.50 | Reads back 850.5 in the view, edit and CSV | M |
 | TC-DMI-20 | Text max 150 | Form / API | Each text field at 150, then 151 | 150 saved; the input stops at 150 with an `n/150` counter; 151 via the API → 422 on that field | M |
-| TC-DMI-21 | Blank → empty | Staff | Numbers left empty, text of only spaces | Stored NULL; shown "—" (not 0) | M |
+| TC-DMI-21 | Blank → empty | Staff | Numbers left empty, text of only spaces | Stored NULL; shown blank, not 0 (was "—", changed 2026-09-30) | M |
 | TC-DMI-22 | Zero is not empty | Staff | Morning Tiffin = 0 | Stored 0; shown "0" | M |
 | TC-DMI-23 | View page | Own report | 👁 | All 17 fields by section, text in full; Back / Edit | H |
 | TC-DMI-24 | Edit own | Own report | Change several numbers and the remarks → Save | Updated; `created_*` unchanged | H |
