@@ -200,7 +200,7 @@ Source: [2026-09-30-daily-mitram-expense.md](../planning/features/2026-09-30-dai
 | TC-DME-08 | Staff blocked from admin | Sunai staff | Admin list / export / staff-options / `:id` | 403 | H |
 | TC-DME-09 | Other org's users blocked | PA / staff of org X | Sunai staff and admin APIs | 403 | H |
 | TC-DME-10 | Options = active masters only | Masters with active and inactive rows | GET options; open Add Expense | Only active centers / heads / units, sorted; the dropdowns match | H |
-| TC-DME-11 | Empty master | No active centers | Open Add Expense | The "No active centers…" message; can't save | M |
+| ~~TC-DME-11~~ | **Superseded 2026-09-30** (warning removed). Empty master | No active centers | Open Add Expense | The "No active centers…" message; can't save | M |
 | TC-DME-12 | Add a report | Staff | Date (today), Center 16, two items (Rice 10 kg; Dal 3.5 kg "Arhar") → Save | Saved; on the list: date DD-MM-YYYY, Center Name, Code 16, Items "Rice 10 kg, Dal 3.5 kg" | H |
 | TC-DME-13 | Date defaults to today | Staff | Open Add Expense | Date = IST today, editable | H |
 | TC-DME-14 | Past / future date | Staff | Save with last month, then next month; edit the date | All saved | M |

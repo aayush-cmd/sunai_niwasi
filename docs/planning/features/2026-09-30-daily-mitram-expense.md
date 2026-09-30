@@ -380,7 +380,7 @@ one active center, head and unit. The 404 cases apply to the page (not-found) an
 | TC-DME-08 | Staff blocked from admin | Sunai staff | Admin list / export / staff-options / `:id` | 403 | H |
 | TC-DME-09 | Other org's users blocked | PA / staff of org X | Sunai staff and admin APIs | 403 | H |
 | TC-DME-10 | Options = active masters only | Masters with active and inactive rows | GET options; open Add Expense | Only active centers / heads / units, sorted; the dropdowns match | H |
-| TC-DME-11 | Empty master | No active centers | Open Add Expense | The "No active centers…" message; can't save | M |
+| ~~TC-DME-11~~ | **Superseded 2026-09-30** (warning removed). Empty master | No active centers | Open Add Expense | The "No active centers…" message; can't save | M |
 | TC-DME-12 | Add a report | Staff | Date (today), Center 16, two items (Rice 10 kg; Dal 3.5 kg "Arhar") → Save | Saved; on the list: date DD-MM-YYYY, Center Name, Code 16, Items "Rice 10 kg, Dal 3.5 kg" | H |
 | TC-DME-13 | Date defaults to today | Staff | Open Add Expense | Date = IST today, editable | H |
 | TC-DME-14 | Past / future date | Staff | Save with last month, then next month; edit the date | All saved | M |
@@ -668,6 +668,16 @@ one active center, head and unit. The 404 cases apply to the page (not-found) an
     the view page shows "Cleaning Supplies (inactive)". API / frontend `tsc` and eslint are
     clean. (The PM2 servers had stopped again and were restarted.)
   - New test case TC-DME-49, added to §3 and `TEST_CASES.md`.
+
+- 2026-09-30, user (screenshot of the Add Expense form showing the three "No active … ask your
+  admin …" warnings): "can you remove these i dont want them".
+  - Removed the empty-master warning box from `DailyMitramExpenseForm.tsx`. This supersedes the
+    §2.5 "If a master list is empty … shows 'No active centers …'" behaviour. With no active
+    rows, the dropdowns are simply empty.
+  - TC-DME-11 is superseded. It had not been run.
+  - At the time, the options endpoint returned 10 centers / 12 heads / 10 units for Sunai, so the
+    screenshot was probably taken while the options were empty or loading.
+  - eslint and `tsc` are clean.
 
 ## 7. Cross-references
 
