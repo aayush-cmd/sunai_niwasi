@@ -2,11 +2,11 @@
 
 | Field | Value |
 |---|---|
-| Status | in-progress |
+| Status | shipped |
 | Started | 2026-09-30 |
-| Shipped | |
+| Shipped | 2026-09-30 |
 | SRS row | — |
-| Test cases | TC-RSD-01..14 |
+| Test cases | TC-RSD-01..14. Promoted to `docs/testing/TEST_CASES.md` |
 | Prototype todo | — |
 
 ## 1. Requirement (as given)
@@ -227,6 +227,9 @@ the form side, where it's never user-entered.
   - **Cleanup:** every `ZZRSD` / `zzui` master, report and item row was deleted, and the 2 DAR
     test rows. Left: DME 1 (the user's) with 2 items, DAR 2 (the user's).
 
+- 2026-09-30: shipped. Commits: api `bd0ffb5`, frontend `798a9eb`, parent `b26c5bc`. The 14 §3 rows were copied verbatim into
+  `docs/testing/TEST_CASES.md` ("Report status + soft delete (Sunai daily reports)"). Status → shipped. **The status column was folded into the two CREATE TABLE files (not merged to main at the time); a DB already built from the earlier files needs the §2.2 ALTER block.**
+
 ## 6. Post-deploy
 
 _(none yet)_
@@ -234,6 +237,6 @@ _(none yet)_
 ## 7. Cross-references
 
 - Modifies: `2026-09-30-daily-activity-report.md`, `2026-09-30-daily-mitram-expense.md`
-- TEST_CASES: TC-RSD-01..14 (promote on ship)
+- TEST_CASES: TC-RSD-01..14 ✔ promoted on ship (2026-09-30)
 - Migration: folded into the two existing CREATE files (not merged to main yet); the local DB is updated with the ALTER block in §2.2 (run by the user)
 - Docs: `docs/api/api-structure.md` (DME body item `id`, soft delete on edit)

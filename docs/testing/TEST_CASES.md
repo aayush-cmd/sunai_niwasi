@@ -238,3 +238,74 @@ Source: [2026-09-30-daily-mitram-expense.md](../planning/features/2026-09-30-dai
 | TC-DME-46 | CSV tricky text | A comment with `a, b; "c"` and a newline | Open the CSV | The values stay in their own columns | H |
 | TC-DME-47 | Numbers and dates round-trip | Staff | Quantity 12.5, Date 01-09-2026 | Read back 12.5 and 01-09-2026 exactly | H |
 | TC-DME-48 | Translation wrapped | i18n on; some Hindi labels entered | Switch to हिं | Those labels in Hindi; the data and CSV headers unchanged | L |
+
+## Report status + soft delete (Sunai daily reports)
+
+The `status` column (1 active / -1 soft-deleted) on the Daily Activity Report, Daily Mitram Expense and expense-item tables; every read is limited to status 1. The Daily Mitram Expense edit ✕ soft-deletes an item instead of deleting it.
+Source: [2026-09-30-report-status-soft-delete.md](../planning/features/2026-09-30-report-status-soft-delete.md) §3, shipped 2026-09-30.
+
+| TC-ID | Title | Pre-condition | Steps | Expected Result | Priority |
+|---|---|---|---|---|---|
+| TC-RSD-01 | Migration adds columns | SQL run | Inspect the 3 tables | `status TINYINT NOT NULL DEFAULT 1` plus the index on each; existing rows = 1 | H |
+| TC-RSD-02 | New rows active | — | Create a DAR report and a DME report | Header `status = 1`; every DME item `status = 1` | H |
+| TC-RSD-03 | ✕ soft-deletes an item | DME report with 3 items | Edit → ✕ the middle row → Save | The DB still has 3 item rows: the removed one has `status = -1` with `updated_by` / `updated_at` set; the other two stay 1 | H |
+| TC-RSD-04 | Kept items keep their ids | Same report | Edit item 1's quantity → Save | Item 1 has the **same id**, is updated in place, and `created_at` is unchanged | H |
+| TC-RSD-05 | New item inserted | — | Edit → Add Item → Save | One new row, status 1; the others unchanged | H |
+| TC-RSD-06 | Order kept after remove / add | — | Remove row 1, add a row at the end → Save | `sort_order` of the active rows matches the on-screen order | M |
+| TC-RSD-07 | Deleted items hidden everywhere | Report with a soft-deleted item | Staff view, edit form, list summary, admin view, CSV, search by that item's material / comment | The -1 item appears nowhere; searching for its text doesn't match the report | H |
+| TC-RSD-08 | Can't touch another report's item | Item id from report B | PUT report A with `items: [{ id: <B item>, … }]` | 422 on `items.0.id`; B unchanged | H |
+| TC-RSD-09 | Can't revive a deleted item | A soft-deleted item's id | PUT the same report with that id | 422 on `items.<i>.id`; the row stays -1 | M |
+| TC-RSD-10 | Create ignores ids | — | POST with an item `id` | Saved as a new row; no other row changed | M |
+| TC-RSD-11 | Limits count active items only | Report with 50 active items, then ✕ 1 and add 1 | Save | Saved (50 active); the -1 row doesn't count | L |
+| TC-RSD-12 | Headers filtered by status | A DAR and a DME header set to -1 in the DB | Staff list, get `:id`, admin list, staff-options, CSV | Hidden everywhere; `:id` → 404 | M |
+| TC-RSD-13 | DAR unaffected | — | Create / edit / list / CSV of DAR | Same as before (regression) | M |
+| TC-RSD-14 | Existing report intact after migration | The user's report id 1 with 2 items | Open its view and edit | Both items show; saving unchanged keeps both ids | H |
+
+## Daily Meal and Income Report (Sunai-only)
+
+Sunai staff **Daily Meal and Income Report** (Reports and Tracking → Daily Reports; own reports in six sections: add, view, edit, no delete) and the Partner Admin **Reports → Daily Meal and Income Report** tab (every staff member's reports, read-only, CSV with all 17 fields).
+Source: [2026-09-30-daily-meal-income-report.md](../planning/features/2026-09-30-daily-meal-income-report.md) §3, shipped 2026-09-30.
+"Staff" means an approved Sunai staff member. The 404 cases apply to the page (not-found) and
+
+| TC-ID | Title | Pre-condition | Steps | Expected Result | Priority |
+|---|---|---|---|---|---|
+| TC-DMI-01 | Staff menu entry | Sunai staff with Reports and Tracking | Open Daily Reports | … Daily Activity Report, Daily Mitram Expense, **Daily Meal and Income Report**; it opens the list | H |
+| TC-DMI-02 | Not in other orgs' menus | Staff of another org | Open Daily Reports | Not listed | H |
+| TC-DMI-03 | Admin Reports leaf | Sunai PA | Open the Reports dropdown | Third leaf, Daily Meal and Income Report | H |
+| TC-DMI-04 | Admin leaf absent elsewhere | PA of another org | Admin nav | No Reports dropdown | M |
+| TC-DMI-05 | Access roles | SA; Sunai PA; Sunai staff | Staff list; add a report | All three can; each sees only their own | H |
+| TC-DMI-06 | Other org is not-found | Any user, including SA | Both page URLs and APIs on `<Other>` | Not-found page; API 404 | H |
+| TC-DMI-07 | Logged out | No session | Staff list, admin list | 401 | H |
+| TC-DMI-08 | Staff blocked from admin | Sunai staff | Admin list / export / staff-options / `:id` | 403 | H |
+| TC-DMI-09 | Other org's users blocked | PA / staff of org X | Sunai staff and admin APIs | 403 | H |
+| TC-DMI-10 | Form sections | Staff | Open Add Report | Six titled sections (Date, Tiffin, Mess, Expense and Money, Stock Remaining, Remarks), fields in table order | H |
+| TC-DMI-11 | Add a full report | Staff | Fill every field (e.g. 18 / 14 / 1200 / 850.50 / 22 / 20 / 1500 / 1100 / 2300 / 2000 / Ramesh / 5 Kg / 1 Kg / 2 Kg / — / remark) → Save | Saved; the list row shows Date DD-MM-YYYY, 18, 14, 22, 20, 2300, 2000 | H |
+| TC-DMI-12 | Date only | Staff | Only the Date → Save | Saved; empty columns show "—" | H |
+| TC-DMI-13 | Date defaults to today | Staff | Open Add Report | Date = IST today, editable | H |
+| TC-DMI-14 | Date required / invalid | Form / API | Clear the date; API `2026-02-30`, `30-09-2026` | Inline "Date is required."; API 422 | H |
+| TC-DMI-15 | Past / future dates | Staff | Save last month and next month; edit the date | All saved | M |
+| TC-DMI-16 | Count range | Form / API | Morning Tiffin = 0, 99999, 100000, -1 | 0 and 99999 saved; 100000 and -1 → inline error / 422 on that field | H |
+| TC-DMI-17 | Counts are whole numbers | Form / API | Evening Mess = 2.5 | Rejected ("whole number"); the input accepts digits only | H |
+| TC-DMI-18 | Money range and decimals | Form / API | Cash Payment = 0, 99999, 99999.99, 100000, 12.5, 12.345, 1e3, abc | 0, 99999 and 12.5 saved; 99999.99 → rejected (above 99999); 100000, 12.345 (3 decimals), 1e3 and abc → rejected | H |
+| TC-DMI-19 | Decimal round-trip | Staff | Online Payment 850.50 | Reads back 850.5 in the view, edit and CSV | M |
+| TC-DMI-20 | Text max 150 | Form / API | Each text field at 150, then 151 | 150 saved; the input stops at 150 with an `n/150` counter; 151 via the API → 422 on that field | M |
+| TC-DMI-21 | Blank → empty | Staff | Numbers left empty, text of only spaces | Stored NULL; shown "—" (not 0) | M |
+| TC-DMI-22 | Zero is not empty | Staff | Morning Tiffin = 0 | Stored 0; shown "0" | M |
+| TC-DMI-23 | View page | Own report | 👁 | All 17 fields by section, text in full; Back / Edit | H |
+| TC-DMI-24 | Edit own | Own report | Change several numbers and the remarks → Save | Updated; `created_*` unchanged | H |
+| TC-DMI-25 | Can't read / edit another's | Staff A; B's id | GET / PUT `:id`; open the pages | 404 / not found; B unchanged | H |
+| TC-DMI-26 | No delete | — | Check the actions; DELETE `:id` | No control; 404 | M |
+| TC-DMI-27 | Body can't set owner / org / status | API | POST with `created_by`, `partner_id`, `status: -1` | Saved under the caller and Sunai, with status 1 | H |
+| TC-DMI-28 | Soft-deleted hidden | A row set to status -1 in the DB | Staff list, get, admin list, get, staff-options, CSV | Hidden; get → 404 | M |
+| TC-DMI-29 | Staff search | Several reports | Search by Money Given To name, a stock text, a remark | Matching rows; a number value doesn't match (Q5) | M |
+| TC-DMI-30 | Date range | — | From / To; From > To | Correct rows; From > To → the page's own message / API 422 | M |
+| TC-DMI-31 | Staff pagination | 11+ reports | Page 2 | 10 per page, sorted date desc | M |
+| TC-DMI-32 | Admin list | Reports by 2+ staff | PA opens the admin list | All reports; Staff column; sorted date desc, then staff | H |
+| TC-DMI-33 | Admin staff filter | — | Staff dropdown | Submitters only; the filter works; filters in the URL | H |
+| TC-DMI-34 | Admin search incl. staff name | — | Search a staff name; a remark | Matching reports | M |
+| TC-DMI-35 | Admin view | — | 👁 | "Staff: <name>" plus every section; no Edit; Back keeps the filters | H |
+| TC-DMI-36 | CSV follows the filters | Staff + date filter | Download CSV | Only the filtered reports; filename `daily-meal-income-report_<today>.csv` | H |
+| TC-DMI-37 | CSV headers and format | — | Open the CSV | Exactly `S.No, Staff` + the 17 field headers in §2.1 order; DD-MM-YYYY; BOM; empty numbers are empty cells; 850.5 shown | H |
+| TC-DMI-38 | CSV tricky text | A remark with `a, b; "c"` and a newline | Open the CSV | Stays in its own column | H |
+| TC-DMI-39 | Timestamps | — | Create then edit; check the DB | Correct times (no 5h30m skew); edit changes only `updated_*` | L |
+| TC-DMI-40 | Translation wrapped | i18n on; some Hindi labels entered (e.g. "Remarks" → विवरणी) | Switch to हिं | Those labels in Hindi; the data and CSV headers unchanged | L |

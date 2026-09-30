@@ -2,11 +2,11 @@
 
 | Field | Value |
 |---|---|
-| Status | in-progress |
+| Status | shipped |
 | Started | 2026-09-30 |
-| Shipped | |
+| Shipped | 2026-09-30 |
 | SRS row | — (no `docs/requirement/SRS.md` in this repo yet) |
-| Test cases | TC-DMI-01..40 |
+| Test cases | TC-DMI-01..40. Promoted to `docs/testing/TEST_CASES.md` |
 | Prototype todo | — |
 
 ## 1. Requirement (as given)
@@ -469,6 +469,9 @@ the API.
   - **Cleanup:** the 23 reports created by the tests were deleted by id; no `ZZ…`-marked rows
     remain. The user's own report (id 1, created_by 1) was untouched.
 
+- 2026-09-30: shipped. Commits: api `a980a2e`, frontend `28c0391`, parent `05a36a1`. The 40 §3 rows were copied verbatim into
+  `docs/testing/TEST_CASES.md` ("Daily Meal and Income Report (Sunai-only)"). Status → shipped. **Before deploying the API to beta/prod, the user runs `apps/api/prisma/sql/2026-09-30-partner-staff-daily-meal-income-report.sql` there.**
+
 ## 6. Post-deploy
 
 _(none yet)_
@@ -476,7 +479,7 @@ _(none yet)_
 ## 7. Cross-references
 
 - SRS row: n/a
-- TEST_CASES: TC-DMI-01..40 (promote on ship)
+- TEST_CASES: TC-DMI-01..40 ✔ promoted on ship (2026-09-30)
 - Page maps / API docs to update: `docs/frontend/partner-portal.md`, `docs/api/endpoints.md`,
   `docs/api/api-structure.md`
 - Migration: `apps/api/prisma/sql/2026-09-30-partner-staff-daily-meal-income-report.sql` (user
