@@ -2,11 +2,11 @@
 
 | Field | Value |
 |---|---|
-| Status | in-progress |
+| Status | shipped |
 | Started | 2026-09-30 |
-| Shipped | |
+| Shipped | 2026-09-30 |
 | SRS row | — (no `docs/requirement/SRS.md` in this repo yet) |
-| Test cases | TC-DAR-01..42 |
+| Test cases | TC-DAR-01..42. Promoted to `docs/testing/TEST_CASES.md` |
 | Prototype todo | — |
 
 ## 1. Requirement (as given)
@@ -524,6 +524,11 @@ the page URL (the not-found page) and the API.
     `requireOrgMember()` as planned, so those staff can still use the page by its URL. This is
     pre-existing menu behaviour, not changed by this feature.
 
+- 2026-09-30: shipped. Commits: api `c2a9847`, frontend `cf391f9`, parent `43632aa`. The 42 §3
+  rows were copied verbatim into `docs/testing/TEST_CASES.md` ("Daily Activity Report
+  (Sunai-only)"). Status → shipped. **Before deploying the API to beta/prod, the user runs
+  `apps/api/prisma/sql/2026-09-30-partner-staff-daily-activity-report.sql` there.**
+
 ## 6. Post-deploy
 
 _(none yet)_
@@ -531,7 +536,7 @@ _(none yet)_
 ## 7. Cross-references
 
 - SRS row: n/a
-- TEST_CASES: TC-DAR-01..42 (promote on ship)
+- TEST_CASES: TC-DAR-01..42 ✔ promoted on ship (2026-09-30)
 - Page maps / API docs to update: `docs/frontend/partner-portal.md`, `docs/api/endpoints.md`,
   `docs/api/api-structure.md`
 - Migration: `apps/api/prisma/sql/2026-09-30-partner-staff-daily-activity-report.sql` (user runs

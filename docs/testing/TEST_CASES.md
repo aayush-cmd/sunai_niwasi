@@ -128,3 +128,55 @@ Source: [2026-09-29-partner-sunai-masters.md](../planning/features/2026-09-29-pa
 | TC-PSM-33 | Body can't set partner or status | Sunai admin | POST with extra `partner_id: 5, status: 0` | Row saved under Sunai, active (extra keys ignored or rejected) | M |
 | TC-PSM-34 | Translation wrapped | `NEXT_PUBLIC_I18N_ENABLED` on; a Hindi `label_text` row added via the Language admin for "Center Name" | Switch to हिं | That label shows in Hindi; strings without a row stay English; master data values unchanged | L |
 | TC-PSM-35 | Timestamps set on create/edit | Sunai admin | Create a row, then edit it; check the DB | API sets both on create, and only `updated_at` on edit / toggle; the values match the real time (not 5h30m off); the columns have no DB default | L |
+
+## Daily Activity Report (Sunai-only)
+
+Sunai staff **Daily Activity Report** (Reports and Tracking → Daily Reports; own reports: add, view, edit, no delete) and the Partner Admin **Reports → Daily Activity Report** tab (every staff member's reports, read-only, filter-dependent CSV).
+Source: [2026-09-30-daily-activity-report.md](../planning/features/2026-09-30-daily-activity-report.md) §3, shipped 2026-09-30.
+The staff menu is shown only to designations with `reports.view` (a known limitation the user chose to leave); the page itself is open to any active Sunai member.
+"Staff" means an approved Sunai staff member (not the Partner Admin). The 404 cases apply to
+
+| TC-ID | Title | Pre-condition | Steps | Expected Result | Priority |
+|---|---|---|---|---|---|
+| TC-DAR-01 | Staff menu entry | Logged in as Sunai staff | Open Reports and Tracking → Daily Reports | "Team Daily Report", then "Daily Activity Report"; it opens the list | H |
+| TC-DAR-02 | Staff menu entry absent elsewhere | Staff of a non-Sunai org | Open Reports and Tracking | No "Daily Activity Report"; the rest of the menu is unchanged | H |
+| TC-DAR-03 | Admin Reports tab | Sunai Partner Admin | Look at the admin nav | New "Reports" dropdown after Users & Report Management, containing Daily Activity Report | H |
+| TC-DAR-04 | Admin Reports tab absent elsewhere | Partner Admin of another org | Look at the admin nav | No "Reports" dropdown | H |
+| TC-DAR-05 | Staff page open to all three roles | Sunai staff; Sunai PA; System Admin | Open `/Sunai/staff/reports/daily-activity-report`, add a report | All three can use it; each sees only their own reports | H |
+| TC-DAR-06 | Non-Sunai URLs are not-found | Any user, including System Admin | Open `/<Other>/staff/reports/daily-activity-report` and `/<Other>/admin/reports/daily-activity-report`; call both list APIs on `<Other>` | Not-found page; API 404 | H |
+| TC-DAR-07 | Logged out | No session | Call the staff list API and the admin list API | 401 | H |
+| TC-DAR-08 | Staff blocked from admin API | Sunai staff | Call admin list / export / `:id` / staff-options | 403 | H |
+| TC-DAR-09 | Other org's member blocked | Staff / PA of org X | Call the Sunai staff and admin APIs | 403 | H |
+| TC-DAR-10 | Empty staff list | Staff with no reports | Open the list | "No result found."; count 0; Add Report visible | M |
+| TC-DAR-11 | Add a report | Staff | Add Report → Date today, 08:00–16:30, Work Done "Kitchen setup", Next Plan "Stock audit by 27-09-2026", Items "40 thalis" → Save | Saved; back on the list with the new row first; date shown DD-MM-YYYY, times HH:mm | H |
+| TC-DAR-12 | Only required fields | Staff | Date only (everything else blank) → Save | Saved; empty columns show "—" | H |
+| TC-DAR-13 | Date required | Add form | Clear the Date → Save | Inline "Date is required."; API 422 on `report_date` | H |
+| TC-DAR-14 | Date defaults to today | Staff | Open Add Report | Date is prefilled with today's date (IST); it can be changed | H |
+| TC-DAR-15 | Past and future dates allowed | Add form / edit form | Save with a date last month, then with a date next month; edit a report's date | All saved; the edited date is kept | H |
+| TC-DAR-16 | Invalid date | API | `report_date` "2026-02-30" / "30-09-2026" / "abc" | 422 | M |
+| TC-DAR-17 | End before start | Add form | Start 16:00, End 08:00 (and End = Start) | Inline "End time must be after the start time."; API 422 on `work_end_time` | H |
+| TC-DAR-18 | Only one time given | Add form | Start 08:00, End blank | Saved | M |
+| TC-DAR-19 | Invalid time | API | `work_start_time` "24:00" / "8:5" / "08:60" | 422 | M |
+| TC-DAR-20 | Text max length | Add form / API | Work Done / Next Plan / Items Sold with 151 characters (and exactly 150) | 151: inputs stop at 150; API 422 if sent directly. 150: saved | M |
+| TC-DAR-21 | Whitespace handling | Staff | Next Plan "   " → Save; reopen | Stored as empty (NULL); view shows "—" | L |
+| TC-DAR-22 | Times read back unchanged | Staff | Save 08:05–23:59; reopen view and edit | Exactly 08:05 and 23:59 (no timezone shift) | H |
+| TC-DAR-23 | Date reads back unchanged | Staff | Save Date 01-09-2026; reopen | 01-09-2026 (no off-by-one day) | H |
+| TC-DAR-24 | Multiple reports same day | Staff | Add two reports with the same date | Both saved and listed | M |
+| TC-DAR-25 | View page | Staff with a report | 👁 on a row | All six fields read-only, in full; Back returns to the list; Edit opens the edit form | H |
+| TC-DAR-26 | Edit own report | Staff | ✏ → change Work Done → Save | Updated; `created_at` / `created_by` unchanged, `updated_*` set | H |
+| TC-DAR-27 | Can't read or edit another's report | Staff A; report id owned by staff B | Open `/…/daily-activity-report/<B id>` and `/edit`; call GET / PUT `:id` | Not found / API 404; B's report unchanged | H |
+| TC-DAR-28 | No delete | Any row | Check the actions; call `DELETE …/daily-activity-reports/:id` | No delete control; API 404 | M |
+| TC-DAR-29 | Body can't set owner or org | Staff | POST with extra `created_by: 1, partner_id: 5` | Saved under the caller and Sunai | H |
+| TC-DAR-30 | Staff filters | Staff with several reports | Search "thali"; Date From/To range; Clear | Only matching rows; Clear resets; page returns to 1 | M |
+| TC-DAR-31 | Date range order | Staff / admin filters | From after To → Search | Page's own message; no request; API 422 if called directly | M |
+| TC-DAR-32 | Staff pagination | 11+ own reports | Page 2 | 10 per page; count text correct | M |
+| TC-DAR-33 | Admin sees everyone's reports | Reports by 2+ staff | PA opens the admin list | All rows, with the Staff column; sorted by date desc, then staff name | H |
+| TC-DAR-34 | Admin staff filter | Several staff; one staff has none | Open the Staff dropdown; choose a staff member | Only staff with ≥1 report are listed; choosing one filters the rows | H |
+| TC-DAR-35 | Admin search includes staff name | Admin | Search by part of a staff name, and by text in Items Sold | Matching rows | M |
+| TC-DAR-36 | Admin view | Admin | 👁 on a row | "Staff: <name>" and all fields read-only; no Edit; Back keeps the filters and page | H |
+| TC-DAR-37 | Admin can't edit | Admin | Call `PUT /admin/daily-activity-reports/:id`; try staff `PUT` on another person's id | 404 (no route / not own) | M |
+| TC-DAR-38 | CSV follows the filters | Admin with a staff + date filter applied | Download CSV | Only the filtered rows; filename `daily-activity-report_<today>.csv` | H |
+| TC-DAR-39 | CSV headers and format | Admin | Open the CSV in Excel / LibreOffice | Headers exactly `S.No, Staff, Date, Work Start Time, Work End Time, Work Done, Next Plan / Expected Completion Date, Items Sold Today`; dates DD-MM-YYYY; Hindi text readable (BOM) | H |
+| TC-DAR-40 | CSV with commas, semicolons, quotes, newlines | Report text with `a, b; "c"` and a line break | Download and open | Each value stays in its own column; no row shift | H |
+| TC-DAR-41 | Admin empty / pagination | No reports / 11+ reports | Open the list | "No result found." / 10 per page; CSV of an empty result has only the header row | M |
+| TC-DAR-42 | Translation wrapped | `NEXT_PUBLIC_I18N_ENABLED` on; Hindi rows added via the Language admin for some labels | Switch to हिं | Those labels in Hindi; others stay English; data and CSV headers unchanged | L |
