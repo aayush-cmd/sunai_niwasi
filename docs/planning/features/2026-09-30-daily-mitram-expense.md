@@ -418,6 +418,7 @@ one active center, head and unit. The 404 cases apply to the page (not-found) an
 | TC-DME-46 | CSV tricky text | A comment with `a, b; "c"` and a newline | Open the CSV | The values stay in their own columns | H |
 | TC-DME-47 | Numbers and dates round-trip | Staff | Quantity 12.5, Date 01-09-2026 | Read back 12.5 and 01-09-2026 exactly | H |
 | TC-DME-48 | Translation wrapped | i18n on; some Hindi labels entered | Switch to हिं | Those labels in Hindi; the data and CSV headers unchanged | L |
+| TC-DME-49 | Inactive master shown as "(inactive)" (2026-09-30) | A report whose material / unit / center was deactivated after saving | Open the staff and admin lists, both view pages, and the CSV | The name shows with " (inactive)" in the Items summary, the Center Name column, the view page and the CSV Material / Quantity Unit / Center Name columns; the center code stays a plain number; nothing is hidden | M |
 
 ## 4. Sign-off
 
@@ -639,6 +640,34 @@ one active center, head and unit. The 404 cases apply to the page (not-found) an
 - 2026-09-30, user: add a `status` column for soft delete (-1) to the report tables, and make
   the Daily Mitram Expense item ✕ soft-delete instead of deleting. Planned in
   `2026-09-30-report-status-soft-delete.md`.
+
+- 2026-09-30, user (screenshots: the edit form shows "Cleaning Supplies (inactive)", the list
+  shows plain "Cleaning Supplies"): "the data that is inactive in the master table it shows
+  inactive in the editing of report rows but in normal table it doesn not show that so what
+  should we do about that should be hide that from the table so it shows blank and same for the
+  csv or show inactive in the table too in bracket so the csv also shows correct inactive for
+  them".
+  - **Recommended:** show "(inactive)", because hiding loses real history and makes old reports
+    look incomplete. User: "yes show (inactive)".
+  - **Done:** a master row (center, material or unit) deactivated since the report was saved is
+    shown as `<name> (inactive)`:
+    - in the staff and admin list Items summary ("Cleaning Supplies (inactive) 25 box"; unit
+      short code likewise) and the Center Name column;
+    - on both view pages (Center Name, Material, Quantity Unit);
+    - in the CSV (Center Name, Material, Quantity Unit), built server-side from the existing
+      `…_active` flags.
+  - The center code stays a plain number. The edit form was unchanged; it already showed this.
+  - **Files:**
+    - `lib/partner-daily-mitram-expense.ts`: `withInactive()`; `itemsSummary(items, label)`;
+    - `DailyMitramExpenseDetails.tsx`;
+    - the staff and admin list pages;
+    - `daily-mitram-expense.service.ts` (`csvName`).
+  - The UI word goes through `t("inactive")`; the CSV uses the English word.
+  - **Verified** on the user's data, where "Cleaning Supplies" is inactive: the CSV has 2 rows
+    with "Cleaning Supplies (inactive)"; the staff list shows it in both affected reports' Items;
+    the view page shows "Cleaning Supplies (inactive)". API / frontend `tsc` and eslint are
+    clean. (The PM2 servers had stopped again and were restarted.)
+  - New test case TC-DME-49, added to §3 and `TEST_CASES.md`.
 
 ## 7. Cross-references
 

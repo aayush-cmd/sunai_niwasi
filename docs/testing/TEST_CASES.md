@@ -238,6 +238,7 @@ Source: [2026-09-30-daily-mitram-expense.md](../planning/features/2026-09-30-dai
 | TC-DME-46 | CSV tricky text | A comment with `a, b; "c"` and a newline | Open the CSV | The values stay in their own columns | H |
 | TC-DME-47 | Numbers and dates round-trip | Staff | Quantity 12.5, Date 01-09-2026 | Read back 12.5 and 01-09-2026 exactly | H |
 | TC-DME-48 | Translation wrapped | i18n on; some Hindi labels entered | Switch to हिं | Those labels in Hindi; the data and CSV headers unchanged | L |
+| TC-DME-49 | Inactive master shown as "(inactive)" (2026-09-30) | A report whose material / unit / center was deactivated after saving | Open the staff and admin lists, both view pages, and the CSV | The name shows with " (inactive)" in the Items summary, the Center Name column, the view page and the CSV Material / Quantity Unit / Center Name columns; the center code stays a plain number; nothing is hidden | M |
 
 ## Report status + soft delete (Sunai daily reports)
 
