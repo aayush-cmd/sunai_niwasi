@@ -105,6 +105,14 @@ what was recommended, what was decided, and that it was built as asked.
 ## Database conventions
 
 - `snake_case` for every column name in the DB; `camelCase` in TypeScript.
+- **A column that refers to another table is named after that table** — `{table_name}_id` for
+  the reference, and `{table_name}_{column}` for a copied (snapshot) value from it, e.g.
+  `master_partner_center_id`, `master_partner_center_code`, `master_partner_center_name`. Anyone
+  reading the column can tell it refers to another table, and which one. Stay within MySQL's
+  64-character identifier limit. **Exceptions — keep the repo-wide standard names:**
+  `partner_id`, `community_id`, `user_id` and the audit columns `created_by` / `updated_by` /
+  `deleted_by`, which every existing table and the gates/helpers rely on. Applies to new tables
+  and new columns; existing columns are not renamed.
 - No foreign-key constraints in the DB — every FK-equivalent column (e.g. `user_id`,
   `created_by`) gets an index instead. Referential integrity is enforced at the application
   level, not the DB level: no FK constraints anywhere, designed in code wherever a relation

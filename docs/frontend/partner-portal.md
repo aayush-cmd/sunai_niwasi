@@ -56,6 +56,7 @@ each feature once. The table at the end lists every page.
 | `/admin/masters/activity-category` | Activity categories |
 | `/admin/masters/material-expense-head`, `/admin/masters/center`, `/admin/masters/quantity-unit` | Material and Expense Head (name), Center Name (name + Center Code, unique per org even when inactive) and Quantity Unit (name + Short Code, e.g. Kilogram / kg) masters: search, Active/Inactive/All, Add/Edit, Activate/Deactivate (no delete). **Sunai only:** for Sunai's Partner Admin and the System Admin; staff can't open them, and other partner orgs have no menu items (their URLs are not-found). Under Master, after Master Activity. |
 | `/admin/reports/daily-activity-report`, `/admin/reports/daily-activity-report/[id]` | Every staff member's Daily Activity Reports, read-only: Staff / Search / Date From–To filters, filter-dependent **Download CSV**, 👁 → the view page ("Staff: <name>" + the fields). **Sunai only:** for Sunai's Partner Admin and the System Admin; staff can't open it, and other orgs have no Reports tab (their URLs are not-found). The "Reports" dropdown after Users & Report Management. |
+| `/admin/reports/daily-mitram-expense`, `/admin/reports/daily-mitram-expense/[id]` | Every staff member's Daily Mitram Expense reports, read-only: Staff / Search / Date From–To filters, filter-dependent **Download CSV** (one row per item), 👁 → the view page ("Staff: <name>", header, items). **Sunai only:** Sunai's Partner Admin and the System Admin. Under the "Reports" dropdown, after Daily Activity Report. |
 | `/admin/orders` | Every staff member's Order Placement orders for the org. Filters (customer/mobile, staff, service group, status, date range), filter-dependent CSV download, a ✏ Edit status dialog (statuses depend on the service group), and 👁 → the Order Details page. **Sunai only:** for Sunai's Partner Admin and the System Admin; staff can't open it, and other partner orgs have no tab (their URLs are not-found). The "Orders" tab after Feedback Form. |
 | `/admin/orders/[group]/[id]` | Order Details: read-only fields for one order, depending on its service group (and medical type), with its attachments. Back and Close return to the list with the same filters. |
 | `/admin/profile` | Organisation profile |
@@ -121,6 +122,7 @@ Placing and tracking service orders for customers, such as home sample collectio
 | `/reports/proposed-campaigner`, `/proposed-followup`, `/proposed-ns`, `/proposed-swachhata` | Proposed-activity reports (follow-up, NS, Swachhata/cleanliness) |
 | `/reports/cpc/[masterReport]` | Jan Jagran CPC meeting reports, under a master report |
 | `/reports/daily-activity-report` (+ `/new`, `/[id]`, `/[id]/edit`) | Daily Activity Report: the caller's own reports (date, work start/end time, work done, next plan, items sold today). Search + date range, Add, View, Edit; no delete. **Sunai only:** System Admin, Sunai's Partner Admin and Sunai staff, each seeing only their own; other orgs get not-found. Menu: Reports and Tracking → Daily Reports, after Team Daily Report. |
+| `/reports/daily-mitram-expense` (+ `/new`, `/[id]`, `/[id]/edit`) | Daily Mitram Expense: the caller's own expense reports — Date, Center Code (active centers; Center Name fills in) and item rows (Material, Quantity, Quantity Unit from the active Sunai masters, Comment). Search (center name / item), Center Code and date filters; Add, View, Edit; no delete. **Sunai only:** System Admin, Sunai's Partner Admin and Sunai staff, each seeing only their own; other orgs get not-found. Menu: Reports and Tracking → Daily Reports, after Daily Activity Report. |
 | `/reports/global` | Global report |
 | `/reports/my-panchayat` | "My Panchayat My Thought" feedback report |
 | `/staff/ham-niwasi-daily-report` | Ham Niwasi daily report |
@@ -166,7 +168,7 @@ The platform System Admin's partner-side tools.
 
 The complete list: one row per `page.tsx` in `apps/frontend/app/`. The sections above explain what each feature is; this table makes sure every page is listed. Keep it in sync by hand (see the docs rule in `AGENTS.md`).
 
-218 pages. **URL** is what the user sees. **Kind** comes from the URL: Create = `new`/`create`/`add`, Edit = `edit`, Detail = ends in a `[param]`.
+224 pages. **URL** is what the user sees. **Kind** comes from the URL: Create = `new`/`create`/`add`, Edit = `edit`, Detail = ends in a `[param]`.
 
 | URL | Kind | File |
 |---|---|---|
@@ -200,6 +202,8 @@ The complete list: one row per `page.tsx` in `apps/frontend/app/`. The sections 
 | `/[slug]/admin/projects` | Page | `app/(partner)/partner/(dash)/[slug]/admin/projects/page.tsx` |
 | `/[slug]/admin/reports/daily-activity-report` | Page | `app/(partner)/partner/(dash)/[slug]/admin/reports/daily-activity-report/page.tsx` |
 | `/[slug]/admin/reports/daily-activity-report/[id]` | Detail | `app/(partner)/partner/(dash)/[slug]/admin/reports/daily-activity-report/[id]/page.tsx` |
+| `/[slug]/admin/reports/daily-mitram-expense` | Page | `app/(partner)/partner/(dash)/[slug]/admin/reports/daily-mitram-expense/page.tsx` |
+| `/[slug]/admin/reports/daily-mitram-expense/[id]` | Detail | `app/(partner)/partner/(dash)/[slug]/admin/reports/daily-mitram-expense/[id]/page.tsx` |
 | `/[slug]/admin/shared-projects` | Page | `app/(partner)/partner/(dash)/[slug]/admin/shared-projects/page.tsx` |
 | `/[slug]/admin/users` | Page | `app/(partner)/partner/(dash)/[slug]/admin/users/page.tsx` |
 | `/[slug]/admin/wards` | Page | `app/(partner)/partner/(dash)/[slug]/admin/wards/page.tsx` |
@@ -319,6 +323,10 @@ The complete list: one row per `page.tsx` in `apps/frontend/app/`. The sections 
 | `/[slug]/staff/reports/daily-activity-report/[id]` | Detail | `app/(partner)/partner/(dash)/[slug]/staff/reports/daily-activity-report/[id]/page.tsx` |
 | `/[slug]/staff/reports/daily-activity-report/[id]/edit` | Edit | `app/(partner)/partner/(dash)/[slug]/staff/reports/daily-activity-report/[id]/edit/page.tsx` |
 | `/[slug]/staff/reports/daily-activity-report/new` | Create | `app/(partner)/partner/(dash)/[slug]/staff/reports/daily-activity-report/new/page.tsx` |
+| `/[slug]/staff/reports/daily-mitram-expense` | Page | `app/(partner)/partner/(dash)/[slug]/staff/reports/daily-mitram-expense/page.tsx` |
+| `/[slug]/staff/reports/daily-mitram-expense/[id]` | Detail | `app/(partner)/partner/(dash)/[slug]/staff/reports/daily-mitram-expense/[id]/page.tsx` |
+| `/[slug]/staff/reports/daily-mitram-expense/[id]/edit` | Edit | `app/(partner)/partner/(dash)/[slug]/staff/reports/daily-mitram-expense/[id]/edit/page.tsx` |
+| `/[slug]/staff/reports/daily-mitram-expense/new` | Create | `app/(partner)/partner/(dash)/[slug]/staff/reports/daily-mitram-expense/new/page.tsx` |
 | `/[slug]/staff/reports/global` | Page | `app/(partner)/partner/(dash)/[slug]/staff/reports/global/page.tsx` |
 | `/[slug]/staff/reports/global/[id]` | Detail | `app/(partner)/partner/(dash)/[slug]/staff/reports/global/[id]/page.tsx` |
 | `/[slug]/staff/reports/global/[id]/edit` | Edit | `app/(partner)/partner/(dash)/[slug]/staff/reports/global/[id]/edit/page.tsx` |
