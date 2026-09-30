@@ -617,7 +617,9 @@ one active center, head and unit. The 404 cases apply to the page (not-found) an
 
 ## 6. Post-deploy
 
-_(none yet)_
+- 2026-09-30, user: add a `status` column for soft delete (-1) to the report tables, and make
+  the Daily Mitram Expense item ✕ soft-delete instead of deleting. Planned in
+  `2026-09-30-report-status-soft-delete.md`.
 
 ## 7. Cross-references
 
