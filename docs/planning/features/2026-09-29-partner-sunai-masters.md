@@ -568,6 +568,15 @@ and to the API.
     typing; Center 0/100 plus the code hint; the error and the hint show together; Head 0/100.
   - The one Kilogram/kg unit saved during the check was deleted.
 
+- 2026-09-30, user: "can you also check the master tables too for that" (following the daily
+  reports' "show blank instead of —" change).
+  - `SunaiMasterListView.tsx`, the only placeholder in the three Sunai master pages: an empty
+    list cell now renders blank instead of "—".
+  - Every master field is required, so in practice no cell is empty; the change is for
+    consistency.
+  - Master Activity (a separate page) wasn't touched.
+  - eslint and `tsc` are clean.
+
 ## 7. Cross-references
 
 - SRS row: n/a
