@@ -89,6 +89,7 @@ TC-PAO-16 (the old 👁 modal) was superseded before ship and is only in the pla
 
 Sunai-only partner masters under Master: **Material and Expense Head**, **Center Name** and **Quantity Unit** (list, Add/Edit, Activate/Deactivate, no delete).
 Source: [2026-09-29-partner-sunai-masters.md](../planning/features/2026-09-29-partner-sunai-masters.md) §3, shipped 2026-09-29.
+Validation limits changed 2026-09-30 (plan §6): TC-PSM-14 and TC-PSM-16 are superseded by TC-PSM-36 and TC-PSM-37 (kept in the planning file only).
 `<M>` means the case is run for each of the three masters. The 404 cases apply to the page URL
 
 | TC-ID | Title | Pre-condition | Steps | Expected Result | Priority |
@@ -106,9 +107,7 @@ Source: [2026-09-29-partner-sunai-masters.md](../planning/features/2026-09-29-pa
 | TC-PSM-11 | Add Center | Sunai admin | Add Center → "Mitram Rasoi Ballia", code 16 → Save | Row shows name, code 16, Active | H |
 | TC-PSM-12 | Add Quantity Unit keeps short name case | Sunai admin | Add → Unit Name "kilogram", Short Code "kg" → Save | Row "Kilogram" / "kg" (short name not capitalised) | H |
 | TC-PSM-13 | Required fields | Add modal open, per `<M>` | Save with every field blank / only spaces | Inline "required" error under each field; nothing saved; API returns 422 with the same fields if called directly | H |
-| TC-PSM-14 | Max length | Add modal | Name of 256 characters (101 for unit name); unit short name of 21 | Inline max-length error; API 422 | M |
 | TC-PSM-15 | Center code must be a whole number | Add Center | Enter `abc`, `-5`, `1.5`, `1e3`, `0`, `4294967296` | Each rejected inline; API 422 for each | H |
-| TC-PSM-16 | Center code upper bound ok | Add Center | Code `4294967295` | Saved | L |
 | TC-PSM-17 | Center code leading zeros | Add Center | Code `016` | Saved and shown as 16 | L |
 | TC-PSM-18 | Duplicate center code | Center with code 16 exists | Add another center with code 16 | Inline "code already exists" (409 `CODE_TAKEN`); not saved | H |
 | TC-PSM-19 | Duplicate code blocked even when inactive | Center code 16 exists and is deactivated | Add a new center with code 16 | 409 `CODE_TAKEN` | M |
@@ -128,6 +127,8 @@ Source: [2026-09-29-partner-sunai-masters.md](../planning/features/2026-09-29-pa
 | TC-PSM-33 | Body can't set partner or status | Sunai admin | POST with extra `partner_id: 5, status: 0` | Row saved under Sunai, active (extra keys ignored or rejected) | M |
 | TC-PSM-34 | Translation wrapped | `NEXT_PUBLIC_I18N_ENABLED` on; a Hindi `label_text` row added via the Language admin for "Center Name" | Switch to हिं | That label shows in Hindi; strings without a row stay English; master data values unchanged | L |
 | TC-PSM-35 | Timestamps set on create/edit | Sunai admin | Create a row, then edit it; check the DB | API sets both on create, and only `updated_at` on edit / toggle; the values match the real time (not 5h30m off); the columns have no DB default | L |
+| TC-PSM-36 | Name length limits (2026-09-30) | Add / Edit modal, per master | Head Name 100 / 101 chars; Center Name 100 / 101; Unit Name 50 / 51; Short Code 20 / 21 | 100 / 100 / 50 / 20 saved; the inputs stop at those lengths; 101 / 101 / 51 / 21 sent to the API → 422 on that field | H |
+| TC-PSM-37 | Center Code range 1–99999 (2026-09-30) | Add Center | Code 99999; 100000; 0 / 00000; `00016` | 99999 saved; 100000 and 0 → inline "Center Code must be between 1 and 99999." and API 422; the input stops at 5 digits; `00016` saved as 16 | H |
 
 ## Daily Activity Report (Sunai-only)
 

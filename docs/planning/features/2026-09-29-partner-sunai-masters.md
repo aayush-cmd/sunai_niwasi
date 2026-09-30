@@ -141,7 +141,8 @@ CREATE TABLE master_partner_quantity_unit (
   code 16. Because the index is at DB level, it covers **inactive rows too**, so a deactivated
   center's code can't be reused. Q1 confirms both points.
 - **`code` type.** `INT UNSIGNED`, so the range is 0..4294967295. Leading zeros are not stored:
-  "016" is saved as 16. The API accepts 1..4294967295 (no 0, Q1).
+  "016" is saved as 16. The API accepts 1..4294967295 (no 0, Q1). **Superseded 2026-09-30
+  (§6):** the application now accepts 1..99999.
 - **Other uniqueness** is done in the application: a name (and, for units, a short name) must be
   unique **among this partner's active rows**, case-insensitive. This matches the Activity
   Category and Designations masters and the prototype's checks (Q2). A DB unique index isn't
@@ -226,9 +227,9 @@ That's **12 endpoints**. There's **no DELETE**, because the prototype has `noDel
 
 | Field | Rule |
 |---|---|
-| name (all three) | required; trimmed length 1..100 for units, 1..255 for the others |
-| code (center) | required; whole number 1..4294967295; digits only, no sign, decimal or exponent |
-| short_name (unit) | required; trimmed length 1..20 |
+| name (all three) | required; trimmed length 1..100 for units, 1..255 for the others. **Superseded 2026-09-30 (§6):** Head name and Center name 1..100, Unit name 1..50 |
+| code (center) | required; whole number 1..4294967295; digits only, no sign, decimal or exponent. **Superseded 2026-09-30 (§6):** 1..99999 |
+| short_name (unit) | required; trimmed length 1..20 (kept unchanged on 2026-09-30, by the user's choice) |
 | status (PATCH) | boolean |
 | list `limit` | 1..100, default 20 |
 | list `search` | max 150 characters |
@@ -264,7 +265,7 @@ Plus:
   **Center Name**, **Quantity Unit**. Other orgs see only "Master Activity", as today. The staff
   nav isn't touched, since staff have no access.
 - **Center Code input:** `inputMode="numeric"`, digits only, the same 1..4294967295 check as the
-  API.
+  API. **Superseded 2026-09-30 (§6):** 1..99999, and `maxLength` is 5.
 - **Translation** (AGENTS.md rule): every UI string — headings, labels, buttons, placeholders,
   headers, empty states, messages — is wrapped in `t()`. Master data values (names, codes, short
   names) are not. No `label_text` SQL is written; the team enters Hindi labels through the live
@@ -341,9 +342,9 @@ and to the API.
 | TC-PSM-11 | Add Center | Sunai admin | Add Center → "Mitram Rasoi Ballia", code 16 → Save | Row shows name, code 16, Active | H |
 | TC-PSM-12 | Add Quantity Unit keeps short name case | Sunai admin | Add → Unit Name "kilogram", Short Code "kg" → Save | Row "Kilogram" / "kg" (short name not capitalised) | H |
 | TC-PSM-13 | Required fields | Add modal open, per `<M>` | Save with every field blank / only spaces | Inline "required" error under each field; nothing saved; API returns 422 with the same fields if called directly | H |
-| TC-PSM-14 | Max length | Add modal | Name of 256 characters (101 for unit name); unit short name of 21 | Inline max-length error; API 422 | M |
+| TC-PSM-14 | Max length _(superseded 2026-09-30 by TC-PSM-36)_ | Add modal | Name of 256 characters (101 for unit name); unit short name of 21 | Inline max-length error; API 422 | M |
 | TC-PSM-15 | Center code must be a whole number | Add Center | Enter `abc`, `-5`, `1.5`, `1e3`, `0`, `4294967296` | Each rejected inline; API 422 for each | H |
-| TC-PSM-16 | Center code upper bound ok | Add Center | Code `4294967295` | Saved | L |
+| TC-PSM-16 | Center code upper bound ok _(superseded 2026-09-30 by TC-PSM-37)_ | Add Center | Code `4294967295` | Saved | L |
 | TC-PSM-17 | Center code leading zeros | Add Center | Code `016` | Saved and shown as 16 | L |
 | TC-PSM-18 | Duplicate center code | Center with code 16 exists | Add another center with code 16 | Inline "code already exists" (409 `CODE_TAKEN`); not saved | H |
 | TC-PSM-19 | Duplicate code blocked even when inactive | Center code 16 exists and is deactivated | Add a new center with code 16 | 409 `CODE_TAKEN` | M |
@@ -362,6 +363,8 @@ and to the API.
 | TC-PSM-32 | Id from another org or missing | Row id belonging to another partner / nonexistent | `PUT` and `PATCH …/status` with that id on the Sunai slug | 404; nothing changed | H |
 | TC-PSM-33 | Body can't set partner or status | Sunai admin | POST with extra `partner_id: 5, status: 0` | Row saved under Sunai, active (extra keys ignored or rejected) | M |
 | TC-PSM-35 | Timestamps set on create/edit | Sunai admin | Create a row, then edit it; check the DB | API sets both on create, and only `updated_at` on edit / toggle; the values match the real time (not 5h30m off); the columns have no DB default | L |
+| TC-PSM-36 | Name length limits (2026-09-30) | Add / Edit modal, per master | Head Name 100 / 101 chars; Center Name 100 / 101; Unit Name 50 / 51; Short Code 20 / 21 | 100 / 100 / 50 / 20 saved; the inputs stop at those lengths; 101 / 101 / 51 / 21 sent to the API → 422 on that field | H |
+| TC-PSM-37 | Center Code range 1–99999 (2026-09-30) | Add Center | Code 99999; 100000; 0 / 00000; `00016` | 99999 saved; 100000 and 0 → inline "Center Code must be between 1 and 99999." and API 422; the input stops at 5 digits; `00016` saved as 16 | H |
 | TC-PSM-34 | Translation wrapped | `NEXT_PUBLIC_I18N_ENABLED` on; a Hindi `label_text` row added via the Language admin for "Center Name" | Switch to हिं | That label shows in Hindi; strings without a row stay English; master data values unchanged | L |
 
 ## 4. Sign-off
@@ -497,7 +500,73 @@ and to the API.
 
 ## 6. Post-deploy
 
-_(none yet)_
+- 2026-09-30, user, change request after ship (verbatim):
+
+  > i want you to add some validation for the master tables that we added recently
+  > Material and Expense Head
+  > Name*, Status*
+  > Name - 1-100 ch
+  >
+  > Center Name
+  > Center Name*, Center Code*, Status*
+  > Center Name - 1-100 ch
+  > Center code - numeric (1-99999)
+  >
+  > Quantity Unit
+  > Unit Name*, Status*
+  > Unit Name - 1-50 ch
+  >
+  > you can apply the validations for the name , center name ,center code etc in the application level
+
+  - **Asked:** the Quantity Unit list doesn't mention Short Code. User: "Keep as is
+    (Recommended)", so Short Code stays required, max 20 characters, unique among active units.
+  - **Changed** (application level only; no DB change, the columns stay VARCHAR(255) / (100)
+    and INT UNSIGNED):
+    - Head Name 1..255 → **1..100**;
+    - Center Name 1..255 → **1..100**;
+    - Unit Name 1..100 → **1..50**;
+    - Center Code 1..4294967295 → **1..99999**.
+
+    The change is in the API (`partner-masters.sunai.schema.ts` constants) and mirrored in the
+    frontend (`lib/partner-sunai-masters.ts`). The Center Code input's `maxLength` is now derived
+    from `CODE_MAX` (5 digits). "Status\*" needs no change: status is always set (create =
+    Active; the row toggle).
+  - Existing local data was within the new limits: the 21 head rows have a longest name of 9
+    characters; there were no center or unit rows.
+  - **Test cases:** TC-PSM-14 and TC-PSM-16 are superseded by the new TC-PSM-36 and TC-PSM-37.
+    TC-PSM-15 still holds (0 and 4294967296 stay rejected).
+  - **Verified live:**
+    - API: head 100 ok / 101 → 422; center name 100 ok / 101 → 422; code 99999 ok, 100000 and
+      0 → 422 ("between 1 and 99999"), `00016` ok, `1e3` → 422, missing → 422; unit name 50 ok /
+      51 → 422; Short Code still max 20 and required.
+    - UI: the inputs stop at 100 / 100 / 5 digits / 50 / 20; code `00000` → inline "Center Code
+      must be between 1 and 99999.".
+    - API `tsc` clean; eslint on the changed frontend files clean. Test rows (`zzv…`) were
+      deleted.
+    - The PM2 servers had stopped again and were restarted. The first UI run hit a 404 while the
+      dev server was compiling; it passed on retry.
+    - **Re-verified after another VS Code crash (2026-09-30):** API 14/14 PASS (test rows
+      deleted); the browser checks passed 6/6: name inputs stop at 100 / 100 / 50; the code input
+      stops at 5 digits; code 0 → the inline 1–99999 message; blank head name → "Name is
+      required."; frontend `tsc` is clean.
+    - **Environment:** after that crash, every route more than one folder below `admin/` or
+      `staff/` returned 404, including long-standing ones such as `staff/reports/global` and the
+      Order Details page. A restart didn't help. The cause was a corrupted Next.js dev cache.
+      Fixed by stopping niwasi-web, deleting `apps/frontend/.next` (4.2 GB, gitignored build
+      output) and starting it again. No code change.
+
+- 2026-09-30, user (with a screenshot of the Add Quantity Unit modal): "can you show the allowed
+  character in the modal like we show for the reports that we just added".
+  - **Done:** every text field in the Add/Edit modal shows a live counter under the input, right
+    aligned, in the same style as the Daily Activity Report form (`n/max`): Head Name `/100`,
+    Center Name `/100`, Unit Name `/50`, Short Code `/20`.
+  - The numeric Center Code shows "Numbers only, 1–99999" instead of a counter.
+  - An inline error, when present, sits on the left of the same row.
+  - The text is wrapped in `t()`.
+  - **File:** `components/partner/masters/SunaiMasterListView.tsx`.
+  - **Checks:** eslint and `tsc` clean; browser 5/5 PASS: 0/50 and 0/20 → 8/50 and 2/20 while
+    typing; Center 0/100 plus the code hint; the error and the hint show together; Head 0/100.
+  - The one Kilogram/kg unit saved during the check was deleted.
 
 ## 7. Cross-references
 
