@@ -531,6 +531,20 @@ the page URL (the not-found page) and the API.
 
 ## 6. Post-deploy
 
+- 2026-09-30, user (with a screenshot of the staff Reports and Tracking menu): "also move the
+  ham niwasi daily report http://partner.niwasi.abhishek/Sunai/staff/ham-niwasi-daily-report
+  into daily report (just move it under the daily reports section no other change needed)".
+  - `reports-menu.service.ts`: "Ham Niwasi Daily Report" moved from its own top-level item to
+    the **last** child of "Daily Reports", matching the prototype's order (Team Daily Report,
+    Daily Activity Report, Daily Mitram Expense, Daily Meal and Income Report, Ham Niwasi Daily
+    Report).
+  - It stays unconditional, **for every org** as before, so other orgs now see it under Daily
+    Reports too. The Daily Reports group is therefore always emitted, since it always has at
+    least this item.
+  - Same page and URL; no other change. The greyed "Mitram Daily Reports" placeholder is
+    untouched.
+  - Doc: the `partner-portal.md` staff Reports row notes the new menu location.
+
 - 2026-09-30, user: add a `status` column for soft delete (-1) to the report tables, and make
   the Daily Mitram Expense item ✕ soft-delete instead of deleting. Planned in
   `2026-09-30-report-status-soft-delete.md`.

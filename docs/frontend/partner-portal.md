@@ -127,7 +127,7 @@ Placing and tracking service orders for customers, such as home sample collectio
 | `/reports/daily-meal-income-report` (+ `/new`, `/[id]`, `/[id]/edit`) | Daily Meal and Income Report: the caller's own reports — Date plus Tiffin / Mess counts and payments, Expense and Money, Stock Remaining and Remarks (all optional but the Date). Search (text fields) and date filters; Add, View, Edit; no delete. **Sunai only:** System Admin, Sunai's Partner Admin and Sunai staff, each seeing only their own; other orgs get not-found. Menu: Reports and Tracking → Daily Reports, after Daily Mitram Expense. |
 | `/reports/global` | Global report |
 | `/reports/my-panchayat` | "My Panchayat My Thought" feedback report |
-| `/staff/ham-niwasi-daily-report` | Ham Niwasi daily report |
+| `/staff/ham-niwasi-daily-report` | Ham Niwasi daily report. Menu: Reports and Tracking → Daily Reports (the last item, every org), no longer a top-level item (2026-09-30). |
 
 ### Other staff pages
 
