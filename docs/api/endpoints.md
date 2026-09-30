@@ -2,7 +2,7 @@
 
 Every endpoint in `apps/api`, with the full URL it's served at (after all router mounts from `src/index.ts`). Keep it in sync by hand (see the docs rule in `AGENTS.md`). See [api-structure.md](api-structure.md) for how the API is organised and what each module does.
 
-911 endpoints, grouped by mount. **Guards** are the auth/permission middleware on the route, including router-level ones; permission keys are shown in quotes. **Source** is the file and line where the route is declared.
+919 endpoints, grouped by mount. **Guards** are the auth/permission middleware on the route, including router-level ones; permission keys are shown in quotes. **Source** is the file and line where the route is declared.
 
 ### `/api/v1/admin` (110)
 
@@ -553,7 +553,7 @@ Every endpoint in `apps/api`, with the full URL it's served at (after all router
 | POST | `/api/v1/locations/sub-localities` | public | `src/modules/niwasi/location.routes.ts:31` |
 | GET | `/api/v1/locations/wards` | public | `src/modules/niwasi/location.routes.ts:25` |
 
-### `/api/v1/partner` (401)
+### `/api/v1/partner` (409)
 
 | Method | Path | Guards | Source |
 |---|---|---|---|
@@ -581,6 +581,10 @@ Every endpoint in `apps/api`, with the full URL it's served at (after all router
 | GET | `/api/v1/partner/my-orgs` | `requirePartnerAuth` | `src/modules/partner/partner.routes.ts:157` |
 | GET | `/api/v1/partner/nature-types` | `requirePartnerAuth`, `requirePartnerPermission('partner.org.manage')` | `src/modules/partner/partner.routes.ts:699` |
 | GET | `/api/v1/partner/orgs` | public | `src/modules/partner/partner.routes.ts:120` |
+| GET | `/api/v1/partner/orgs/:slug/admin/daily-activity-reports` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/daily-activity-report.routes.ts:40` |
+| GET | `/api/v1/partner/orgs/:slug/admin/daily-activity-reports/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/daily-activity-report.routes.ts:43` |
+| GET | `/api/v1/partner/orgs/:slug/admin/daily-activity-reports/export` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/daily-activity-report.routes.ts:42` |
+| GET | `/api/v1/partner/orgs/:slug/admin/daily-activity-reports/staff-options` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/daily-activity-report.routes.ts:41` |
 | GET | `/api/v1/partner/orgs/:slug/admin/orders` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/order-placement.admin.routes.ts:29` |
 | GET | `/api/v1/partner/orgs/:slug/admin/orders/:group/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/order-placement.admin.routes.ts:32` |
 | GET | `/api/v1/partner/orgs/:slug/admin/orders/:group/:id/attachments/:filename` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgAccess` | `src/modules/partner/order-placement.admin.routes.ts:33` |
@@ -655,6 +659,10 @@ Every endpoint in `apps/api`, with the full URL it's served at (after all router
 | POST | `/api/v1/partner/orgs/:slug/contacts/sync` | `requirePartnerPermission('iec.contact')`, `requirePartnerAuth`, `requireOrgMember` | `src/modules/partner/contacts-extras.routes.ts:60` |
 | GET | `/api/v1/partner/orgs/:slug/contacts/today` | `requirePartnerPermission('iec.contact')`, `requirePartnerAuth`, `requireOrgMember` | `src/modules/partner/contacts-extras.routes.ts:51` |
 | POST | `/api/v1/partner/orgs/:slug/contacts/today/schedule` | `requirePartnerPermission('iec.contact')`, `requirePartnerAuth`, `requireOrgMember` | `src/modules/partner/contacts-extras.routes.ts:50` |
+| GET | `/api/v1/partner/orgs/:slug/daily-activity-reports` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgMember` | `src/modules/partner/daily-activity-report.routes.ts:35` |
+| POST | `/api/v1/partner/orgs/:slug/daily-activity-reports` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgMember` | `src/modules/partner/daily-activity-report.routes.ts:36` |
+| GET | `/api/v1/partner/orgs/:slug/daily-activity-reports/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgMember` | `src/modules/partner/daily-activity-report.routes.ts:37` |
+| PUT | `/api/v1/partner/orgs/:slug/daily-activity-reports/:id` | `requirePartnerAuth`, `requireSunaiOrg`, `requireOrgMember` | `src/modules/partner/daily-activity-report.routes.ts:38` |
 | GET | `/api/v1/partner/orgs/:slug/dashboard` | `requirePartnerAuth`, `requireOrgAccess` | `src/modules/partner/partner.routes.ts:148` |
 | GET | `/api/v1/partner/orgs/:slug/designations` | `requirePartnerAuth`, `requireOrgAccess` | `src/modules/partner/partner.routes.ts:192` |
 | POST | `/api/v1/partner/orgs/:slug/designations` | `requirePartnerAuth`, `requireOrgAccess` | `src/modules/partner/partner.routes.ts:200` |
