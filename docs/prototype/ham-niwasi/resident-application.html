@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>हम निवासी - Niwasi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Serif:wght@400;600;700&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!--=============  Unified Header Section  ==============-->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="navbar">
+    <div class="container-fluid px-4">
+      <!-- Logo Section -->
+      <a class="navbar-brand" href="index.html">
+        <img src="image/logo-transparent.png" alt="हम निवासी लोगो" height="60" />
+      </a>
+      
+      <!-- Navigation Section -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="impact.html">प्रभाव</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pahal">पहल </a></li>
+          <li class="nav-item"><a class="nav-link" href="samajik-udyami.html">सामाजिक उद्यमी</a></li>
+          <li class="nav-item"><a class="nav-link" href="#appeal">अपील</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sewa">सेवा</a></li>
+          <li class="nav-item"><a class="nav-link" href="mulya.html">मूल्य</a></li>
+          <li class="nav-item"><a class="nav-link" href="niwasi-sabha.html">विवरणिका</a></li>
+        </ul>
+      </div>
+      
+      <!-- Right Section -->
+      <div class="header-right-section d-flex align-items-center">    
+        <!-- Social Icons -->
+        <div class="social-icons-header d-flex align-items-center">
+          <a href="https://www.facebook.com/hamniwasi/" target="_blank" rel="noopener" class="social-link-header" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/hamniwasi/" class="social-link-header" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://niwasi.tlitech.net/hum-niwasi/" target="_blank" rel="noopener" class="social-link-header" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+        
+        <!-- Search and Menu Icons -->
+        <div class="header-actions d-flex align-items-center ms-5">
+          <button class="btn btn-link nav-icon" type="button" id="searchToggle">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="btn btn-link nav-icon" type="button" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Search Overlay - Top Sliding Panel -->
+  <div class="search-overlay" id="searchOverlay">
+    <!-- Background Overlay -->
+    <div class="search-backdrop"></div>
+
+    <!-- Search Panel -->
+  <div class="search-panel">
+    <div class="search-panel-header">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="search-input-container">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+            </div>
+          </div>
+          <div class="col-auto">
+            <button class="search-close" id="searchClose">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="search-panel-content">
+      <div class="container-fluid">
+        <div class="quick-links">
+          <h6 class="quick-links-title">Quick Links</h6>
+          <div class="row">
+            <div class="col-md-4 col-lg-3">
+              <a href="kaaryashala.html" class="quick-link-item">
+                <!-- <i class="fas fa-car me-2"></i> -->
+                <span>कार्यशाला</span>
+              </a>
+            </div>
+            <div class="col-md-4 col-lg-3">
+              <a href="samajik-udyami.html" class="quick-link-item">
+                <!-- <i class="fas fa-calculator me-2"></i> -->
+                <span>सामाजिक उद्यमी</span>
+              </a>
+            </div>
+            <div class="col-md-4 col-lg-3">
+              <a href="train-samajik-udyami.html" class="quick-link-item">
+                <!-- <i class="fas fa-book me-2"></i> -->
+                <span>ट्रेन सामाजिक उद्यमी</span>
+              </a>
+            </div>
+            <div class="col-md-4 col-lg-3">
+              <a href="abhiyaan.html" class="quick-link-item">
+                <!-- <i class="fas fa-tag me-2"></i> -->
+                <span>अभियान</span>
+              </a>
+            </div>
+            <div class="col-md-4 col-lg-3">
+              <a href="help.html" class="quick-link-item">
+                <!-- <i class="fas fa-tag me-2"></i> -->
+                <span>सहायता</span>
+              </a>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <a href="testimonials.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>प्रशंसापत्र</span>
+                </a>
+              </div>
+                <!-- <div class="col-md-4 col-lg-3">
+                <a href="niwasi-sabha.html" class="quick-link-item">
+                
+                  <span>निवासी सभा</span>
+                </a>
+              </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Full Screen Overlay Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay">
+    <div class="drawer-container" id="drawerContainer">
+      <!-- Left Panel - Navigation -->
+      <div class="drawer-left-panel">
+        <div class="drawer-header">
+          <a href="#" class="sidebar-logo">
+            <img src="image/logo-transparent.png" alt="हम निवासी लोगो" height="30" />
+          </a>
+        </div>
+        <nav class="drawer-nav">
+          <ul class="drawer-nav-list">
+            <li><a href="gallery.html">गैलरी</a></li>
+            <li><a href="hamniwasi-program.html">हम-निवासी कार्यक्रम के बारे में</a></li>
+            <li><a href="ethical-foundation.html">एथिकल फौन्डेशन ट्रस्ट के बारे में</a></li>
+            <li><a href="sunai-consultancy.html">सहयोगी संस्थान सुनई कन्सलटेंसी के बारे में</a></li>
+            <li><a href="mitram-kitchen-store.html">सहयोगी व्यवसाय मित्रम रसोई और मित्रम स्टोर के बारे में</a></li>
+            <li><a href="niwasi-sabha-champion.html">निवासी सभा कैंपियन के बारे में</a></li>
+            <li><a href="samajik-udyami.html">सामाजिक उद्यमी के बारे में</a></li>
+            <li><a href="collaborating-donors.html">सहयोगी दानदाता</a></li>
+            <li><a href="resident-application.html">निवासी आवेदन</a></li>
+            <li class="mt-2 text-center"><a href="login.html" class="join-button">लॉगिन</a></li>
+          </ul>
+          <!-- Bottom Button -->
+          <!-- <div class="sidebar-bottom">
+            <button class="join-button">लॉगिन</button> closeDrawer
+          </div> -->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+
+<!--=============  Resident Application Content Section Start ==============-->
+<div class="resident-app-content">
+  <!-- HEADING SECTION -->
+  <div style="text-align: center; margin-bottom: 8px;">
+    <h1 style="color: #F97316; font-size: 1.6rem; font-weight: 700;">
+      निवासी आवेदन
+    </h1>
+  </div>
+
+  <!-- FORM IMAGE -->
+  <div class="niwasi-form-wrapper">
+    <img src="image/application.png" alt="निवासी आवेदन फॉर्म" 
+         style="width: 100%; height: auto; display: block; border: 1px solid #1a1a1a;">
+  </div>
+
+  <!-- PRINT BUTTON -->
+  <div style="text-align: center; margin-top: 30px;">
+    <button onclick="printImage()" 
+            style="padding: 12px 40px; background: #F97316; 
+                   color: white; border: none; border-radius: 8px; 
+                   font-size: 1rem; font-weight: 700; cursor: pointer;">
+      प्रिंट करें
+    </button>
+  </div>
+
+</div>
+<!--=============  Resident Application Content Section End ==============-->
+
+
+
+
+  <!-- Footer -->
+  <footer class="text-center py-3" style="background-color:#f8f9fa; border-top:1px solid #dee2e6;">
+    <div class="container">
+      <p class="mb-0">Privacy Policy , © Copyright Niwasi. All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTop" title="Scroll to Top">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    // Print Image Function - Make it globally accessible
+    window.printImage = function() {
+      const img = document.querySelector('.niwasi-form-wrapper img');
+      
+      if (!img) {
+        console.error('Application image not found');
+        return;
+      }
+      
+      // Create a new window for printing
+      const printWindow = window.open('', '_blank', 'width=800,height=600');
+      
+      if (!printWindow) {
+        alert('Please allow popups to print the application form');
+        return;
+      }
+      
+      // Create the HTML content for printing
+      const printContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>निवासी आवेदन</title>
+          <style>
+            body {
+              margin: 0;
+              padding: 10px;
+              display: flex;
+              justify-content: center;
+              align-items: flex-start;
+              min-height: 100vh;
+              background: white;
+            }
+            img {
+              max-width: 100%;
+              height: auto;
+              border: 1px solid #1a1a1a;
+              box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            @media print {
+              body {
+                margin: 0;
+                padding: 0;
+                background: white;
+              }
+              img {
+                max-width: 100%;
+                height: auto;
+                border: 1px solid #1a1a1a;
+              }
+            }
+          </style>
+        </head>
+        <body>
+          <img src="${img.src}" alt="निवासी आवेदन फॉर्म" />
+        </body>
+        </html>
+      `;
+      
+      // Write the content to the new window
+      printWindow.document.write(printContent);
+      printWindow.document.close();
+      
+      // Wait for the image to load, then print
+      printWindow.onload = function() {
+        setTimeout(function() {
+          printWindow.print();
+          printWindow.close();
+        }, 500);
+      };
+    };
+
+    // Scroll to Top Button
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    if (scrollToTopBtn) {
+      window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+          scrollToTopBtn.style.display = 'block';
+        } else {
+          scrollToTopBtn.style.display = 'none';
+        }
+      });
+
+      scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    // Modal Functions (if needed for future use)
+    function openModal(modalId) {
+      // Modal functionality can be added here if needed
+      console.log('Opening modal:', modalId);
+    }
+
+    function closeModal(modalId) {
+      // Modal functionality can be added here if needed
+      console.log('Closing modal:', modalId);
+    }
+  </script>
+
+</body>
+
+</html>

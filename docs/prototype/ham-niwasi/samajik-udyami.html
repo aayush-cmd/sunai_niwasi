@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>हम निवासी - Niwasi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!--=============  Unified Header Section  ==============-->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="navbar">
+    <div class="container-fluid px-4">
+      <!-- Logo Section -->
+      <a class="navbar-brand" href="index.html">
+        <img src="image/logo-transparent.png" alt="हम निवासी लोगो" height="60" />
+      </a>
+      
+      <!-- Navigation Section -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="impact.html">प्रभाव</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pahal">पहल </a></li>
+          <li class="nav-item"><a class="nav-link" href="samajik-udyami.html">सामाजिक उद्यमी</a></li>
+          <li class="nav-item"><a class="nav-link" href="#appeal">अपील</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sewa">सेवा</a></li>
+          <li class="nav-item"><a class="nav-link" href="mulya.html">मूल्य</a></li>
+          <li class="nav-item"><a class="nav-link" href="niwasi-sabha.html">विवरणिका</a></li>
+        </ul>
+      </div>
+      
+      <!-- Right Section -->
+      <div class="header-right-section d-flex align-items-center">    
+        <!-- Social Icons -->
+        <div class="social-icons-header d-flex align-items-center">
+          <a href="https://www.facebook.com/hamniwasi/" target="_blank" rel="noopener" class="social-link-header" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/hamniwasi/" class="social-link-header" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://niwasi.tlitech.net/hum-niwasi/" target="_blank" rel="noopener" class="social-link-header" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+        
+        <!-- Search and Menu Icons -->
+        <div class="header-actions d-flex align-items-center ms-5">
+          <button class="btn btn-link nav-icon" type="button" id="searchToggle">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="btn btn-link nav-icon" type="button" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+   <!-- Search Overlay - Top Sliding Panel -->
+  <div class="search-overlay" id="searchOverlay">
+    <!-- Background Overlay -->
+    <div class="search-backdrop"></div>
+
+    <!-- Search Panel -->
+    <div class="search-panel">
+      <div class="search-panel-header">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col">
+              <div class="search-input-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+              </div>
+            </div>
+            <div class="col-auto">
+              <button class="search-close" id="searchClose">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-panel-content">
+        <div class="container-fluid">
+          <div class="quick-links">
+            <h6 class="quick-links-title">Quick Links</h6>
+            <div class="row">
+              <div class="col-md-4 col-lg-3">
+                <a href="kaaryashala.html" class="quick-link-item">
+                  <!-- <i class="fas fa-car me-2"></i> -->
+                  <span>कार्यशाला</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="samajik-udyami.html" class="quick-link-item">
+                  <!-- <i class="fas fa-calculator me-2"></i> -->
+                  <span>सामाजिक उद्यमी</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="train-samajik-udyami.html" class="quick-link-item">
+                  <!-- <i class="fas fa-book me-2"></i> -->
+                  <span>ट्रेन सामाजिक उद्यमी</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="abhiyaan.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>अभियान</span>
+                </a>
+              </div>
+               <div class="col-md-4 col-lg-3">
+                <a href="help.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>सहायता</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="testimonials.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>प्रशंसापत्र</span>
+                </a>
+              </div>
+                <!-- <div class="col-md-4 col-lg-3">
+                <a href="niwasi-sabha.html" class="quick-link-item">
+                  
+                  <span>निवासी सभा</span>
+                </a>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Screen Overlay Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay">
+    <div class="drawer-container" id="drawerContainer">
+      <!-- Left Panel - Navigation -->
+      <div class="drawer-left-panel">
+        <div class="drawer-header">
+          <a href="#" class="sidebar-logo">
+            <img src="image/logo-transparent.png" alt="हम निवासी लोगो" height="30" />
+          </a>
+        </div>
+        <nav class="drawer-nav">
+          <ul class="drawer-nav-list">
+            <li><a href="gallery.html">गैलरी</a></li>
+            <li><a href="hamniwasi-program.html">हम-निवासी कार्यक्रम के बारे में</a></li>
+            <li><a href="ethical-foundation.html">एथिकल फौन्डेशन ट्रस्ट के बारे में</a></li>
+            <li><a href="sunai-consultancy.html">सहयोगी संस्थान सुनई कन्सलटेंसी के बारे में</a></li>
+            <li><a href="mitram-kitchen-store.html">सहयोगी व्यवसाय मित्रम रसोई और मित्रम स्टोर के बारे में</a></li>
+            <li><a href="niwasi-sabha-champion.html">निवासी सभा कैंपियन के बारे में</a></li>
+            <li><a href="samajik-udyami.html">सामाजिक उद्यमी के बारे में</a></li>
+            <li><a href="collaborating-donors.html">सहयोगी दानदाता</a></li>
+            <li><a href="resident-application.html">निवासी आवेदन</a></li>
+            <li class="mt-2 text-center"><a href="login.html" class="join-button">लॉगिन</a></li>
+          </ul>
+          <!-- Bottom Button -->
+          <!-- <div class="sidebar-bottom">
+            <button class="join-button">लॉगिन</button> closeDrawer
+          </div> -->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Social Entrepreneur Section -->
+  <section id="social-entrepreneur" class="py-5" style="background-color: #fff8e1; font-family: 'Noto Serif Devanagari', serif;">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-12 col-lg-10">
+          <h2 class="text-center mb-4" style="color: #8d6663; font-size: 2.5rem; font-weight: 700;">सामाजिक उद्यमी</h2>
+          
+          <!-- Intro Banner/Tagline Box -->
+          <div class="intro-banner mb-5">
+            <div class="tagline-box p-4 text-center" style="background: linear-gradient(135deg, #8d6663 0%, #d4a574 100%); color: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(139, 105, 20, 0.2); position: relative; overflow: hidden;">
+              <div class="tagline-box::before" style="content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.05) 10px, rgba(255, 255, 255, 0.05) 20px); animation: shimmer 20s linear infinite;"></div>
+              <p class="mb-0"
+                style="font-size: 1.3rem; font-style: italic; font-weight: 500; line-height: 1.6; position: relative; z-index: 2;">
+                ‘हम-निवासी’ एक समुदाय आधारित कार्यक्रम है जिसका संचालन एथिकल फाउंडेशन ट्रस्ट के
+                मार्गदर्शन में किया जाता है. इस कार्यक्रम का विकास एथिकल फाउंडेशन ट्रस्ट और सुनई
+                कंसल्टेंसी द्वारा संयुक्त रूप से किया गया है।
+              </p>
+            </div>
+          </div>
+
+          <!-- Section 1 - Social Entrepreneur Introduction -->
+          <div class="intro-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">‘सामाजिक उद्यमी’ परिचय:</h3>
+            <p class="mb-3" style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; text-align: justify;">
+              किसी भी गाँव मोहल्ले में निवासियों को अपने सम्मिलित प्रयास आसान
+              और प्रभावी बनाने, और आपसी सहयोग को बढ़ावा देने के लिए एक स्व-प्रेरित प्रशिक्षित उत्साही
+              व्यक्ति की सेवा की आवश्यकता हो सकती है। इस व्यक्ति को <strong>‘सामाजिक उद्यमी’</strong> नाम दिया गया
+              है।
+            </p>
+            <p class="mb-3" style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; text-align: justify;">
+              ‘सामाजिक उद्यमी’ उन चुनौतियों का समाधान करने में निवासियों का मदद करता है जिनका सामना
+              हमलोग घर से बाहर निकलते ही करते हैं, परन्तु साथ ही उसमें बदलाव या सुधार चाहते हैं। हम
+              सभी अपने मोहल्ले, अपने शहर, अपने गाँव, अपने देश को एक महान समुदाय के रूप में देखना
+              चाहते हैं। </p>
+            <p class="mb-4" style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; text-align: justify;">
+              सामाजिक उद्यमी बनने से एक व्यक्ति को रोज़मर्रा की चुनौतियों का समाधान करने के लिए स्किल
+              सीखने, अभ्यास करने और उनमें बेहतर होने का एक अच्छा अवसर मिलता है।
+            </p>
+            
+            <!-- Bulleted List Box -->
+            <div class="benefits-box p-4" style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px;">
+              <h4 class="mb-3" style="color: #8d6663; font-size: 1.3rem; font-weight: 600;">साथ ही:-</h4>
+              <ul style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; padding-left: 20px; margin: 0;">
+                <li class="mb-2">एथिकल फ़ाउंडेशन से प्रमाणपत्र प्राप्त होता है</li>
+                <li class="mb-2">किसी दिए गए दिन 2-3 घंटे समर्पित करके कुछ पॉकेट मनी कम सकते</li>
+                <li class="mb-2">अपनी पसंद के अनुसार काम करने के समय का चुनाव। पढ़ाई, जॉब, घर का काम या आराम करते हुए एक सामाजिक उद्यमी बनें।</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Motivational Statement Box -->
+          <div class="motivational-box mb-5">
+            <div class="motivation-banner p-4 text-center" style="background: linear-gradient(135deg, #8d6663 0%, #d4a574 100%); color: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(139, 105, 20, 0.2); position: relative; overflow: hidden;">
+              <div class="motivation-banner::before" style="content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.05) 10px, rgba(255, 255, 255, 0.05) 20px); animation: shimmer 20s linear infinite;"></div>
+              <p class="mb-0"
+                style="font-size: 1.3rem; font-style: italic; font-weight: 500; line-height: 1.6; position: relative; z-index: 2;">
+                हमारा प्रेरक कथन है: सामाजिक और कानूनी रूप से वैद्य कोई भी विधि से अपने आस-पड़ोस,
+                मोहल्ले, शहर, गाँव को स्वच्छ और श्रेष्ठ बनाएंगे।
+              </p>
+            </div>
+          </div>
+
+          <!-- Section 2 - Social Entrepreneur Qualities -->
+          <div class="qualities-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">सामाजिक उद्यमी के गुण :</h3>
+            <p class="mb-4" style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; text-align: justify;">
+              निवासी सभा सामाजिक उद्यमी एक उद्यमी खुशमिजाज व्‍यक्ति होता है, जो सार्वजनिक कार्यो में
+              अगुआई कर सकता है, वह गाँव शहर के विकास में निवासियों की सहभागिता के प्रति आश्वस्त एवं
+              प्रतिबद्ध होता है। उसका कार्य एक अनुभव, सहनशीलता एवं आगे आने का है अतः एक अनुभवी या
+              उर्जावान व्यक्ति ही निवासी सभा सामाजिक उद्यमी की भूमिका में आ सकता है। इस कार्य को
+              अच्छे तरीके से करने में स्‍थानीय युवा उनके साथ आगे आ सकता है।
+            </p>
+
+            <!-- Sub-section: Social Entrepreneur are Self-Motivated -->
+            <div class="sub-section mb-4">
+              <h4 class="mb-3" style="color: #8d6663; font-size: 1.5rem; font-weight: 600;">सामाजिक उद्यमी स्‍वप्रेरित होते हैं:</h4>
+              <p class="mb-0" style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; text-align: justify;">
+                निवासी सभा या निवासियों की औपचारिक सभा प्रचलन में नहीं
+                है। एक क्षेत्र के निवासी खुद से बैठक के लिए आगे आते हैं ना कि किसी के कहने पर, तभी निवासी
+                सभा हो पाना संभव है। अत: जो व्‍यक्ति वहाँ के निवासियों के लिए निवासी सभा को सरल और
+                आसान बनाता है उसे खुद भी स्‍वप्रेरित होना चाहिए। इस कारण से सामाजिक उद्यमी स्‍वंयसेवक
+                की कल्‍पना की गई है।
+              </p>
+            </div>
+
+            <!-- Sub-section: Youth Social Entrepreneur -->
+            <div class="sub-section">
+              <h4 class="mb-3" style="color: #8d6663; font-size: 1.5rem; font-weight: 600;">युवा सामाजिक उद्यमी :</h4>
+              <p class="mb-0" style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; text-align: justify;">
+                निवासी सभा को सहज बनाने में कार्य करनेवाले सामाजिक उद्यमी कॉलेज
+                में अध्ययनरत या नौकरी की तलाश करने वाले अनुभवी छात्र-छात्रा भी हो सकते हैं। निवासी सभा को
+              
+                सहज बनाने के लिए यह कार्य उनकी शिक्षा एवं व्यक्तित्व निर्माण में उपयोगी साबित होगा, जो कि
+                उनके लिए भविष्य में तीव्र कैरियर ग्रोथ में सहायक होगा।
+              </p>
+            </div>
+          </div>
+
+          <!-- Section 3 - What Not to Do -->
+          <div class="what-not-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">सामाजिक उद्यमी को क्‍या नहीं करना है?</h3>
+            <div class="restrictions-box p-4" style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px;">
+              <ol style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; padding-left: 20px; margin: 0;">
+                <li class="mb-2">सीधे कोई भी काम वह नहीं करेगा।</li>
+                <li class="mb-2">घर-घर भ्रमण में निवासी सभा के एजेंडा को वह खुद से नहीं लिखेगा।</li>
+                <li class="mb-2">बैठक के किसी भी निर्णय में अपना विचार नहीं देगा।</li>
+                <li class="mb-2">एजेंडा या निर्णय को वह खुद से नहीं लिखेगा।</li>
+                <li class="mb-2">ऐसा व्यवहार या बातचीत कदापि ना करे जिससे किसी समुदाय या समूह के प्रति भेदभाव परिलक्षित होता हो।</li>
+                <li class="mb-2">किसी व्यक्तिगत/निजी मामले में अपनी राय ना दें।</li>
+                <li class="mb-2">राजनीतिक बातें ना करें।</li>
+                <li class="mb-0">किसी भी प्रकार के व्यवसायिक या व्यक्तिगत लाभ के लिए ना करें।</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Section 4 - Behavior Guidelines -->
+          <div class="behavior-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">सामाजिक उद्यमी का व्यवहार के सम्बन्ध में क्या करें?</h3>
+            <div class="behavior-box p-4" style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px;">
+              <ul style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; padding-left: 20px; margin: 0;">
+                <li class="mb-2">सभी लोगों के साथ मित्रवत व्यवहार करें।</li>
+                <li class="mb-2">सभी निवासी आपके लिए एक समान हैं इसलिए सबको एक नजर से देखें।</li>
+                <li class="mb-2">आपकी कार्यशैली ऐसी हो जिससे लोगों को लगे कि आप उसकी मदद के लिए नहीं आएं और आपका उद्देश्‍य निवासी सभा बैठक मात्र है।</li>
+                <li class="mb-2">आपका व्यवहार सम्मानजनक हो।</li>
+                <li class="mb-0">आपका पहनावा व्यवहारिक हो।</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Section 5 - Training Program -->
+          <div class="training-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">सामाजिक उद्यमी - प्रशिक्षण कार्यक्रम</h3>
+            <h4 class="mb-4" style="color: #8d6663; font-size: 1.5rem; font-weight: 600;">2-2 घंटे का 6 सत्र | निवासियों का सम्मिलित प्रयास को आसान और प्रभावी बनाना</h4>
+            
+            <!-- Training Day Cards -->
+            <div class="row">
+              <!-- Day 1 -->
+              <div class="col-lg-6 col-md-12 mb-4">
+                <div class="training-card p-4" style="background: white; border: 2px solid #d4a574; border-radius: 12px; box-shadow: 0 4px 12px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+                  <h5 class="card-title" style="color: #8d6663; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">पहला दिन (2 Hours) - Section A : उद्देश्य एवं परिचय</h5>
+                  <ul style="font-size: 1rem; line-height: 1.6; color: #4a4a4a; padding-left: 20px; margin: 0;">
+                    <li class="mb-2">हम निवासी कार्यक्रम - परिचय एवं उद्देश्य</li>
+                    <li class="mb-2">इस ट्रेनिंग से प्रतिभागी क्या सीखेंगे</li>
+                    <li class="mb-2">निवासियों को परिचय देना</li>
+                    <li class="mb-2">हम-निवासी श्रेष्ठ समुदाय कार्यशाला</li>
+                    <li class="mb-0">FAQ</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Day 2 -->
+              <div class="col-lg-6 col-md-12 mb-4">
+                <div class="training-card p-4" style="background: white; border: 2px solid #d4a574; border-radius: 12px; box-shadow: 0 4px 12px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+                  <h5 class="card-title" style="color: #8d6663; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">दूसरा दिन (2 Hours) - Section B : कार्यक्रम</h5>
+                  <ul style="font-size: 1rem; line-height: 1.6; color: #4a4a4a; padding-left: 20px; margin: 0;">
+                    <li class="mb-2">सामाजिक उद्यमी के कार्य</li>
+                    <li class="mb-2">निवासी सभा</li>
+                    <li class="mb-2">गाँव में निवासी सभा पर कार्यशाला करना</li>
+                    <li class="mb-0">निवासी सभा से संबंधित चर्चा के लिए अक्सर पूछे जाने वाले प्रश्न</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Day 3 -->
+              <div class="col-lg-6 col-md-12 mb-4">
+                <div class="training-card p-4" style="background: white; border: 2px solid #d4a574; border-radius: 12px; box-shadow: 0 4px 12px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+                  <h5 class="card-title" style="color: #8d6663; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">तीसरा दिन (2 Hours)</h5>
+                  <ul style="font-size: 1rem; line-height: 1.6; color: #4a4a4a; padding-left: 20px; margin: 0;">
+                    <li class="mb-2">सभी बच्चे पढ़ें (उदाहरण सेवा)</li>
+                    <li class="mb-0">घर-घर कैम्पेन</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Day 4 -->
+              <div class="col-lg-6 col-md-12 mb-4">
+                <div class="training-card p-4" style="background: white; border: 2px solid #d4a574; border-radius: 12px; box-shadow: 0 4px 12px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+                  <h5 class="card-title" style="color: #8d6663; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">चौथा दिन (2 Hours)</h5>
+                  <ul style="font-size: 1rem; line-height: 1.6; color: #4a4a4a; padding-left: 20px; margin: 0;">
+                    <li class="mb-2">स्वच्छ आस-पड़ोस (उदाहरण सेवा)</li>
+                    <li class="mb-2">घर-घर कैम्पेन</li>
+                    <li class="mb-2">सामुदायक प्रोजेक्ट</li>
+                    <li class="mb-2">सुकुन भरा सार्वजनिक स्थल</li>
+                    <li class="mb-2">पार्टनर की पहचान</li>
+                    <li class="mb-0">दान दाता की पहचान</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Day 5 -->
+              <div class="col-lg-6 col-md-12 mb-4">
+                <div class="training-card p-4" style="background: white; border: 2px solid #d4a574; border-radius: 12px; box-shadow: 0 4px 12px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+                  <h5 class="card-title" style="color: #8d6663; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">पाँचवा दिन (2 Hours) - Section C & D : सामाजिक उद्यमी के लिए 1 साल का कार्य </h5>
+                  <ul style="font-size: 1rem; line-height: 1.6; color: #4a4a4a; padding-left: 20px; margin: 0;">
+                    <li class="mb-2">सामाजिक उद्यमी के लिए 1 साल का कार्य एवं लक्ष्य</li>
+                    <li class="mb-2">सामाजिक उद्यमी को ध्यान देने योग्य बातें</li>
+                    <li class="mb-2">सामाजिक उद्यमी को क्या नही करना हैं</li>
+                    <li class="mb-2">कुछ FAQ एवं चर्चा</li>
+                    <li class="mb-2">सामाजिक उद्यमी रिपोर्ट कैसे बनायेगें</li>
+                    <li class="mb-0">Section D: आप ने अभी तक क्या सीखा ( परीक्षा )</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Day 6 -->
+              <div class="col-lg-6 col-md-12 mb-4">
+                <div class="training-card p-4" style="background: white; border: 2px solid #d4a574; border-radius: 12px; box-shadow: 0 4px 12px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+                  <h5 class="card-title" style="color: #8d6663; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">छठवाँ दिन (2 Hours) - Section E : ब्रिज सेवा (व्यवसाय)</h5>
+                  <ul style="font-size: 1rem; line-height: 1.6; color: #4a4a4a; padding-left: 20px; margin: 0;">
+                    <li class="mb-2">1.5 घंटा हम निवासी कार्यक्रम में कार्य करने के बाद, व्यवसाय करना चाहेगे ?</li>
+                    <li class="mb-2">जो निवासियों का सम्मलित प्रयास करेगा वही व्यवसाय करेगा</li>
+                    <li class="mb-2">आप ग्राहक के बीच में रहते है, सेवादाता दूर है क्या आप इन दोनों के बीच की कड़ी बनना चाहते है ?</li>
+                    <li class="mb-0">इथिकल का सहयोगी संस्था इसमें मदद कर सकती है</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 6 - Training Methods -->
+          <div class="methods-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">प्रशिक्षण विधि</h3>
+            <div class="methods-box p-4" style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px;">
+              <ul style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; padding-left: 20px; margin: 0;">
+                <li class="mb-2">(क) कक्षा आधारित चर्चा (ऊपर वर्णित 2-2 घंटे का 6 सत्र)</li>
+                <li class="mb-2">(ख) निवासी सभा का सहजीकरण में अपना योगदान देना</li>
+                <li class="mb-2">(ग) पुन: कक्षा आधारित चर्चा</li>
+                <li class="mb-2">(घ) कुछ सटिक जमिनी उदाहरण का अध्ययन (Case Study) लिखना </li>
+                <li class="mb-2">(च) अंत में प्रमाणीकरण। इस प्रशिक्षण का फैलाव पूरे एक वर्ष के लिए है, जिसके अंतर्गत उन्‍हें</li>
+                <li class="mb-2">(छ) स्‍वध्‍याय के लिए कई महत्त्वपूर्ण विषय सामग्री भी दिया जाता है।</li>
+                <li class="mb-0">(ज) समुदाय प्रोजेक्ट करना</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-3" style="background-color:#f8f9fa; border-top:1px solid #dee2e6;">
+    <div class="container">
+      <p class="mb-0">Privacy Policy , © Copyright Niwasi. All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTop" title="Scroll to Top">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

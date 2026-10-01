@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>हम निवासी - Niwasi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!--=============  Unified Header Section  ==============-->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="navbar">
+    <div class="container-fluid px-4">
+      <!-- Logo Section -->
+      <a class="navbar-brand" href="index.html">
+        <img src="image/logo-transparent.png" alt="हम निवासी लोगो" height="60" />
+      </a>
+
+      <!-- Navigation Section -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="impact.html">प्रभाव</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pahal">पहल </a></li>
+          <li class="nav-item"><a class="nav-link" href="samajik-udyami.html">सामाजिक उद्यमी</a></li>
+          <li class="nav-item"><a class="nav-link" href="#appeal">अपील</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sewa">सेवा</a></li>
+          <li class="nav-item"><a class="nav-link" href="mulya.html">मूल्य</a></li>
+          <li class="nav-item"><a class="nav-link" href="niwasi-sabha.html">विवरणिका</a></li>
+        </ul>
+      </div>
+
+      <!-- Right Section -->
+      <div class="header-right-section d-flex align-items-center">
+        <!-- Social Icons -->
+        <div class="social-icons-header d-flex align-items-center">
+          <a href="https://www.facebook.com/hamniwasi/" target="_blank" rel="noopener" class="social-link-header" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/hamniwasi/" class="social-link-header" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://niwasi.tlitech.net/hum-niwasi/" target="_blank" rel="noopener" class="social-link-header" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+
+        <!-- Search and Menu Icons -->
+        <div class="header-actions d-flex align-items-center ms-5">
+          <button class="btn btn-link nav-icon" type="button" id="searchToggle">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="btn btn-link nav-icon" type="button" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!--=============  Navbar Section End ==============-->
+
+  <!--=============  Second Navbar Section  ==============-->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="second-navbar">
+    <div class="container-fluid px-4">
+      <!-- Left Section -->
+      <div class="d-flex align-items-center">
+        <!-- Contact Dropdown -->
+        <div class="dropdown">
+          <button class="btn btn-link nav-link-second dropdown-toggle" type="button" id="contactDropdown">
+            <span>संपर्क करें</span>
+            <i class="fas fa-chevron-down ms-1"></i>
+          </button>
+          <div class="dropdown-menu contact-dropdown-menu" id="contactDropdownMenu">
+            <a href="contact-sabha.html" class="dropdown-item">• निवासी सभा सहज करने के लिए संपर्क</a>
+            <a href="contact-neighborhood.html" class="dropdown-item">• हमारा आस-पड़ोस श्रेष्ठ कार्यशाला करने के लिए
+              संपर्क</a>
+            <a href="#" class="dropdown-item">• गाँव मोहल्ला आधारित प्रोजेक्ट</a>
+            <a href="#" class="dropdown-item">• क्रिएटिविटी क्लब स्थापित करने के संपर्क</a>
+            <a href="contact-social.html" class="dropdown-item">• सामाजिक उद्यमी बनने के लिए संपर्क</a>
+            <a href="contact-training.html" class="dropdown-item">• अग्रणी-कर्मी (जैसे सोसायटी प्रबंधक, कूड़ा उठावकर्ता,
+              सुपरवाइजर, टोला सेवक...) सम्मिलित-प्रयास को बढ़ावा दे सकें, उन्हें प्रशिक्षण प्राप्त करने के लिए
+              संपर्क</a>
+            <a href="contact-help.html" class="dropdown-item">• जरूरतमंदों की मदद करने के लिए संपर्क</a>
+            <a href="contact-business.html" class="dropdown-item">• बिजनेस पार्टनर बनने के लिए संपर्क</a>
+            <a href="contact-donate.html" class="dropdown-item">• डोनेट करने के लिए संपर्क</a>
+          </div>
+        </div>
+
+
+        <!-- Discussion Link -->
+        <a href="#todayQuestion" class="nav-link-second">चर्चा के लिए प्रसंग</a>
+
+        <span class="nav-divider">|</span>
+
+        <!-- FAQ Link -->
+        <a href="faq.html" class="nav-link-second">FAQ</a>
+      </div>
+
+      <!-- Right Section -->
+      <div class="d-flex align-items-center">
+        <!-- Business Text + Yellow Pill -->
+        <div class="d-flex align-items-center me-4">
+          <span class="business-text">व्यवसाय के</span>
+          <button class="btn btn-yellow-pill ms-2">आमदनी का 20% अभियान के लिए</button>
+        </div>
+
+        <!-- Campaign Text + Orange Donate Button -->
+        <div class="d-flex align-items-center">
+          <button class="btn btn-orange-donate ms-2" onclick="window.location.href='contact-donate.html'">दान
+            दें</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!--=============  Second Navbar Section End  ==============-->
+
+
+  <!--=============  Hero Section Carousel  ==============-->
+  <div class="hero-carousel" id="heroCarousel">
+    <!-- Slide 1 - Real Content (Nivasi Sabha) -->
+    <div class="carousel-slide slide-1 active" id="slide1">
+      <div class="slide-content">
+        <div class="slide-left">
+          <h1 class="slide-heading">निवासी सभा</h1>
+          <p class="slide-paragraph">प्रत्येक निवासी द्वारा एजेंडा, एजेंडा वार निवासी-सभा में चर्चा, निर्णय, प्रभाव।
+            हमारी सेवा - कार्यशाला, कैम्पेन, प्रचार प्रसार, सामाजिक उद्यमी का सभा-स्थल पर रहना परन्तु कोई भागीदारी नहीं।
+          </p>
+          <h2 class="slide-subheading">निवासी सभा सहज करने हेतु संपर्क</h2>
+          <p class="slide-small-text">सेवा की विवरणी</p>
+          <a href="#" class="slide-link">निवासी सभा एजेंडा और निर्णय प्रपत्र (एक बार प्रयोग कर देंखें)</a>
+        </div>
+        <div class="slide-right">
+          <img src="image/Hero1.png" alt="">
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 - Placeholder -->
+    <div class="carousel-slide" id="slide2">
+      <div class="slide-content">
+        <div class="slide-right">
+          <div class="placeholder-box">
+            <img src="image/Hero2.png" alt="">
+          </div>
+        </div>
+        <div class="slide-left">
+          <h1 class="slide-heading">कार्यशाला </h1>
+          <h2 class="slide-subheading">हमारा गाँव-टोला-मोहल्ला श्रेष्ठ</h2>
+          <p class="slide-paragraph">इस परिचर्चा में सभी अपने विचार दो से तीन मिनट में देते हैं। खुली चर्चा। विशेषज्ञ की
+            भागीदारी |</p>
+          <h2 class="slide-subheading">कार्यशाला संसाधन</h2>
+          <p class="slide-small-text">कार्यशाला बैनर</p>
+          <a href="#" class="slide-link">अपने क्षेत्र या संस्था में कार्यशाला के संपर्क करें </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 - Placeholder -->
+    <div class="carousel-slide" id="slide3">
+      <div class="slide-content">
+        <div class="slide-left">
+          <h1 class="slide-heading">सामुदायिक प्रोजेक्ट</h1>
+          <h2 class="slide-subheading">बच्चे, युवा, बड़े सबों के लिए</h2>
+          <p class="slide-paragraph">उद्देश्य है कि बच्चे मोबाइल से दूर रहें, बड़े भी बिना मतलब के मोबाइल का लत नहीं
+            लगें। हम सभी दोस्तों के साथ पड़ोसियों के साथ घुले मिलें। वे अपने क्षेत्र के बारे में और अपने आसपास को जाने
+            समझें, मिलजुलकर कुछ करें। हम सभी क्रिएटिव बने।</p>
+          <h2 class="slide-subheading">सामुदायिक प्रोजेक्ट उदाहरण</h2>
+          <p class="slide-small-text">विवरणी</p>
+          <a href="contact-neighborhood.html" class="slide-link">सामुदायिक प्रोजेक्ट में हिस्सा लेने के लिए संपर्क
+            करें</a>
+        </div>
+        <div class="slide-right">
+          <div class="placeholder-box">
+            <img src="image/Hero3.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4 - Placeholder -->
+    <div class="carousel-slide slide-4" id="slide4">
+      <div class="slide-content">
+        <div class="slide-right">
+          <div class="placeholder-box">
+            <img src="image/Hero4.png" alt="">
+          </div>
+        </div>
+        <div class="slide-left">
+          <h1 class="slide-heading">जरुरतमंद-मददकर्ता</h1>
+          <h2 class="slide-subheading">के बीच तालमेल</h2>
+          <p class="slide-paragraph">जरूरतमंदों के लिए समुदाय में उपलब्ध सहायता को सुगम बनाता है: समुदाय और उसके निवासी
+            एक-दूसरे की मदद करने के लिए मिलकर काम करते हैं। </p>
+          <h2 class="slide-subheading">मददाकर्त्ता के निवासी टूल्स</h2>
+          <p class="slide-small-text">सेवा की विवरणी</p>
+          <a href="contact-help.html" class="slide-link">जरुरतमंद की मदद के लिए संपर्क करें</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5 - Placeholder -->
+    <div class="carousel-slide" id="slide5">
+      <div class="slide-content">
+        <div class="slide-left">
+          <h1 class="slide-heading">सामाजिक उद्यमी</h1>
+          <h2 class="slide-subheading">प्रशिक्षण एवं सहयोग</h2>
+          <p class="slide-paragraph">‘सामाजिक उद्यमी’ निवासियों के उन चुनौतियों के समाधान में सहयोग करता है, जिनका सामना
+            हमलोग घर से बाहर निकलते ही करते हैं। उसमें बदलाव या सुधार चाहते हैं। हमारा गाँव, मोहल्ला, शहर, देश श्रेष्ठ
+            बन जाय! </p>
+          <h2 class="slide-subheading">प्रशिक्षण (6 सत्रों में) विवरणी</h2>
+          <!-- <p class="slide-small-text">सेवा की विवरणी</p> -->
+          <a href="contact-social.html" class="slide-link">सभी अग्रणी कारुकर्ता सामाजिक उद्यमी का प्रशिक्षण लें</a>
+        </div>
+        <div class="slide-right">
+          <div class="placeholder-box">
+            <img src="image/Hero5.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dots Navigation -->
+    <div class="dots-navigation">
+      <button class="dot active" onclick="goToSlide(1)"></button>
+      <button class="dot" onclick="goToSlide(2)"></button>
+      <button class="dot" onclick="goToSlide(3)"></button>
+      <button class="dot" onclick="goToSlide(4)"></button>
+      <button class="dot" onclick="goToSlide(5)"></button>
+    </div>
+  </div>
+  <!--=============  Hero Section Carousel End  ==============-->
+
+
+
+  <!--=============  Vision Section ==============-->
+  <section class="vision-section" style="background-color: #fff8e1; padding: 80px 20px 40px 20px!important;">
+    <div class="container">
+
+      <!-- PART 1: Top Text -->
+      <div style="max-width: 700px; margin: 0 auto 30px auto;">
+        <h2 style="color: #8d6663; font-weight: 700; font-size: 2.5rem; margin-bottom: 8px; text-align: left;">
+          हमारा विजन - दृष्टिकोण:
+        </h2>
+        <h2 style="color: #F97316; font-size: 1.5rem; margin-bottom: 0; text-align: left;">
+          निवासियों के सम्मिलित प्रयास आसान और प्रभावी हो
+        </h2>
+      </div>
+
+      <!-- PART 2: Center Image Box -->
+      <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+        <img src="image/card.svg" alt="हम निवासी कार्ड" style="max-width: 500px; height: auto; display: block;">
+      </div>
+
+      <!-- PART 3: Bottom Text Block -->
+      <div style="max-width: 900px; margin: 0 auto;">
+        <h6 style="color: #F97316; font-weight: 700; font-size: 1.5rem; margin-bottom: 12px; text-align: left;">
+          सार्वजनिक सेवाओं-सुविधाओं का अधिकतम लाभ...
+        </h6>
+
+        <p style="color: #8d6663; font-size: 1.3rem; font-weight: 500; margin-bottom: 12px; text-align: left;">
+          अच्छी सार्वजनिक सेवाएं-सुविधाएं जैसे:- शिक्षा, स्वास्थ्य, पेय-जल, बिजली, कूड़ा उठाव...
+        </p>
+
+        <p style="color: #8d6663; font-weight: 700; font-size: 1.3rem; margin-bottom: 12px; text-align: left;">
+          अच्छी सार्वजनिक आधारभूत संरचनाएं जैसे:- स्कूल भवन, हॉस्पिटल, सड़क, खेल-मैदान, लैंडफिल...
+        </p>
+
+        <p style="color: #8d6663; font-weight: 500; font-size: 1.3rem; margin-bottom: 12px; text-align: left;">
+          सबों के लिए मूलभूत लक्ष्य की प्राप्ति जैसे सामाजिक सुरक्षा; वृद्ध, विकलांग, दिव्यांग को पेंशन एवं सुरक्षा, सभी
+          शिशु को टीकाकरण एवं पोषाहार, सबों के लिए पौष्टिक भोजन, सबों को आवास, प्रदूषण रहित वातावरण... सभी बच्चों को
+          मूलभूत शिक्षा, सभी लोगों को कौशल शिक्षा...
+        </p>
+
+        <p style="color: #F97316; font-weight: 700; font-size: 1.5rem; margin-bottom: 0; text-align: left;">
+          हम निवासी सुनिश्चित करते हैं - गाँव मोहल्ला शहर श्रेष्ठ!!
+        </p>
+      </div>
+    </div>
+  </section>
+  <!--=============  Vision Section End ==============-->
+
+
+
+  <!--=============  Quick Links Section ==============-->
+  <!-- Search Overlay - Top Sliding Panel -->
+  <div class="search-overlay" id="searchOverlay">
+    <!-- Background Overlay -->
+    <div class="search-backdrop"></div>
+
+    <!-- Search Panel -->
+    <div class="search-panel">
+      <div class="search-panel-header">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col">
+              <div class="search-input-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+              </div>
+            </div>
+            <div class="col-auto">
+              <button class="search-close" id="searchClose">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-panel-content">
+        <div class="container-fluid">
+          <div class="quick-links">
+            <h6 class="quick-links-title">Quick Links</h6>
+            <div class="row">
+              <div class="col-md-4 col-lg-3">
+                <a href="kaaryashala.html" class="quick-link-item">
+                  <!-- <i class="fas fa-car me-2"></i> -->
+                  <span>कार्यशाला</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="samajik-udyami.html" class="quick-link-item">
+                  <!-- <i class="fas fa-calculator me-2"></i> -->
+                  <span>सामाजिक उद्यमी</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="train-samajik-udyami.html" class="quick-link-item">
+                  <!-- <i class="fas fa-book me-2"></i> -->
+                  <span>ट्रेन सामाजिक उद्यमी</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="abhiyaan.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>अभियान</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="help.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>सहायता</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="testimonials.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>प्रशंसापत्र</span>
+                </a>
+              </div>
+                <!-- <div class="col-md-4 col-lg-3">
+                <a href="niwasi-sabha.html" class="quick-link-item">
+                
+                  <span>निवासी सभा</span>
+                </a>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--=============  Quick Links Section End ==============-->
+
+
+
+  <!--=============  Drawer Section ==============-->
+  <!-- Full Screen Overlay Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay">
+    <div class="drawer-container" id="drawerContainer">
+      <!-- Left Panel - Navigation -->
+      <div class="drawer-left-panel">
+        <div class="drawer-header">
+          <a href="#" class="sidebar-logo">
+            <img src="image/logo-transparent.png" alt="हम निवासी लोगो" height="30" />
+          </a>
+        </div>
+        <nav class="drawer-nav">
+          <ul class="drawer-nav-list">
+            <li><a href="gallery.html">गैलरी</a></li>
+            <li><a href="hamniwasi-program.html">हम-निवासी कार्यक्रम के बारे में</a></li>
+            <li><a href="ethical-foundation.html">एथिकल फौन्डेशन ट्रस्ट के बारे में</a></li>
+            <li><a href="sunai-consultancy.html">सहयोगी संस्थान सुनई कन्सलटेंसी के बारे में</a></li>
+            <li><a href="mitram-kitchen-store.html">सहयोगी व्यवसाय मित्रम रसोई और मित्रम स्टोर के बारे में</a></li>
+            <li><a href="niwasi-sabha-champion.html">निवासी सभा कैंपियन के बारे में</a></li>
+            <li><a href="samajik-udyami.html">सामाजिक उद्यमी के बारे में</a></li>
+            <li><a href="collaborating-donors.html">सहयोगी दानदाता</a></li>
+            <li><a href="resident-application.html">निवासी आवेदन</a></li>
+            <li class="mt-2 text-center"><a href="login.html" class="join-button">लॉगिन</a></li>
+          </ul>
+          <!-- Bottom Button -->
+          <!-- <div class="sidebar-bottom">
+            <button class="join-button">लॉगिन</button> closeDrawer
+          </div> -->
+        </nav>
+      </div>
+
+      <!-- Right Panel - Feature Cards -->
+      <div class="drawer-right-panel">
+        <button class="drawer-close" id="drawerClose">
+          <i class="fa-solid fa-x"></i>
+        </button>
+        <div class="drawer-cards-grid">
+        <a href="kaaryashala.html" class="drawer-card-link">
+          <div class="drawer-card">
+            <div class="drawer-card-icon">
+              <i class="fa-solid fa-chalkboard-user"></i>
+            </div>
+            <div class="drawer-card-content">
+              <h4>समुदाय में कार्यशाला</h4>
+              <p>अपने मोहल्ले के लोगों के साथ मिलकर सीखें, समझें और बदलाव लाएं</p>
+            </div>
+          </div>
+          </a>
+
+          <div class="drawer-card">
+            <div class="drawer-card-icon">
+              <i class="fa-solid fa-landmark"></i>
+            </div>
+            <div class="drawer-card-content">
+              <h4>मेरी पंचायत मेरा विचार</h4>
+              <p>अपने क्षेत्र की समस्याओं पर अपनी राय दें और निर्णय में भागीदार बनें।</p>
+            </div>
+          </div>
+
+          <div class="drawer-card">
+            <div class="drawer-card-icon">
+              <i class="fa-solid fa-tree-city"></i>
+            </div>
+            <div class="drawer-card-content">
+              <h4>सुकून भरा सार्वजनिक स्थल</h4>
+              <p>साफ, सुंदर और शांत सार्वजनिक जगहें — सबके लिए, सबके द्वारा।</p>
+            </div>
+          </div>
+
+          <div class="drawer-card">
+            <div class="drawer-card-icon">
+              <i class="fa-solid fa-clipboard-list"></i>
+            </div>
+            <div class="drawer-card-content">
+              <h4>निवासी फीडबैक</h4>
+              <p>अपने अनुभव साझा करें और अपने इलाके को बेहतर बनाने में मदद करें।</p>
+            </div>
+          </div>
+
+          <div class="drawer-card">
+            <div class="drawer-card-icon">
+              <i class="fa-solid fa-user-clock"></i>
+            </div>
+            <div class="drawer-card-content">
+              <h4>वरिष्‍ठ क्‍लब</h4>
+              <p>बुजुर्गों के लिए एक सक्रिय, सम्मानजनक और जुड़ा हुआ समुदाय।</p>
+            </div>
+          </div>
+
+          <div class="drawer-card">
+            <div class="drawer-card-icon">
+              <i class="fa-solid fa-book-open-reader"></i>
+            </div>
+            <div class="drawer-card-content">
+              <h4>सभी बच्चें पढ़े</h4>
+              <p>हर बच्चे को शिक्षा का अधिकार — मिलकर बनाएं एक पढ़ा-लिखा समाज।</p>
+            </div>
+          </div>
+
+          <div class="drawer-card">
+            <div class="drawer-card-icon">
+              <i class="fa-solid fa-house-chimney-user"></i>
+            </div>
+            <div class="drawer-card-content">
+              <h4>निवासी सभा</h4>
+              <p>अपने मोहल्ले की बैठक में शामिल हों और सामूहिक निर्णयों का हिस्सा बनें।"</p>
+            </div>
+          </div>
+
+          <a href="samajik-udyami.html" class="drawer-card-link">
+            <div class="drawer-card">
+              <div class="drawer-card-icon">
+                <i class="fa-solid fa-seedling"></i>
+              </div>
+              <div class="drawer-card-content">
+                <h4>सामाजिक उद्यमी</h4>
+                <p>समाज की समस्याओं को अवसर में बदलें — बनें एक सामाजिक बदलाव के सूत्रधार।</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--=============  Drawer Section End ==============-->
+
+
+
+  <!--=============  Hero Section ==============-->
+  <!-- <section id="home" class="hero-section">
+    <div class="hero-container">
+      <div class="hero-left">
+        <img src="image/ghar.png" alt="Left Hero" class="hero-image" />
+        <div class="hero-content-overlay">
+          <h1>घर पर सुकून, सोफे पर / बिस्तर पर</h1>
+          <h6>घर पे आराम से बैठना, ताज़ा महसूस करना</h6>
+          <p>हमारा घर स्वच्छ और सुरक्षित है, इसलिए हमारे घर आ कर अच्छा महसूस होता है तो हमारे घर के बाहर भी ऐसा जरूरी है
+          </p>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img src="image/bahar.png" alt="Right Hero" class="hero-image" />
+        <div class="hero-content-overlay">
+          <h1>घर के बाहर भी सुकून</h1>
+          <h1>मुस्कुराहट के साथ साफ सड़क / भीड़ में भी आराम से चलना</h1>
+          <h6>अपने घर के बाहर भी घर जैसा सुकून भरा स्वच्छ महौल
+            सार्वजनिक सेवाओं-सुविधाओं का अधिकतम लाभ मिले... <br>
+            <span>(हम घर के बाहर घर से ज्यादा समय बिताते हैं!)</span>
+          </h6>
+          <p>हमारी सेवा और हमारा प्रस्ताव है "हमसभी निवासियों का सम्मिलित प्रयास हो" जैसे नियमित निवासी सभा होना,
+            निवासी सभा में एजेंडा और निर्णय पत्र को लागू करना, आपस में परिचय मिलना जुलना बढ़ाना, क्रिएटिविटी क्लब
+            को चलाना,</p>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!--=============  Hero Section End ==============-->
+
+
+
+  <!--=============  Aaj ka Sawal Section ==============-->
+  <!-- Today's Common Question Section -->
+  <section class="py-5" style="background-color: #f5e6c8;" id="todayQuestion">
+    <div class="container-fluid px-0">
+      <div class="d-flex align-items-start" style="min-height: 500px;">
+
+        <!-- LEFT TEXT SIDE -->
+        <div
+          style="width: 50%; margin-top: 40px; padding: 80px 50px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <h2 style="color: #F97316; font-weight: 700; font-size: 1.5rem; text-align: center; line-height: 1.4;">
+            अनुभव साझा करें, सीखें,<br> संसाधन लगाएँ और लागू करें।
+          </h2>
+          <br>
+          <br>
+          <br>
+          <h2 style="color: #8d6663; font-weight: 600; font-size: 1.5rem;  text-align: center;">
+            इस सप्ताह चर्चा के लिए प्रसंग
+          </h2>
+          <h2 style="color: #8d6663; font-weight: 600; font-size: 1.5rem; text-align: center;">
+            (जमीनी अनुभवों पर आधारित)
+          </h2>
+        </div>
+
+        <!-- RIGHT CARDS SIDE -->
+        <div style="width: 40%; padding: 30px 40px 30px 20px;  display: flex; flex-direction: column; gap: 20px;">
+
+          <!-- Card 1 — same as before, no changes inside -->
+          <div class="session-card">
+            <div class="session-header">
+              <h5 class="session-date">6 Apr 2026 <span>IST</span> </h5>
+              <div class="session-time-slots">
+                <button class="time-slot">रात्रि 8 बजे</button>
+                <button class="time-slot">प्रातः 8 बजे</button>
+                <button class="time-slot">दोपहर 12 बजे</button>
+              </div>
+            </div>
+            <div class="session-body">
+              <h4 class="session-topic">निवासी का प्रयास कितना तर्कसंगत है?</h4>
+              <p class="session-reference">
+                <a href="https://www.facebook.com/hamniwasi/">
+                  <i class="fas fa-link"></i> कुछ निवासी मिलकर अपने आगे का नाला ढक लिए (Facebook link)
+                </a>
+              </p>
+              <div class="session-actions">
+                <button class="btn-action btn-accept" onclick="openParticipationForm()">
+                  <span>✅ चर्चा में शामिल हों</span>
+                </button>
+                <button class="btn-action btn-suggest-time" onclick="openTimeSuggestionForm()">
+                  <span>🕐 अन्य समय सुझाएं</span>
+                </button>
+                <button class="btn-action btn-suggest-topic" onclick="openTopicSuggestionForm()">
+                  <span>💬 अन्य विषय सुझाएं</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 — same as before, no changes inside -->
+          <div class="session-card">
+            <div class="session-header">
+              <h5 class="session-date">9 Apr 2026 <span>IST</span> </h5>
+              <div class="session-time-slots">
+                <button class="time-slot">रात्रि 8 बजे</button>
+                <button class="time-slot">प्रातः 8 बजे</button>
+                <button class="time-slot">दोपहर 12 बजे</button>
+              </div>
+            </div>
+            <div class="session-body">
+              <h4 class="session-topic">माँ के प्रयास से बच्चा धाराप्रवाह पढ़ना शुरू कर दिया</h4>
+              <p class="session-reference">
+                <a href="https://www.facebook.com/hamniwasi/">
+                  <i class="fas fa-link"></i> सामाजिक उद्यमी संगीता जी का अनुभव
+                </a>
+              </p>
+              <div class="session-actions">
+                <button class="btn-action btn-accept" onclick="openParticipationForm()">
+                  <span>✅ चर्चा में शामिल हों</span>
+                </button>
+                <button class="btn-action btn-suggest-time" onclick="openTimeSuggestionForm()">
+                  <span>🕐 अन्य समय सुझाएं</span>
+                </button>
+                <button class="btn-action btn-suggest-topic" onclick="openTopicSuggestionForm()">
+                  <span>💬 अन्य विषय सुझाएं</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+  </section>
+  <!-- Modal Overlays -->
+  <!-- Participation Form Modal -->
+  <div class="modal-overlay" id="participationModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">चर्चा में शामिल हों</h3>
+        <button class="modal-close" onclick="closeModal('participationModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form class="modal-form" onsubmit="handleParticipationSubmit(event)">
+          <div class="form-group">
+            <label>नाम</label>
+            <input type="text" required placeholder="आपका पूरा नाम" />
+          </div>
+          <div class="form-group">
+            <label>मोबाइल नंबर</label>
+            <input type="tel" required placeholder="आपका मोबाइल नंबर" />
+          </div>
+          <div class="form-group">
+            <label>ईमेल (वैकल्पिक)</label>
+            <input type="email" placeholder="आपका ईमेल" />
+          </div>
+          <div class="form-group">
+            <label>पसंदित समय</label>
+            <select>
+              <option value="">समय चुनें</option>
+              <option value="morning">रात्रि 8 बजे</option>
+              <option value="afternoon">प्रातः 8 बजे</option>
+              <option value="evening">दोपहर 12 बजे</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" onclick="closeModal('participationModal')">रद्द करें</button>
+        <button type="submit" class="btn-submit" form="participationForm">भेजें</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Time Suggestion Form Modal -->
+  <div class="modal-overlay" id="timeSuggestionModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">अन्य समय सुझाएं</h3>
+        <button class="modal-close" onclick="closeModal('timeSuggestionModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form class="modal-form" onsubmit="handleTimeSuggestionSubmit(event)">
+          <div class="form-group">
+            <label>नाम</label>
+            <input type="text" required placeholder="आपका पूरा नाम" />
+          </div>
+          <div class="form-group">
+            <label>मोबाइल नंबर</label>
+            <input type="tel" required placeholder="आपका मोबाइल नंबर" />
+          </div>
+          <div class="form-group">
+            <label>सुझाया समय</label>
+            <input type="text" required placeholder="उदाहरण समय (जैसे: सुबह 10 बजे)" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" onclick="closeModal('timeSuggestionModal')">रद्द करें</button>
+        <button type="submit" class="btn-submit" form="timeSuggestionForm">भेजें</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Suggestion Form Modal -->
+  <div class="modal-overlay" id="topicSuggestionModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">अन्य विषय सुझाएं</h3>
+        <button class="modal-close" onclick="closeModal('topicSuggestionModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form class="modal-form" onsubmit="handleTopicSuggestionSubmit(event)">
+          <div class="form-group">
+            <label>नाम</label>
+            <input type="text" required placeholder="आपका पूरा नाम" />
+          </div>
+          <div class="form-group">
+            <label>मोबाइल नंबर</label>
+            <input type="tel" required placeholder="आपका मोबाइल नंबर" />
+          </div>
+          <div class="form-group">
+            <label>विषय सुझाव</label>
+            <textarea required placeholder="आपका विषय सुझाव यहाँ लिखें..." rows="4"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" onclick="closeModal('topicSuggestionModal')">रद्द करें</button>
+        <button type="submit" class="btn-submit" form="topicSuggestionForm">भेजें</button>
+      </div>
+    </div>
+  </div>
+  <!--=============  Aaj ka Sawal Section End ==============-->
+
+
+
+   <!--=============  Business Partnership Appeal Section ==============-->
+  <section class="business-appeal-section" style="background-color: #fff8e1; padding: 50px 40px; text-align: center;">
+    <div class="container">
+      
+      <!-- PART 1: Top Line -->
+      <div class="top-line" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px;">
+        <img src="image/logo-transparent.png" alt="हम निवासी लोगो" style="width: 80px; height: auto;">
+        <span style="color: #F97316; font-size: 1.3rem;">
+          अभियान सभी व्यवसाय से <u>अपील</u> करता है कि वे निवासियों के सम्मिलित प्रयास को बढ़ावा दें
+        </span>
+      </div>
+      
+      <!-- PART 2: Main Heading -->
+      <h2 class="main-heading" style="color: #8d6663; font-size: 1.4rem; font-weight: 700; margin: 30px auto;">
+        व्यवसाय वही करेगा जो सार्वजनिक सेवा-सुविधा की बेहतरी के लिए कार्य करेगा
+      </h2>
+      
+      <!-- PART 3: Highlighted Badge -->
+      <div class="highlighted-badge" style="display: inline-block; margin: 20px auto; background: #F97316; border-radius: 30px; padding: 12px 30px;">
+        <span style="color: white; font-size: 1.4rem; font-weight: 700;">आमदनी का </span>
+        <span style="color: #FFD700; font-size: 2.2rem; font-weight: 900;"> 20% </span>
+        <span style="color: white; font-size: 1.4rem; font-weight: 700;"> अभियान के लिए</span>
+      </div>
+      
+      <!-- PART 4: Partner Logos Row -->
+      <div class="partner-logos" style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; margin: 40px auto;">
+        <img src="image/patner/mitarm1.png" alt="मित्रम रसोई" style="width: 120px; height: auto; object-fit: contain;">
+        <img src="image/patner/store.png" alt="मित्रम स्टोर" style="width: 120px; height: auto; object-fit: contain;">
+        <img src="image/patner/triline.png" alt="ट्राइलाइन इन्फोटेक" style="width: 120px; height: auto; object-fit: contain;">
+        <img src="image/patner/ID-Maker.png" alt="आईडी मेकर" style="width: 120px; height: auto; object-fit: contain;">
+        <img src="image/patner/catering.png" alt="मित्रम रसोई केटरिंग" style="width: 120px; height: auto; object-fit: contain;">
+      </div>
+      
+      <!-- PART 5: Bottom Line 1 -->
+      <div class="bottom-line-1" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 40px;">
+        <img src="image/logo-transparent.png" alt="हम निवासी लोगो" style="width: 80px; height: auto;">
+        <span style="color: #8d6663; font-size: 1.4rem;">
+          अभियान सभी निवासियों एवं उपभक्ताओं से <u>अपील</u> करता है कि वे इन संस्थानों से सेवा लें
+        </span>
+      </div>
+      
+      <!-- PART 6: Bottom Line 2 -->
+      <div class="bottom-line-2" style="color: #F97316; font-size: 1.1rem; margin-top: 10px;">
+        मित्रम-रसोई, मित्रम-स्टोर, <strong>Triline Infotech, IDMaker</strong> और <strong>Sunai Consultancy</strong> से सेवा प्राप्त करें।
+      </div>
+      
+    </div>
+  </section>
+  <!--=============  Business Partnership Appeal Section End ==============-->
+
+
+
+
+
+
+  <!-- Footer -->
+  <footer class="text-center py-3" style="background-color:#f8f9fa; border-top:1px solid #dee2e6;">
+    <div class="container">
+      <p class="mb-0">Privacy Policy , © Copyright Niwasi. All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTop" title="Scroll to Top">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    // Second Navbar Dropdown Functionality
+    document.addEventListener('DOMContentLoaded', function () {
+      const contactDropdown = document.getElementById('contactDropdown');
+      const contactDropdownMenu = document.getElementById('contactDropdownMenu');
+
+      // Toggle dropdown on click
+      contactDropdown.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (contactDropdownMenu.style.display === 'block') {
+          contactDropdownMenu.style.display = 'none';
+        } else {
+          contactDropdownMenu.style.display = 'block';
+        }
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function (e) {
+        if (!contactDropdown.contains(e.target) && !contactDropdownMenu.contains(e.target)) {
+          contactDropdownMenu.style.display = 'none';
+        }
+      });
+
+      // Close dropdown when clicking on dropdown items
+      const dropdownItems = contactDropdownMenu.querySelectorAll('.dropdown-item');
+      dropdownItems.forEach(item => {
+        item.addEventListener('click', function () {
+          contactDropdownMenu.style.display = 'none';
+        });
+      });
+    });
+  </script>
+
+  <!-- Hero Carousel JavaScript -->
+  <script>
+    // Hero Carousel Functionality
+    let currentSlide = 1;
+    const totalSlides = 5;
+    let autoPlayInterval;
+
+    function goToSlide(slideNumber) {
+      // Remove active class from current slide
+      document.getElementById('slide' + currentSlide).classList.remove('active');
+      document.querySelectorAll('.dot')[currentSlide - 1].classList.remove('active');
+
+      // Set new slide
+      currentSlide = slideNumber;
+
+      // Add active class to new slide
+      document.getElementById('slide' + currentSlide).classList.add('active');
+      document.querySelectorAll('.dot')[currentSlide - 1].classList.add('active');
+
+      // Reset auto-play
+      resetAutoPlay();
+    }
+
+    function nextSlide() {
+      const nextSlideNumber = currentSlide === totalSlides ? 1 : currentSlide + 1;
+      goToSlide(nextSlideNumber);
+    }
+
+    function startAutoPlay() {
+      autoPlayInterval = setInterval(nextSlide, 4000); // Change slide every 4 seconds
+    }
+
+    function stopAutoPlay() {
+      clearInterval(autoPlayInterval);
+    }
+
+    function resetAutoPlay() {
+      stopAutoPlay();
+      startAutoPlay();
+    }
+
+    // Initialize carousel when page loads
+    document.addEventListener('DOMContentLoaded', function () {
+      // Start auto-play
+      startAutoPlay();
+
+      // Pause auto-play when hovering over carousel
+      const carousel = document.getElementById('heroCarousel');
+      carousel.addEventListener('mouseenter', stopAutoPlay);
+      carousel.addEventListener('mouseleave', startAutoPlay);
+
+      // Add keyboard navigation
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') {
+          const prevSlideNumber = currentSlide === 1 ? totalSlides : currentSlide - 1;
+          goToSlide(prevSlideNumber);
+        } else if (e.key === 'ArrowRight') {
+          nextSlide();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+# The two gallery videos (15 MB) are not committed here: the port serves them from
+# apps/frontend/public/ham-niwasi/gallery/, so committing them twice would double
+# their weight in git. Copy them back from there to view gallery.html locally.
+# Plan: docs/planning/features/2026-10-01-ham-niwasi-site.md (Q7).
+image/gallery/*.mp4

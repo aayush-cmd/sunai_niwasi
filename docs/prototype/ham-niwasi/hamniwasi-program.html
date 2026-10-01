@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>हम निवासी - Niwasi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Serif:wght@400;600;700&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!--=============  Unified Header Section  ==============-->
+  <!-- Navbar -->
+   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="navbar">
+    <div class="container-fluid px-4">
+      <!-- Logo Section -->
+      <a class="navbar-brand" href="index.html">
+        <img src="image/logo-transparent.png" alt="हम निवासी लोगो" height="60" />
+      </a>
+      
+      <!-- Navigation Section -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="impact.html">प्रभाव</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pahal">पहल </a></li>
+          <li class="nav-item"><a class="nav-link" href="samajik-udyami.html">सामाजिक उद्यमी</a></li>
+          <li class="nav-item"><a class="nav-link" href="#appeal">अपील</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sewa">सेवा</a></li>
+          <li class="nav-item"><a class="nav-link" href="mulya.html">मूल्य</a></li>
+          <li class="nav-item"><a class="nav-link" href="niwasi-sabha.html">विवरणिका</a></li>
+        </ul>
+      </div>
+      
+      <!-- Right Section -->
+      <div class="header-right-section d-flex align-items-center">    
+        <!-- Social Icons -->
+        <div class="social-icons-header d-flex align-items-center">
+          <a href="https://www.facebook.com/hamniwasi/" target="_blank" rel="noopener" class="social-link-header" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/hamniwasi/" class="social-link-header" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://niwasi.tlitech.net/hum-niwasi/" target="_blank" rel="noopener" class="social-link-header" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+        
+        <!-- Search and Menu Icons -->
+        <div class="header-actions d-flex align-items-center ms-5">
+          <button class="btn btn-link nav-icon" type="button" id="searchToggle">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="btn btn-link nav-icon" type="button" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+   <!-- Search Overlay - Top Sliding Panel -->
+  <div class="search-overlay" id="searchOverlay">
+    <!-- Background Overlay -->
+    <div class="search-backdrop"></div>
+
+    <!-- Search Panel -->
+     <div class="search-panel">
+      <div class="search-panel-header">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col">
+              <div class="search-input-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+              </div>
+            </div>
+            <div class="col-auto">
+              <button class="search-close" id="searchClose">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-panel-content">
+        <div class="container-fluid">
+          <div class="quick-links">
+            <h6 class="quick-links-title">Quick Links</h6>
+            <div class="row">
+              <div class="col-md-4 col-lg-3">
+                <a href="kaaryashala.html" class="quick-link-item">
+                  <!-- <i class="fas fa-car me-2"></i> -->
+                  <span>कार्यशाला</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="samajik-udyami.html" class="quick-link-item">
+                  <!-- <i class="fas fa-calculator me-2"></i> -->
+                  <span>सामाजिक उद्यमी</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="train-samajik-udyami.html" class="quick-link-item">
+                  <!-- <i class="fas fa-book me-2"></i> -->
+                  <span>ट्रेन सामाजिक उद्यमी</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="abhiyaan.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>अभियान</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="help.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>सहायता</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="testimonials.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>प्रशंसापत्र</span>
+                </a>
+              </div>
+                <!-- <div class="col-md-4 col-lg-3">
+                <a href="niwasi-sabha.html" class="quick-link-item">
+                 
+                  <span>निवासी सभा</span>
+                </a>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Screen Overlay Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay">
+    <div class="drawer-container" id="drawerContainer">
+      <!-- Left Panel - Navigation -->
+      <div class="drawer-left-panel">
+        <div class="drawer-header">
+          <a href="#" class="sidebar-logo">
+            <img src="image/logo-transparent.png" alt="हम निवासी लोगो" height="30" />
+          </a>
+        </div>
+        <nav class="drawer-nav">
+          <ul class="drawer-nav-list">
+            <li><a href="gallery.html">गैलरी</a></li>
+            <li><a href="hamniwasi-program.html">हम-निवासी कार्यक्रम के बारे में</a></li>
+            <li><a href="ethical-foundation.html">एथिकल फौन्डेशन ट्रस्ट के बारे में</a></li>
+            <li><a href="sunai-consultancy.html">सहयोगी संस्थान सुनई कन्सलटेंसी के बारे में</a></li>
+            <li><a href="mitram-kitchen-store.html">सहयोगी व्यवसाय मित्रम रसोई और मित्रम स्टोर के बारे में</a></li>
+            <li><a href="niwasi-sabha-champion.html">निवासी सभा कैंपियन के बारे में</a></li>
+            <li><a href="samajik-udyami.html">सामाजिक उद्यमी के बारे में</a></li>
+            <li><a href="collaborating-donors.html">सहयोगी दानदाता</a></li>
+            <li><a href="resident-application.html">निवासी आवेदन</a></li>
+            <li class="mt-2 text-center"><a href="login.html" class="join-button">लॉगिन</a></li>
+          </ul>
+          <!-- Bottom Button -->
+          <!-- <div class="sidebar-bottom">
+            <button class="join-button">लॉगिन</button> closeDrawer
+          </div> -->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Main Content -->
+  <section id="hamniwasi-program" style="font-family: 'Noto Serif Devanagari', serif; background-color: #fff8e1; padding-top: 80px;">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-12 col-lg-10">
+          <h2 class="text-center mb-4" style="color: #8d6663; font-size: 2.5rem; font-weight: 700;">हम-निवासी कार्यक्रम के बारे में</h2>
+          
+          <!-- Section 1 - कार्यक्रम का परिचय -->
+          <div class="intro-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">कार्यक्रम का परिचय:</h3>
+            <p class="mb-4" style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; text-align: justify;">
+              'हम-निवासी' एक समुदाय आधारित कार्यक्रम है जिसका संचालन एथिकल फाउंडेशन ट्रस्ट के मार्गदर्शन में किया जाता है। इस कार्यक्रम का विकास एथिकल फाउंडेशन ट्रस्ट और सुनई कंसल्टेंसी द्वारा संयुक्त रूप से किया गया है।
+            </p>
+            
+            <!-- Intro Banner/Tagline Box -->
+            <div class="intro-banner mb-5">
+              <div class="tagline-box p-4 text-center" style="background: linear-gradient(135deg, #8d6663 0%, #d4a574 100%); color: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(139, 105, 20, 0.2); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                <div class="tagline-box::before" style="content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.05) 10px, rgba(255, 255, 255, 0.05) 20px); animation: shimmer 20s linear infinite;"></div>
+                <p class="mb-0" style="font-size: 1.3rem; font-style: italic; font-weight: 500; line-height: 1.6; position: relative; z-index: 2; text-align: center; margin: 0;">
+                  मुख्य सन्देश: "हम-निवासी मिलें, कुछ करें!"
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2 - हम-निवासी का सन्देश -->
+          <div class="message-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">हम-निवासी का सन्देश:</h3>
+            <p class="mb-3" style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; text-align: justify;">
+              इस प्रकार हम-निवासी सुनिश्चित करते हैं – सार्वजनिक स्थल-मोहल्ला-गाँव-शहर स्वच्छ और सुकून भरा हो! घर जैसा!! क्योंकि हमलोग घर से ज्यादा समय घर से बाहर बिताते हैं। हम सभी निवासियों का "सम्मिलित प्रयास" हो।
+            </p>
+            <h4 class="mb-3" style="color: #8d6663; font-size: 1.5rem; font-weight: 600;">सार्वजनिक सेवाओं-सुविधाओं का अधिकतम लाभ मिले...</h4>
+            
+            <!-- Left-Bordered Box -->
+            <div class="services-box p-4 mb-4" style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px;">
+              <ul style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; padding-left: 20px; margin: 0;">
+                <li class="mb-2">अच्छी सार्वजनिक सेवाएँ सुविधाएँ जैसे शिक्षा, स्वास्थ्य, पेय-जल, बिजली, कूड़ा का उठाव</li>
+                <li class="mb-2">अच्छी सार्वजनिक आधारभूत संरचनाएँ जैसे स्कूल भवन, हॉस्पिटल, सड़क, रेल, खेल-मैदान, कूड़ा लैंडफिल</li>
+                <li class="mb-2">सबों के लिए मूलभूत लक्ष्य की प्राप्ति जैसे सामाजिक सुरक्षा; वृद्ध, विकलांग, दिव्यांग को पेंशन एवं सुरक्षा, सभी शिशु को टीकाकरण एवं पोषाहार, सबों के लिए पौष्टिक भोजन, सबों को आवास, प्रदूषण रहित वातावरण</li>
+                <li class="mb-0">सभी बच्चों को मूलभूत शिक्षा, सभी लोगों को कौशल शिक्षा</li>
+              </ul>
+            </div>
+            
+            <!-- Gold Gradient Closing Banner -->
+            <div class="closing-banner mb-5">
+              <div class="motivation-banner p-4 text-center" style="background: linear-gradient(135deg, #8d6663 0%, #d4a574 100%); color: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(139, 105, 20, 0.2); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                <div class="motivation-banner::before" style="content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.05) 10px, rgba(255, 255, 255, 0.05) 20px); animation: shimmer 20s linear infinite;"></div>
+                <p class="mb-0" style="font-size: 1.3rem; font-style: italic; font-weight: 500; line-height: 1.6; position: relative; z-index: 2; text-align: center; margin: 0;">
+                  गाँव मोहल्ला शहर श्रेष्ठ!!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3 - हम-निवासी कार्यक्रम के अंतर्गत क्रियाकलाप -->
+          <div class="activities-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">हम-निवासी कार्यक्रम के अंतर्गत क्रियाकलाप:</h3>
+            
+            <!-- Activity Cards -->
+            <div class="row">
+              <!-- Activity 1 -->
+              <div class="col-lg-6 col-md-12 mb-4">
+                <div class="activity-card p-4" style="background: white; border: 2px solid #d4a574; border-radius: 12px; box-shadow: 0 4px 12px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+                  <h5 class="card-title" style="color: #8d6663; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">1. निवासी सभा सहज करना</h5>
+                </div>
+              </div>
+              
+              <!-- Activity 2 -->
+              <div class="col-lg-6 col-md-12 mb-4">
+                <div class="activity-card p-4" style="background: white; border: 2px solid #d4a574; border-radius: 12px; box-shadow: 0 4px 12px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+                  <h5 class="card-title" style="color: #8d6663; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">2. निवासी स्व-निदान बैठक का आयोजन करना</h5>
+                </div>
+              </div>
+              
+              <!-- Activity 3 -->
+              <div class="col-lg-6 col-md-12 mb-4">
+                <div class="activity-card p-4" style="background: white; border: 2px solid #d4a574; border-radius: 12px; box-shadow: 0 4px 12px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+                  <h5 class="card-title" style="color: #8d6663; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">3. हम निवासी कार्यशाला का आयोजन जिसमें चर्चा हो कि हमारा गाँव-टोला-मोहल्ला श्रेष्ठ कैसे बने, क्योंकि हमलोग घर से ज्यादा समय घर से बाहर बिताते हैं</h5>
+                </div>
+              </div>
+              
+              <!-- Activity 4 -->
+              <div class="col-lg-6 col-md-12 mb-4">
+                <div class="activity-card p-4" style="background: white; border: 2px solid #d4a574; border-radius: 12px; box-shadow: 0 4px 12px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+                  <h5 class="card-title" style="color: #8d6663; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">4. बच्चे, युवा, बड़े सबों के लिए गाँव मोहल्ला आधारित सामुदायिक प्रोजेक्ट</h5>
+                </div>
+              </div>
+              
+              <!-- Activity 5 -->
+              <div class="col-lg-6 col-md-12 mb-4">
+                <div class="activity-card p-4" style="background: white; border: 2px solid #d4a574; border-radius: 12px; box-shadow: 0 4px 12px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+                  <h5 class="card-title" style="color: #8d6663; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">5. निवासियों का आपसी परिचय: जरुरतमंद और मददकर्ता के बीच तालमेल, आपसी सहयोग और समन्वयन, निवासी विशेषज्ञ तथा हौबी डेटाबेस, समारोह आयोजन</h5>
+                </div>
+              </div>
+              
+              <!-- Activity 6 -->
+              <div class="col-lg-6 col-md-12 mb-4">
+                <div class="activity-card p-4" style="background: white; border: 2px solid #d4a574; border-radius: 12px; box-shadow: 0 4px 12px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+                  <h5 class="card-title" style="color: #8d6663; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">6. गाँव शहर में निवासियों के बीच सम्मिलित प्रयास को बढ़ावा देने के लिए अभियान चलाना</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4 - सामाजिक उद्यमी की भूमिका -->
+          <div class="role-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">सामाजिक उद्यमी की भूमिका:</h3>
+            <p class="mb-4" style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; text-align: justify;">
+              'हम निवासी' कार्यक्रम को किसी क्षेत्र में लागू करने के लिए 'सामाजिक उद्यमी' की परिकल्पना की गई है।
+            </p>
+            
+            <!-- Left-Bordered Box -->
+            <div class="role-box p-4 mb-4" style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px;">
+              <ul style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; padding-left: 20px; margin: 0;">
+                <li class="mb-2">'सामाजिक उद्यमी' उन चुनौतियों का समाधान करने में निवासियों का मदद करता है जिनका सामना हम लोग घर से बाहर निकलते ही करते हैं, परन्तु इसके साथ ही उसमें बदलाव या सुधार चाहते हैं।</li>
+                <li class="mb-2">'सामाजिक उद्यमी' आंशिक समय देते हैं (part time) — निवासी लोग सुबह-शाम या छुट्टियों के दिन ही उपलब्ध होते हैं।</li>
+                <li class="mb-0">उनका कार्य ऊपर वर्णित क्रियाकलापों को आधार बनाकर तय होगा।</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Section 5 - सहयोग का निवेदन -->
+          <div class="cooperation-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">सहयोग का निवेदन:</h3>
+            <p class="mb-4" style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; text-align: justify;">
+              इस कार्यक्रम को सफल बनाने के लिए आवश्यक सहयोग का निवेदन संस्थानों और व्यक्तियों से किया जाता है। सहयोग का स्वरूप भिन्न है:
+            </p>
+            
+            <!-- Left-Bordered Box -->
+            <div class="cooperation-box p-4 mb-4" style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px;">
+              <ul style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; padding-left: 20px; margin: 0;">
+                <li class="mb-2">आर्थिक सहयोग</li>
+                <li class="mb-2">अपने क्षेत्र में लागू करना</li>
+                <li class="mb-2">सामाजिक उद्यमियों का सहयोग करना</li>
+                <li class="mb-2">अपने क्षेत्र और संस्थानों में कार्यशाला का आयोजन करना</li>
+                <li class="mb-0">अपने क्षेत्र या नए क्षेत्र में निवासी सभा करना इत्यादि</li>
+              </ul>
+            </div>
+            
+            <!-- Closing Note -->
+            <p class="mb-0" style="font-size: 0.9rem; font-style: italic; color: #4a4a4a; text-align: center;">
+              विशेष वेबसाइट के लिंक पर क्लिक करके डाउनलोड किया जा सकता है।
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-3" style="background-color:#f8f9fa; border-top:1px solid #dee2e6;">
+    <div class="container">
+      <p class="mb-0">Privacy Policy , © Copyright Niwasi. All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTop" title="Scroll to Top">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

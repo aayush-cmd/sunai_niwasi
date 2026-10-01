@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>हम निवासी - Niwasi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Serif:wght@400;600;700&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!--=============  Unified Header Section  ==============-->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="navbar">
+    <div class="container-fluid px-4">
+      <!-- Logo Section -->
+      <a class="navbar-brand" href="index.html">
+        <img src="image/logo-transparent.png" alt="हम निवासी लोगो" height="60" />
+      </a>
+      
+      <!-- Navigation Section -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="impact.html">प्रभाव</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pahal">पहल </a></li>
+          <li class="nav-item"><a class="nav-link" href="samajik-udyami.html">सामाजिक उद्यमी</a></li>
+          <li class="nav-item"><a class="nav-link" href="#appeal">अपील</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sewa">सेवा</a></li>
+          <li class="nav-item"><a class="nav-link" href="mulya.html">मूल्य</a></li>
+          <li class="nav-item"><a class="nav-link" href="niwasi-sabha.html">विवरणिका</a></li>
+        </ul>
+      </div>
+      
+      <!-- Right Section -->
+      <div class="header-right-section d-flex align-items-center">    
+        <!-- Social Icons -->
+        <div class="social-icons-header d-flex align-items-center">
+          <a href="https://www.facebook.com/hamniwasi/" target="_blank" rel="noopener" class="social-link-header" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/hamniwasi/" class="social-link-header" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://niwasi.tlitech.net/hum-niwasi/" target="_blank" rel="noopener" class="social-link-header" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+        
+        <!-- Search and Menu Icons -->
+        <div class="header-actions d-flex align-items-center ms-5">
+          <button class="btn btn-link nav-icon" type="button" id="searchToggle">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="btn btn-link nav-icon" type="button" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Search Overlay - Top Sliding Panel -->
+  <div class="search-overlay" id="searchOverlay">
+    <!-- Background Overlay -->
+    <div class="search-backdrop"></div>
+
+    <!-- Search Panel -->
+  <div class="search-panel">
+    <div class="search-panel-header">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="search-input-container">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+            </div>
+          </div>
+          <div class="col-auto">
+            <button class="search-close" id="searchClose">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="search-panel-content">
+      <div class="container-fluid">
+        <div class="quick-links">
+          <h6 class="quick-links-title">Quick Links</h6>
+          <div class="row">
+            <div class="col-md-4 col-lg-3">
+              <a href="kaaryashala.html" class="quick-link-item">
+                <!-- <i class="fas fa-car me-2"></i> -->
+                <span>कार्यशाला</span>
+              </a>
+            </div>
+            <div class="col-md-4 col-lg-3">
+              <a href="samajik-udyami.html" class="quick-link-item">
+                <!-- <i class="fas fa-calculator me-2"></i> -->
+                <span>सामाजिक उद्यमी</span>
+              </a>
+            </div>
+            <div class="col-md-4 col-lg-3">
+              <a href="train-samajik-udyami.html" class="quick-link-item">
+                <!-- <i class="fas fa-book me-2"></i> -->
+                <span>ट्रेन सामाजिक उद्यमी</span>
+              </a>
+            </div>
+            <div class="col-md-4 col-lg-3">
+              <a href="abhiyaan.html" class="quick-link-item">
+                <!-- <i class="fas fa-tag me-2"></i> -->
+                <span>अभियान</span>
+              </a>
+            </div>
+            <div class="col-md-4 col-lg-3">
+              <a href="help.html" class="quick-link-item">
+                <!-- <i class="fas fa-tag me-2"></i> -->
+                <span>सहायता</span>
+              </a>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <a href="testimonials.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>प्रशंसापत्र</span>
+                </a>
+              </div>
+                <!-- <div class="col-md-4 col-lg-3">
+                <a href="niwasi-sabha.html" class="quick-link-item">
+               
+                  <span>निवासी सभा</span>
+                </a>
+              </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Full Screen Overlay Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay">
+    <div class="drawer-container" id="drawerContainer">
+      <!-- Left Panel - Navigation -->
+      <div class="drawer-left-panel">
+        <div class="drawer-header">
+          <a href="#" class="sidebar-logo">
+            <img src="image/logo-transparent.png" alt="हम निवासी लोगो" height="30" />
+          </a>
+        </div>
+        <nav class="drawer-nav">
+          <ul class="drawer-nav-list">
+            <li><a href="gallery.html">गैलरी</a></li>
+            <li><a href="hamniwasi-program.html">हम-निवासी कार्यक्रम के बारे में</a></li>
+            <li><a href="ethical-foundation.html">एथिकल फौन्डेशन ट्रस्ट के बारे में</a></li>
+            <li><a href="sunai-consultancy.html">सहयोगी संस्थान सुनई कन्सलटेंसी के बारे में</a></li>
+            <li><a href="mitram-kitchen-store.html">सहयोगी व्यवसाय मित्रम रसोई और मित्रम स्टोर के बारे में</a></li>
+            <li><a href="niwasi-sabha-champion.html">निवासी सभा कैंपियन के बारे में</a></li>
+            <li><a href="samajik-udyami.html">सामाजिक उद्यमी के बारे में</a></li>
+            <li><a href="collaborating-donors.html">सहयोगी दानदाता</a></li>
+            <li><a href="resident-application.html">निवासी आवेदन</a></li>
+            <li class="mt-2 text-center"><a href="login.html" class="join-button">लॉगिन</a></li>
+          </ul>
+          <!-- Bottom Button -->
+          <!-- <div class="sidebar-bottom">
+            <button class="join-button">लॉगिन</button> closeDrawer
+          </div> -->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Main Content -->
+  <section id="mitram-kitchen-store"
+    style="font-family: 'Noto Serif Devanagari', serif; background-color: #fff8e1; padding-top: 80px;">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-12 col-lg-10">
+          <h2 class="text-center mb-4" style="color: #8d6663; font-size: 2.5rem; font-weight: 700;">सहयोगी व्यवसाय:-
+            मित्रम रसोई और मित्रम स्टोर के बारे में</h2>
+
+          <!-- Section 1 - &#2346;&#2352;&#2367;&#2330;&#2351; -->
+          <div class="intro-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">परिचय:</h3>
+            <p class="mb-4" style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; text-align: justify;">
+              Mitram Kitchen (मित्रम रसोई) और मित्रम स्टोर, सुनई कंसल्टेंसी की पहल है। इन दोनों
+              सेवाओं का उद्देश्य अधिक से अधिक परिवारों और व्यक्तियों की जरूरतों को पूरा करना है।
+              भोजन और रोजमर्रे का सामान सभी लोगों की नियमित आवश्यक वस्तुएं हैं।
+            </p>
+          </div>
+
+          <!-- Section 2 - Mitram Kitchen (&#2350;&#2367;&#2340;&#2381;&#2352;&#2350; &#2352;&#2360;&#2379;&#2310;) -->
+          <div class="kitchen-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">Mitram Kitchen (मित्रम रसोई):
+            </h3>
+            <p class="mb-4" style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; text-align: justify;">
+              Mitram Kitchen (मित्रम रसोई) पर हर दिन 400 सिंपल और स्वादिष्ट भोजन परोसा जाता
+              है। यहाँ सिर्फ ताज़ी सब्जियाँ, चक्की में पिसा हुआ मशाला और आशीर्वाद आटा ही इस्तेमाल
+              होता है।
+            </p>
+            <h4 class="mb-3" style="color: #8d6663; font-size: 1.5rem; font-weight: 600;">
+             हमारी सेवाएँ:-:</h4>
+
+            <!-- Left-Bordered Box -->
+            <div class="services-box p-4 mb-4"
+              style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px;">
+              <ul style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; padding-left: 20px; margin: 0;">
+                <li class="mb-2">टेक अवे, टिफिन, बैठ कर भोजन और होम डिलीवरी सेवा उपलब्ध है।</li>
+                <li class="mb-2">घर जैसा भोजन – टिफ़िन सर्विसेज</li>
+                <li class="mb-2">अपनों के संग भोजन का आनंद (सम्मिलित प्रयास पैकेज): पारिवारिक-सामाजिक-व्यावसायिक कार्यक्रम: रु 70-350/- प्रति प्लेट</li>
+                <li class="mb-2">समोसा, कचौरी-पकौड़ा (15 चटनी); मीठा (जलेबी-इमरती, रसोगुला, चन्द्रकला...)</li>
+                <li class="mb-0">सीजन का पोपुलर “दही, चूड़ा, तिलकुट”, सत्तू इत्यादि।;</li>
+              </ul>
+            </div>
+
+            <!-- Info Card -->
+            <div class="info-card p-4 mb-4"
+              style="background: white; border: 2px solid #d4a574; border-left: 4px solid #8d6663; border-radius: 12px; box-shadow: 0 4px 12px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+              <div class="row align-items-center">
+                <div class="col-auto">
+                  <div class="icon-box"
+                    style="width: 60px; height: 60px; background: linear-gradient(135deg, #8d6663 0%, #d4a574 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-utensils" style="color: white; font-size: 1.5rem;"></i>
+                  </div>
+                </div>
+                <div class="col">
+                  <h5 class="mb-3" style="color: #8d6663; font-size: 1.3rem; font-weight: 700;">पता और (मित्रम रसोई) मेनू:</h5>
+                  <ul
+                    style="font-size: 1rem; line-height: 1.6; color: #4a4a4a; padding-left: 0; margin: 0; list-style: none;">
+                    <li class="mb-2">
+                      <strong>मेनू:</strong>
+                      <a href="https://wa.me/917070819777" target="_blank"
+                        style="color: #8d6663; text-decoration: none; font-weight: 600;">https://wa.me/917070819777</a>
+                    </li>
+                    <li class="mb-2">
+                      <strong>पता:</strong> Mitram Kitchen (मित्रम रसोई), SBI Bank बाजार समिति ब्रांच के पास, बहादुरपुर पटना
+                    </li>
+                    <li class="mb-2">
+                      <strong>मो. नं.</strong>
+                      <a href="tel:+917070819777" style="color: #8d6663; text-decoration: none; font-weight: 600;">7070 819 777</a>
+                    </li>
+                    <li class="mb-2">
+                      <strong>FSSAI License:</strong> 10425000002048
+                    </li>
+                    <li class="mb-0">
+                      <strong>Website:</strong>
+                      <a href="http://mitram.niwasi.in/kitchen" target="_blank"
+                        style="color: #8d6663; text-decoration: none; font-weight: 600;">http://mitram.niwasi.in/kitchen</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3 - &#2350;&#2367;&#2340;&#2381;&#2352;&#2350; &#2360;&#2381;&#2335;&#2379;&#2352; -->
+          <div class="store-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">
+              मित्रम स्टोर:</h3>
+            <p class="mb-4" style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; text-align: justify;">
+             मित्रम स्टोर अभी शुरुआत स्थिति में है और अभी इसकी प्रक्रिया स्थापित की जा रही है।
+              आशा है कि अप्रैल-मई 2026 महीने में मित्रम स्टोर के अंतर्गत विक्री शुरू हो जाएगी।
+            </p>
+          </div>
+
+          <!-- Section 4 - &#2350;&#2361;&#2340;&#2381;&#2357;&#2346;&#2370;&#2352;&#2381;&#2339; -->
+          <div class="important-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">
+              महत्वपूर्ण:</h3>
+
+            <!-- Gold Gradient Highlight Box -->
+            <div class="highlight-banner p-4 text-center"
+              style="background: linear-gradient(135deg, #8d6663 0%, #d4a574 100%); color: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(139, 105, 20, 0.2); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+              <div class="highlight-banner::before"
+                style="content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.05) 10px, rgba(255, 255, 255, 0.05) 20px); animation: shimmer 20s linear infinite;">
+              </div>
+              <p class="mb-0"
+                style="font-size: 1.3rem; font-style: italic; font-weight: 500; line-height: 1.6; position: relative; z-index: 2; text-align: center; margin: 0;">
+                मित्रम-स्टोर और Mitram Kitchen (मित्रम रसोई) से प्राप्त आमदनी (सामग्री, जमीनी
+                कर्मचारियों और मध्य प्रबंधन के खर्चों को घटा कर) का 20% हम निवासी कार्यक्रम के लिए उपयोग
+                में आता है। हमारा आस-पड़ोस मुहल्ला और शहर सुकून भरा हो, घर जैसा, क्योकि घर से ज्यादा
+                समय हमलोग घर से बाहर बिताते हैं।
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-3" style="background-color:#f8f9fa; border-top:1px solid #dee2e6;">
+    <div class="container">
+      <p class="mb-0">Privacy Policy , © Copyright Niwasi. All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTop" title="Scroll to Top">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

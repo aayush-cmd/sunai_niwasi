@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>लॉगिन करें</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" 
+        rel="stylesheet">
+</head>
+<body>
+
+<div class="login-page">
+  <div class="login-card">
+    
+    <h1 class="login-heading">लॉगिन करें</h1>
+
+    <form class="login-form" onsubmit="handleLogin(event)">
+
+      <div class="login-field">
+        <label for="loginInput">ईमेल या फ़ोन नंबर</label>
+        <input type="text" 
+               id="loginInput" 
+               placeholder="ईमेल या फ़ोन नंबर दर्ज करें"
+               oninput="checkInput(this.value)"
+               autocomplete="off"
+               required>
+      </div>
+
+      <div class="login-field" id="passwordField" 
+           style="display: none;">
+        <label for="passwordInput">पासवर्ड</label>
+        <input type="password" 
+               id="passwordInput" 
+               placeholder="पासवर्ड दर्ज करें"
+               required>
+      </div>
+
+      <button type="submit" class="login-btn">
+        लॉगिन करें
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+<script>
+function checkInput(value) {
+  const passwordField = document.getElementById('passwordField');
+  const passwordInput = document.getElementById('passwordInput');
+  
+  // Show password if email (contains @)
+  if (value.includes('@')) {
+    passwordField.style.display = 'block';
+    passwordInput.required = true;
+  } 
+  // Hide password if only numbers (phone number)
+  else if (/^[0-9]+$/.test(value)) {
+    passwordField.style.display = 'none';
+    passwordInput.required = false;
+  }
+  // Hide if empty
+  else if (value === '') {
+    passwordField.style.display = 'none';
+    passwordInput.required = false;
+  }
+}
+
+function handleLogin(event) {
+  event.preventDefault();
+  
+  const loginInput = document.getElementById('loginInput').value;
+  const passwordInput = document.getElementById('passwordInput').value;
+  
+  // Basic validation
+  if (!loginInput) {
+    alert('कृपया ईमेल या फ़ोन नंबर दर्ज करें');
+    return;
+  }
+  
+  // Check if email and password is required
+  if (loginInput.includes('@') && !passwordInput) {
+    alert('कृपया पासवर्ड दर्ज करें');
+    return;
+  }
+  
+  // Simulate login success (in real app, this would be an API call)
+  console.log('Login successful:', { loginInput, passwordInput });
+  
+  // Redirect to home page
+  window.location.href = 'index.html';
+}
+</script>
+
+</body>
+</html>

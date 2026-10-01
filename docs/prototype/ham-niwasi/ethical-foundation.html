@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>हम निवासी - Niwasi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!--=============  Unified Header Section  ==============-->
+  <!-- Navbar -->
+   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="navbar">
+    <div class="container-fluid px-4">
+      <!-- Logo Section -->
+      <a class="navbar-brand" href="index.html">
+        <img src="image/logo-transparent.png" alt="हम निवासी लोगो" height="60" />
+      </a>
+      
+      <!-- Navigation Section -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+       <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="impact.html">प्रभाव</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pahal">पहल </a></li>
+          <li class="nav-item"><a class="nav-link" href="samajik-udyami.html">सामाजिक उद्यमी</a></li>
+          <li class="nav-item"><a class="nav-link" href="#appeal">अपील</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sewa">सेवा</a></li>
+          <li class="nav-item"><a class="nav-link" href="mulya.html">मूल्य</a></li>
+          <li class="nav-item"><a class="nav-link" href="niwasi-sabha.html">विवरणिका</a></li>
+        </ul>
+      </div>
+      
+      <!-- Right Section -->
+      <div class="header-right-section d-flex align-items-center">    
+        <!-- Social Icons -->
+        <div class="social-icons-header d-flex align-items-center">
+          <a href="https://www.facebook.com/hamniwasi/" target="_blank" rel="noopener" class="social-link-header" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/hamniwasi/" class="social-link-header" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://niwasi.tlitech.net/hum-niwasi/" target="_blank" rel="noopener" class="social-link-header" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+        
+        <!-- Search and Menu Icons -->
+        <div class="header-actions d-flex align-items-center ms-5">
+          <button class="btn btn-link nav-icon" type="button" id="searchToggle">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="btn btn-link nav-icon" type="button" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+   <!-- Search Overlay - Top Sliding Panel -->
+  <div class="search-overlay" id="searchOverlay">
+    <!-- Background Overlay -->
+    <div class="search-backdrop"></div>
+
+    <!-- Search Panel -->
+      <div class="search-panel">
+      <div class="search-panel-header">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col">
+              <div class="search-input-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+              </div>
+            </div>
+            <div class="col-auto">
+              <button class="search-close" id="searchClose">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-panel-content">
+        <div class="container-fluid">
+          <div class="quick-links">
+            <h6 class="quick-links-title">Quick Links</h6>
+            <div class="row">
+              <div class="col-md-4 col-lg-3">
+                <a href="kaaryashala.html" class="quick-link-item">
+                  <!-- <i class="fas fa-car me-2"></i> -->
+                  <span>कार्यशाला</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="samajik-udyami.html" class="quick-link-item">
+                  <!-- <i class="fas fa-calculator me-2"></i> -->
+                  <span>सामाजिक उद्यमी</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="train-samajik-udyami.html" class="quick-link-item">
+                  <!-- <i class="fas fa-book me-2"></i> -->
+                  <span>ट्रेन सामाजिक उद्यमी</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="abhiyaan.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>अभियान</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="help.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>सहायता</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="testimonials.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>प्रशंसापत्र</span>
+                </a>
+              </div>
+                <!-- <div class="col-md-4 col-lg-3">
+                <a href="niwasi-sabha.html" class="quick-link-item">
+                 
+                  <span>निवासी सभा</span>
+                </a>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+  </div>
+
+  <!-- Full Screen Overlay Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay">
+    <div class="drawer-container" id="drawerContainer">
+      <!-- Left Panel - Navigation -->
+      <div class="drawer-left-panel">
+        <div class="drawer-header">
+          <a href="#" class="sidebar-logo">
+            <img src="image/logo-transparent.png" alt="हम निवासी लोगो" height="30" />
+          </a>
+        </div>
+        <nav class="drawer-nav">
+          <ul class="drawer-nav-list">
+            <li><a href="gallery.html">गैलरी</a></li>
+            <li><a href="hamniwasi-program.html">हम-निवासी कार्यक्रम के बारे में</a></li>
+            <li><a href="ethical-foundation.html">एथिकल फौन्डेशन ट्रस्ट के बारे में</a></li>
+            <li><a href="sunai-consultancy.html">सहयोगी संस्थान सुनई कन्सलटेंसी के बारे में</a></li>
+            <li><a href="mitram-kitchen-store.html">सहयोगी व्यवसाय मित्रम रसोई और मित्रम स्टोर के बारे में</a></li>
+            <li><a href="niwasi-sabha-champion.html">निवासी सभा कैंपियन के बारे में</a></li>
+            <li><a href="samajik-udyami.html">सामाजिक उद्यमी के बारे में</a></li>
+            <li><a href="collaborating-donors.html">सहयोगी दानदाता</a></li>
+            <li><a href="resident-application.html">निवासी आवेदन</a></li>
+            <li class="mt-2 text-center"><a href="login.html" class="join-button">लॉगिन</a></li>
+          </ul>
+          <!-- Bottom Button -->
+          <!-- <div class="sidebar-bottom">
+            <button class="join-button">लॉगिन</button> closeDrawer
+          </div> -->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Ethical Foundation Section -->
+  <section id="ethical-foundation" class="py-5" style="background-color: #fff8e1; font-family: 'Noto Serif Devanagari', serif;">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-12 col-lg-10">
+          <h2 class="text-center mb-4" style="color: #8d6663; font-size: 2.5rem; font-weight: 700;">हमारे बारे में – एथिकल फाउंडेशन ट्रस्ट</h2>
+          
+          <!-- Section 1 - Trust ka Parichay -->
+          <div class="trust-intro mb-5">
+            <h3 class="mb-3" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">ट्रस्ट का परिचय:</h3>
+            <p class="lead" style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a;">
+              एथिकल फाउंडेशन ट्रस्ट का पंजीकरण 2019 की शुरुआत में समुदायों में नागरिक समूह (सिविल सोसाईटी) और निवासियों की सम्मिलित प्रयास को बढ़ावा देने और तलाश संदेशों को फैलाने के उद्देश्य से किया गया था।
+            </p>
+          </div>
+
+          <!-- Section 2 - TALASH Sandesh -->
+          <div class="talash-sandesh mb-5">
+            <div class="quote-box p-4 text-center" style="background: linear-gradient(135deg, #8d6663 0%, #d4a574 100%); color: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(139, 105, 20, 0.2);">
+              <h3 class="mb-3" style="font-size: 1.6rem; font-weight: 600;">तलाश का मुख्य संदेश है:</h3>
+              <p class="mb-0" style="font-size: 1.4rem; font-style: italic; font-weight: 500;">"मिलें तो सही। बातें तो हो।"</p>
+            </div>
+          </div>
+
+          <!-- Section 3 - TALASH Mool Mantra -->
+          <div class="talash-mantra mb-5">
+            <h3 class="mb-3" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">तलाश मूल मंत्र:</h3>
+            <div class="mantra-box p-4" style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px;">
+              <ol style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; padding-left: 20px;">
+                <li class="mb-2">गलत को गलत कहें।</li>
+                <li class="mb-2">अच्छे को अच्छा कहें।</li>
+                <li class="mb-2">अपनी आमदनी वाजिब तरीके से प्रतिदिन बढ़ाएं।</li>
+                <li class="mb-0">रचनात्मक सामूहिक सोच का निर्माण करें।</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Section 4 - Structure & Mission -->
+          <div class="structure-mission mb-5">
+            <h3 class="mb-3" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">संरचना एवं मिशन:</h3>
+            <div class="content-box p-4" style="background: rgba(139, 105, 20, 0.03); border-radius: 8px;">
+              <p class="mb-3" style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a;">
+                कानूनी और संरचनात्मक रूप से, TALASH व्यक्तियों का एक अनौपचारिक समूह है और इसका मुख्यालय भारत के बिहार राज्य के पटना में स्थित है। ट्रस्ट के संस्थापक सदस्य TALASH के सक्रिय सदस्य हैं। TALASH की बैठक हर महीने के पहले रविवार को शाम लगभग 4 बजे होती है। <a href="http://talashindia.org" target="_blank" style="color: #8d6663; text-decoration: none;">http://talashindia.org</a>
+              </p>
+              <p class="mb-3" style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a;">
+                Ethical Foundation has shown impacts of resident's collective initiatives at very local level. Shreshth Community (Great Community) and collective initiatives of active and empowered residents are key mission of Ethical Foundation.
+              </p>
+              <p class="mb-3" style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a;">
+                एथिकल फाउंडेशन का हम-निवासी कार्यक्रम स्थानीय स्तर पर निवासियों की सम्मिलित प्रयास के प्रभाव को प्रदर्शित किया है। श्रेष्ठ समुदाय और सक्रिय एवं सशक्त निवासियों की सम्मिलित प्रयास एथिकल फाउंडेशन का प्रमुख मिशन हैं। <a href="http://facebook.com/hamniwasi" target="_blank" style="color: #8d6663; text-decoration: none;">http://facebook.com/hamniwasi</a>
+              </p>
+              <p class="mb-3" style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a;">
+                ट्रस्ट का पंजीकृत पता है: के-73, पी.सी. कॉलोनी, कनकरबाग, पटना – 800 020।
+              </p>
+              <p class="mb-4" style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a;">
+                एथिकल फाउंडेशन भारत सरकार के आयकर विभाग के अंतर्गत धारा 12AA और 80G के तहत भी पंजीकृत है।
+              </p>
+              <div class="text-center">
+                <p class="mb-3" style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a;">
+                  एथिकल फाउंडेशन के नोवेल मिशन को पूरा करने में मदद करने के लिए कृपया यहां क्लिक करके दान करें।
+                </p>
+                <button class="btn-donate" style="background: linear-gradient(135deg, #8d6663 0%, #d4a574 100%); color: #fff!important; border: none; padding: 15px 40px; font-size: 1.2rem; font-weight: 600; border-radius: 50px; box-shadow: 0 5px 15px rgba(139, 105, 20, 0.3); transition: all 0.3s ease; cursor: pointer;">
+                  <a href="contact-donate.html"><i class="fas fa-heart me-2"></i>Donate Now</a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5 - TRUSTEES -->
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <h2 class="text-center mb-5" style="color: #8d6663; font-size: 2.2rem; font-weight: 700;">TRUSTEES</h2>
+        </div>
+      </div>
+      
+      <div class="row justify-content-center">
+        <!-- Trustee 1 -->
+        <div class="col-lg-6 col-md-12 mb-4">
+          <div class="trustee-card"
+            style="background: white; border: 3px solid #d4a574; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+            <h4 class="trustee-name" style="color: #8d6663; font-size: 1.8rem; font-weight: 700; margin-bottom: 10px;">Dr.
+              Avinash Prasad</h4>
+            <p class="trustee-role" style="color: #d4a574; font-size: 1.1rem; font-style: italic; margin-bottom: 15px;">अध्यक्ष – एथिकल फाउंडेशन ट्रस्ट</p>
+            <p class="trustee-bio" style="font-size: 1rem; line-height: 1.6; color: #4a4a4a;">
+              डॉ. अविनाश प्रसाद का जन्म नालन्दा जिले के दोसुत गाँव में एक साधारण परिवार में हुआ। मात्र 11 वर्ष की आयु से बच्चों
+              को पढ़ाना शुरू किया। पशुचिकित्सा विज्ञान में स्वर्णपदक के साथ स्नातकोत्तर, 1983 में Milk-Induction की खोज पर
+              राष्ट्रपति सम्मान प्राप्त किया। पाँच बार स्वर्णपदक से सम्मानित। 2003 में उपनिदेशक पशुपालन, बिहार से सेवानिवृत्त।
+              समाजसेवा में आजीवन सक्रिय — वृक्षारोपण, भूखों को भोजन, जरूरतमंदों की सहायता में दशकों तक समर्पित।
+              पद: बिहार पेंशन समाज सभापति (15 वर्ष) | वरिष्ठ नागरिक कल्याण समिति अध्यक्ष (12 वर्ष) | तलाश पूर्व-संयोजक
+              📞 9934410252 | ✉️ prasadavinash569@gmail.com
+            </p>
+          </div>
+        </div>
+
+        <!-- Trustee 2 -->
+        <div class="col-lg-6 col-md-12 mb-4">
+          <div class="trustee-card" style="background: white; border: 3px solid #d4a574; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+            <h4 class="trustee-name" style="color: #8d6663; font-size: 1.8rem; font-weight: 700; margin-bottom: 10px;">Brigadier Krishna Murari Prasad Singh</h4>
+            <p class="trustee-role" style="color: #d4a574; font-size: 1.1rem; font-style: italic; margin-bottom: 15px;">ट्रस्टी बोर्ड अध्यक्ष – एथिकल फाउंडेशन ट्रस्ट</p>
+            <p class="trustee-bio" style="font-size: 1rem; line-height: 1.6; color: #4a4a4a;">
+              उन्होंने 1974 से 2010 तक भारतीय सेना में सर्वोच्च सम्मान, ब्रिगेडियर के पद पर सेवा दी। आजकल, वे विभिन्न सामाजिक मंचों पर अपना योगदान दे रहे हैं। वे 'एथिकल फाउंडेशन ट्रस्ट' के ट्रस्टी बोर्ड के अध्यक्ष रहे हैं। वे 'तलाश' के एक सक्रिय सदस्य रहे हैं।
+            </p>
+          </div>
+        </div>
+
+        <!-- Trustee 3 -->
+        <div class="col-lg-6 col-md-12 mb-4">
+          <div class="trustee-card" style="background: white; border: 3px solid #d4a574; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+            <h4 class="trustee-name" style="color: #8d6663; font-size: 1.8rem; font-weight: 700; margin-bottom: 10px;">Ajit Sinha</h4>
+            <p class="trustee-role" style="color: #d4a574; font-size: 1.1rem; font-style: italic; margin-bottom: 15px;">संस्थापक ट्रस्टी – एथिकल फाउंडेशन ट्रस्ट</p>
+            <p class="trustee-bio" style="font-size: 1rem; line-height: 1.6; color: #4a4a4a;">
+            70 वर्ष से अधिक आयु में भी पूर्णतः समाजसेवा में समर्पित। 1972 में बिहार सरकार से करियर शुरू किया — कल्याण अधिकारी, ऑडिटर (A.G. Bihar), और बिहार राज्य विद्युत बोर्ड में श्रम कल्याण अधिकारी के पदों पर कार्य किया। उप निदेशक, कार्मिक के पद से सेवानिवृत्त। तलाश के संस्थापक सदस्य, रेड सोसाइटी के संस्थापक, और प्रयास भारती के माध्यम से महिला सशक्तिकरण में सक्रिय।
+            </p>
+          </div>
+        </div>
+
+        <!-- Trustee 4 -->
+        <div class="col-lg-6 col-md-12 mb-4">
+          <div class="trustee-card" style="background: white; border: 3px solid #d4a574; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+            <h4 class="trustee-name" style="color: #8d6663; font-size: 1.8rem; font-weight: 700; margin-bottom: 10px;">Pranav Kumar Chaudhary</h4>
+            <p class="trustee-role" style="color: #d4a574; font-size: 1.1rem; font-style: italic; margin-bottom: 15px;">कोषाध्यक्ष – एथिकल फाउंडेशन ट्रस्ट</p>
+            <p class="trustee-bio" style="font-size: 1rem; line-height: 1.6; color: #4a4a4a;">
+          1998 में IIT मुंबई से सिविल इंजीनियरिंग में स्नातक। तुरंत बाद 'प्रथम एजुकेशन इनिशिएटिव' से विकास क्षेत्र में कार्य शुरू किया और बिहार में इसकी शिक्षा पहल की नींव रखी। 2005 में पटना में 'सुनई कंसल्टेंसी' की स्थापना की, जो राष्ट्रीय व राज्य स्तर के विकास अनुसंधान करती है। 'हम-निवासी पहल' के प्रणेता एवं एथिकल फाउंडेशन ट्रस्ट के संस्थापक सदस्य।
+            </p>
+          </div>
+        </div>
+
+        <!-- Trustee 5 -->
+        <div class="col-lg-6 col-md-12 mb-4">
+          <div class="trustee-card" style="background: white; border: 3px solid #d4a574; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+            <h4 class="trustee-name" style="color: #8d6663; font-size: 1.8rem; font-weight: 700; margin-bottom: 10px;">Pradeep Rai</h4>
+            <p class="trustee-role" style="color: #d4a574; font-size: 1.1rem; font-style: italic; margin-bottom: 15px;">ट्रस्टी – एथिकल फाउंडेशन ट्रस्ट</p>
+            <p class="trustee-bio" style="font-size: 1rem; line-height: 1.6; color: #4a4a4a;">
+             सुनई कंसल्टेंसी में लगभग 20 वर्षों तक फील्ड कोऑर्डिनेटर के रूप में सामुदायिक और सर्वेक्षण परियोजनाओं में कार्य किया। 'निवासी सभा' के विकास में महत्वपूर्ण योगदान दिया, जिससे 'हम-निवासी' कार्यक्रम अस्तित्व में आया। निवासियों की सामूहिक जिम्मेदारी और स्वावलंबन के प्रति पूर्णतः समर्पित।
+            </p>
+          </div>
+        </div>
+
+        <!-- Trustee 6 -->
+        <div class="col-lg-6 col-md-12 mb-4">
+          <div class="trustee-card" style="background: white; border: 3px solid #d4a574; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+            <h4 class="trustee-name" style="color: #8d6663; font-size: 1.8rem; font-weight: 700; margin-bottom: 10px;">Rajkumar Mishra</h4>
+            <p class="trustee-role" style="color: #d4a574; font-size: 1.1rem; font-style: italic; margin-bottom: 15px;">ट्रस्टी – एथिकल फाउंडेशन ट्रस्ट</p>
+            <p class="trustee-bio" style="font-size: 1rem; line-height: 1.6; color: #4a4a4a;">
+             बिहार सरकार के विद्युत विभाग में सेवा दी। कार्यकाल के दौरान ही सामाजिक कार्यों में सक्रिय रहे। समस्तीपुर के शाहपुर पटोरी में 'तलाश' की शाखा स्थापित की, जहाँ पर्यावरण जागरूकता व सामाजिक अभियान सफलतापूर्वक चलाए।
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-3" style="background-color:#f8f9fa; border-top:1px solid #dee2e6;">
+    <div class="container">
+      <p class="mb-0">Privacy Policy , © Copyright Niwasi All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTop" title="Scroll to Top">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

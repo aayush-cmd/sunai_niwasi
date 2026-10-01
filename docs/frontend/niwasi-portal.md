@@ -30,6 +30,7 @@ No login needed.
 | `/sabha` | Explains how a Niwasi Sabha (community meeting) works |
 | `/niwasi-video` | Intro video |
 | `/mitram-rasoi` | Mitram Rasoi: a standalone, static Hindi page for the restaurant. It has no Niwasi header or footer (`PublicChrome` skips them on this path). It's reached from the Mitram Rasoi card in the home page's **Extensions** section, which opens it in a new tab. It isn't in the main nav. |
+| `/ham-niwasi`, `/ham-niwasi/<page>` | Ham Niwasi: a standalone, static Hindi site, ported from `docs/prototype/ham-niwasi/`. It has 27 pages: the home page, 18 info pages, 7 contact-form pages, and `/ham-niwasi/login`. It has its own navbars and footer, and no Niwasi header or footer (`PublicChrome` skips them on this path). Reached from **Ham Niwasi** in the main nav and in the footer's Platform column, both opening a new tab. The forms, including login, are frontend only: they validate and send nothing (no backend yet). |
 | `/login` | Resident login |
 | `/forgot-password`, `/reset-password` | Password recovery |
 
@@ -175,7 +176,7 @@ Platform-wide administration. Only the System Admin can open it.
 
 The complete list: one row per `page.tsx` in `apps/frontend/app/`. The sections above explain what each feature is; this table makes sure every page is listed. Keep it in sync by hand (see the docs rule in `AGENTS.md`).
 
-212 pages. **URL** is what the user sees. **Kind** comes from the URL: Create = `new`/`create`/`add`, Edit = `edit`, Detail = ends in a `[param]`.
+239 pages. **URL** is what the user sees. **Kind** comes from the URL: Create = `new`/`create`/`add`, Edit = `edit`, Detail = ends in a `[param]`.
 
 | URL | Kind | File |
 |---|---|---|
@@ -336,6 +337,33 @@ The complete list: one row per `page.tsx` in `apps/frontend/app/`. The sections 
 | `/community/[slug]/work-requests/raise` | Page | `app/(niwasi)/community/[slug]/work-requests/raise/page.tsx` |
 | `/contact` | Page | `app/(niwasi)/(public)/contact/page.tsx` |
 | `/forgot-password` | Page | `app/(niwasi)/(public)/forgot-password/page.tsx` |
+| `/ham-niwasi` | Page | `app/(niwasi)/(public)/ham-niwasi/page.tsx` |
+| `/ham-niwasi/abhiyaan` | Page | `app/(niwasi)/(public)/ham-niwasi/abhiyaan/page.tsx` |
+| `/ham-niwasi/collaborating-donors` | Page | `app/(niwasi)/(public)/ham-niwasi/collaborating-donors/page.tsx` |
+| `/ham-niwasi/contact-business` | Page | `app/(niwasi)/(public)/ham-niwasi/contact-business/page.tsx` |
+| `/ham-niwasi/contact-donate` | Page | `app/(niwasi)/(public)/ham-niwasi/contact-donate/page.tsx` |
+| `/ham-niwasi/contact-help` | Page | `app/(niwasi)/(public)/ham-niwasi/contact-help/page.tsx` |
+| `/ham-niwasi/contact-neighborhood` | Page | `app/(niwasi)/(public)/ham-niwasi/contact-neighborhood/page.tsx` |
+| `/ham-niwasi/contact-sabha` | Page | `app/(niwasi)/(public)/ham-niwasi/contact-sabha/page.tsx` |
+| `/ham-niwasi/contact-social` | Page | `app/(niwasi)/(public)/ham-niwasi/contact-social/page.tsx` |
+| `/ham-niwasi/contact-training` | Page | `app/(niwasi)/(public)/ham-niwasi/contact-training/page.tsx` |
+| `/ham-niwasi/ethical-foundation` | Page | `app/(niwasi)/(public)/ham-niwasi/ethical-foundation/page.tsx` |
+| `/ham-niwasi/faq` | Page | `app/(niwasi)/(public)/ham-niwasi/faq/page.tsx` |
+| `/ham-niwasi/gallery` | Page | `app/(niwasi)/(public)/ham-niwasi/gallery/page.tsx` |
+| `/ham-niwasi/hamniwasi-program` | Page | `app/(niwasi)/(public)/ham-niwasi/hamniwasi-program/page.tsx` |
+| `/ham-niwasi/help` | Page | `app/(niwasi)/(public)/ham-niwasi/help/page.tsx` |
+| `/ham-niwasi/impact` | Page | `app/(niwasi)/(public)/ham-niwasi/impact/page.tsx` |
+| `/ham-niwasi/kaaryashala` | Page | `app/(niwasi)/(public)/ham-niwasi/kaaryashala/page.tsx` |
+| `/ham-niwasi/login` | Page | `app/(niwasi)/(public)/ham-niwasi/login/page.tsx` |
+| `/ham-niwasi/mitram-kitchen-store` | Page | `app/(niwasi)/(public)/ham-niwasi/mitram-kitchen-store/page.tsx` |
+| `/ham-niwasi/mulya` | Page | `app/(niwasi)/(public)/ham-niwasi/mulya/page.tsx` |
+| `/ham-niwasi/niwasi-sabha` | Page | `app/(niwasi)/(public)/ham-niwasi/niwasi-sabha/page.tsx` |
+| `/ham-niwasi/niwasi-sabha-champion` | Page | `app/(niwasi)/(public)/ham-niwasi/niwasi-sabha-champion/page.tsx` |
+| `/ham-niwasi/resident-application` | Page | `app/(niwasi)/(public)/ham-niwasi/resident-application/page.tsx` |
+| `/ham-niwasi/samajik-udyami` | Page | `app/(niwasi)/(public)/ham-niwasi/samajik-udyami/page.tsx` |
+| `/ham-niwasi/sunai-consultancy` | Page | `app/(niwasi)/(public)/ham-niwasi/sunai-consultancy/page.tsx` |
+| `/ham-niwasi/testimonials` | Page | `app/(niwasi)/(public)/ham-niwasi/testimonials/page.tsx` |
+| `/ham-niwasi/train-samajik-udyami` | Page | `app/(niwasi)/(public)/ham-niwasi/train-samajik-udyami/page.tsx` |
 | `/help` | Page | `app/(niwasi)/help/page.tsx` |
 | `/help/child-report` | Page | `app/(niwasi)/help/child-report/page.tsx` |
 | `/help/needy/[id]` | Detail | `app/(niwasi)/help/needy/[id]/page.tsx` |

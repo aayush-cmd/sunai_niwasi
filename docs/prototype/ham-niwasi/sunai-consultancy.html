@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>हम निवासी - Niwasi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!--=============  Unified Header Section  ==============-->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="navbar">
+    <div class="container-fluid px-4">
+      <!-- Logo Section -->
+      <a class="navbar-brand" href="index.html">
+        <img src="image/logo-transparent.png" alt="हम निवासी लोगो" height="60" />
+      </a>
+      
+      <!-- Navigation Section -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+       <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="impact.html">प्रभाव</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pahal">पहल </a></li>
+          <li class="nav-item"><a class="nav-link" href="samajik-udyami.html">सामाजिक उद्यमी</a></li>
+          <li class="nav-item"><a class="nav-link" href="#appeal">अपील</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sewa">सेवा</a></li>
+          <li class="nav-item"><a class="nav-link" href="mulya.html">मूल्य</a></li>
+          <li class="nav-item"><a class="nav-link" href="niwasi-sabha.html">विवरणिका</a></li>
+        </ul>
+      </div>
+      
+      <!-- Right Section -->
+      <div class="header-right-section d-flex align-items-center">    
+        <!-- Social Icons -->
+        <div class="social-icons-header d-flex align-items-center">
+          <a href="https://www.facebook.com/hamniwasi/" target="_blank" rel="noopener" class="social-link-header" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/hamniwasi/" class="social-link-header" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://niwasi.tlitech.net/hum-niwasi/" target="_blank" rel="noopener" class="social-link-header" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+        
+        <!-- Search and Menu Icons -->
+        <div class="header-actions d-flex align-items-center ms-5">
+          <button class="btn btn-link nav-icon" type="button" id="searchToggle">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="btn btn-link nav-icon" type="button" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Search Overlay - Top Sliding Panel -->
+  <div class="search-overlay" id="searchOverlay">
+    <!-- Background Overlay -->
+    <div class="search-backdrop"></div>
+
+    <!-- Search Panel -->
+    <div class="search-panel">
+      <div class="search-panel-header">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col">
+              <div class="search-input-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+              </div>
+            </div>
+            <div class="col-auto">
+              <button class="search-close" id="searchClose">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-panel-content">
+        <div class="container-fluid">
+          <div class="quick-links">
+            <h6 class="quick-links-title">Quick Links</h6>
+            <div class="row">
+              <div class="col-md-4 col-lg-3">
+                <a href="kaaryashala.html" class="quick-link-item">
+                  <!-- <i class="fas fa-car me-2"></i> -->
+                  <span>कार्यशाला</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="samajik-udyami.html" class="quick-link-item">
+                  <!-- <i class="fas fa-calculator me-2"></i> -->
+                  <span>सामाजिक उद्यमी</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="train-samajik-udyami.html" class="quick-link-item">
+                  <!-- <i class="fas fa-book me-2"></i> -->
+                  <span>ट्रेन सामाजिक उद्यमी</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="abhiyaan.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>अभियान</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="help.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>सहायता</span>
+                </a>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <a href="testimonials.html" class="quick-link-item">
+                  <!-- <i class="fas fa-tag me-2"></i> -->
+                  <span>प्रशंसापत्र</span>
+                </a>
+              </div>
+                <!-- <div class="col-md-4 col-lg-3">
+                <a href="niwasi-sabha.html" class="quick-link-item">
+               
+                  <span>निवासी सभा</span>
+                </a>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+  </div>
+
+  <!-- Full Screen Overlay Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay">
+    <div class="drawer-container" id="drawerContainer">
+      <!-- Left Panel - Navigation -->
+      <div class="drawer-left-panel">
+        <div class="drawer-header">
+          <a href="#" class="sidebar-logo">
+            <img src="image/logo-transparent.png" alt="हम निवासी लोगो" height="30" />
+          </a>
+        </div>
+        <nav class="drawer-nav">
+          <ul class="drawer-nav-list">
+            <li><a href="gallery.html">गैलरी</a></li>
+            <li><a href="hamniwasi-program.html">हम-निवासी कार्यक्रम के बारे में</a></li>
+            <li><a href="ethical-foundation.html">एथिकल फौन्डेशन ट्रस्ट के बारे में</a></li>
+            <li><a href="sunai-consultancy.html">सहयोगी संस्थान सुनई कन्सलटेंसी के बारे में</a></li>
+            <li><a href="mitram-kitchen-store.html">सहयोगी व्यवसाय मित्रम रसोई और मित्रम स्टोर के बारे में</a></li>
+            <li><a href="niwasi-sabha-champion.html">निवासी सभा कैंपियन के बारे में</a></li>
+            <li><a href="samajik-udyami.html">सामाजिक उद्यमी के बारे में</a></li>
+            <li><a href="collaborating-donors.html">सहयोगी दानदाता</a></li>
+            <li><a href="resident-application.html">निवासी आवेदन</a></li>
+            <li class="mt-2 text-center"><a href="login.html" class="join-button">लॉगिन</a></li>
+          </ul>
+          <!-- Bottom Button -->
+          <!-- <div class="sidebar-bottom">
+            <button class="join-button">लॉगिन</button> closeDrawer
+          </div> -->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Sunai Consultancy Section -->
+  <section id="sunai-consultancy" class="py-5"
+    style="background-color: #fff8e1; font-family: 'Noto Serif Devanagari', serif;">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-12 col-lg-10">
+            <h2 class="text-center mb-4" style="color: #8d6663; font-size: 2.5rem; font-weight: 700;">सुनई कंसल्टेंसी – परिचय</h2>
+
+          <!-- Section 1 - Parichay -->
+          <div class="sunai-intro mb-5">
+            <p class="lead" style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; text-align: justify;">
+              सुनई कंसल्टेंसी एक प्राईवेट लिमिटेड कंपनी है, जिसकी स्थापना 2005 में पटना, बिहार
+              (भारत) में हुई थी। इसका मुख्य कार्य विकास क्षेत्र के क्लाइंट्स को रिसर्च, क्षमता निर्माण
+              और फील्ड प्रोजेक्ट्स से जुड़ी सेवाएँ प्रदान करना है। सुनई ने हम-निवासी कार्यक्रम के
+              अंतर्गत सभी लोगों को निवासी के रूप में समाधान उपलब्ध कराने का प्रयास किया है, ताकि
+              हमारा जीवन हमारे घर के बाहर भी दिन-ब-दिन बेहतर हो सके - विशेष रूप से उन लोगों के
+              लिए जो वंचित पृष्ठभूमि से आते हैं।
+            </p>
+            <p class="lead" style="font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; text-align: justify;">
+              सुनई स्वच्छता और अपशिष्ट प्रबंधन, पोषण, गरीबी उन्मूलन, स्व-शासन, प्राथमिक शिक्षा, बाल
+              संरक्षण, ग्रामीण विकास, पंचायती राज, कृषि, आजीविका और अन्य जैसे विभिन्न क्षेत्रों में
+              कार्य किया हैं।
+            </p>
+          </div>
+
+          <!-- Section 2 - Gatividhi-Vishisht Anubhav -->
+          <div class="services-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">गतिविधि-विशिष्ट अनुभव नोट नीचे
+              दिया गया है:</h3>
+
+            <!-- Survey Service -->
+            <div class="service-box p-4 mb-4"
+              style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px; transition: all 0.3s ease;">
+              <div class="d-flex align-items-start">
+                <div class="service-icon me-3" style="color: #8d6663; font-size: 2rem;">
+                  <i class="fas fa-clipboard-list"></i>
+                </div>
+                <div>
+                  <h4 class="service-title"
+                    style="color: #8d6663; font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem;">सर्वे:</h4>
+                  <p style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; margin: 0;">
+                    सुनई ने अलग-अलग सेक्टर में 150 से ज़्यादा सर्वे प्रोजेक्ट किया है। <br>
+                    ये सर्वे प्रोजेक्ट बहुपक्षीय एजेंसियों, विश्वविद्यालयों, राष्ट्रीय और अंतर्राष्ट्रीय संगठनों, सरकारी
+                    विभागों, शोधकर्ताओं, शिक्षाविदों, बड़े NGOs आदि के लिए सर्वेक्षण का कार्य किया है।
+                    सुनई ने अलग-अलग भौगोलिक क्षेत्रों में फैले PSUs से रैंडमली चुने गए 8 लाख से ज़्यादा
+                    सर्वे कर प्राइमरी रिकॉर्ड इकट्ठा किया है। सुनई ग्रामीण और शहरी, दोनों इलाकों से डेटा
+                    इकट्ठा करता है। सुनई ने ऐसे 40 सर्वे प्रोजेक्ट लागू किए हैं, जिनमें 1 से ज़्यादा राज्य या पूरे
+                    राज्य शामिल थे। 5 प्रोजेक्ट्स में, सर्वे का पैमाना 25,000 सर्वे से ज़्यादा था। 5000 से ज़्यादा
+                    के सैंपल साईज़ के साथ, हमने 60 से ज़्यादा सर्वे किए। कुछ प्रोजेक्ट्स का साईज़ 50,000
+                    सैंपल से ज़्यादा था। सुनई ने रिसर्च से जुड़ा यह प्राथमिक डेटा भारत के लगभग सभी राज्यों
+                    से इकट्ठा किया है।
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ham-Niwasi Program -->
+            <div class="service-box p-4 mb-4"
+              style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px; transition: all 0.3s ease;">
+              <div class="d-flex align-items-start">
+                <div class="service-icon me-3" style="color: #8d6663; font-size: 2rem;">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div>
+                  <h4 class="service-title"
+                    style="color: #8d6663; font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem;">हम निवासी&#39;
+                    कार्यक्रम:</h4>
+                  <p style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; margin: 0;">
+                    यह सभी लोगो को निवासी के रूप में एक सामाजिक सेवा है। इसे
+                    सुनई की मुख्य टीम ने समय-समय पर, अपने क्लाइंटल प्रोजेक्ट्स के बीच में मिलने वाले
+                    खाली समय में विकसित किया है। अब Ethical Foundation Trust से मिली प्रेरणा के साथ,
+                    &#39;हम-निवासी&#39; कार्यक्रम को सुनई के बिक्री प्रयासों का एक हिस्सा बना दिया गया है।
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Zero Waste Services -->
+            <div class="service-box p-4 mb-4"
+              style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px; transition: all 0.3s ease;">
+              <div class="d-flex align-items-start">
+                <div class="service-icon me-3" style="color: #8d6663; font-size: 2rem;">
+                  <i class="fas fa-recycle"></i>
+                </div>
+                <div>
+                  <h4 class="service-title"
+                    style="color: #8d6663; font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem;">ज़ीरो वेस्ट
+                    सेवाएँ:</h4>
+                  <p style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; margin: 0;">
+                    हमारे मुख्य सेवा क्षेत्रों में से एक समुदाय के लिए &#39;ज़ीरो वेस्ट सेवाएँ&#39; हैं,
+                    जिसमें शामिल हैं: प्रशिक्षण, DPR तैयार करना, जागरूकता अभियान चलाना, मोबाईल
+                    कम्युनिटी-रेसिडेंट-सैनिटेशन एप्लिकेशन, और स्वच्छता क्षेत्रों में (ठोस कचरा और अपशिष्ट
+                    जल दोनों के लिए) विशेष रूप से छोटे और विकेंद्रीकृत स्तर पर ज़मीनी स्तर पर काम
+                    करना।
+
+                    सुनई, उत्तर प्रदेश सरकार के शहरी विकास विभाग के साथ 2017-18 में छोटे शहरों के लिए
+                    ठोस अपशिष्ट प्रबंधन सेवाओं हेतु सूचीबद्ध एजेंसियों में से एक है। इसके साथ ही, सुनई
+                    लंदन स्कूल ऑफ़ ईकोनॉमिक्स (LSE) के &#39;सेंटर फ़ॉर ईकोनॉमिक परफ़ॉर्मेंस&#39; के लिए ठोस
+                    अपशिष्ट प्रबंधन के कार्यान्वयन पर आधारित शोध परियोजना &#39;Greening Urban Economy&#39;
+                    में कार्यान्वयन भागीदार भी है।
+                    सुनई ने ग्रामीण क्षेत्रों में स्वच्छता प्रथाओं पर 1000 से अधिक प्रतिभागियों के साथ एक
+                    सर्वेक्षण किया, जिसमें शौचालय की सुविधा, खुले में शौच, अपशिष्ट जल, ठोस कचरा और
+                    स्वच्छता से संबंधित सामुदायिक पहलों जैसे विषयों को शामिल किया गया।
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- M&E and Project Management -->
+            <div class="service-box p-4 mb-4"
+              style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px; transition: all 0.3s ease;">
+              <div class="d-flex align-items-start">
+                <div class="service-icon me-3" style="color: #8d6663; font-size: 2rem;">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <div>
+                  <h4 class="service-title"
+                    style="color: #8d6663; font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem;">M&amp;E और प्रोजेक्ट मैनेजमेंट कंसल्टेंसी:</h4>
+                  <p style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; margin: 0;">
+                    विकास क्षेत्र में सुनई के समृद्ध अनुभवों को देखते
+                    हुए, 2008 से 2011 के बीच सुनई को विश्व बैंक के लिए ग्रामीण विकास विभाग के साथ
+                    &#39;रिफॉर्म सपोर्ट यूनिट&#39; प्रोजेक्ट की कंसल्टेंसी का काम सौंपा गया।
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- IT Solutions -->
+            <div class="service-box p-4 mb-4"
+              style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px; transition: all 0.3s ease;">
+              <div class="d-flex align-items-start">
+                <div class="service-icon me-3" style="color: #8d6663; font-size: 2rem;">
+                  <i class="fas fa-laptop-code"></i>
+                </div>
+                <div>
+                  <h4 class="service-title"
+                    style="color: #8d6663; font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem;">निवासियों के लिए IT समाधान:</h4>
+                  <p style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; margin: 0;">
+                    जैसा की ऊपर चर्चा की गई है, सुनई ने &#39;हम-निवासी&#39; (Ham
+                    Niwasi) कार्यक्रम को विकसित, परीक्षित और कार्यान्वित किया है। इसी क्रम में, निवासियों के
+                    लिए एक व्यापक वेब-आधारित/मोबाईल एप्लिकेशन ( http://niwasi.in एवं Niwasi App) अभी
+                    विकास की प्रक्रिया में है।
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Capacity Building -->
+            <div class="service-box p-4 mb-4"
+              style="background: rgba(139, 105, 20, 0.05); border-left: 4px solid #8d6663; border-radius: 8px; transition: all 0.3s ease;">
+              <div class="d-flex align-items-start">
+                <div class="service-icon me-3" style="color: #8d6663; font-size: 2rem;">
+                  <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div>
+                  <h4 class="service-title"
+                    style="color: #8d6663; font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem;">क्षमता निर्माण सेवाएँ:</h4>
+                  <p style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; margin: 0;">
+                    सुनई ने कभी भी पेशेवर क्षमता निर्माण सेवाओं के क्षेत्र में काम नहीं
+                    किया है, लेकिन हमें विभिन्न मंचों पर प्रशिक्षण प्रदान करने के अवसर अवश्य प्राप्त हुए हैं।
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3 - Reports and Process Manuals -->
+          <div class="reports-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">रिपोर्ट और प्रोसेस मैनुअल:
+            </h3>
+            <div class="content-box p-4" style="background: rgba(139, 105, 20, 0.03); border-radius: 8px;">
+              <p class="mb-3" style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a;">
+                <strong>रिपोर्ट और प्रोसेस मैनुअल: नीचे दी गई रिपोर्ट सुनई टीम ने लिखी हैं।</strong>
+              </p>
+              <ul style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; padding-left: 20px;">
+                <li class="mb-2">प्लान इंटरनेशनल के कार्यान्वयन भागीदार &#39;चेतना विकास&#39; के लिए झारखंड के चार
+                  शहरों में सड़क पर रहने वाले बच्चों की स्थिति।</li>
+                <li class="mb-2">यूनिसेफ बिहार के लिए बिहार में एससी-एसटी स्कूल</li>
+                <li class="mb-2">अखंड ज्योति के लिए 'नेत्र देखभार पर स्थिति रिपोर्ट'</li>
+                <li class="mb-2">मानव प्रक्रिया सर्वेक्षण नियामक (सुनई के अंतरिक उपयोग हेतु)</li>
+                <li class="mb-2">ASER रिपोर्ट विश्लेषण का सारणीकरण</li>
+                <li class="mb-2">विश्व बैंक के लिए बिहार में MGNREGS पर प्रक्रिया दस्तावेज़ीकरण।</li>
+                <li class="mb-2">निवासी सभा अंतरिक प्रक्रिया कार्ति है</li>
+                <li class="mb-0">बिहार के गाँवों में स्वच्छता के प्रति जागरूकता</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Section 4 - Yogdan aur Pramaanpatra -->
+          <div class="contributions-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">योगदान और प्रमाण-पत्र:</h3>
+            <div class="content-box p-4" style="background: rgba(139, 105, 20, 0.03); border-radius: 8px;">
+              <p class="mb-3" style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a;">
+                <strong>प्रकाशित कुछ प्रमुख रिपोर्टें, जिनमें सुनई एक गौरवपूर्ण योगदानकर्ता है।</strong>
+              </p>
+              <ul style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; padding-left: 20px;">
+                <li class="mb-2">गीता किंगडन और मोहम्मद मुज़म्मिल की RECOUP ‘भारत में शिक्षा की
+                  राजनीतिक अर्थव्यवस्था’ प्रोजेक्ट पर रिपोर्ट, जनवरी 2008 </li>
+                <li class="mb-2">शहरी भारत में संकट और रोज़गार की गारंटी, स्वाति ढींगरा* और स्टीफन*, सितंबर 2020</li>
+                <li class="mb-2">2000 के दशक के मध्य में, MIT JPAL ने बिहार में अपना सर्वेक्षण कार्य शुरू किया।
+                  सुनई ने &#39;प्रथम&#39; के &#39;पढ़ना सीखने&#39; संबंधी हस्तक्षेप पर आधारित शोध अध्ययन के लिए
+                  डेटा संग्रह और पायलट परीक्षण का कार्य किया।</li>
+                <li class="mb-2">बदलते भारत के लिए सामाजिक सुरक्षा — विश्व बैंक की रिपोर्ट</li>
+                <li class="mb-2">नांदी ने पूरे भारत में भूख और कुपोषण से लड़ने के लिए एक सर्वेक्षण किया। सुनई
+                  ने इसके लिए ज़रूरी टूल्स बनाने में योगदान दिया और बिहार, उत्तर प्रदेश और बिहार
+                  में 60,000 से ज़्यादा सैंपल लेकर सर्वेक्षण किए।</li>
+                <li class="mb-2">टीनएज गर्ल्स रिपोर्ट (TAG): TAG रिपोर्ट तैयार करने में सुनई एक बार फिर Naandi
+                  का पार्टनर है; इसमें सुनई ने न केवल टूल्स डेवलप करने और पूरे भारत में सर्वे
+                  डिज़ाईन करने में योगदान दिया, बल्कि भारत के 8 राज्यों से डेटा भी इकट्ठा किया।</li>
+                <li class="mb-0">वार्षिक मूल्यांकन शिक्षा रिपोर्ट (ASER, प्रथम)। डेटा विश्लेषण और डेटा प्रबंधन के
+                  क्षेत्र में ASER के सभी संस्करणों का &#39;सुनई&#39; एक गौरवशाली भागीदार है। - सुनई टीम</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Section 5 - Vishisht Clients -->
+          <div class="clients-section mb-5">
+            <h3 class="mb-4" style="color: #8d6663; font-size: 1.8rem; font-weight: 600;">विशिष्ट क्लायंट:</h3>
+            <div class="clients-grid p-4" style="background: rgba(139, 105, 20, 0.03); border-radius: 8px;">
+              <div class="row">
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">एन.सी.ए.ई.आर.</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">आई.डी. इंसाइट</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">मार्ट रूरल</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">ह्यूमन डेवलपमेंट फाउंडेशन (एचडीएफ)</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">प्राईस वाटर हाउस कूपर्स प्राईवेट लिमिटेड</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">नेवेह टेक्नोलॉजी प्राईवेट लिमिटेड</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">क्लिंटन फाउंडेशन</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">जेपीएएल साउथ एशिया (एमआईटी, यूएस)</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">विश्व बैंक</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">यूनिसेफ</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">असर सेंटर और प्रथम,</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">लंदन स्कूल ऑफ़ एजुकेशन</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">ऑक्सफोर्ड विश्वविद्यालय</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">नंदी फाउंडेशन</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">सेंटर फॉर माईक्रो फाईनेंस</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">एजुकेशन रिसोर्स यूनिट</span>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">पेनसिल्वेनिया विश्वविद्यालय</span>
+                  </div>
+                </div>
+                <!-- <div class="col-lg-4 col-md-6 mb-3">
+                  <div class="client-item p-3"
+                    style="background: white; border: 1px solid #d4a574; border-radius: 8px; text-align: center; transition: all 0.3s ease;">
+                    <span style="color: #8d6663; font-weight: 600; font-size: 1rem;">और अन्य</span>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 6 - Team -->
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <h2 class="text-center mb-5" style="color: #8d6663; font-size: 2.2rem; font-weight: 700;">टीम</h2>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <!-- Team Member 1 -->
+        <div class="col-lg-6 col-md-12 mb-4">
+          <div class="team-card"
+            style="background: white; border: 3px solid #d4a574; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+            <h4 class="team-name" style="color: #8d6663; font-size: 1.8rem; font-weight: 700; margin-bottom: 10px;">
+              Pranav Kumar Chaudhary</h4>
+            <p class="team-role" style="color: #d4a574; font-size: 1.1rem; font-style: italic; margin-bottom: 15px;">
+              प्रमुख, सुनाइ कंसल्टेंसी</p>
+            <p class="team-bio" style="font-size: 1rem; line-height: 1.6; color: #4a4a4a;">
+              Sunai की स्थापना करने से पहले, प्रणव ने 6 साल तक Pratham के
+              साथ काम किया। अब उन्हें विकास क्षेत्र में लगभग 20 वर्षों का अनुभव है। वे Sunai
+              Consultancy के प्रमुख हैं। उन्होंने IIT मुंबई से सिविल इंजीनियरिंग में B.Tech. किया है।
+            </p>
+          </div>
+        </div>
+
+        <!-- Team Member 2 -->
+        <div class="col-lg-6 col-md-12 mb-4">
+          <div class="team-card"
+            style="background: white; border: 3px solid #d4a574; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+            <h4 class="team-name" style="color: #8d6663; font-size: 1.8rem; font-weight: 700; margin-bottom: 10px;">
+              Sudhakar Sinha</h4>
+            <p class="team-role" style="color: #d4a574; font-size: 1.1rem; font-style: italic; margin-bottom: 15px;">
+              डायरेक्टर, सुनाइ कंसल्टेंसी</p>
+            <p class="team-bio" style="font-size: 1rem; line-height: 1.6; color: #4a4a4a;">
+              Sunai की स्थापना करने से पहले, सुधाकर 2 साल से भी ज़्यादा समय तक
+              Pratham की राष्ट्रीय ऑपरेशंस टीम के सदस्य रहे थे। उन्होंने कंप्यूटर एप्लीकेशंस में
+              मास्टर्स किया है। वे Sunai Consultancy में डायरेक्टर हैं।
+            </p>
+          </div>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="col-lg-6 col-md-12 mb-4">
+          <div class="team-card"
+            style="background: white; border: 3px solid #d4a574; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+            <h4 class="team-name" style="color: #8d6663; font-size: 1.8rem; font-weight: 700; margin-bottom: 10px;">
+              Vikas Kumar Chaudhary</h4>
+            <p class="team-role" style="color: #d4a574; font-size: 1.1rem; font-style: italic; margin-bottom: 15px;">
+              आईटी सॉल्यूशंस, सुनाइ कंसल्टेंसी </p>
+            <p class="team-bio" style="font-size: 1rem; line-height: 1.6; color: #4a4a4a;">
+              विकास की मुख्य ज़िम्मेदारी Sunai सेवा के लिए IT समाधान
+              विकसित करना है। वे Triline Infotech नामक टेक्नोलॉजी कंपनी के मालिक हैं और उसका
+              नेतृत्व करते हैं। उन्होंने कम्युनिकेशन टेक्नोलॉजी में B.Tech. किया है।
+            </p>
+          </div>
+        </div>
+
+        <!-- Team Member 4 -->
+        <div class="col-lg-6 col-md-12 mb-4">
+          <div class="team-card"
+            style="background: white; border: 3px solid #d4a574; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(139, 105, 20, 0.1); transition: all 0.3s ease;">
+            <h4 class="team-name" style="color: #8d6663; font-size: 1.8rem; font-weight: 700; margin-bottom: 10px;">
+              Satyendra Kumar</h4>
+            <p class="team-role" style="color: #d4a574; font-size: 1.1rem; font-style: italic; margin-bottom: 15px;">
+              फ़ील्ड ऑपरेशंस, सुनाइ कंसल्टेंसी</p>
+            <p class="team-bio" style="font-size: 1rem; line-height: 1.6; color: #4a4a4a;">
+              सत्येंद्र कुमार लगभग 12 वर्षों से &#39;सुनई&#39; (Sunai) के साथ जुड़े हुए हैं, और डेटा
+              संग्रह के कार्य को लागू करने में वे मुख्य व्यक्ति हैं। उन्होंने मगध विश्वविद्यालय से
+              मनोविज्ञान में स्नातक की उपाधि प्राप्त की है।
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Team Info -->
+      <div class="row justify-content-center mt-4">
+        <div class="col-12 col-lg-10">
+          <div class="team-info-box p-4"
+            style="background: rgba(139, 105, 20, 0.05); border-radius: 8px; text-align: center;">
+            <p style="font-size: 1.1rem; line-height: 1.7; color: #4a4a4a; margin: 0;">
+              Sunai के पास प्रशिक्षित और अनुभवी फील्ड सुपरवाईज़रों की एक मज़बूत टीम है, जिसे पूरे
+              भारत के राज्यों में फ्रीलांस फील्ड जांचकर्ताओं के पैनल में शामिल कर्मियों का सहयोग प्राप्त
+              है।
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-3" style="background-color:#f8f9fa; border-top:1px solid #dee2e6;">
+    <div class="container">
+      <p class="mb-0">Privacy Policy , © Copyright Niwasi. All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTop" title="Scroll to Top">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
