@@ -6,7 +6,7 @@
 | Started | 2026-10-01 |
 | Shipped | |
 | SRS row | — |
-| Test cases | TC-HN-01..22 |
+| Test cases | TC-HN-01..23 |
 | Prototype todo | — |
 
 ## 1. Requirement (as given)
@@ -239,6 +239,7 @@ Nothing changes in `apps/api`.
 | TC-HN-16 | Discussion modals | `/ham-niwasi` | Click each of the 3 session buttons; close by ✕, backdrop and रद्द करें | The right modal opens and closes; submit behaves as in TC-HN-15 | M |
 | ~~TC-HN-17~~ | ~~Login link~~ | | | ~~Goes to Niwasi `/login`~~ _Superseded 2026-10-01 by TC-HN-21 (Q3)._ | |
 | TC-HN-22 | Phone layouts (§2.4c) | 375px and 414px wide | Open index, faq, gallery, impact, testimonials; open the drawer and search; swipe the testimonials | No horizontal overflow and nothing clipped. The header is one row (index and faq: the second bar sits below it without covering content). The hero and discussion stack. Testimonials shows one full card per view. At 1440px these pages are unchanged. | H |
+| TC-HN-23 | Phone fields accept only 10 digits (§5, 2026-10-05) | — | On every phone field (7 contact pages, the 3 home-page discussion pop-ups, login), type letters and symbols, paste `+91 98765-43210 abc`, type 12 digits, then submit with 9 digits | Non-digits are dropped as typed or pasted (login keeps letters, for an email), and an 11th digit can't be entered. Submitting with fewer than 10 digits is blocked with "कृपया 10 अंकों का मोबाइल नंबर दर्ज करें". Exactly 10 digits submits as before (nothing sent). | H |
 | TC-HN-21 | Ham Niwasi login page | — | Click लॉगिन in the drawer; type a phone number, then an email; submit empty, then filled | Opens `/ham-niwasi/login` matching `login.html`. The password field appears only for input containing `@`. An empty submit is blocked. A filled submit makes no request and, as in the prototype's simulated login, goes to `/ham-niwasi`. Nobody is logged in. | M |
 | TC-HN-18 | No CSS leak | `/ham-niwasi` loaded first in a tab | Navigate in the same tab to a Niwasi page (e.g. via `/login`) | Niwasi page looks unchanged: no Bootstrap or Ham Niwasi tokens applied | H |
 | TC-HN-19 | Other public pages unchanged | — | Open `/`, `/aboutUs`, `/mitram-rasoi` | Unchanged apart from the new Header and Footer link (Mitram has neither) | H |
@@ -260,6 +261,11 @@ Nothing changes in `apps/api`.
   - Desktop stays as ported.
 - **2026-10-01, arrow choice changed:** "instead of this down arrow the other one was better", with a screenshot of the chevron. The "संपर्क करें" toggle now keeps the **small Bootstrap caret (▾)** and drops the chevron icon. Still one arrow, as asked before; only which one changed.
 - **2026-10-01, improvement:** "make login page correct http://niwasi.abhishek/ham-niwasi/login i dont want this upper part there make it fit in the 1 screen" (screenshot: the empty 120px cream band at the top). `/ham-niwasi/login` drops the layout's 120 / 110px navbar offset, since login has no navbar, and fits in one viewport with no page scroll. This is a deliberate deviation: the prototype's `body{padding-top:120px}` applied to login.html too.
+- **2026-10-05, ship status:** "dont mark it shipped yet because the backend is yet to be created".
+  - On 2026-10-05 the plan had been set to `shipped`, on the strength of the frontend commits (frontend `458461c`; root `110e690` / `dd8f3ac`), and the §3 rows had been copied into `TEST_CASES.md`. **Both are reverted:** status is back to `in-progress`, and the Ham Niwasi block was removed from `TEST_CASES.md`.
+  - The phone-field fix moved from §6 (post-deploy) to §5.
+  - **The feature ships only once its backend exists:** the forms' API, storage and the mirrored validation.
+  - **On ship:** promote TC-HN-01..23 (minus the superseded TC-HN-17) to `TEST_CASES.md`.
 - **2026-10-01, answers:** "all as recommended except 3 port login too just no backend yet".
   - Q1: all pages (27, corrected from 29), as `/ham-niwasi/<page>`.
   - Q2: only add "Ham Niwasi" before "Contact"; the rest of the nav is unchanged.
@@ -381,6 +387,52 @@ Nothing changes in `apps/api`.
 - **2026-10-01, docs:**
   - `docs/frontend/niwasi-portal.md`: a §1 row for `/ham-niwasi`, and 27 All-pages rows (count 212 → 239).
   - `docs/prototype/ham-niwasi/.gitignore` excludes the 2 gallery mp4s (Q7). The copy that was already staged still includes them, so they need unstaging before commit.
+
+#### 2026-10-05: phone fields accept text and more than 10 digits (fix before ship)
+
+> so in the hamniwasi site that we worked on recently
+> there are phone number  fields it is accepting text number more than 10 digits can you fix these issues
+
+**Cause:** the prototype's phone inputs are plain `type="tel"` with no `pattern` or `maxlength`, and the port copied them faithfully. `tel` doesn't restrict characters, so any text and any length passed.
+
+**Fields (all of them):**
+- **The 7 contact pages:** the mobile field in `ContactFields.tsx` (`ContactPersonRows`), plus contact-business's "सम्पर्क व्यक्ति मोबाइल नंबर".
+- **The home page:** the 3 discussion pop-ups in `HomeDiscussion.tsx`.
+- **Login:** "ईमेल या फ़ोन नंबर" in `LoginForm.tsx`.
+
+**Rule:** the repo-wide convention, `/^\d{10}$/` (e.g. `components/public/SignupForm.tsx`, `CommunityUserForm.tsx`):
+- **While typing:** non-digits are stripped on input and paste, and `maxLength=10` stops an 11th digit. `inputMode="numeric"` brings up the phone keypad.
+- **On submit:** fewer than 10 digits is blocked with "कृपया 10 अंकों का मोबाइल नंबर दर्ज करें" through the browser's validity bubble, like the existing `required` messages.
+- **Message:** Hindi, matching this all-Hindi site, and not wrapped in `t()` (§2.1 exemption).
+
+**Implementation:** one shared client component, `_components/PhoneInput.tsx`, used by all phone fields. It stays uncontrolled, so the forms' existing reset keeps working.
+
+**Login, a choice made without asking (flagged to the user):** the field takes an email *or* a phone, so letters can't be stripped there.
+- **All digits:** treated as a phone. It's capped at 10 digits and must be exactly 10.
+- **Anything else:** must look like an email (contain `@`); otherwise the message is "कृपया सही ईमेल या 10 अंकों का मोबाइल नंबर दर्ज करें".
+- **Prototype quirk fixed:** text that was neither email nor digits used to block submit silently (§5, batch B). It now shows that message.
+
+**Backend:** none yet (frontend-only site). When these forms get an API, its validation must mirror this rule (AGENTS.md sync rule).
+
+**Test case:** TC-HN-23 (§3).
+
+**Built and verified 2026-10-05:**
+- **New file:** `_components/PhoneInput.tsx`, used by `ContactInput` (`type="tel"`) on all 7 contact pages and by the 3 `HomeDiscussion` modals. `LoginForm` uses the same `toPhoneDigits` and `PHONE_MESSAGE`.
+- **TC-HN-23 PASS (Playwright), on each of the 10 phone fields:**
+  - typed `ab12cd34!@ 56` keeps `123456`;
+  - 12 typed digits stop at `1234567890`;
+  - a pasted `+91 98765-43210 abc` becomes `9876543210`;
+  - 9 digits is invalid with "कृपया 10 अंकों का मोबाइल नंबर दर्ज करें", and a real submit shows no success state and makes no non-GET request;
+  - 10 digits is valid.
+- **Login:**
+  - `123456789012` becomes `1234567890` (valid);
+  - `98765 43210` becomes `9876543210` (valid);
+  - `987654321` shows the phone message;
+  - `abc` shows the email-or-phone message;
+  - `a@b.com` is valid;
+  - 10 digits then submit goes to `/ham-niwasi`.
+- **Checks:** `tsc` exit 0, `eslint` exit 0.
+- **Shipping:** TC-HN-23 is promoted with the rest of §3 when the feature ships.
 
 ## 6. Post-deploy
 
