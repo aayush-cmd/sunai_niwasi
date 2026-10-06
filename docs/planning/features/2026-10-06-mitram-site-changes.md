@@ -2,9 +2,9 @@
 
 | Field | Value |
 |---|---|
-| Status | in-progress |
+| Status | shipped |
 | Started | 2026-10-06 |
-| Shipped | |
+| Shipped | 2026-10-06 (frontend `e8fb3cb`, root `cd437c4`, merged to `main` and pushed) |
 | SRS row | — |
 | Test cases | TC-MTC-01..20 |
 | Prototype todo | — |
@@ -273,6 +273,11 @@ Replace `docs/prototype/mitram/` with the updated prototype (`README.md` + `desi
   - **Awaiting:** the user's explicit go-ahead to implement changes 4–5.
 - **2026-10-06, go-ahead for changes 4–5:** "yes".
 
+- **2026-10-06, shipped:** "i have pushed and merged the code with main".
+  - Status set to `shipped` (frontend `e8fb3cb`, root `cd437c4`).
+  - §3 rows TC-MTC-01..20 copied verbatim to `docs/testing/TEST_CASES.md`.
+  - **Open item carried over:** the video `preload` question (Chrome fetches about 1 MB per video before play) is unanswered; it stays as built.
+
 ## 5. Execution log
 
 - **2026-10-06:** the new prototype was compared with the shipped copy. The header and drawer brand markup changed (text only); the footer brand didn't. Planning file created.
@@ -354,5 +359,8 @@ _None yet._
 ## 7. Cross-references
 
 - Parent feature: [2026-10-06-mitram-site.md](2026-10-06-mitram-site.md)
-- TEST_CASES: TC-MTC-* (promote on ship)
-- Page maps: none for changes 1–3 (no page added or removed). `docs/frontend/mitram-portal.md` descriptions get updated for Bulk (booking form) and for the pages with the new order section.
+- TEST_CASES: TC-MTC-01..20, promoted from §3 on ship (2026-10-06)
+- Config: `apps/frontend/app/(mitram)/mitram/_components/siteConfig.ts` (page on/off, routes, menus)
+- Page maps: `docs/frontend/mitram-portal.md` (header brand, order section, Bulk booking form, Catering videos, Kitchen hidden, siteConfig note); no page added or removed; no API change
+- Prototype: `docs/prototype/mitram/` (replaced with the new version; `*.mp4` gitignored there, committed once in `public/mitram/videos/`)
+- Commits: frontend `e8fb3cb` "feat(mitram): apply 5 prototype changes — …"; root `cd437c4` "feat(mitram): bump frontend for the 5 Mitram changes; update prototype, page map and plan"

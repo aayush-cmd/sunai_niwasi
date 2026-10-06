@@ -337,3 +337,32 @@ Plan: `docs/planning/features/2026-10-06-mitram-site.md` (shipped 2026-10-06). N
 | TC-MT-18 | No style leak | — | Load a Mitram page, then a Niwasi page in the same tab | The Niwasi page looks unchanged (scoped CSS module only) | M |
 | TC-MT-19 | No external requests | — | Load each page with DevTools Network open | No Google Fonts or CDN request; no `/api` call | M |
 | TC-MT-20 | Tab identity | — | Look at the browser tab on each page | "मित्रम — <page>" title and the Mitram favicon | L |
+
+## Mitram website: changes after ship
+
+Plan: `docs/planning/features/2026-10-06-mitram-site-changes.md` (shipped 2026-10-06). Notes from ship:
+- TC-MTC-15: Chrome fetches the first ~1 MB of each video before play even with `preload="metadata"`.
+- TC-MTC-16 to TC-MTC-19 assume `kitchen.enabled = false` in `siteConfig.ts`.
+
+| TC-ID | Title | Pre-condition | Steps | Expected Result | Priority |
+|---|---|---|---|---|---|
+| TC-MTC-01 | Header brand is text only | — | Open any page at 1440px | The header shows only "मित्रम" (display font, maroon, 30px): no logo image and no "घर जैसा भोजन". Matches the new board. | H |
+| TC-MTC-02 | Header brand on phones | ≤900px | Open any page at 390px | Only "मित्रम" at 24px. The header row is otherwise unchanged (menu and call buttons). | H |
+| TC-MTC-03 | Drawer brand | ≤900px | Open ☰ | The drawer header shows only "मित्रम" and the ✕ button, with no logo image. | M |
+| TC-MTC-04 | Brand still scrolls to top | — | On the home page, scroll down and click "मित्रम"; then click it from `/kitchen` | Smooth scroll to top with no hash; from Kitchen it goes to `/` (unchanged behaviour). | M |
+| TC-MTC-05 | Footer and favicon unchanged | — | Look at the footer and the browser tab | The footer still shows the logo image; the tab still shows the Mitram favicon. | L |
+| TC-MTC-06 | New order section replaces the 20% band | — | Open `/`, `/services`, `/bulk`, `/catering`, `/laddoo`, `/sankranti` at 1440 and 390px | Each shows the new section exactly as the board: "अभी ऑर्डर करें", the yellow phone pill (tel: link), address, FSSAI, the 20% banner image, the line of text, the Ham Niwasi logo and the QR with "स्कैन करें". No maroon 20% band anywhere. | H |
+| TC-MTC-07 | Pages without the section | — | Open `/kitchen`, `/sammilit`, `/rasoi` | No order section and no 20% band (as in the boards) | M |
+| TC-MTC-08 | Bulk page layout | — | Compare `/bulk` with the new board at 1440 and 390px | Hero (new copy, white and WhatsApp-outline buttons, card), the ₹48 block, the calculator and bill, then the order section. The old menu cards and services section are gone. | H |
+| TC-MTC-09 | Bulk calculator | — | People 20 → +5 → −5 (floor 20), type 15; switch utensils and pickup; staff 0 → 2 | Bill lines and total exactly as the board's script (e.g. 25 people, our utensils, delivery, 2 staff: food ₹1,200, utensils ₹75, delivery ₹125, staff ₹1,400–2,000, total as a range). The under-20 note and the delivery-fare note show as on the board. | H |
+| TC-MTC-10 | Booking pop-up opens | — | With 15 people click "WhatsApp पर ऑर्डर भेजें"; then with 20 | Under 20: red toast "कम से कम 20 लोगों का ऑर्डर चुनें।" and no pop-up. At 20: the pop-up "बल्क ऑर्डर बुक करें" opens. | H |
+| TC-MTC-11 | Booking validation | Pop-up open | Submit empty; then only the mobile wrong; then a past date | Red fields plus the board's toasts ("लाल घेरे वाले खाने भरें।", "सही 10 अंकों का मोबाइल नंबर डालें।", "आज या आगे की तारीख़ चुनें।"). With delivery chosen, पता is required. | H |
+| TC-MTC-12 | Mobile field input | Pop-up open | Type letters and 12 digits; paste "+91 98765 43210" | Only digits, at most 10; a pasted +91 is dropped (user's standing rule) | H |
+| TC-MTC-13 | Booking done, nothing sent | Valid form | Submit; watch the network; click "WhatsApp पर भेजें" | "बुकिंग तैयार है" with a `BK-…` number, the summary and total; the WhatsApp link opens wa.me with the booking text; **no non-GET request** from the site | H |
+| TC-MTC-14 | Catering videos | — | Open `/catering` at 1440 and 390px; scroll to "हाल के आयोजन" | 4 videos with posters and captions, in the board's tall/wide layout (two columns on desktop, one on phones, tall ones max 300px wide), then "तस्वीरें" and the photo gallery | H |
+| TC-MTC-15 | Videos play, nothing preloaded | — | Load `/catering` (network open); press play on each | Only metadata loads before play; each video plays with native controls; `playsinline` on phones | M |
+| TC-MTC-16 | Kitchen page hidden | Kitchen disabled | Open `/kitchen` directly | 404 (no Mitram Kitchen page) | H |
+| TC-MTC-17 | Kitchen gone from the menus | Kitchen disabled | Open the सेवाएँ dropdown, the mobile drawer and the footer | Kitchen isn't listed; the other 6 services are, in the same order | H |
+| TC-MTC-18 | No links lead to Kitchen | Kitchen disabled | Crawl every page; collect hrefs | No link to `/kitchen` anywhere (banner, cards, units, locations, services) | H |
+| TC-MTC-19 | Static Kitchen cards | Kitchen disabled | Home services grid and the Services page; hover and click the Kitchen card/row | Not a link, no "देखें और ऑर्डर करें" / "देखें", no hover lift or shadow; the other cards keep their link and hover | H |
+| TC-MTC-20 | One switch restores Kitchen | Set `kitchen.enabled = true` in `siteConfig.ts` | Repeat TC-MTC-16..19 | Everything is back as it was before this change | M |
