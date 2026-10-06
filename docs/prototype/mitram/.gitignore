@@ -1,0 +1,4 @@
+# The prototype's Catering videos (9.5 MB) are committed once, in
+# apps/frontend/public/mitram/videos/ (where the site serves them), not here too.
+# Plan: docs/planning/features/2026-10-06-mitram-site-changes.md (Q7).
+*.mp4

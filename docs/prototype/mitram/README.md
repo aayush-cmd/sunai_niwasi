@@ -33,7 +33,7 @@ Use the **Page** dropdown to jump between pages and **Desktop / Mobile** to swit
 | `design/canvas/*.dc.html` | Source boards from the Claude Design canvas (9 desktop + 9 mobile) |
 | `design/canvas/canvas.json` | Canvas layout for the Mitram page (board names, sizes, order) |
 | `design/canvas/support.js` | Runtime that renders the `.dc.html` boards |
-| `design/canvas/img/` | Food, logo and banner images used by the boards (82 files) |
+| `design/canvas/img/` | Food, logo and banner images and the catering videos used by the boards (86 files). Keep this folder next to `index.html`: the catering videos play from here. |
 
 Data in the prototype is sample data; orders and enquiries are not saved.
 

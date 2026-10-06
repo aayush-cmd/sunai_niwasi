@@ -3,7 +3,7 @@
  "attachments": {},
  "boards": {
   "Mitram-Bulk.dc.html": {
-   "h": 2416,
+   "h": 2440,
    "is_interactive": true,
    "page": "page-igfkwv",
    "title": "Mitram · सेवा: ₹48 बल्क भोजन",
@@ -12,7 +12,7 @@
    "y": 120
   },
   "Mitram-Catering.dc.html": {
-   "h": 6068,
+   "h": 7697,
    "is_interactive": true,
    "page": "page-igfkwv",
    "title": "Mitram · सेवा: कैटरिंग",
@@ -21,7 +21,7 @@
    "y": 120
   },
   "Mitram-Home.dc.html": {
-   "h": 4435,
+   "h": 4714,
    "is_interactive": true,
    "page": "page-igfkwv",
    "title": "Mitram · होम",
@@ -39,7 +39,7 @@
    "y": 120
   },
   "Mitram-Laddoo.dc.html": {
-   "h": 2713,
+   "h": 3033,
    "is_interactive": true,
    "page": "page-igfkwv",
    "title": "Mitram · सेवा: मित्रम लड्डू",
@@ -48,7 +48,7 @@
    "y": 120
   },
   "Mitram-M-Bulk.dc.html": {
-   "h": 4428,
+   "h": 3753,
    "is_interactive": true,
    "page": "page-igfkwv",
    "title": "Mitram · सेवा: ₹48 बल्क भोजन (मोबाइल)",
@@ -57,7 +57,7 @@
    "y": 120
   },
   "Mitram-M-Catering.dc.html": {
-   "h": 7701,
+   "h": 8000,
    "is_interactive": true,
    "page": "page-igfkwv",
    "title": "Mitram · सेवा: कैटरिंग (मोबाइल)",
@@ -66,7 +66,7 @@
    "y": 120
   },
   "Mitram-M-Home.dc.html": {
-   "h": 7228,
+   "h": 7556,
    "is_interactive": true,
    "page": "page-igfkwv",
    "title": "Mitram · होम (मोबाइल)",
@@ -84,7 +84,7 @@
    "y": 120
   },
   "Mitram-M-Laddoo.dc.html": {
-   "h": 5270,
+   "h": 5639,
    "is_interactive": true,
    "page": "page-igfkwv",
    "title": "Mitram · सेवा: मित्रम लड्डू (मोबाइल)",
@@ -111,7 +111,7 @@
    "y": 120
   },
   "Mitram-M-Sankranti.dc.html": {
-   "h": 6967,
+   "h": 6766,
    "is_interactive": true,
    "page": "page-igfkwv",
    "title": "Mitram · सेवा: दही-चूड़ा · मकर संक्रांति (मोबाइल)",
@@ -120,7 +120,7 @@
    "y": 120
   },
   "Mitram-M-Services.dc.html": {
-   "h": 4921,
+   "h": 5265,
    "is_interactive": true,
    "page": "page-igfkwv",
    "title": "Mitram · सेवाएँ (मोबाइल)",
@@ -147,7 +147,7 @@
    "y": 120
   },
   "Mitram-Sankranti.dc.html": {
-   "h": 4840,
+   "h": 4787,
    "is_interactive": true,
    "page": "page-igfkwv",
    "title": "Mitram · सेवा: दही-चूड़ा · मकर संक्रांति",
@@ -156,7 +156,7 @@
    "y": 120
   },
   "Mitram-Services.dc.html": {
-   "h": 2617,
+   "h": 2937,
    "is_interactive": true,
    "page": "page-igfkwv",
    "title": "Mitram · सेवाएँ",

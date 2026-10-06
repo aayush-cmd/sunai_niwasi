@@ -11,22 +11,25 @@ then confirmed by phone (the order pop-up shows the summary and a call button; n
   the user sees.** To find the file, prepend `app/(mitram)/mitram/`. The internal `/mitram` path
   can't be opened on `niwasi.in` (it redirects to `/`).
 - **Source design:** the prototype boards in `docs/prototype/mitram/design/canvas/`.
-- **Plan:** `docs/planning/features/2026-10-06-mitram-site.md`.
+- **Plan:** `docs/planning/features/2026-10-06-mitram-site.md`; later changes in `docs/planning/features/2026-10-06-mitram-site-changes.md`.
+- **Pages on/off:** `_components/siteConfig.ts` is the one place that maps pages to routes and turns a page off. A disabled page returns 404, leaves every menu, and the cards that link to it render static.
 - **Every page** is listed, with its count, in [All pages](#all-pages) at the end.
 
 ## Pages
 
-Every page shares the same header (होम, सुनई के बारे में, the सेवाएँ menu with the 7 services, the
-call button; a slide-in menu on phones) and footer.
+Every page shares the same header (the text brand "मित्रम", होम, सुनई के बारे में, the सेवाएँ menu with
+the 7 services, the call button; a slide-in menu on phones) and footer. Home, Services, Bulk,
+Catering, Laddoo and Sankranti also share the order section ("अभी ऑर्डर करें": the phone number, the
+address, FSSAI, the 20% campaign banner, and the हम निवासी logo and QR code).
 
 | URL | Page |
 |---|---|
-| `/` | Home: the 7-slide banner carousel, the services, about Sunai (`/#about`) and the Ham Niwasi campaign, Mitram's units, the 20% Ham Niwasi band, the two kitchens' locations |
+| `/` | Home: the 7-slide banner carousel, the services, about Sunai (`/#about`) and the Ham Niwasi campaign, Mitram's units, the order section, the two kitchens' locations |
 | `/services` | All services, with filter chips (daily / event / sweets) |
-| `/kitchen` | मित्रम किचन — रोज़ का भोजन: the full daily menu (thali, breakfast, non-veg, Chinese, monthly tiffin) with quantities, a cart and the order pop-up |
-| `/bulk` | ₹48 भोजन — बल्क ऑर्डर: the bulk meal cost calculator (20 people or more) and order |
+| `/kitchen` | **Hidden for now: returns 404** (`siteConfig.ts`: `kitchen.enabled = false`). It's not in the menus, and the cards that point to it are static. When enabled: मित्रम किचन — रोज़ का भोजन: the full daily menu (thali, breakfast, non-veg, Chinese, monthly tiffin) with quantities, a cart and the order pop-up |
+| `/bulk` | ₹48 भोजन — बल्क ऑर्डर: the bulk meal cost calculator (20 people or more: utensils, pickup or delivery, serving staff) with an estimated bill, and a booking form (name, mobile, date, people, address for delivery) that ends in a WhatsApp message. Nothing is sent by the site. |
 | `/sammilit` | सम्मिलित प्रयास पैकेज: event meal packages (puja, bhandara, sabha, functions) that build an order slip |
-| `/catering` | मित्रम किचन कैटरिंग: catering packages, menus and order |
+| `/catering` | मित्रम किचन कैटरिंग: catering packages, menus and order, plus "हाल के आयोजन" with 4 event videos (served from `public/mitram/videos/`) and the photo gallery |
 | `/rasoi` | मित्रम रसोई, बलिया: the vegetarian restaurant in Ballia, open 24×7, with its hall for 80–100 guests |
 | `/laddoo` | मित्रम लड्डू: laddoo varieties by weight, and order |
 | `/sankranti` | दही-चूड़ा · मकर संक्रांति: curd, chura, tilkut and family gift packs, and order |
@@ -43,7 +46,7 @@ by hand (see the docs rule in `AGENTS.md`).
 | `/` | Page | `app/(mitram)/mitram/page.tsx` |
 | `/bulk` | Page | `app/(mitram)/mitram/bulk/page.tsx` |
 | `/catering` | Page | `app/(mitram)/mitram/catering/page.tsx` |
-| `/kitchen` | Page | `app/(mitram)/mitram/kitchen/page.tsx` |
+| `/kitchen` | Page (disabled: 404) | `app/(mitram)/mitram/kitchen/page.tsx` |
 | `/laddoo` | Page | `app/(mitram)/mitram/laddoo/page.tsx` |
 | `/rasoi` | Page | `app/(mitram)/mitram/rasoi/page.tsx` |
 | `/sammilit` | Page | `app/(mitram)/mitram/sammilit/page.tsx` |
