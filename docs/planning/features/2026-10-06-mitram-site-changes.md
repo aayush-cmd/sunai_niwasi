@@ -354,7 +354,21 @@ Replace `docs/prototype/mitram/` with the updated prototype (`README.md` + `desi
 
 ## 6. Post-deploy
 
-_None yet._
+### 2026-10-06: Kitchen card address hidden on phones
+
+> this adderess disappears in the mobile view can you make it so it doesnt meaning dont hide this address in the mobile screen
+> SBI बैंक बाज़ार समिति ब्रांच के नज़दीक, बहादुरपुर, पटना
+
+**Cause:** the Home services-grid cards hide their description at ≤900px. That's the boards' `.svc-card p` rule, and the static Kitchen card copied the same `[@media(max-width:900px)]:hidden`. Since the address replaced the description there, it disappeared on phones.
+
+**Fix:** remove the ≤900px hide from the **static Kitchen card's** text only, so the address shows at every width. The other cards keep the board's mobile behaviour (descriptions hidden), and the Services page row already shows it.
+
+This is a deliberate deviation from the board: the new board hides it on phones too. Requested by the user.
+
+**Built:**
+- **Code (`page.tsx`):** the static card's `<p>` no longer has `[@media(max-width:900px)]:hidden`. At ≤900px it's 13px (the size the board uses for small card text on phones, e.g. the CTA card), and 14.5px on desktop as before.
+- **Verified on :3016:** at 390px the address shows (display block, 13px, card 216px tall, sitting well in the 2-column grid); the other cards' descriptions are still hidden on phones, as in the board. At 1440px it's unchanged (14.5px).
+- **Checks:** `eslint` clean.
 
 ## 7. Cross-references
 
