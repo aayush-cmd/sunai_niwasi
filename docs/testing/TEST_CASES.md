@@ -310,3 +310,30 @@ Source: [2026-09-30-daily-meal-income-report.md](../planning/features/2026-09-30
 | TC-DMI-38 | CSV tricky text | A remark with `a, b; "c"` and a newline | Open the CSV | Stays in its own column | H |
 | TC-DMI-39 | Timestamps | — | Create then edit; check the DB | Correct times (no 5h30m skew); edit changes only `updated_*` | L |
 | TC-DMI-40 | Translation wrapped | i18n on; some Hindi labels entered (e.g. "Remarks" → विवरणी) | Switch to हिं | Those labels in Hindi; the data and CSV headers unchanged | L |
+
+## Mitram website
+
+Plan: `docs/planning/features/2026-10-06-mitram-site.md` (shipped 2026-10-06). Notes from ship: TC-MT-12 is not applicable (the prototype has no mobile fields); TC-MT-01 was verified with the `Host` header against the dev server, and a browser visit needs the local `/etc/hosts` and nginx entries.
+
+| TC-ID | Title | Pre-condition | Steps | Expected Result | Priority |
+|---|---|---|---|---|---|
+| TC-MT-01 | Mitram host serves the site | Local host set up (§2.2) | Open `http://mitram.niwasi.abhishek/` | The Mitram home page, with no Niwasi header or footer and no prototype maroon bar | H |
+| TC-MT-02 | Every page reachable | — | Open `/`, `/services`, `/kitchen`, `/bulk`, `/sammilit`, `/catering`, `/rasoi`, `/laddoo`, `/sankranti` on the Mitram host | Each returns 200 with the board's title | H |
+| TC-MT-03 | Internal path guarded | — | Open `http://niwasi.abhishek/mitram` and `/mitram/kitchen` | Redirect to `/` on niwasi; never the Mitram page | H |
+| TC-MT-04 | Other hosts unaffected | — | Open `niwasi.abhishek/`, `/mitram-rasoi`, `partner.…/`, `event.…/` | Unchanged | H |
+| TC-MT-05 | Desktop fidelity | Board open side by side | Compare each page with its board at 1440px | Same sections, order, copy, prices, colours, images | H |
+| TC-MT-06 | Mobile fidelity | — | Compare each page with its board at 390px | Same responsive layout (1180 / 900 / 560px breakpoints); no horizontal overflow | H |
+| TC-MT-07 | Header nav and active link | — | Visit each page | होम / सुनई के बारे में / सेवाएँ, with the current page marked as in the board; the सेवाएँ dropdown lists the 7 services and links correctly | H |
+| TC-MT-08 | Mobile drawer | ≤900px | Open ☰; tap a service; open again and close via ✕ and the backdrop | Drawer opens and closes; links navigate and close it | H |
+| TC-MT-09 | Home banner carousel | — | Wait; use the arrows, chips and pause | Slides advance and controls work as in the board | M |
+| TC-MT-10 | Kitchen cart | — | Add items with +, change quantity, remove | Totals update as in the board; the cart lists the lines | H |
+| TC-MT-11 | Order pop-up validation | Items in cart | Open the order; submit empty; then with a 9-digit, then a `5…` mobile | Red fields and the board's toasts ("लाल घेरे वाले खाने भरें।", "सही 10 अंकों का मोबाइल नंबर डालें।"); it doesn't submit | H |
+| TC-MT-12 | Mobile field input | — | Type letters and 12 digits; paste `+91 98765 43210` | Only digits are kept, at most 10; a pasted `+91` is dropped | H |
+| TC-MT-13 | Order "submit" sends nothing | Valid order | Submit; watch the network | A simulated `MT-…` number, a WhatsApp link with the order text, and a call link; **no non-GET request** | H |
+| TC-MT-14 | Clear and undo | Items in cart | Clear the order; then Undo | Cart cleared with the "ऑर्डर हटा दिया गया।" toast; Undo restores it | M |
+| TC-MT-15 | Bulk calculator | — | Change the people count and options | Cost recomputes as in the board's script; the minimum of 20 is respected | H |
+| TC-MT-16 | Sammilit builder | — | Pick an occasion, menu and cooking option | The slip and total match the board's script | H |
+| TC-MT-17 | Catering, Rasoi, Laddoo, Sankranti flows | — | Use each page's selection and enquiry or order | Behaves as in its board; the forms send nothing | H |
+| TC-MT-18 | No style leak | — | Load a Mitram page, then a Niwasi page in the same tab | The Niwasi page looks unchanged (scoped CSS module only) | M |
+| TC-MT-19 | No external requests | — | Load each page with DevTools Network open | No Google Fonts or CDN request; no `/api` call | M |
+| TC-MT-20 | Tab identity | — | Look at the browser tab on each page | "मित्रम — <page>" title and the Mitram favicon | L |

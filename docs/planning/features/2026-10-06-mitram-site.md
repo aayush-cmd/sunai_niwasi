@@ -2,9 +2,9 @@
 
 | Field | Value |
 |---|---|
-| Status | in-progress |
+| Status | shipped |
 | Started | 2026-10-06 |
-| Shipped | |
+| Shipped | 2026-10-06 (frontend `4a270e8`, root `e95a699`, merged to `main` and pushed) |
 | SRS row | — |
 | Test cases | TC-MT-01..20 |
 | Prototype todo | — |
@@ -269,6 +269,10 @@ Same as Ham Niwasi:
 
 - **2026-10-06, user verification:** "ok i verified all the pages and everything against the prototype and as much as i have seen everything seems to match". All 9 pages were checked by the user against the prototype. Status stays `in-progress` until the user says it's shipped.
 
+- **2026-10-06, shipped:** "so the code has been merged with the main branch and push", clarified as "we recently worked on mitram so that is why i was telling you i have merged the code to main and pushed so you could complete the rest process after the push".
+  - Status set to `shipped` (frontend `4a270e8`, root `e95a699`).
+  - §3 rows TC-MT-01..20 copied verbatim to `docs/testing/TEST_CASES.md`.
+
 ## 5. Execution log
 
 - ~~**2026-10-06, shell built:**~~ _Reverted the same day at the user's request (see §4). Kept as a record of what was tried and found._
@@ -405,5 +409,8 @@ _None yet._
 ## 7. Cross-references
 
 - Pattern: [2026-10-01-ham-niwasi-site.md](2026-10-01-ham-niwasi-site.md), [2026-09-24-mitram-rasoi-page.md](2026-09-24-mitram-rasoi-page.md)
-- Routing precedent: `apps/frontend/proxy.ts` (partner / event hosts)
-- Page map: `docs/frontend/mitram-portal.md` (new)
+- Routing: `apps/frontend/proxy.ts` (`isMitramHost`, `/mitram` guard); documented in `apps/frontend/README.md` (multi-domain routing)
+- TEST_CASES: TC-MT-01..20, promoted from §3 on ship (2026-10-06)
+- Page maps / API docs updated: `docs/frontend/mitram-portal.md` (new) and `AGENTS.md` (page-map rule); no API change
+- Prototype: `docs/prototype/mitram/`
+- Commits: frontend `4a270e8` "feat(mitram): Add Mitram site pages and proxy configuration"; root `e95a699` "feat(mitram): add mitram prototype and add planning doc for its implementation"
