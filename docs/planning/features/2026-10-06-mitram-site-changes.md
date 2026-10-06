@@ -370,6 +370,30 @@ This is a deliberate deviation from the board: the new board hides it on phones 
 - **Verified on :3016:** at 390px the address shows (display block, 13px, card 216px tall, sitting well in the 2-column grid); the other cards' descriptions are still hidden on phones, as in the board. At 1440px it's unchanged (14.5px).
 - **Checks:** `eslint` clean.
 
+### 2026-10-06: Bulk booking pop-up buttons cut off on a phone
+
+> ok this form looks like this in my phone
+> it  button are overflowing out of the screen and there is no scroll
+
+_(Screenshot from a real Android phone on https://mitram.niwasi.in/bulk: the "बल्क ऑर्डर बुक करें" pop-up fills the screen. The bottom bar with the call and "WhatsApp पर बुक करें" buttons is cut off at the bottom edge, and the pop-up doesn't scroll.)_
+
+**Cause:** on phones the pop-up is full screen at `height: 100vh` (the board's own rule, ported as `h-screen`).
+- **Why that's wrong on phones:** mobile browsers resolve `100vh` to the height with the address bar **hidden**. While the bar shows, the pop-up is taller than the visible area. Its bottom bar (the call and "WhatsApp पर बुक करें" buttons) sits below the screen edge, and since the form itself fits inside that too-tall box, there's nothing to scroll.
+- **Not reproducible in headless Playwright,** which has no address bar (there `100vh` = the visible height). Checked at 390×640 and 360×560: the buttons were visible and the body scrolled.
+- **First suspicion ruled out:** a missing `min-h-0` on the scrolling body. That wasn't it; an `overflow:auto` flex item can already shrink.
+
+**Fix:**
+- **`BulkCalc.tsx`:** the pop-up's ≤900px height is `h-dvh max-h-dvh` (100dvh, the *dynamic* viewport height, which tracks the address bar). Confirmed in the compiled CSS: `height: 100dvh; max-height: 100dvh`.
+- **Same cause, fixed in the same change:**
+  - `MtHeader`'s ≤900px drawer is `h-dvh` (was `h-screen`), so its last item, the call button, can't sit below the screen;
+  - `OrderModal`'s ≤900px bottom-sheet cap is `max-h-[92dvh]` (was 92vh).
+- **Left as they are:** the full-screen scrim (taller than visible is harmless), the desktop-only `calc(100vh-40px)` caps, the gallery lightbox image `70vh`, and the layout's `min-h-screen`.
+
+**Verified on :3016:**
+- **Regression check at 390×700 (mobile emulation):** the drawer is 700px with the call button in view; the Bulk pop-up is 700px with the WhatsApp button bottom at 686.
+- **Checks:** `eslint` clean.
+- **The real address-bar case needs the user's phone** to confirm: open `/bulk` → "WhatsApp पर ऑर्डर भेजें" and check the bottom buttons show.
+
 ## 7. Cross-references
 
 - Parent feature: [2026-10-06-mitram-site.md](2026-10-06-mitram-site.md)
