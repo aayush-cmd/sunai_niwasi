@@ -34,6 +34,7 @@ below.
   - a page on `niwasi.in` → `docs/frontend/niwasi-portal.md`
   - a page on `partner.niwasi.in` → `docs/frontend/partner-portal.md`
   - a page on `event.niwasi.in` → `docs/frontend/event-portal.md`
+  - a page on `mitram.niwasi.in` → `docs/frontend/mitram-portal.md`
   - an endpoint, a new module or router mount, a new auth/permission middleware, or a change to
     the response/error shape → `docs/api/api-structure.md`
 

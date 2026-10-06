@@ -1,0 +1,232 @@
+{
+ "v": 3,
+ "attachments": {},
+ "boards": {
+  "Mitram-Bulk.dc.html": {
+   "h": 2416,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवा: ₹48 बल्क भोजन",
+   "w": 1440,
+   "x": 4800,
+   "y": 120
+  },
+  "Mitram-Catering.dc.html": {
+   "h": 6068,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवा: कैटरिंग",
+   "w": 1440,
+   "x": 8000,
+   "y": 120
+  },
+  "Mitram-Home.dc.html": {
+   "h": 4435,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · होम",
+   "w": 1440,
+   "x": 0,
+   "y": 120
+  },
+  "Mitram-Kitchen.dc.html": {
+   "h": 6766,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवा: मित्रम किचन — रोज़ का भोजन",
+   "w": 1440,
+   "x": 3200,
+   "y": 120
+  },
+  "Mitram-Laddoo.dc.html": {
+   "h": 2713,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवा: मित्रम लड्डू",
+   "w": 1440,
+   "x": 11200,
+   "y": 120
+  },
+  "Mitram-M-Bulk.dc.html": {
+   "h": 4428,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवा: ₹48 बल्क भोजन (मोबाइल)",
+   "w": 390,
+   "x": 16210,
+   "y": 120
+  },
+  "Mitram-M-Catering.dc.html": {
+   "h": 7701,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवा: कैटरिंग (मोबाइल)",
+   "w": 390,
+   "x": 17150,
+   "y": 120
+  },
+  "Mitram-M-Home.dc.html": {
+   "h": 7228,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · होम (मोबाइल)",
+   "w": 390,
+   "x": 14800,
+   "y": 120
+  },
+  "Mitram-M-Kitchen.dc.html": {
+   "h": 7216,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवा: मित्रम किचन — रोज़ का भोजन (मोबाइल)",
+   "w": 390,
+   "x": 15740,
+   "y": 120
+  },
+  "Mitram-M-Laddoo.dc.html": {
+   "h": 5270,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवा: मित्रम लड्डू (मोबाइल)",
+   "w": 390,
+   "x": 18090,
+   "y": 120
+  },
+  "Mitram-M-Rasoi.dc.html": {
+   "h": 5318,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवा: मित्रम रसोई, बलिया (मोबाइल)",
+   "w": 390,
+   "x": 17620,
+   "y": 120
+  },
+  "Mitram-M-Sammilit.dc.html": {
+   "h": 5270,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवा: सम्मिलित प्रयास पैकेज (मोबाइल)",
+   "w": 390,
+   "x": 16680,
+   "y": 120
+  },
+  "Mitram-M-Sankranti.dc.html": {
+   "h": 6967,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवा: दही-चूड़ा · मकर संक्रांति (मोबाइल)",
+   "w": 390,
+   "x": 18560,
+   "y": 120
+  },
+  "Mitram-M-Services.dc.html": {
+   "h": 4921,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवाएँ (मोबाइल)",
+   "w": 390,
+   "x": 15270,
+   "y": 120
+  },
+  "Mitram-Rasoi.dc.html": {
+   "h": 2988,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवा: मित्रम रसोई, बलिया",
+   "w": 1440,
+   "x": 9600,
+   "y": 120
+  },
+  "Mitram-Sammilit.dc.html": {
+   "h": 2977,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवा: सम्मिलित प्रयास पैकेज",
+   "w": 1440,
+   "x": 6400,
+   "y": 120
+  },
+  "Mitram-Sankranti.dc.html": {
+   "h": 4840,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवा: दही-चूड़ा · मकर संक्रांति",
+   "w": 1440,
+   "x": 12800,
+   "y": 120
+  },
+  "Mitram-Services.dc.html": {
+   "h": 2617,
+   "is_interactive": true,
+   "page": "page-igfkwv",
+   "title": "Mitram · सेवाएँ",
+   "w": 1440,
+   "x": 1600,
+   "y": 120
+  }
+ },
+ "createdOnFiles": {
+  "at": "2026-09-30T16:50:37.726Z",
+  "v": 1
+ },
+ "designSystems": [
+  {
+   "artifact": "https://claude.ai/code/artifact/92b1784e-b21a-4108-9eb4-e1b6ec58d987",
+   "copiedAt": "2026-09-30T16:59:52Z",
+   "namespace": "portal-design-system",
+   "title": "Portal Design System",
+   "version": null
+  }
+ ],
+ "launch": {
+  "page": "niwasi",
+  "view": "canvas"
+ },
+ "notes": {
+  "mitram3-mob": {
+   "kind": "title1",
+   "maxW": 4000,
+   "page": "page-igfkwv",
+   "text": "मित्रम वेबसाइट — Mobile (390px)",
+   "w": 1200,
+   "x": 14800,
+   "y": 0
+  },
+  "mitram3-web": {
+   "kind": "title1",
+   "maxW": 4000,
+   "page": "page-igfkwv",
+   "text": "मित्रम वेबसाइट — Desktop (1440px)",
+   "w": 1200,
+   "x": 0,
+   "y": 0
+  }
+ },
+ "order": [
+  "Mitram-Home.dc.html",
+  "Mitram-Services.dc.html",
+  "Mitram-Kitchen.dc.html",
+  "Mitram-Bulk.dc.html",
+  "Mitram-Sammilit.dc.html",
+  "Mitram-Catering.dc.html",
+  "Mitram-Rasoi.dc.html",
+  "Mitram-Laddoo.dc.html",
+  "Mitram-Sankranti.dc.html",
+  "Mitram-M-Home.dc.html",
+  "Mitram-M-Services.dc.html",
+  "Mitram-M-Kitchen.dc.html",
+  "Mitram-M-Bulk.dc.html",
+  "Mitram-M-Sammilit.dc.html",
+  "Mitram-M-Catering.dc.html",
+  "Mitram-M-Rasoi.dc.html",
+  "Mitram-M-Laddoo.dc.html",
+  "Mitram-M-Sankranti.dc.html"
+ ],
+ "pages": [
+  {
+   "id": "page-igfkwv",
+   "name": "Mitram"
+  }
+ ],
+ "title": "Niwasi & Partner Portal Structure"
+}
