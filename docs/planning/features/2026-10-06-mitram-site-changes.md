@@ -8,6 +8,7 @@
 | SRS row | — |
 | Test cases | TC-MTC-01..20 |
 | Prototype todo | — |
+| Batch 2 (3 changes) | in-progress. Changes 1–3 (§2.2f–h) built and verified, not committed. |
 
 Follows the shipped [2026-10-06-mitram-site.md](2026-10-06-mitram-site.md). Same pattern: Tailwind, the `app/(mitram)/mitram/` route group, frontend only, translation-exempt static Hindi.
 
@@ -44,6 +45,39 @@ _(Screenshot: the current maroon band, a big yellow "20%" with "आमदनी 
 > comment out the see and order button from the kichen card and also disable its hover aimation for now
 
 _(Screenshot: the Home services grid. The "मित्रम किचन — रोज़ का भोजन" card has no "देखें और ऑर्डर करें" link and its text is the address "SBI बैंक बाज़ार समिति ब्रांच के नज़दीक, बहादुरपुर, पटना"; the other cards keep their link.)_
+
+### Batch 2 (2026-10-07)
+
+> there are 3 new changes we need to make in the mitram site
+> mention these in the already exiting changes planning file
+> chage 1 is on this page
+> http://mitram.niwasi.abhishek/catering
+> section कैटरिंग पैकेज
+> here we have veg/ non veg switch button
+> so when we switch here to non veg the price and the icon changes but the description text remain same
+> the prototype that client provided has something different text there
+> check ss for both veg and non veg
+
+_(Two screenshots of the "कैटरिंग पैकेज" section. **शाकाहारी** selected: green marks, ₹275 / ₹375 / ₹575 / ₹775, the veg contents (the current site text). **मांसाहारी** selected: red marks, ₹325 / ₹425 / ₹675 / ₹875, and different contents per package: chicken curry, egg curry, chicken butter masala, mutton curry, fish curry.)_
+
+> ok next is this section  in the same page
+> अपना खर्च जानें
+> add the missing fields and  the see order button changes to same as ss and with the functionality to send the details to whatsapp
+
+_(Screenshot of the client prototype's "अपना खर्च जानें": fields मेन्यू (select, "स्पेशल पैकेज (वेज) — ₹275"), मेहमानों की संख्या (a plain number box, 100) and आयोजन की तारीख (वैकल्पिक) (a date box). The result card shows "अनुमानित कुल खर्च", ₹27,500, "100 × ₹275", and a yellow button "WhatsApp पर यह ऑर्डर भेजें".)_
+
+This is change 2, planned in §2.2g.
+
+> next we have similar changes in these page forms missing fields and send to whatsapp button
+> http://mitram.niwasi.abhishek/sammilit
+> http://mitram.niwasi.abhishek/laddoo
+> provided all the important ss
+
+_(Three screenshots of the client prototypes:)_
+- _**Sammilit:** step 3 "मेहमान और विवरण" (subtitle "तारीख, जगह और संपर्क — ऑर्डर संदेश में अपने आप जुड़ जाएगा।") with मेहमानों की संख्या, तारीख और समय, आपका नाम, मोबाइल नंबर, आयोजन का पता / मोहल्ला, दूरी, प्लेट पैकिंग and कुछ और बताना है?. The "ऑर्डर पर्ची" slip has a red "WhatsApp पर ऑर्डर भेजें" (with a small › circle), "ऑर्डर संदेश कॉपी करें", and 7070 819 777 "कॉल या WhatsApp करें"._
+- _**Laddoo, twice:** the "आपका ऑर्डर" sheet with कुल रकम; कैसे लेंगे? (दुकान से लेंगे / होम डिलीवरी); नाम; कब चाहिए?; पता (होम डिलीवरी के लिए), shown only with होम डिलीवरी; a "WhatsApp पर ऑर्डर भेजें" button; the note "WhatsApp में आपका ऑर्डर संदेश तैयार खुलेगा, वहाँ से भेजें। दुकान से पुष्टि मिलने पर ही ऑर्डर पक्का माना जाएगा।"; and "या फ़ोन करें: 7070 819 777" with a "कॉपी" button._
+
+This is change 3, planned in §2.2h. All three changes of batch 2 are now received.
 
 ## 2. Plan
 
@@ -193,6 +227,161 @@ The new board's outline is hero → `bk-main` → the new order section (change 
 
 **How "comment out" is done (Q6):** rather than commenting the JSX out by hand, each of these spots checks `isEnabled("kitchen")`. The hidden button and link code stays in the file, behind that flag, so there's one switch to bring them all back. Each spot gets a one-line code comment saying it's hidden while Kitchen is disabled.
 
+### 2.2f Batch 2, change 1: non-veg package contents (`/catering`, "कैटरिंग पैकेज")
+
+**Now:** `CateringOrder.tsx` `PKGS` holds one description per package (the veg one). The शाकाहारी / मांसाहारी switch changes the mark and adds ₹50 to the price, but the text stays veg.
+
+**Source of the new text:** the user's two screenshots, which come from the client-provided prototype. The user added mid-turn: "the ss are of client proided prototype and the prototype in this repo and the client provided are totally different … i have not shared the client prototype with you". So the repo's `docs/prototype/mitram/` is **not** the source; it has only the veg text.
+- **Character check (open question Q8):** a local file, `~/Downloads/Mitram Services (2)/Mitram Services/Catering Mitram Kitchen.html`, has a non-veg package list that matches the screenshot word for word. It isn't confirmed to be the client prototype. The text below was copied from that file and checked against the screenshot.
+- **Veg and prices:** the screenshot's veg text matches the site's current text. ~~Its non-veg prices match the site's veg + ₹50. Only the non-veg descriptions are new.~~ _**Corrected 2026-10-07, during the build:** that was wrong. The screenshot's non-veg prices are ₹325 / ₹425 / **₹675 / ₹875**, but the cards computed veg + ₹50, showing **₹625 / ₹825** for Premium and Ultimate. The site's own order-form list (`O`) already had ₹675 / ₹875, so the card and the form disagreed. The repo board had the same +₹50 formula._
+
+Non-veg text:
+
+| # | Package | Non-veg price | Non-veg contents |
+|---|---|---|---|
+| 01 | स्पेशल पैकेज | ₹325 | 1 नाश्ता/साइड डिश, मुख्य व्यंजन (1 चिकन करी, चावल, पूरी, हरी सलाद, पापड़, चटनी, बूंदी रायता), 1 मिठाई, 1 कॉफ़ी/चाय |
+| 02 | डीलक्स पैकेज | ₹425 | 1 वेलकम ड्रिंक, 2 स्नैक्स/साइड डिश, मेन कोर्स (1 चिकन करी, 2 पीस अंडा करी, चावल, पूरी, ग्रीन सलाद, पापड़, चटनी, बूंदी रायता), 1 मिठाई, 1 कॉफ़ी/चाय |
+| 03 | प्रीमियम पैकेज | ₹675 | 2 वेलकम ड्रिंक्स, 3 स्नैक्स/साइड डिश, मेन कोर्स (1 चिकन करी, 1 चिकन बटर मसाला, 1 मटन करी, चावल, पूरी, ग्रीन सलाद, पापड़, चटनी, बूंदी रायता), 2 डेज़र्ट, 1 कॉफ़ी/चाय |
+| 04 | अल्टीमेट पैकेज | ₹875 | स्वागत पेय, 3 स्नैक्स/साइड डिश, मुख्य व्यंजन (चिकन करी, चिकन बटर मसाला, मटन करी, फिश करी, अंडा करी, वेज पुलाव, चावल, पूरी, हरी सलाद, पापड़, चटनी, बूंदी रायता), 3 मिठाई, 1 कॉफ़ी और चाय |
+
+The client's wording isn't consistent between packages (नाश्ता vs स्नैक्स, मुख्य व्यंजन vs मेन कोर्स, हरी vs ग्रीन सलाद). It's kept exactly as given, not normalised.
+
+**Code (one file, `CateringOrder.tsx`):**
+- `PKGS` gets a second description: `d` → `dv` (veg, unchanged) and a new `dn` (non-veg, the table above).
+- `CateringPackages` renders `dv === "n" ? p.dn : p.dv`.
+- ~~Prices stay as computed now (veg + ₹50).~~ _Superseded by the correction above:_ each card reads its price from `O` (`<key>_v` / `<key>_n`), the list the order form already uses. That gives ₹675 / ₹875 as in the screenshot, and the card and form can no longer disagree. The `price` field and the +₹50 formula are removed from `PKGS`.
+- The order form's package dropdown and the order pop-up show only package names and prices, so they don't change.
+
+**Rules:** frontend only; no page added or removed, so `mitram-portal.md` isn't changed. Static Hindi, translation-exempt.
+
+**Phones:** the same component renders at every width, so there is no separate mobile change.
+
+### 2.2g Batch 2, change 2: "अपना खर्च जानें" fields and the WhatsApp button (`/catering`, `#calc`)
+
+**Source:** the screenshot, plus the same client file as §2.2f (`Catering Mitram Kitchen.html`, section `#estimate` and its `estimate()` script). It shows how the fields behave.
+
+**Site now vs the client prototype:**
+
+| | Site now | Client prototype |
+|---|---|---|
+| मेन्यू | One flat list; every option shows a price; bhoj priced at one fixed rate (A ₹150, the "डिस्पोजेबल" column) | Grouped (`optgroup`): शाकाहारी पैकेज (प्रति व्यक्ति), मांसाहारी पैकेज (प्रति व्यक्ति), भोज (प्रति प्लेट, 80+ प्लेट), थाली. Bhoj options carry no price, since the price depends on the service |
+| सेवा | — | Shown **only for a bhoj menu**: बिना प्लेट (हाफ कैटरिंग) / डिस्पोजेबल प्लेट के साथ / पूर्ण कैटरिंग (default). It picks the bhoj price column (e.g. A: ₹140 / ₹150 / ₹170, the same prices as the site's bhoj table) |
+| मेहमानों की संख्या | −/+ stepper (steps of 10) | Plain number box, default 100 |
+| आयोजन | Occasion select (linked to the occasion chips) | — |
+| आयोजन की तारीख (वैकल्पिक) | — | Date box, optional |
+| Breakdown | "100 × ₹275 · <occasion>" | "100 × ₹275", plus " — <service>" for bhoj |
+| Warning | — | For bhoj under 80: "भोज की ये कीमतें 80 प्लेट या अधिक पर लागू हैं। कम प्लेट के लिए कीमत कॉल करके पूछें।" |
+| Button | "ऑर्डर देखें" → the order pop-up (call to confirm) | "WhatsApp पर यह ऑर्डर भेजें", a link to `wa.me/917070819777?text=…` |
+
+**Plan (each point maps to Q9–Q13 below):**
+- **Fields added:** सेवा (bhoj only) and आयोजन की तारीख (वैकल्पिक).
+- **Menu:** grouped like the client's. Bhoj options have no price in the label, and their price follows सेवा.
+- **Kept from the site (Q9):** the guests stepper and the आयोजन select. They aren't in the client's screenshot, but the user asked to *add* the missing fields, not remove any.
+- **Warning:** the 80-plate warning shows under the result for bhoj.
+- **Button (Q10):** ~~"ऑर्डर देखें" and its pop-up are replaced by "WhatsApp पर यह ऑर्डर भेजें"~~ _Superseded by the Q10 answer "dont remove the see order button add the new button next to it"._ **Both buttons, side by side:**
+  - **"WhatsApp पर यह ऑर्डर भेजें"** is new: yellow, as in the screenshot, with the same text and no icon. It comes first.
+  - **"ऑर्डर देखें"** stays next to it, with its pop-up and the same behaviour. It changes from yellow to the outlined white style (`btn("light")`), so the two buttons don't look identical.
+  - **The pop-up** also shows the new details: the line's name gets " (सेवा)" for bhoj, and its subtitle gets the date when one is set.
+  - **Layout:** side by side, wrapping if needed; at ≤560px each is full width, stacked, with WhatsApp on top.
+  - **The WhatsApp button** opens WhatsApp in a new tab with this message (the client's wording, plus the occasion when one is chosen):
+  > नमस्ते मित्रम किचन, मुझे {मेन्यू}{ (सेवा) for bhoj} चाहिए, {N} लोगों के लिए{, तारीख DD-MM-YYYY}{, आयोजन: {occasion}}। अनुमानित खर्च ₹X। कृपया संपर्क करें।
+
+  The package names in the message are "स्पेशल पैकेज (शाकाहारी)" / "(मांसाहारी)", as in the client's.
+- **Validation (Q12), frontend only (no backend, so nothing to mirror):**
+  - **Guests:** with 0 or empty guests the button doesn't open WhatsApp; it shows the toast "मेहमानों की संख्या डालें।", as the "ऑर्डर देखें" button does now.
+  - **Date:** past dates can't be picked (`min` = today). If one is typed anyway, the toast is "आज या आगे की तारीख़ चुनें।", the Bulk form's wording.
+- **Package "चुनें" buttons and thali picks:** they still set the menu and toast "… — ऊपर खर्च देखें।" (unchanged).
+- **Colours (Q13):** the screenshot's dark page and rose card are the client prototype's styling. The site keeps its own colours (the maroon result card); only the fields and the button change.
+
+**Code:**
+- `CateringOrder.tsx`:
+  - the menu list gets groups and the bhoj tier prices (`[half, disposable, full]`, the same numbers as `CateringBhoj`);
+  - state gets `tier` and `date` (`om` stays for the pop-up);
+  - `CateringCalc` gains the two fields, the warning and the WhatsApp link;
+  - `OrderModal` stays on this page (Q10 answer).
+- `WHATSAPP` from `ui.ts` gives the number.
+
+**Prototype:** the repo boards `Mitram-Catering.dc.html` / `Mitram-M-Catering.dc.html` get the same fields, menu groups, warning and button, as was done for change 1.
+
+**Docs:** the `mitram-portal.md` Catering row gains "cost estimate sent on WhatsApp". No page is added or removed.
+
+**Phones:** the fields stack in one column at ≤900px (as now); the date box and the button are full width there.
+
+### 2.2h Batch 2, change 3: Sammilit and Laddoo order forms (`/sammilit`, `/laddoo`)
+
+**Source:** the screenshots, plus the client files `~/Downloads/Mitram Services (2)/Mitram Services/Sammilit Prayas Package/index.html` and `…/Mitram Rasoi Laddoo/index.html` (their form markup and scripts give the exact wording, the rules and the WhatsApp text).
+
+**Same rule as change 2 (the Q10 answer):** the existing "ऑर्डर देखें" / "ऑर्डर पर्ची देखें" buttons and their pop-ups **stay**. The WhatsApp button is added next to them (Q14).
+
+#### Laddoo (`LaddooOrder.tsx`, the "आपका ऑर्डर" sheet)
+
+| | Site now | Client prototype → plan |
+|---|---|---|
+| Lines, कुल रकम, कैसे लेंगे?, सब हटाएँ | ✓ | Unchanged |
+| नाम | — | **Add.** Placeholder "जैसे: सुनीता देवी"; **required** to send ("ऑर्डर भेजने के लिए अपना नाम लिखें।") |
+| कब चाहिए? | — | **Add.** Date, `min` today; optional ("जल्द से जल्द" in the message when empty) |
+| पता (होम डिलीवरी के लिए) | — | **Add.** Shown only with होम डिलीवरी; placeholder "मोहल्ला, लैंडमार्क"; **required** then ("होम डिलीवरी के लिए पता लिखें।") |
+| Button | "ऑर्डर देखें" (maroon, full width) | **Add "WhatsApp पर ऑर्डर भेजें"** (maroon, full width, first); "ऑर्डर देखें" stays below it, as the outlined style |
+| Note under the buttons | "ऑर्डर पक्का करने के लिए 7070 819 777 पर कॉल करें।" | **Replaced** by the client's note "WhatsApp में आपका ऑर्डर संदेश तैयार खुलेगा, वहाँ से भेजें। दुकान से पुष्टि मिलने पर ही ऑर्डर पक्का माना जाएगा।" and the row "या फ़ोन करें: **7070 819 777**" with a "कॉपी" button (copies 7070819777; the button reads "कॉपी हो गया" for 1.8s) (Q15) |
+| Weight per laddoo | No limit | Max 50 किलो, as the client's (Q16) |
+
+**WhatsApp text** (the client's, to 917070819777):
+> नमस्ते मित्रम रसोई, मुझे यह ऑर्डर देना है:
+> • मोतीचूर लड्डू – 1½ किलो = ₹390
+> कुल: ₹390
+> नाम: सुनीता देवी
+> कब चाहिए: 14 अक्टूबर  _(or "जल्द से जल्द"; the browser's hi-IN month name, as the client's script)_
+> कैसे: दुकान से लूँगा/लूँगी (Take Away)  _(or "होम डिलीवरी")_
+> पता: …  _(home delivery only)_
+
+**The pop-up** subtitle adds the name and date when set.
+
+#### Sammilit (`SammilitBuilder.tsx`)
+
+| | Site now | Client prototype → plan |
+|---|---|---|
+| Step 3 subtitle | "मेहमानों की संख्या और तारीख चुनें — कुल रकम पर्ची में दिखेगी।" | "तारीख, जगह और संपर्क — ऑर्डर संदेश में अपने आप जुड़ जाएगा।" |
+| मेहमानों की संख्या, तारीख और समय, दूरी, प्लेट पैकिंग | ✓ | Unchanged |
+| आपका नाम | — | **Add.** Placeholder "जैसे: रमेश कुमार"; optional, as the client's |
+| मोबाइल नंबर | — | **Add.** Placeholder "10 अंकों का नंबर"; optional, as the client's. Digits only, at most 10, a pasted +91 dropped (the user's standing phone rule). If filled, it must be a valid number (`^[6-9]\d{9}$`, "सही 10 अंकों का मोबाइल नंबर डालें।"), as the Bulk form |
+| आयोजन का पता / मोहल्ला | — | **Add**, full width. Placeholder "जैसे: कंकड़बाग, पटना"; optional |
+| कुछ और बताना है? | — | **Add**, full width, 2-row text box. Placeholder "जैसे: बिना प्याज़-लहसुन, बच्चों के लिए कम तीखा"; optional |
+| Field order | guests · date+time / दूरी · पैकिंग | The client's: guests · date+time / नाम · मोबाइल / पता (full) / दूरी · पैकिंग / note (full) |
+| Slip buttons | "ऑर्डर पर्ची देखें", "ऑर्डर संदेश कॉपी करें" | **Add "WhatsApp पर ऑर्डर भेजें"** first: red, with the › circle, as the screenshot. "ऑर्डर पर्ची देखें" is kept but becomes outlined; "ऑर्डर संदेश कॉपी करें" is kept |
+| Copied message | A short summary | The **same text as the WhatsApp message** (as the client's) |
+
+**WhatsApp text** (the client's, to 917070819777; lines are left out when empty):
+> नमस्ते मित्रम किचन,
+> सम्मिलित प्रयास पैकेज के लिए ऑर्डर:
+>
+> आयोजन: सत्यनारायण पूजा
+> मेहमान: 50
+> तारीख: 14 अक्टूबर 2026 (दोपहर का भोजन)
+>
+> • भोज B — पूड़ी/रोटी, चावल, …: 50 प्लेट × ₹95, पनीर +₹50 = ₹7,250
+> • प्लेट पैकिंग: 50 × ₹20 = ₹1,000
+>
+> अनुमानित कुल: ₹8,250
+> डिलीवरी: 5 km के भीतर (मुफ़्त)  _(or "5 km से ज़्यादा" / "Take Away")_
+> पता: …
+> संपर्क: रमेश कुमार, 9876543210
+> नोट: …
+
+**Pop-up subtitle** adds the name when set.
+
+#### Both pages
+- **Sending is blocked** with a toast and a red field (the Bulk form's pattern, Q17) when:
+  - nothing is chosen ("अभी कोई लड्डू नहीं चुना…" / "पहले कम से कम एक पैकेज जोड़ें।");
+  - Sammilit has under 20 guests (the existing message);
+  - a required field is empty;
+  - the mobile number is invalid;
+  - the date is in the past ("आज या आगे की तारीख़ चुनें।").
+- **Validation scope:** frontend only (no backend, so nothing to mirror).
+- **Prototype:** the repo boards `Mitram-Laddoo.dc.html`, `Mitram-M-Laddoo.dc.html`, `Mitram-Sammilit.dc.html` and `Mitram-M-Sammilit.dc.html` get the same fields, buttons, rules and text, as for changes 1–2.
+- **Docs:** the `mitram-portal.md` rows for `/sammilit` and `/laddoo` gain "order sent on WhatsApp". No page is added or removed.
+- **Phones:** the new fields stack in one column at ≤900px; the buttons are full width.
+- **Not included:** the client prototypes' fixed bottom total bar on phones ("ऑर्डर पर्ची देखें" / "ऑर्डर देखें" bar), which the user didn't ask for (Q18).
+
 ### 2.3 Prototype copy
 
 Replace `docs/prototype/mitram/` with the updated prototype (`README.md` + `design/`, without the inlined `index.html`, as decided in the parent plan Q4), so the repo copy matches what's being ported. _Open question Q1 below._
@@ -214,6 +403,28 @@ Replace `docs/prototype/mitram/` with the updated prototype (`README.md` + `desi
    - **Recommendation:** the flag.
 7. **Q7, video files in git:** the 9.5 MB of `.mp4` would sit both in `public/` and in the `docs/prototype/mitram/` copy.
    - **Recommendation:** add a `docs/prototype/mitram/.gitignore` for `*.mp4`, as done for Ham Niwasi, so they're committed once (in `public/`).
+8. **Q8 (batch 2), source file for the non-veg text:** is `~/Downloads/Mitram Services (2)/Mitram Services/Catering Mitram Kitchen.html` the client prototype from the screenshots?
+   - **Recommendation:** use the §2.2f text either way. It matches the screenshots word for word, and the file only supplies the exact characters (nuktas, punctuation).
+9. **Q9 (batch 2), fields the client's screenshot doesn't have:** keep the guests −/+ stepper and the आयोजन select?
+   - **Recommendation:** keep both. The request says "add the missing fields". The occasion still links to the chips above and goes into the WhatsApp message.
+10. **Q10, the order pop-up:** "ऑर्डर देखें" opened a pop-up (a summary, "call to confirm", clear and undo). Should the WhatsApp button replace it entirely?
+    - **Recommendation:** yes, as in the screenshot: one button straight to WhatsApp.
+11. **Q11, सेवा in the calculator vs the bhoj table's segment:** should picking a service in the bhoj table's segment also change the calculator's सेवा?
+    - **Recommendation:** keep them separate, as the client's prototype does. The calculator's सेवा defaults to पूर्ण कैटरिंग.
+12. **Q12, validation:** should sending be blocked with 0 guests, and should past dates be blocked?
+    - **Recommendation:** yes to both, with the toasts in the plan. The client's prototype sends anything, including 0 guests.
+13. **Q13, colours:** the screenshot's dark background and rose card.
+    - **Recommendation:** keep the site's colours; change only the fields and the button.
+14. **Q14 (change 3), the existing order buttons:** keep "ऑर्डर देखें" / "ऑर्डर पर्ची देखें" and their pop-ups, and add WhatsApp next to them, as decided for Catering?
+    - **Recommendation:** yes, the same rule as the Q10 answer.
+15. **Q15, Laddoo's call line:** replace "ऑर्डर पक्का करने के लिए 7070 819 777 पर कॉल करें।" with the client's note plus the "या फ़ोन करें … कॉपी" row?
+    - **Recommendation:** yes; it's what the screenshot shows.
+16. **Q16, Laddoo weight limit:** cap each laddoo at 50 किलो, as the client's?
+    - **Recommendation:** yes. Larger orders are bulk orders by phone.
+17. **Q17, how a blocked send looks:** the client's Laddoo greys out the button and shows red text above it; its Sammilit doesn't check anything.
+    - **Recommendation:** keep the button always clickable; on click show the site's toast and mark the field red, as Bulk and Catering do. It's consistent across the site and says exactly what's missing.
+18. **Q18, the phones' fixed bottom total bar** in both client prototypes:
+    - **Recommendation:** leave it out. It wasn't asked for and it covers content.
 
 ## 3. Test cases (designed up front)
 
@@ -241,6 +452,28 @@ Replace `docs/prototype/mitram/` with the updated prototype (`README.md` + `desi
 | TC-MTC-18 | No links lead to Kitchen | Kitchen disabled | Crawl every page; collect hrefs | No link to `/kitchen` anywhere (banner, cards, units, locations, services) | H |
 | TC-MTC-19 | Static Kitchen cards | Kitchen disabled | Home services grid and the Services page; hover and click the Kitchen card/row | Not a link, no "देखें और ऑर्डर करें" / "देखें", no hover lift or shadow; the other cards keep their link and hover | H |
 | TC-MTC-20 | One switch restores Kitchen | Set `kitchen.enabled = true` in `siteConfig.ts` | Repeat TC-MTC-16..19 | Everything is back as it was before this change | M |
+
+_Batch 2:_
+
+| TC-ID | Title | Pre-condition | Steps | Expected Result | Priority |
+|---|---|---|---|---|---|
+| TC-MTC-21 | Non-veg package contents | — | Open `/catering` → "कैटरिंग पैकेज"; click मांसाहारी, then शाकाहारी (1440 and 390px) | मांसाहारी: red marks, ₹325 / ₹425 / ₹675 / ₹875, and each package shows its non-veg contents exactly as §2.2f (e.g. Special "1 नाश्ता/साइड डिश, मुख्य व्यंजन (1 चिकन करी, …"). शाकाहारी: green marks, ₹275 / ₹375 / ₹575 / ₹775 and the veg contents, unchanged. | H |
+| TC-MTC-22 | Picking a non-veg package | मांसाहारी selected | Click "चुनें" on डीलक्स पैकेज | The order form selects "डीलक्स पैकेज (नॉन-वेज) — ₹425", as before this change | M |
+| TC-MTC-23 | Calculator fields | — | Open `/catering` → "अपना खर्च जानें" (1440 and 390px) | Fields: मेन्यू (grouped: शाकाहारी पैकेज / मांसाहारी पैकेज / भोज / थाली), मेहमानों की संख्या (stepper), आयोजन, आयोजन की तारीख (वैकल्पिक). सेवा isn't shown for a package. | H |
+| TC-MTC-24 | सेवा for bhoj | — | Choose "A. स्पेशल भोजन – 1 सब्जी के साथ", 100 guests; switch सेवा through all 3 | सेवा appears, defaulting to पूर्ण कैटरिंग: ₹17,000 "100 × ₹170 — पूर्ण कैटरिंग"; then ₹14,000 (बिना प्लेट) and ₹15,000 (डिस्पोजेबल). Choosing a package again hides सेवा. | H |
+| TC-MTC-25 | 80-plate warning | Bhoj menu chosen | Set guests to 70, then 80 | At 70 the warning "भोज की ये कीमतें 80 प्लेट या अधिक पर लागू हैं। …" shows; at 80 it's gone. It never shows for a package or thali. | M |
+| TC-MTC-26 | WhatsApp message | — | Choose डीलक्स पैकेज (मांसाहारी), 120 guests, date = a future date, occasion शादी-ब्याह; click "WhatsApp पर यह ऑर्डर भेजें" | A new tab opens `wa.me/917070819777` with the text "नमस्ते मित्रम किचन, मुझे डीलक्स पैकेज (मांसाहारी) चाहिए, 120 लोगों के लिए, तारीख DD-MM-YYYY, आयोजन: शादी-ब्याह। अनुमानित खर्च ₹51,000। कृपया संपर्क करें।". Without a date or occasion those parts are left out. | H |
+| TC-MTC-27 | Sending blocked | — | Set guests to 0 and click the button; then type a past date and click | 0 guests: toast "मेहमानों की संख्या डालें।", no WhatsApp. Past date: the date picker doesn't offer it; a typed one gives the toast "आज या आगे की तारीख़ चुनें।" and no WhatsApp. | H |
+| TC-MTC-29 | Both buttons | — | Look at the result card (1440 and 390px); with 100 guests click "ऑर्डर देखें" | "WhatsApp पर यह ऑर्डर भेजें" (yellow) and "ऑर्डर देखें" (outlined) side by side; stacked full width at 390px. The pop-up opens as before; for a bhoj its line reads e.g. "A. स्पेशल भोजन – 1 सब्जी के साथ (पूर्ण कैटरिंग)", and a chosen date shows in its subtitle. With 0 guests: toast "मेहमानों की संख्या डालें।". | H |
+| TC-MTC-30 | Laddoo fields | — | Open `/laddoo` (1440 and 390px); look at "आपका ऑर्डर"; switch to होम डिलीवरी and back | नाम and कब चाहिए? always; पता (होम डिलीवरी के लिए) only with होम डिलीवरी. The client's note and "या फ़ोन करें: 7070 819 777" with "कॉपी" sit under the buttons. | H |
+| TC-MTC-31 | Laddoo blocked sends | — | Click "WhatsApp पर ऑर्डर भेजें": with no laddoo; then with 1 किलो but no name; then होम डिलीवरी without पता; then a past date | Toasts in order: "अभी कोई लड्डू नहीं चुना। किसी भी लड्डू पर + दबाएँ।", "ऑर्डर भेजने के लिए अपना नाम लिखें।", "होम डिलीवरी के लिए पता लिखें।", "आज या आगे की तारीख़ चुनें।"; the field turns red; no WhatsApp tab. | H |
+| TC-MTC-32 | Laddoo WhatsApp text | — | 1½ किलो मोतीचूर, name सुनीता देवी, date 14 Oct, दुकान से लेंगे; click send. Then without the date, with होम डिलीवरी and a पता | `wa.me/917070819777` opens with the §2.2h text (कुल ₹390, "कब चाहिए: 14 अक्टूबर", "कैसे: दुकान से लूँगा/लूँगी (Take Away)"). Without a date: "जल्द से जल्द"; with home delivery: "कैसे: होम डिलीवरी" and the पता line. | H |
+| TC-MTC-33 | Laddoo buttons, copy, limit | — | Click "ऑर्डर देखें"; click "कॉपी"; press + on one laddoo past 50 किलो | The pop-up opens as before (its subtitle shows the name and date). "कॉपी" puts 7070819777 on the clipboard and reads "कॉपी हो गया" briefly. The weight stops at 50 किलो. | M |
+| TC-MTC-34 | Sammilit fields | — | Open `/sammilit` step 3 (1440 and 390px) | The new subtitle and the client's field order: guests · date+time / आपका नाम · मोबाइल नंबर / आयोजन का पता (full) / दूरी · प्लेट पैकिंग / कुछ और बताना है? (full). One column on phones. | H |
+| TC-MTC-35 | Sammilit mobile field | — | Type letters and 12 digits; paste "+91 98765 43210"; then "12345" and send | Digits only, at most 10; +91 dropped. "12345" gives the toast "सही 10 अंकों का मोबाइल नंबर डालें।" and a red field; empty is allowed. | H |
+| TC-MTC-36 | Sammilit WhatsApp text and copy | Default slip (भोज B + भंडारा N) | Fill name, mobile, address, note, date; click "WhatsApp पर ऑर्डर भेजें", then "ऑर्डर संदेश कॉपी करें" | WhatsApp opens with the §2.2h multi-line text (each package line with qty × price and extras, packing, total, delivery, पता, संपर्क, नोट); the copied text is identical. Empty fields leave their lines out. | H |
+| TC-MTC-37 | Sammilit blocked sends and buttons | — | Remove all packages and send; add one, set 10 guests and send; past date and send; then click "ऑर्डर पर्ची देखें" | Toasts: "पहले कम से कम एक पैकेज जोड़ें।", "सम्मिलित प्रयास पैकेज कम से कम 20 लोगों के लिए है।", "आज या आगे की तारीख़ चुनें।"; no WhatsApp tab. The red WhatsApp button comes first, then "ऑर्डर पर्ची देखें" (outlined; its pop-up works as before), then the copy button. | H |
+| TC-MTC-28 | Package pick still fills the calculator | — | In "कैटरिंग पैकेज" click मांसाहारी, then "चुनें" on प्रीमियम | The menu shows "प्रीमियम पैकेज (नॉन-वेज) — ₹675", total = guests × ₹675, toast "… — ऊपर खर्च देखें।" | M |
 
 ## 4. Sign-off
 
@@ -277,6 +510,31 @@ Replace `docs/prototype/mitram/` with the updated prototype (`README.md` + `desi
   - Status set to `shipped` (frontend `e8fb3cb`, root `cd437c4`).
   - §3 rows TC-MTC-01..20 copied verbatim to `docs/testing/TEST_CASES.md`.
   - **Open item carried over:** the video `preload` question (Chrome fetches about 1 MB per video before play) is unanswered; it stays as built.
+
+- **2026-10-07, batch 2:** 3 new changes announced, to be recorded in this file. Change 1 received (§1, Batch 2) and planned in §2.2f, with test cases TC-MTC-21..22. **Awaiting:** changes 2 and 3, then the user's review and go-ahead. No code yet.
+- **2026-10-07, go-ahead for change 1:** "start implementing and make sure to update this in prototype too".
+  - **Build now:** change 1 only. Changes 2 and 3 haven't been received.
+  - **Q8:** not answered. The §2.2f text is used (it matches the screenshots).
+  - **Prototype:** the repo boards `docs/prototype/mitram/design/canvas/Mitram-Catering.dc.html` and `Mitram-M-Catering.dc.html` also get the non-veg text. Each package's `<p>` becomes a `{{ pkD_<key> }}` value, and the board's package script (which already sets `pk_<key>` prices from `dv`) picks the veg or non-veg description.
+  - **Batch 2 status:** in-progress.
+- **2026-10-07:** change 2 received (§1, Batch 2) and planned in §2.2g, with questions Q9–Q13 and test cases TC-MTC-23..28. **Awaiting:** the user's review and go-ahead for change 2, and change 3. No code for change 2 yet.
+- **2026-10-07, answers Q9–Q13:** "dont remove the see order button add the new button next to it rest as recommended".
+  - **Q10:** **against the recommendation** to replace the pop-up. "ऑर्डर देखें" and its pop-up stay, and the WhatsApp button is added next to it (§2.2g). Built as asked.
+  - **Q9:** keep the stepper and the आयोजन select.
+  - **Q11:** सेवा stays separate from the bhoj table's segment.
+  - **Q12:** block 0 guests and past dates.
+  - **Q13:** keep the site's colours.
+  - **Awaiting:** the go-ahead to implement change 2.
+- **2026-10-07, go-ahead for change 2:** "start implementation".
+- **2026-10-07:** change 3 received (§1, Batch 2) and planned in §2.2h, with questions Q14–Q18 and test cases TC-MTC-30..37. **Awaiting:** the user's review and go-ahead. No code for change 3 yet.
+- **2026-10-07, answers Q14–Q18:** "all as recommended".
+  - **Q14:** keep the existing order buttons and pop-ups; add WhatsApp next to them.
+  - **Q15:** Laddoo's call line is replaced by the client's note and the "या फ़ोन करें … कॉपी" row.
+  - **Q16:** a 50 किलो cap per laddoo.
+  - **Q17:** the button stays clickable; a blocked send shows a toast and a red field.
+  - **Q18:** no fixed bottom bar on phones.
+  - **Awaiting:** the go-ahead to implement change 3.
+- **2026-10-07, go-ahead for change 3:** "yes".
 
 ## 5. Execution log
 
@@ -351,6 +609,90 @@ Replace `docs/prototype/mitram/` with the updated prototype (`README.md` + `desi
   - **Known:** the 404 page under the Mitram layout shows the layout's default title "मित्रम — होम", since there's no Mitram-specific not-found page.
   - **Checks:** `tsc` (whole frontend) and `eslint` clean.
   - **Docs:** `mitram-portal.md` updated: Kitchen hidden, Catering videos, and the `siteConfig.ts` note.
+- **2026-10-07, batch 2 change 1 built:**
+  - **Code (`CateringOrder.tsx`):** `PKGS` has `dv` / `dn` descriptions; the card shows `dn` when मांसाहारी is on. The card price comes from `O`, which fixes Premium and Ultimate non-veg (₹625 → ₹675, ₹825 → ₹875).
+  - **Boards (`Mitram-Catering.dc.html`, `Mitram-M-Catering.dc.html`):**
+    - each package `<p>` is now `{{ pkD_<key> }}`, set in the package script from the veg or non-veg list;
+    - the price line reads `O.find(x => x[0] === k + '_' + dv)[2]` instead of `+ 50`.
+    - Edited with a one-off Node script kept in the session scratchpad, not added to the repo.
+  - **Text source check:** all 4 non-veg strings in the code match `Catering Mitram Kitchen.html` character for character.
+  - **Verified on :3016 (Playwright, 1440 and 390px):**
+    - **TC-MTC-21:** शाकाहारी shows ₹275 / ₹375 / ₹575 / ₹775 with the veg text; मांसाहारी shows ₹325 / ₹425 / ₹675 / ₹875 with the non-veg text.
+    - **TC-MTC-22:** non-veg डीलक्स "चुनें" selects "डीलक्स पैकेज (नॉन-वेज) — ₹425".
+    - **Both boards** (opened as files) show the same text and prices for veg and non-veg, with no script errors.
+  - **Checks:** `tsc` (whole frontend) and `eslint` clean.
+  - **Docs:** no page added or removed, so `mitram-portal.md` is unchanged.
+- **2026-10-07, batch 2 change 2 built:**
+  - **Code (`CateringOrder.tsx`):**
+    - `O`'s bhoj rows carry their 3 सेवा prices (the same numbers as `CateringBhoj`'s table);
+    - `GROUPS` puts मेन्यू in the client's optgroups, with bhoj labels carrying no price;
+    - `TIERS`, `waName()` and `todayIso()` are new;
+    - state gets `tier` (default पूर्ण कैटरिंग) and `date`.
+  - **`CateringCalc`:**
+    - the सेवा select appears only for bhoj, and the date box is a third field in the grid;
+    - the breakdown adds " — <सेवा>", and the 80-plate warning shows for bhoj under 80;
+    - the yellow "WhatsApp पर यह ऑर्डर भेजें" link (new tab, `WHATSAPP?text=…`) sits beside "ऑर्डर देखें", which is now `btn("light")`. They stack full width at ≤560px;
+    - the pop-up line adds " (सेवा)" and its subtitle adds the date.
+  - **Date `min`:** set on focus rather than at render, so the server's date can't cause a hydration mismatch.
+  - **Boards (`Mitram-Catering.dc.html`, `Mitram-M-Catering.dc.html`):** the same markup changes:
+    - the menu optgroups, `<sc-if isBhoj>` सेवा and the date field;
+    - `<sc-if bhojWarn>` for the warning, and a `.ct-btns` row with the WhatsApp link and the "ऑर्डर देखें" `btn-light`;
+    - a few CSS rules, and the script values (`tier`, `date`, `waHref`, `waClick` with the two toasts, the pop-up subtitle).
+    - Edited with a one-off Node script in the session scratchpad, not added to the repo.
+  - **Verified on :3016 (Playwright, 1440 and 390px):**
+    - **TC-MTC-23:** 4 groups (4 / 4 / 7 / 3 options), and सेवा is hidden for packages.
+    - **TC-MTC-24:** A at 100 guests gives ₹17,000 (पूर्ण) / ₹14,000 / ₹15,000.
+    - **TC-MTC-25:** the warning shows at 70 and not at 80.
+    - **TC-MTC-26:** the exact message text, including the date (15-11-2026) and the occasion.
+    - **TC-MTC-27:** 0 guests or a past date gives the toast and opens no tab; `min` = today.
+    - **TC-MTC-28:** picking non-veg प्रीमियम gives ₹675 in the menu and total.
+    - **TC-MTC-29:** the buttons sit side by side at 1440px and stack at 390px; the pop-up shows the सेवा and the date.
+    - No console errors.
+  - **Both boards** (opened as files) give the same results and have no script errors.
+  - **Checks:** `tsc` (whole frontend) and `eslint` clean.
+  - **Docs:** the `mitram-portal.md` `/catering` row now describes the estimate and the WhatsApp send.
+- **2026-10-07, batch 2 change 3 built:**
+  - **Shared helpers moved to `ui.ts`:** `waUrl()`, `todayIso()`, `hiDate()`, `digits10()`, `pastedMobile()` and `MOBILE_RE`.
+    - `BulkCalc` and `CateringOrder` now import them instead of their local copies. Same behaviour; one copy of the phone rule.
+  - **`LaddooOrder.tsx`:**
+    - the नाम / कब चाहिए? fields, and पता for होम डिलीवरी only;
+    - "WhatsApp पर ऑर्डर भेजें" (maroon, first), with "ऑर्डर देखें" kept below it as the outlined white style;
+    - the client's note, and the "या फ़ोन करें … कॉपी" row;
+    - a 50 किलो cap per laddoo;
+    - the pop-up subtitle adds the name and date.
+    - **Copy fallback:** the clipboard API exists only on HTTPS pages. Found in testing on the local http host, where the first version showed "कॉपी हो गया" without copying. Now: clipboard if available, else the number is selected and the button reads "चुन लिया" (the client prototype's own fallback).
+  - **`SammilitBuilder.tsx`:**
+    - the step 3 subtitle;
+    - the आपका नाम / मोबाइल नंबर / आयोजन का पता (full width) / कुछ और बताना है? (full width) fields in the client's order;
+    - the client's multi-line `msg`, used by both WhatsApp and "ऑर्डर संदेश कॉपी करें";
+    - a red "WhatsApp पर ऑर्डर भेजें" with the › circle first, then "ऑर्डर पर्ची देखें" (outlined), then copy;
+    - the pop-up subtitle adds the name.
+    - The cook items' message line has no dish text. The client's script prints "undefined" there; that's a bug in their script, so it's not copied.
+  - **Boards:** `Mitram-Laddoo`, `Mitram-M-Laddoo`, `Mitram-Sammilit` and `Mitram-M-Sammilit` (`.dc.html`) get the same:
+    - fields (in the Sammilit board, the `span2` full-width ones);
+    - buttons, the note and the copy row;
+    - rules and messages (script values `waHref`, `waClick`, and the field setters and error classes).
+    - Edited with a one-off Node script in the session scratchpad, not added to the repo.
+  - **Verified on :3016 (Playwright, 1440 and 390px), clipboard stubbed:**
+    - **TC-MTC-30:** the Laddoo fields; पता appears only with होम डिलीवरी.
+    - **TC-MTC-31:** the 4 blocking toasts with red fields.
+    - **TC-MTC-32:** the exact Laddoo messages (dated / "जल्द से जल्द", home / Take Away).
+    - **TC-MTC-33:** the pop-up subtitle; "कॉपी" puts 7070819777 on the clipboard ("कॉपी हो गया"; "चुन लिया" plus the number selected on plain http); the 50 किलो cap.
+    - **TC-MTC-34:** the Sammilit fields at the client's positions: full-width address and note at 1440px, one column at 390px.
+    - **TC-MTC-35:** typed "abc98765432109" gives 9876543210; a pasted "+91 98765 43210" gives 9876543210; "12345" gives a toast and a red field.
+    - **TC-MTC-36:** the full message, with copied text identical.
+    - **TC-MTC-37:** the no-package / <20 / past-date toasts and the button order.
+    - Blocked sends opened 0 WhatsApp tabs; no console errors.
+  - **Both board pairs** (opened as files) give the same results and have no script errors.
+  - **Checks:** `tsc` (whole frontend) and `eslint` clean.
+  - **Docs:** the `mitram-portal.md` rows for `/sammilit` and `/laddoo` describe the WhatsApp ordering.
+- **2026-10-07, change 2 follow-up:** "in the catering page the right side card that has see orders and send to whatsapp button / make its ui proper keep content properly centered" (screenshot: the maroon result card at 1440px, with its label, total, breakdown and the two buttons all left-aligned, and empty space on the right).
+  - **Change:** the result card's content is centred horizontally: the label, total, breakdown, bhoj warning, and the two-button row (`justify-center`). It stays vertically centred as before. On phones the buttons stay stacked full width.
+  - **Prototype:** the same in both Catering boards (`.ct-cr .est` centred, `.ct-btns` `justify-content:center`).
+  - **Built and verified** (Playwright, 1440 and 390px): the label, total, breakdown and warning are centred in the card (offset 0px from its centre line). The two buttons are centred as a pair at 1440px and stacked full width at 390px. The board looks the same. `eslint` clean.
+  - **Reverted, 2026-10-07:** "that is not looking good revert it back". The card is back to its earlier left-aligned layout, in the code and both boards. The centring is withdrawn.
+  - **Instead, 2026-10-07:** "just do this give a bit of vertical gap between the buttons and the above text" (the label, total and breakdown). The button row gets an extra 8px top margin (`mt-2`), so the gap goes from 14px to 22px. The same in both boards (`.ct-btns{margin-top:8px}`). Nothing else changes.
+- **2026-10-07, plan-file repair:** while change 3 was planned, a scripted edit pasted a second copy of this file's first ~345 lines into the §2.2h Sammilit table. The cause: a dollar sign followed by a backtick in the inserted text was treated by JavaScript's `replace()` as "insert the text before the match". Found while logging the build; the duplicate block was removed and the regex restored. No content was lost.
 
 ## 6. Post-deploy
 

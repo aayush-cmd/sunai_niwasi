@@ -28,10 +28,10 @@ address, FSSAI, the 20% campaign banner, and the हम निवासी logo 
 | `/services` | All services, with filter chips (daily / event / sweets) |
 | `/kitchen` | **Hidden for now: returns 404** (`siteConfig.ts`: `kitchen.enabled = false`). It's not in the menus, and the cards that point to it are static. When enabled: मित्रम किचन — रोज़ का भोजन: the full daily menu (thali, breakfast, non-veg, Chinese, monthly tiffin) with quantities, a cart and the order pop-up |
 | `/bulk` | ₹48 भोजन — बल्क ऑर्डर: the bulk meal cost calculator (20 people or more: utensils, pickup or delivery, serving staff) with an estimated bill, and a booking form (name, mobile, date, people, address for delivery) that ends in a WhatsApp message. Nothing is sent by the site. |
-| `/sammilit` | सम्मिलित प्रयास पैकेज: event meal packages (puja, bhandara, sabha, functions) that build an order slip |
-| `/catering` | मित्रम किचन कैटरिंग: catering packages, menus and order, plus "हाल के आयोजन" with 4 event videos (served from `public/mitram/videos/`) and the photo gallery |
+| `/sammilit` | सम्मिलित प्रयास पैकेज: event meal packages (puja, bhandara, sabha, functions) that build an order slip. The guest details (name, mobile, address, note) and the slip are sent as a WhatsApp message ("WhatsApp पर ऑर्डर भेजें"), viewed in the order pop-up, or copied |
+| `/catering` | मित्रम किचन कैटरिंग: catering packages (veg / non-veg contents and prices), menus, and the "अपना खर्च जानें" cost estimate (menu, सेवा for bhoj, guests, occasion, optional date). The estimate can be sent as a WhatsApp message ("WhatsApp पर यह ऑर्डर भेजें") or viewed in the order pop-up ("ऑर्डर देखें"), plus "हाल के आयोजन" with 4 event videos (served from `public/mitram/videos/`) and the photo gallery |
 | `/rasoi` | मित्रम रसोई, बलिया: the vegetarian restaurant in Ballia, open 24×7, with its hall for 80–100 guests |
-| `/laddoo` | मित्रम लड्डू: laddoo varieties by weight, and order |
+| `/laddoo` | मित्रम लड्डू: laddoo varieties by weight (½ kg steps, max 50 kg each), and an order sheet (pickup or home delivery, name, date, address) sent as a WhatsApp message ("WhatsApp पर ऑर्डर भेजें") or viewed in the order pop-up |
 | `/sankranti` | दही-चूड़ा · मकर संक्रांति: curd, chura, tilkut and family gift packs, and order |
 
 ## All pages
