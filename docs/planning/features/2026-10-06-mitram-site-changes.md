@@ -8,6 +8,7 @@
 | SRS row | — |
 | Test cases | TC-MTC-01..20 |
 | Prototype todo | — |
+| Batch 3 (Home redesign) | in-progress. Built and verified (§2.2i), not committed. |
 | Batch 2 (3 changes) | in-progress. Changes 1–3 (§2.2f–h) built and verified, not committed. |
 
 Follows the shipped [2026-10-06-mitram-site.md](2026-10-06-mitram-site.md). Same pattern: Tailwind, the `app/(mitram)/mitram/` route group, frontend only, translation-exempt static Hindi.
@@ -79,6 +80,25 @@ _(Three screenshots of the client prototypes:)_
 
 This is change 3, planned in §2.2h. All three changes of batch 2 are now received.
 
+### Batch 3 (2026-10-07)
+
+> some new changes has been made to the home page
+> check this prototype and update the changes file plan
+> file:///home/triline27/Downloads/Mitram-Website(new)/Mitram-Website/index.html#Home
+> then when i tell you to implement we will do it
+
+**The new prototype:** `~/Downloads/Mitram-Website(new)/Mitram-Website/`, with a new layout: boards at the top level (no `design/canvas/`), images and videos in `assets/` (94 files), and an `index.html` shell with a page picker and a Desktop/Mobile switch.
+
+**What changed, compared with the repo copy `docs/prototype/mitram/design/canvas/`:**
+- **`Mitram-Home` / `Mitram-M-Home`:** a new page body. About 1,270 lines changed, plus a new stylesheet "Mitram home content (from uploaded design), scoped to `.mu`".
+- **Every board's header** (the same 28 lines on all 18 boards):
+  - "सुनई के बारे में" → "हमारे बारे में" and "सेवाएँ" → "हमारी सेवाएँ";
+  - two new links after the सेवाएँ dropdown: "अनुभव और प्रतिबद्धताएँ" (→ Home `#work`) and "संपर्क" (→ Home `#contact`, the footer);
+  - the same in the mobile drawer.
+  - From another page these open Home and then scroll to the section (the board's `secVals()`).
+- **No other content changes.** The client's Catering, Sammilit and Laddoo boards also lack this batch-2 work (changes 1–3), so they differ from the repo copy by those edits.
+
+## 2. Plan
 ## 2. Plan
 
 ### 2.1 Rule-by-rule
@@ -382,6 +402,70 @@ The client's wording isn't consistent between packages (नाश्ता vs �
 - **Phones:** the new fields stack in one column at ≤900px; the buttons are full width.
 - **Not included:** the client prototypes' fixed bottom total bar on phones ("ऑर्डर पर्ची देखें" / "ऑर्डर देखें" bar), which the user didn't ask for (Q18).
 
+### 2.2i Batch 3: Home page redesign, and the header's new links
+
+**Source of truth:** the new `Mitram-Home.dc.html` (desktop) and `Mitram-M-Home.dc.html` (390px). All copy is ported **verbatim** from them, as before. Tailwind rewrite, static Hindi (translation-exempt), no backend.
+
+**The new Home, top to bottom:**
+
+| # | Section (board id) | Content |
+|---|---|---|
+| 1 | Hero (`#mu-top`, maroon band with a dot pattern) | Eyebrow "mitram.niwasi.in · पटना · हम-निवासी अभियान"; h1 "मित्रम / खाद्य सेवाएँ"; lead "यह एक रेस्टोरेंट नहीं है, बल्कि <mark>भोजन सुविधा उपलब्ध कराने के कई माध्यमों का समूह</mark> है।"; 8 service chips that scroll to the matching card in section 4 (₹48 भोजन, सम्मिलित प्रयास एवं कैटरिंग, मित्रम रसोई और किचन, Highway Side बलिया, मिठाइयाँ, मेस एवं टिफ़िन, मित्रम स्नैक्स, सोन्हा मटका दही). **Right side: a carousel** of 8 slides (7 photos + 1 video, "मित्रम कैटरिंग सेवा") with captions, prev/next arrows and 8 dots. It moves on every 4.5s and pauses on hover. On phones it sits below the text. |
+| 2 | Figures row (overlapping the hero's bottom) | 4 cards: ₹48 "प्रति भोजन, घर-जैसा खाना" · 1 लाख "भोजन 9 माह में, बाज़ार समिति" · 400 तक "कुल टिफ़िन एवं मेस…" · 25 "कैटरिंग सम्मिलित प्रयास सेवा". 2 columns at ≤760px. |
+| 3 | `#about` "हमारे बारे में / मित्रम की पृष्ठभूमि" | 3 paragraphs on Mitram, सुनई कंसल्टेंसी and the हम-निवासी programme (the programme name is blue). |
+| 4 | `#services` "हमारी सेवाएँ / हर मौके के लिए अलग सेवा" | 8 cards in a grid of columns at least 248px wide, then the "कोई ख़ास मौक़ा?" card (maroon, WhatsApp). Each card's "देखें और ऑर्डर करें →" goes to: ₹48 → `/bulk`; सम्मिलित प्रयास एवं कैटरिंग (video) → `/sammilit`; मित्रम रसोई और किचन (video, address, the WhatsApp menu catalogue, facebook.com/Mitram.Kitchen, 7070 819 777) → WhatsApp; मित्रम रसोई बलिया (Highway Side, 70616 53559, "हॉल उपलब्ध") → `/rasoi`; मिठाइयाँ → `/laddoo`; मेस एवं टिफ़िन, स्नैक्स and मटका दही → WhatsApp. The ₹48 card is the red one ("घर जैसा" logo, big ₹48). |
+| 5 | `#work` "अनुभव और प्रतिबद्धताएँ / हमारे काम" | A promise card ("सिर्फ़ ताज़ी सब्ज़ियाँ, चक्की में पिसा मसाला" and 2 lines), plus a 19-row log (number / what), e.g. "1,00,000 — मित्रम किचन, बाज़ार समिति में ग्राहकों को 9 माह में भोजन" through "13 — बिहार मैनेजमेंट एसोसिएशन…". |
+| 6 | `#discount` (blush band) "साफ़ मोहल्ला, भोजन सही मूल्य पर और स्वादिष्ट घर जैसा" | "…उतनी ज़्यादा <छूट>", and a 6-row discount ledger: 5%, 7%, 10%, 10%, 20%, 20% (the last two yellow). |
+| 7 | `#niwasi` "हम-निवासी कार्यक्रम / निवासी की परिभाषा" | The definition and 6 bullets in 2 columns (1 column at ≤600px). |
+| 8 | `#ham-niwasi` (blush band) "मुख्य सन्देश: हम निवासी बनाते हैं — श्रेष्ठ समुदाय" | The method line, 2 paragraphs, "हम-निवासी कार्यक्रम के 5 क्रियाकलाप" (numbered cards), a yellow invite box, the 20%-of-income paragraph, facebook.com/hamniwasi, and a maroon CTA band "अपने मोहल्ले में हम-निवासी कार्यक्रम करने के लिए संपर्क करें · 903 101 101 9". |
+| 9 | Order section (`.oc`, "अभी ऑर्डर करें") | **Unchanged** (the existing `OrderCallSection`). |
+| 10 | Footer | Unchanged, except that it gets `id="contact"` so the header's "संपर्क" can scroll to it. |
+
+**Removed from Home:**
+- the 7-slide banner (`HomeBanner.tsx`, including its static Kitchen slide);
+- the old services grid "हर मौके के लिए मित्रम" (with the static Kitchen card and its address, from batch 1);
+- "सुनई कंसल्टेंसी और मित्रम" and "हमारी कहानी";
+- "अभियान की मुख्य उपयोगिता";
+- "हमारी इकाइयाँ";
+- the "हमारी रसोइयाँ" locations.
+
+**Kitchen hidden (batch 1, change 5):** the new Home has **no link to `/kitchen`**. Its "मित्रम रसोई और किचन" card goes to WhatsApp. `siteConfig.ts` stays as the switch for the menus, the Services page and the `/kitchen` 404; Home simply no longer has Kitchen-dependent parts.
+
+**The header, on all pages (`MtHeader`), with the drawer and the dropdown unchanged otherwise:**
+- "सुनई के बारे में" → "हमारे बारे में" and "सेवाएँ" → "हमारी सेवाएँ";
+- "अनुभव और प्रतिबद्धताएँ" and "संपर्क" added after the dropdown, desktop and drawer.
+- **Scrolling:** on Home they scroll smoothly to `#work` / `#contact`, with no hash added (as the existing logo / "हमारे बारे में" links do through `HomeLink`). From other pages they open Home at that section.
+- **Width:** with 5 links the desktop nav is wider. The board's 1180px breakpoint (smaller nav padding) still applies, and ≤900px uses the drawer. To check: 901–1180px fits without wrapping.
+
+**Building it:**
+- **New page code:** `page.tsx` (Home) rewritten, with new section components in `_components/`:
+  - `HomeHero`, containing the client-side carousel `HomeCarousel`;
+  - `HomeServices`, `HomeWork` and `HomeNiwasi` (sections 6–8).
+- **Removed code:** `HomeBanner.tsx` is deleted, as nothing else uses it (Q23).
+- **Fonts (Q22):** the Home content uses 3 new Google fonts, Yatra One (headings), Baloo 2 (numbers) and Rajdhani (eyebrows and labels). They're loaded with `next/font` **on the Home page only**, so other pages don't download them.
+- **Colours:** the Home's own tokens (`--band #5e1018`, `--cream #f6e1bf`, `--blush #fde4e4`, `--highlight #ffed00`, `--leaf`, `--call`…) are added to the Home wrapper, not to the site-wide `.theme`.
+- **Media (Q21):**
+  - **Videos:** 3 new ones (5.4, 1.4 and 2.7 MB) go to `public/mitram/videos/` (`home-catering.mp4`, `sammilit-intro.mp4`, `rasoi-kitchen.mp4`).
+  - **Images:** the carousel photos and the inline (`data:`) card images are extracted to `_assets/` and imported statically.
+- **Carousel behaviour:** the board autoplays its video slide. Plan: the video plays muted only while its slide is showing and pauses otherwise; it doesn't preload until shown. Under reduced motion the slides don't move on by themselves.
+- **Page map:** `docs/frontend/mitram-portal.md` gets the Home row's new description and the header's new links.
+- **Service-card WhatsApp text (Q25 answer, the alternative):** the four cards that go to WhatsApp open it with a pre-filled line instead of an empty message, using `waUrl()` from `ui.ts`:
+
+  | Card | Pre-filled message |
+  |---|---|
+  | मित्रम रसोई और मित्रम किचन | नमस्ते मित्रम, मुझे मित्रम रसोई और मित्रम किचन के भोजन के बारे में जानना है। |
+  | मेस एवं टिफ़िन सेवा | नमस्ते मित्रम, मुझे मेस एवं टिफ़िन सेवा के बारे में जानना है। |
+  | मित्रम स्नैक्स | नमस्ते मित्रम, मुझे मित्रम स्नैक्स के बारे में जानना है। |
+  | सोन्हा मटका दही | नमस्ते मित्रम, मुझे सोन्हा मटका दही के बारे में जानना है। |
+
+  Unchanged links: the card's "मित्रम किचन मेन्यू कैटलॉग (WhatsApp)" link, and "कोई ख़ास मौक़ा? — WhatsApp पर बताएँ →", which stay as the prototype has them. The same change goes into the repo Home boards.
+
+**Prototype copy (Q24):** the client's new folder isn't copied over `docs/prototype/mitram/` as a whole. That would drop the batch-2 work in Catering, Sammilit and Laddoo and change the folder layout. Instead:
+- `Mitram-Home` and `Mitram-M-Home` are replaced by the new ones;
+- the header change is applied to the other 16 boards;
+- new media goes to `design/canvas/img/` (the paths in the boards are rewritten from `assets/`, and `*.mp4` stays gitignored).
+
+### 2.3 Prototype copy
 ### 2.3 Prototype copy
 
 Replace `docs/prototype/mitram/` with the updated prototype (`README.md` + `design/`, without the inlined `index.html`, as decided in the parent plan Q4), so the repo copy matches what's being ported. _Open question Q1 below._
@@ -425,6 +509,20 @@ Replace `docs/prototype/mitram/` with the updated prototype (`README.md` + `desi
     - **Recommendation:** keep the button always clickable; on click show the site's toast and mark the field red, as Bulk and Catering do. It's consistent across the site and says exactly what's missing.
 18. **Q18, the phones' fixed bottom total bar** in both client prototypes:
     - **Recommendation:** leave it out. It wasn't asked for and it covers content.
+19. **Q19 (batch 3), the header on every page:** the new boards change the header site-wide ("हमारे बारे में", "हमारी सेवाएँ", plus "अनुभव और प्रतिबद्धताएँ" and "संपर्क"). Apply it to all pages, not just Home?
+    - **Recommendation:** yes. It's on all 18 new boards, and the header is shared.
+20. **Q20, the footer's "मित्रम" column** still says "सुनई के बारे में" in the new boards, while the header now says "हमारे बारे में".
+    - **Recommendation:** keep it as the prototype has it (the client may not have meant to change the footer). The alternative is to rename it to match the header.
+21. **Q21, the carousel's video:** the board autoplays a 5.4 MB video in the hero.
+    - **Recommendation:** play it muted only while its slide is showing, load it only then, and pause it when the slide changes. Same look, much less data on page load, especially on phones.
+22. **Q22, new fonts:** Yatra One, Baloo 2 and Rajdhani for the Home content.
+    - **Recommendation:** load them on the Home page only (with `next/font`), not site-wide.
+23. **Q23, the old Home code:** `HomeBanner.tsx` and the old Home sections become unused.
+    - **Recommendation:** delete them; git history keeps them.
+24. **Q24, the repo prototype copy:**
+    - **Recommendation:** update only Home and the header in `docs/prototype/mitram/` (§2.2i), instead of replacing the folder with the client's new one, which lacks batch 2's work.
+25. **Q25, WhatsApp links on the service cards:** the board's "देखें और ऑर्डर करें" for Rasoi & Kitchen, Tiffin, Snacks and Dahi opens WhatsApp with no message.
+    - **Recommendation:** as the prototype. A pre-filled line like "नमस्ते, मुझे मेस एवं टिफ़िन सेवा के बारे में जानना है" is an option if wanted.
 
 ## 3. Test cases (designed up front)
 
@@ -473,6 +571,15 @@ _Batch 2:_
 | TC-MTC-35 | Sammilit mobile field | — | Type letters and 12 digits; paste "+91 98765 43210"; then "12345" and send | Digits only, at most 10; +91 dropped. "12345" gives the toast "सही 10 अंकों का मोबाइल नंबर डालें।" and a red field; empty is allowed. | H |
 | TC-MTC-36 | Sammilit WhatsApp text and copy | Default slip (भोज B + भंडारा N) | Fill name, mobile, address, note, date; click "WhatsApp पर ऑर्डर भेजें", then "ऑर्डर संदेश कॉपी करें" | WhatsApp opens with the §2.2h multi-line text (each package line with qty × price and extras, packing, total, delivery, पता, संपर्क, नोट); the copied text is identical. Empty fields leave their lines out. | H |
 | TC-MTC-37 | Sammilit blocked sends and buttons | — | Remove all packages and send; add one, set 10 guests and send; past date and send; then click "ऑर्डर पर्ची देखें" | Toasts: "पहले कम से कम एक पैकेज जोड़ें।", "सम्मिलित प्रयास पैकेज कम से कम 20 लोगों के लिए है।", "आज या आगे की तारीख़ चुनें।"; no WhatsApp tab. The red WhatsApp button comes first, then "ऑर्डर पर्ची देखें" (outlined; its pop-up works as before), then the copy button. | H |
+| TC-MTC-38 | Header on every page | — | Open each page at 1440, 1000 and 390px; open the drawer | Desktop nav: होम · हमारे बारे में · हमारी सेवाएँ ▾ · अनुभव और प्रतिबद्धताएँ · संपर्क. It fits on one row at 1000px. The drawer has the same links. The dropdown's services are unchanged (Kitchen still hidden). | H |
+| TC-MTC-39 | Header section links | — | On Home click हमारे बारे में / अनुभव और प्रतिबद्धताएँ / संपर्क; then do the same from `/bulk` and from the drawer | On Home: smooth scroll to `#about` / `#work` / the footer, with the heading clear of the sticky header and no hash in the URL. From another page: Home opens at that section. The drawer closes. | H |
+| TC-MTC-40 | Hero | — | Open `/` (1440 and 390px); click each of the 8 chips | Eyebrow, "मित्रम / खाद्य सेवाएँ", the lead with the yellow highlight. Each chip scrolls to its card in "हर मौके के लिए अलग सेवा", which sits below the header. | H |
+| TC-MTC-41 | Carousel | — | Watch for 10s; hover; press next/prev and a dot; reach slide 2 | 8 slides with captions; moves on every 4.5s and pauses while hovered; the arrows and dots work and the active dot is yellow. The video slide plays muted only while showing and pauses on leaving; it's not downloaded on page load. With reduced motion it doesn't move on by itself. | H |
+| TC-MTC-42 | Figures and About | — | Look below the hero | 4 figure cards overlap the hero's bottom edge (2 columns at ≤760px); "मित्रम की पृष्ठभूमि" with its 3 paragraphs, verbatim. | M |
+| TC-MTC-43 | Service cards | — | Check the 8 cards and "कोई ख़ास मौक़ा?"; click each "देखें और ऑर्डर करें" | Content verbatim; both card videos play on press. Links: ₹48 → /bulk, सम्मिलित → /sammilit, रसोई और किचन → WhatsApp, Highway Side → /rasoi, मिठाइयाँ → /laddoo, टिफ़िन / स्नैक्स / दही → WhatsApp. The four WhatsApp cards open `wa.me/917070819777` with their pre-filled line from §2.2i. **No link to /kitchen** anywhere on Home. | H |
+| TC-MTC-44 | Work, discount, Niwasi sections | — | Scroll through "हमारे काम", "साफ़ मोहल्ला…", "निवासी की परिभाषा", "मुख्य सन्देश…" | The promise card and 19 log rows; 6 discount rows with the right percentages (the last two yellow); 6 definition bullets in 2 columns (1 column at ≤600px); 5 numbered activities, the yellow invite box and the CTA band with 903 101 101 9. All verbatim. | M |
+| TC-MTC-45 | Unchanged tail, and phones | — | Scroll to the end at 1440 and 390px | "अभी ऑर्डर करें" and the footer are as before (the footer now has `id="contact"`). At 390px every section is a single column with no sideways scroll. | H |
+| TC-MTC-46 | Fonts only on Home | — | Load `/bulk` with the network open | Yatra One, Baloo 2 and Rajdhani are not downloaded on pages other than Home. | L |
 | TC-MTC-28 | Package pick still fills the calculator | — | In "कैटरिंग पैकेज" click मांसाहारी, then "चुनें" on प्रीमियम | The menu shows "प्रीमियम पैकेज (नॉन-वेज) — ₹675", total = guests × ₹675, toast "… — ऊपर खर्च देखें।" | M |
 
 ## 4. Sign-off
@@ -535,6 +642,19 @@ _Batch 2:_
   - **Q18:** no fixed bottom bar on phones.
   - **Awaiting:** the go-ahead to implement change 3.
 - **2026-10-07, go-ahead for change 3:** "yes".
+
+- **2026-10-07, batch 3 received:** the Home redesign and the header change (§1 Batch 3). Planned in §2.2i, with questions Q19–Q25 and test cases TC-MTC-38..46. The user: "then when i tell you to implement we will do it". **Waiting** for answers and the "implement" instruction. No code.
+- **2026-10-07, answers Q19–Q25:** "all  as recommended except q25 alternative".
+  - **Q19:** the header change goes on every page.
+  - **Q20:** the footer keeps "सुनई के बारे में", as the prototype.
+  - **Q21:** the carousel video plays muted and loads only while its slide is showing.
+  - **Q22:** the 3 new fonts load on the Home page only.
+  - **Q23:** the old Home code is deleted.
+  - **Q24:** only Home and the header are updated in the repo prototype copy.
+  - **Q25: the alternative, against the recommendation** to keep the prototype's empty WhatsApp links. The four service cards' "देखें और ऑर्डर करें" open WhatsApp with a pre-filled line naming the service (§2.2i). Built as asked.
+  - **Waiting** for the "implement" instruction.
+- **2026-10-07, go-ahead for batch 3:** "let them stay empty and start implementaion".
+  - **"Them":** the two WhatsApp links that keep no pre-filled text (the menu-catalogue link and "कोई ख़ास मौक़ा?"), as planned.
 
 ## 5. Execution log
 
@@ -693,6 +813,41 @@ _Batch 2:_
   - **Reverted, 2026-10-07:** "that is not looking good revert it back". The card is back to its earlier left-aligned layout, in the code and both boards. The centring is withdrawn.
   - **Instead, 2026-10-07:** "just do this give a bit of vertical gap between the buttons and the above text" (the label, total and breakdown). The button row gets an extra 8px top margin (`mt-2`), so the gap goes from 14px to 22px. The same in both boards (`.ct-btns{margin-top:8px}`). Nothing else changes.
 - **2026-10-07, plan-file repair:** while change 3 was planned, a scripted edit pasted a second copy of this file's first ~345 lines into the §2.2h Sammilit table. The cause: a dollar sign followed by a backtick in the inserted text was treated by JavaScript's `replace()` as "insert the text before the match". Found while logging the build; the duplicate block was removed and the regex restored. No content was lost.
+- **2026-10-07, batch 3 built:**
+  - **Home (`page.tsx`):** rewritten from the new board, with the 9 sections of §2.2i and copy verbatim. New `home.module.css` (the `.mu` tokens) and `HomeCarousel.tsx` (client).
+    - Yatra One, Baloo 2 and Rajdhani come from `next/font` in `page.tsx`.
+    - The 15 images are in `_assets/home/` (7 carousel photos plus the 8 card images that were inline `data:` in the board).
+    - The 3 videos are in `public/mitram/videos/` (`home-catering`, `sammilit-intro`, `rasoi-kitchen`).
+    - The four WhatsApp cards use `waUrl()` with their pre-filled line (Q25); the catalogue link and "कोई ख़ास मौक़ा?" are left without one.
+  - **Removed:** `HomeBanner.tsx`, and the old Home sections (they lived in `page.tsx`).
+  - **Header (`MtHeader`):** "हमारे बारे में" and "हमारी सेवाएँ", plus "अनुभव और प्रतिबद्धताएँ" and "संपर्क" (desktop and drawer).
+    - `HomeLink` takes `to: "work" | "contact"` as well.
+    - `MtFooter` has `id="contact"` and a scroll offset.
+  - **Fix during the build:** the "कोई ख़ास मौक़ा?" card rendered cream instead of maroon. Two competing background utilities were stacked (the base card's and the override); the ₹48 card only came out right by class order. Card layout and card colours are now separate (`CARD_BASE`), and the other `!` overrides (eyebrow on the band, ask-card h3, phone prices, the red card's order link) became their own class strings.
+  - **Verified on :3016 (Playwright):**
+    - **Layout:** page height 6,491px at 1440 (board 6,471) and 12,855px at 390 (board 12,839); no sideways scroll; no console errors. Screenshots match the board section by section, including the phone layout.
+    - **TC-MTC-38:** the header at 1000 and 1180px is one row.
+    - **TC-MTC-39:** on Home, about / work land 88px from the top (below the header) with no hash. From `/bulk`, "अनुभव और प्रतिबद्धताएँ" opens `/#work` at the section and "संपर्क" opens `/#contact` (the footer; the page bottom).
+    - **TC-MTC-40:** a chip ("मिठाइयाँ") scrolls its card to 96px.
+    - **TC-MTC-41:** the carousel moves 0→1 after 4.7s and pauses on hover; next and dot 8 work. The carousel video isn't requested on load; it plays on its slide and pauses on leaving. The two card videos load metadata only, as the board.
+    - **TC-MTC-43:** links: ₹48 → /bulk, सम्मिलित → /sammilit, Highway → /rasoi, मिठाइयाँ → /laddoo, and four pre-filled WhatsApp links plus two empty ones. 0 links to /kitchen.
+    - **TC-MTC-46:** loaded fonts are Rozha One, Mukta, Yatra One, Baloo 2 and Rajdhani on `/`, but only Rozha One and Mukta on `/bulk`.
+  - **Prototype (Q24):**
+    - `Mitram-Home` and `Mitram-M-Home` are replaced by the new boards (`assets/` → `img/`) plus the four pre-filled WhatsApp links.
+    - The other 16 boards got the header patch: the nav line and the drawer line from the client's same board, the `secVals()` / `_rv0()` script and the viewer `postMessage` script. 10 of them are now byte-identical to the client's; the 6 batch-2 boards differ only by that work.
+    - New media: 8 images and 3 videos in `design/canvas/img/` (`*.mp4` gitignored).
+    - All 18 boards open without script errors and show the new header links.
+  - **Checks:** `tsc` (whole frontend) and `eslint` clean.
+  - **Docs:** `mitram-portal.md`: the header paragraph (new links) and the `/` row.
+- **2026-10-07, videos reused (the user):** "i think the videos are already present because we already used these videos in the catering page".
+  - **Checked:** the files differed by checksum, but by length, resolution and frames at 3s and 15s, the board's three videos are re-encodes of Catering's:
+    - the carousel's `1ce0c…` (5.4 MB, 848×478, 28.5s) = `training-catering.mp4` (640×360, 28.6s);
+    - the Sammilit card's `a7e9b…` (1.4 MB, 360×640, 54.8s) = `bsnl-catering.mp4` (540×960);
+    - the Rasoi & Kitchen card's `6d325…` (2.7 MB, 640×360, 31.1s) = `school-thali.mp4`.
+  - **Changed:** Home now uses the existing files. The cards also use Catering's posters from `_assets/videos/`.
+  - **Removed:** the three copies I had added (`home-catering`, `sammilit-intro`, `rasoi-kitchen`, 9.5 MB) and my two poster images (unstaged). §2.2i's "3 new videos" no longer applies.
+  - **Verified:** all three videos load on Home (no 4xx); the carousel's plays on slide 2; the cards show their posters. `tsc` and `eslint` clean.
+  - The repo boards keep their own (gitignored) copies under `design/canvas/img/`, as the client's files.
 
 ## 6. Post-deploy
 

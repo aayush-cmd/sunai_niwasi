@@ -17,14 +17,16 @@ then confirmed by phone (the order pop-up shows the summary and a call button; n
 
 ## Pages
 
-Every page shares the same header (the text brand "मित्रम", होम, सुनई के बारे में, the सेवाएँ menu with
-the 7 services, the call button; a slide-in menu on phones) and footer. Home, Services, Bulk,
+Every page shares the same header (the text brand "मित्रम", होम, हमारे बारे में (`/#about`), the हमारी
+सेवाएँ menu with the services, अनुभव और प्रतिबद्धताएँ (`/#work`), संपर्क (`/#contact`, the footer), the
+call button; a slide-in menu on phones) and footer. On Home the section links scroll smoothly; from
+other pages they open Home at that section. Home, Services, Bulk,
 Catering, Laddoo and Sankranti also share the order section ("अभी ऑर्डर करें": the phone number, the
 address, FSSAI, the 20% campaign banner, and the हम निवासी logo and QR code).
 
 | URL | Page |
 |---|---|
-| `/` | Home: the 7-slide banner carousel, the services, about Sunai (`/#about`) and the Ham Niwasi campaign, Mitram's units, the order section, the two kitchens' locations |
+| `/` | Home (redesigned 2026-10-07): the "मित्रम खाद्य सेवाएँ" hero with service chips and an 8-slide photo/video carousel, 4 figures, about (`/#about`), the services as cards (`/#services`; order links to Bulk, Sammilit, Rasoi, Laddoo, or WhatsApp with a pre-filled line), past work (`/#work`), the clean-neighbourhood discount table, who is a निवासी, the हम-निवासी programme, and the order section. Its 3 extra fonts load on Home only |
 | `/services` | All services, with filter chips (daily / event / sweets) |
 | `/kitchen` | **Hidden for now: returns 404** (`siteConfig.ts`: `kitchen.enabled = false`). It's not in the menus, and the cards that point to it are static. When enabled: मित्रम किचन — रोज़ का भोजन: the full daily menu (thali, breakfast, non-veg, Chinese, monthly tiffin) with quantities, a cart and the order pop-up |
 | `/bulk` | ₹48 भोजन — बल्क ऑर्डर: the bulk meal cost calculator (20 people or more: utensils, pickup or delivery, serving staff) with an estimated bill, and a booking form (name, mobile, date, people, address for delivery) that ends in a WhatsApp message. Nothing is sent by the site. |
