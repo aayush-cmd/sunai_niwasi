@@ -198,7 +198,7 @@ That's **8 endpoints**.
 | `report_date` | required; `YYYY-MM-DD`; a real calendar date. **Past and future dates are allowed**, and the date can be changed on edit (user 2026-09-30). The add form **prefills today** (IST), and the user can change it |
 | `work_start_time` | optional; `HH:mm` (00:00–23:59) |
 | `work_end_time` | optional; `HH:mm`; **must be later than the start time** when both are given (user 2026-09-30; the Ham Niwasi rule) |
-| `work_done`, `next_plan`, `items_sold_today` | **optional** (user 2026-09-30, superseding Q4's "Work Done required"); trimmed; **max 150 characters** each (superseding Q5's 2000); blank is stored as NULL. The limit is enforced by the application (Zod + the form); the columns stay `TEXT` (user 2026-09-30) |
+| `work_done`, `next_plan`, `items_sold_today` | **optional** (user 2026-09-30, superseding Q4's "Work Done required"); trimmed; **max 150 characters** each (superseding Q5's 2000) _(**superseded 2026-10-08:** 255 each, see §6 "text limit 150 → 255")_; blank is stored as NULL. The limit is enforced by the application (Zod + the form); the columns stay `TEXT` (user 2026-09-30) |
 | list `from` / `to` | `YYYY-MM-DD`; `from` ≤ `to`; the page shows a message itself (`noValidate`, the Orders lesson) |
 | list `q` | up to 150 characters |
 | list `limit` | 1..100; default 10 (Q7) |
@@ -567,6 +567,47 @@ the page URL (the not-found page) and the API.
 - 2026-09-30, user: add a `status` column for soft delete (-1) to the report tables, and make
   the Daily Mitram Expense item ✕ soft-delete instead of deleting. Planned in
   `2026-09-30-report-status-soft-delete.md`.
+
+### 2026-10-08: text limit 150 → 255 (modification, reactivated)
+
+> for the daily report
+> http://partner.niwasi.abhishek/Sunai/staff/reports/daily-activity-report/new
+> i want you to increase the character limit for the feilds
+> work done, Next Plan / Expected Completion Date, Items Sold Today
+> to 255 each
+
+**Now:** each of the three text fields allows at most 150 characters. The limit is enforced in the application only (the 2026-09-30 decision "keep it text … application level validation"), so the columns stay `TEXT`.
+
+**Plan:**
+- **Backend:** `apps/api/src/modules/partner/daily-activity-report.schema.ts`: `TEXT_MAX = 150` → `255` (the Zod `.max()` on all three fields and its message), and the "max 150" doc comments.
+- **Frontend:** `apps/frontend/lib/partner-daily-activity-report.ts`: `TEXT_MAX = 150` → `255`. That one constant drives the inputs' `maxLength`, the "n/255" counter and the form's own check (add and edit both use `DailyActivityReportForm`). Plus the "max 150" comment in `DailyActivityReportForm.tsx`.
+- **Validation mirror:** frontend and backend change together (same constant value on both sides).
+- **DB:** no change. The columns are `TEXT`, so no `.sql` file is needed.
+- **Unchanged:** the list's search box `q` stays at 150 (it's a search term, not one of these fields). The Daily Meal Income report has its own `TEXT_MAX` and isn't part of this request.
+- **Translation:** no new UI text. The counter's number changes only.
+- **Docs:** this plan's §2.4 validation row ("max 150 characters each") gets a superseded note. No endpoint or page changes, so no API or page-map update.
+- **Existing reports:** none can be over 150 today, so nothing breaks. After the change, a report saved with more than 150 characters still shows in full on the view page, the admin list and the CSV.
+
+**Test cases** (TC-DAR-20 is superseded by TC-DAR-43; both copied to `TEST_CASES.md` on ship):
+
+| TC-ID | Title | Pre-condition | Steps | Expected Result | Priority |
+|---|---|---|---|---|---|
+| TC-DAR-43 | Text max length 255 | Add form, Edit form, API | Work Done / Next Plan / Items Sold: paste 300 characters; type exactly 255; send 256 directly to the API | Inputs stop at 255 and the counter reads 255/255. Exactly 255 saves and shows in full on the view page, the admin view and the CSV. 256 sent to the API → 422 "… must be at most 255 characters." on each field. | M |
+
+**Status:** waiting for the user's go-ahead. No code yet.
+
+- **2026-10-08, go-ahead:** "start".
+- **2026-10-08, built:**
+  - **Backend:** `daily-activity-report.schema.ts` `TEXT_MAX` 150 → 255, and its comments.
+  - **Frontend:** `lib/partner-daily-activity-report.ts` `TEXT_MAX` 150 → 255 (it drives `maxLength`, the counter and `validateDailyActivity`), and the comment in `DailyActivityReportForm.tsx`.
+  - No DB change (the columns are `TEXT`); no `.sql` file.
+  - **Verified:**
+    - **API schema** (`DailyActivityBody.safeParse`, Devanagari + Latin text): 150, 151 and 255 are accepted; 256 gives the three messages "… must be at most 255 characters.".
+    - **Frontend** `validateDailyActivity`: 255 → no errors; 256 → the same three messages. Both sides use the same value.
+    - The running API (`tsx watch`, pm2 `niwasi-api`) picks up the change on save.
+    - Not checked in the browser: the form needs a staff login; it reads the same constant.
+  - **Checks:** `tsc` clean for the API and the frontend; `eslint` clean on the frontend files (the API package has no eslint config).
+  - **On ship:** copy TC-DAR-43 to `docs/testing/TEST_CASES.md` and mark TC-DAR-20 superseded there.
 
 ## 7. Cross-references
 
