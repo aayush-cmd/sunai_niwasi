@@ -848,6 +848,18 @@ _Batch 2:_
   - **Removed:** the three copies I had added (`home-catering`, `sammilit-intro`, `rasoi-kitchen`, 9.5 MB) and my two poster images (unstaged). §2.2i's "3 new videos" no longer applies.
   - **Verified:** all three videos load on Home (no 4xx); the carousel's plays on slide 2; the cards show their posters. `tsc` and `eslint` clean.
   - The repo boards keep their own (gitignored) copies under `design/canvas/img/`, as the client's files.
+- **2026-10-09, carousel change (the user):** "in the hero section carousal we have 7 image (समोसा और छोले) i want you to remove that image from there and add this card's (check ss) video there" (screenshot: the "मित्रम रसोई और मित्रम किचन" service card, whose video is `school-thali.mp4`).
+  - **Plan:** slide 7 ("समोसा और छोले", `_assets/home/slide-6.jpg`) becomes a video slide with the same `school-thali.mp4`, labelled "मित्रम रसोई और मित्रम किचन". There are still 8 slides.
+  - **Video behaviour:** the same as the existing catering video slide (Q21): `preload="none"`, plays muted only while its slide shows, paused otherwise. `HomeCarousel` now handles any number of video slides (one ref per slide) instead of exactly one.
+  - **Posters:** both video slides get their Catering poster (`_assets/videos/training-catering-poster.jpg`, `school-thali-poster.jpg`). With `preload="none"` a video slide was a dark box until it loaded.
+  - **Cleanup:** `slide-6.jpg` is no longer used and is removed.
+  - **Prototype:** the same change in `Mitram-Home` and `Mitram-M-Home` (the board's slide 7 becomes the card's video, and its aria-label is updated).
+  - **Built and verified** (Playwright, :3016):
+    - the carousel lists 8 slides, with slide 7 "मित्रम रसोई और मित्रम किचन" (video);
+    - on slide 7, `school-thali` plays and `training-catering` is paused; on slide 2 it is the other way round; on slide 3 both are paused;
+    - both video slides show their poster, no samosa image remains, and there are no console errors;
+    - the two boards show slide 7 as a video with no script errors.
+  - **Checks:** `tsc` and `eslint` clean.
 
 ## 6. Post-deploy
 
