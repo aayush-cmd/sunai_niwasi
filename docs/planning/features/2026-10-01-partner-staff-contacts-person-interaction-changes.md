@@ -6,7 +6,7 @@
 | Started | 2026-10-01 |
 | Shipped | |
 | SRS row | — |
-| Test cases | TC-PCI-01..24 |
+| Test cases | TC-PCI-01..27 |
 | Prototype todo | — |
 
 ## 1. Requirement (as given)
@@ -90,6 +90,18 @@ Status "+ Add".)
 > then a new field should appear and the title will be the selected option
 
 (user, 2026-10-01)
+
+### Change 7: an "Identification" filter on the persons list
+
+> at this page
+> http://partner.niwasi.abhishek/Sunai/staff/contacts/persons/new
+> we have 4 fields for identification details
+> i want you to add a new filter in http://partner.niwasi.abhishek/Sunai/staff/contacts/persons page
+> after location add type input filter for identification
+
+_(Screenshot: the person form's "Identification Details" section with Identification 1–4, empty text inputs.)_
+
+(user, 2026-10-12)
 
 ## 2. Plan
 
@@ -304,7 +316,34 @@ sync, the Person form / view) is dropped.
    text, so a hidden old value isn't saved.
 3. **Also for "अन्य" (9)?** Recommendation: **no**, only the two new options, as asked.
 
-### All six changes are planned
+### Change 7: "Identification" filter on the persons list
+
+**Now:** the list `/{slug}/staff/contacts/persons` (`persons/page.tsx`, filter form at l.160–202) has 7 filters: Search, Email, Mobile Number, Organisation Name, Location, Interaction Date From, Interaction Date To.
+- None of them looks at Identification 1–4. The Search box matches name, phone, email, city, district, mohalla and profession, but not the identification fields.
+- The values are stored in `staff_contact_persons.identification1..4` (VARCHAR(255), no index).
+
+**Plan:** a text filter **"Identification"** right after **Location**, built the same way as Location:
+- **What it matches:** one input that matches if the typed text is contained in **any** of Identification 1, 2, 3 or 4 (LIKE `%text%`, OR across the four columns). It's combined with the other filters by AND, as they are now.
+- **Behaviour:**
+  - it's applied with the existing Search button, cleared by Clear, and counts towards "filters active";
+  - it's trimmed, and blank means no filter;
+  - it shows in the same 140px-wide slot as the other filters, with placeholder "Identification".
+- **Frontend:**
+  - `persons/page.tsx`: draft + applied state, the `hasActiveFilters` check, `handleSearch`, `handleClear`, the `load()` params and deps, and the new input between Location and Interaction Date From;
+  - `lib/staff-contacts.ts`: `identification?: string` in `ListQuery`.
+- **Backend:**
+  - `staff-contact.schema.ts`: `PersonListQuery` gets `identification: z.string().trim().max(255).optional()`, and its comment block is updated;
+  - `staff-contact.service.ts` `listPersons`: one more OR-group in `andGroups` (`identification1..4 contains`), so it doesn't overwrite the Search / Location groups.
+- **Validation mirror:** max 255 on both sides (the input's `maxLength` and Zod `.max(255)`), matching the columns' 255.
+- **DB:** no change, no `.sql` file. The columns aren't indexed, but LIKE `%…%` couldn't use an index anyway, and the list is already scoped to the partner (and to "mine"). This matches how Location searches its unindexed columns.
+- **Translation:** the label and placeholder are wrapped in `t("Identification")`, like the other filters. No `label_text` SQL (the team adds Hindi labels in the Language admin).
+- **Docs:** `docs/api/endpoints.md` l.899 (GET persons list) gets the new `identification` query parameter. `partner-portal.md` doesn't change, since no page is added or moved.
+- **Not affected:** there's no persons-list export and no admin persons list, so nothing else needs the filter.
+
+**Open question** (recommendation given; answer goes in §4):
+1. **Also in the general Search box?** Recommendation: **no**. Keep Search as it is and use the new dedicated filter, as asked.
+
+### All seven changes are planned
 
 ## 3. Test cases
 
@@ -334,6 +373,9 @@ sync, the Person form / view) is dropped.
 | TC-PCI-22 | Saved to other_residence | Same | Choose "पटना के अन्य भाग", type "कंकड़बाग" → Save | `residence` = 11, `other_residence` = "कंकड़बाग"; edit shows the field pre-filled | H |
 | TC-PCI-23 | Cleared when switching away | A person with residence 11 + text | Edit → choose "दानापुर" → Save | `other_residence` = NULL | M |
 | TC-PCI-24 | Required + max 100 | Form / API | With residence 11: leave the field blank → Save; type 120 characters; via the API send residence 12 with no / blank `other_residence`, and 101 characters | Blank → inline required error and the save is blocked; the input stops at 100 (`n/100`); API → 422 on `other_residence` for blank and for 101 characters | H |
+| TC-PCI-25 | Identification filter matches any of the 4 fields | Persons with an ID in Identification 1, another in Identification 3, one with none | Persons list → type part of each ID in "Identification" (after Location) → Search | Only persons whose Identification 1, 2, 3 or 4 contains the text are listed; case follows the DB collation; page resets to 1 | H |
+| TC-PCI-26 | Combined with other filters and Clear | — | Identification + Location (or Mobile) → Search; then Clear | Results match both filters (AND); Clear empties Identification and lists everything again; a blank or spaces-only value is ignored | M |
+| TC-PCI-27 | Max length 255 | List page / API | Type 300 characters; call the list API with `identification` of 256 characters | The input stops at 255; API → 422 on `identification` | L |
 
 ## 4. Sign-off
 
@@ -373,6 +415,10 @@ sync, the Person form / view) is dropped.
   the AGENTS.md rule that a planning file is written before any code, even for a small change.
   The file was created only when the user asked. It now covers change 1 retroactively; changes 2–4
   will be planned here before any code.
+
+- **2026-10-12:** change 7 received (§1) and planned (§2, change 7), with one open question and test cases TC-PCI-25..27. **Awaiting** the user's review and go-ahead. No code yet.
+- **2026-10-12, change 7 answer and go-ahead:** "as recomended and start implementation".
+  - **Q1:** the general Search box stays as it is (no identification match); only the new filter matches Identification 1–4.
 
 ## 5. Execution log
 
@@ -501,6 +547,23 @@ sync, the Person form / view) is dropped.
       is required." and block the save; the input stops at 100 (100/100).
   - **Cleanup:** 5 `ZZOR` test persons and 1 test interaction were deleted (checked first);
     0 `ZZ…` persons remain.
+- **2026-10-12, change 7 built** (uncommitted):
+  - **Frontend:**
+    - `persons/page.tsx`: an "Identification" text filter after Location (`t("Identification")`, `maxLength 255`), with draft + applied state, `hasActiveFilters`, `handleSearch` (trimmed), `handleClear`, and the `load()` params and deps;
+    - `lib/staff-contacts.ts`: `identification?` in `ListQuery`.
+  - **Backend:**
+    - `staff-contact.schema.ts`: `PersonListQuery.identification`, trimmed, max 255;
+    - `staff-contact.service.ts` `listPersons`: an OR-group over `identification1..4 contains`, pushed into `andGroups`.
+  - **Docs:** the `endpoints.md` row (l.899) lists only method, URL, guards and source, with no parameters, and none of those changed. So that file has nothing to update; this corrects §2's "gets the new parameter".
+  - **Verified** (the real `listPersons` + `PersonListQuery` against the dev DB, read-only, partner and creator of a real person):
+    - **TC-PCI-25:** "ESTI" (with spaces around) finds the person whose Identification 1 is "TESTID20260908", and every result contains the text.
+    - **TC-PCI-26:** a nonsense value → 0; with an impossible Location → 0 (AND); spaces only → the same count as no filter (2 = 2).
+    - **TC-PCI-27:** 255 characters accepted, 256 rejected ("Too big…").
+    - **Q1:** the general Search with the same text does not match identification.
+    - **Not covered by data:** the dev DB has only one person with any identification, and it's in slot 1. Slots 2–4 go through the same OR-group but aren't proven by data.
+    - **Not driven in the browser:** the list page needs a staff login.
+  - **Checks:** `tsc` clean for the API and the frontend.
+  - **Pre-existing lint error:** `eslint` reports `react-hooks/set-state-in-effect` on `useEffect(() => load(), [load])` in `persons/page.tsx`. The committed version has the same error (on l.120), so it's not from this change and was left as is.
 
 ## 6. Post-deploy
 
